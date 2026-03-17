@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__stitch__list_projects",
+      "mcp__stitch__list_screens",
+      "Bash(pnpm install:*)",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(pnpm --filter @sportspay/shared type-check)",
+      "Bash(pnpm --filter @sportspay/web type-check)",
+      "Bash(timeout 15 pnpm --filter @sportspay/web dev)",
+      "Bash(mkdir -p app)",
+      "Bash(mv src/app/_layout.tsx app/)",
+      "Bash(mv src/app/index.tsx app/)",
+      "Bash(mv src/app/'\\(auth\\)' src/app/'\\(admin\\)' src/app/'\\(user\\)' src/app/'\\(shared\\)' app/)",
+      "Bash(rmdir src/app)",
+      "Bash(pnpm --filter @sportspay/app type-check)",
+      "Bash(pnpm --filter @sportspay/app add expo-constants)",
+      "Bash(pnpm turbo:*)"
+    ]
+  }
+}
