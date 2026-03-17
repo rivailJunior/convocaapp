@@ -16,7 +16,10 @@
       "Bash(rmdir src/app)",
       "Bash(pnpm --filter @sportspay/app type-check)",
       "Bash(pnpm --filter @sportspay/app add expo-constants)",
-      "Bash(pnpm turbo:*)"
+      "Bash(pnpm turbo:*)",
+      "Bash(curl -sL \"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzM0MWUxM2Q1ZjNiNjRlNzE5MzRiNDdhODIyZDY0ZWRhEgsSBxDw1PvHrAYYAZIBJAoKcHJvamVjdF9pZBIWQhQxNzA1MDY1MTU2NzQ3OTQ1NDY0Ng&filename=&opi=89354086\")",
+      "Bash(npx tsc:*)",
+      "Bash(pnpm --filter @sportspay/web build)"
     ]
   }
 }
