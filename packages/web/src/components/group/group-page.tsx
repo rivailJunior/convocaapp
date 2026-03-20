@@ -1,9 +1,9 @@
 import React from 'react';
 
-import type { GroupPageItem } from '@/components/group/group-page.dto';
+import type { Group } from '@sportspay/shared';
 
 interface GroupPageProps {
-  items: GroupPageItem[];
+  items: Group[];
 }
 
 export function GroupPage({ items }: GroupPageProps): React.JSX.Element {
@@ -21,16 +21,16 @@ export function GroupPage({ items }: GroupPageProps): React.JSX.Element {
             className="flex items-center gap-3 rounded-xl border border-slate-100 bg-white p-3 shadow-sm dark:border-slate-800 dark:bg-slate-900"
           >
             <img
-              src={item.thumbImageUrl}
-              alt={`Thumb do grupo ${item.title}`}
+              src={item.avatarUrl}
+              alt={`Thumb do grupo ${item.name}`}
               className="h-12 w-12 rounded-lg object-cover"
             />
 
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-bold text-slate-900 dark:text-slate-100">
-                {item.title}
+                {item.name}
               </p>
-              <p className="truncate text-xs text-slate-500 dark:text-slate-400">{item.subtitle}</p>
+              <p className="truncate text-xs text-slate-500 dark:text-slate-400">{item.sport}</p>
             </div>
           </li>
         ))}

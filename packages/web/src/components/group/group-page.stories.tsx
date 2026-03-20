@@ -1,65 +1,101 @@
 import React from 'react';
 
-import type { GroupPageItem } from '@/components/group/group-page.dto';
+import type { Group, Sport } from '@sportspay/shared';
+
 import { GroupPage } from '@/components/group/group-page';
 
-export const groupPageItemsDto: GroupPageItem[] = [
+function createGroupMock(input: {
+  id: string;
+  name: string;
+  sport: Sport;
+  avatarUrl: string;
+}): Group {
+  return {
+    id: input.id,
+    name: input.name,
+    sport: input.sport,
+    adminId: 'admin-1',
+    memberIds: ['user-1', 'user-2'],
+    billingMode: 'fixed',
+    dueDay: 10,
+    paymentMethods: ['pix'],
+    inviteCode: `INV${input.id}`,
+    plan: 'free',
+    avatarUrl: input.avatarUrl,
+    createdAt: '2026-01-01T00:00:00.000Z',
+  };
+}
+
+export const groupPageItemsDto: Group[] = [
   {
-    id: '1',
-    title: 'Futebol da Firma',
-    subtitle: 'Partida semanal aos sabados',
-    thumbImageUrl:
+    ...createGroupMock({
+      id: '1',
+      name: 'Futebol da Firma',
+      sport: 'futebol',
+      avatarUrl:
       'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=200&q=80',
+    }),
   },
   {
-    id: '2',
-    title: 'Volei de Praia',
-    subtitle: 'Treino funcional na areia',
-    thumbImageUrl:
+    ...createGroupMock({
+      id: '2',
+      name: 'Volei de Praia',
+      sport: 'volei',
+      avatarUrl:
       'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=200&q=80',
+    }),
   },
   {
-    id: '3',
-    title: 'Basquete Noturno',
-    subtitle: 'Racha de quarta no ginasio',
-    thumbImageUrl:
+    ...createGroupMock({
+      id: '3',
+      name: 'Basquete Noturno',
+      sport: 'basquete',
+      avatarUrl:
       'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=200&q=80',
+    }),
   },
 ];
 
-const crowdedGroupItems: GroupPageItem[] = [
+const crowdedGroupItems: Group[] = [
   ...groupPageItemsDto,
   {
-    id: '4',
-    title: 'Futsal Masters 40+',
-    subtitle: 'Campeonato interno nas noites de sexta',
-    thumbImageUrl:
+    ...createGroupMock({
+      id: '4',
+      name: 'Futsal Masters 40+',
+      sport: 'futebol',
+      avatarUrl:
       'https://images.unsplash.com/photo-1593766788306-28561086694e?auto=format&fit=crop&w=200&q=80',
+    }),
   },
   {
-    id: '5',
-    title: 'Cross Treino Parque',
-    subtitle: 'Circuito funcional com foco em resistencia',
-    thumbImageUrl:
+    ...createGroupMock({
+      id: '5',
+      name: 'Cross Treino Parque',
+      sport: 'outro',
+      avatarUrl:
       'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=200&q=80',
+    }),
   },
 ];
 
-const longTextGroupItems: GroupPageItem[] = [
+const longTextGroupItems: Group[] = [
   {
-    id: '6',
-    title: 'Grupo de Futebol Society Corporativo da Zona Norte de Sao Paulo',
-    subtitle:
-      'Encontro semanal com confirmacao obrigatoria, taxa compartilhada e lista de espera automatica',
-    thumbImageUrl:
+    ...createGroupMock({
+      id: '6',
+      name: 'Grupo de Futebol Society Corporativo da Zona Norte de Sao Paulo',
+      sport: 'futebol',
+      avatarUrl:
       'https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=200&q=80',
+    }),
   },
   {
-    id: '7',
-    title: 'Time de Volei Feminino da Comunidade',
-    subtitle: 'Treinos tecnicos e amistosos aos domingos',
-    thumbImageUrl:
+    ...createGroupMock({
+      id: '7',
+      name: 'Time de Volei Feminino da Comunidade',
+      sport: 'volei',
+      avatarUrl:
       'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=200&q=80',
+    }),
   },
 ];
 
@@ -69,7 +105,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  render: (args: { items: GroupPageItem[] }) => (
+  render: (args: { items: Group[] }) => (
     <div className="w-[380px] bg-background-light p-4">
       <GroupPage {...args} />
     </div>
