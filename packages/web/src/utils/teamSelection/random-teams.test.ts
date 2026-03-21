@@ -1,14 +1,10 @@
-import type { User } from '@sportspay/shared';
+import type { AttendancePlayer } from '@sportspay/shared';
 import { RandomTeams } from './random-teams';
 
-const makePlayers = (count: number): User[] =>
+const makePlayers = (count: number): AttendancePlayer[] =>
   Array.from({ length: count }, (_, i) => ({
-    uid: `uid_${i + 1}`,
-    name: `Player ${i + 1}`,
-    email: `player${i + 1}@test.com`,
-    groupIds: [],
-    adminGroupIds: [],
-    createdAt: new Date().toISOString(),
+    userId: `uid_${i + 1}`,
+    userName: `Player ${i + 1}`,
   }));
 
 describe('RandomTeams.generateTeam', () => {
@@ -28,7 +24,7 @@ describe('RandomTeams.generateTeam', () => {
     const allIds = result.teams
       .flatMap((t) => t.players.map((p) => p.userId))
       .concat(result.bench.map((p) => p.userId));
-    expect(allIds.sort()).toEqual(players.map((p) => p.uid).sort());
+    expect(allIds.sort()).toEqual(players.map((p) => p.userId).sort());
   });
 
   it('puts leftover players on the bench when teams do not divide evenly', () => {
@@ -49,6 +45,18 @@ describe('RandomTeams.generateTeam', () => {
     const allIds = result.teams
       .flatMap((t) => t.players.map((p) => p.userId))
       .concat(result.bench.map((p) => p.userId));
-    expect(allIds.sort()).toEqual(players.map((p) => p.uid).sort());
+    expect(allIds.sort()).toEqual(players.map((p) => p.userId).sort());
+  });
+
+  it('throws when fewer than 2 teams are requested', () => {
+    const generator = new RandomTeams(1);
+    expect(() => generator.generateTeam(makePlayers(5))).toThrow('Mínimo de 2 times');
+  });
+
+  it('throws when there are more teams than players', () => {
+    const generator = new RandomTeams(5);
+    expect(() => generator.generateTeam(makePlayers(3))).toThrow(
+      'Mais times (5) do que jogadores confirmados (3)',
+    );
   });
 });

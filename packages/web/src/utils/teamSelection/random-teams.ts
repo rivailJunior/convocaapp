@@ -1,21 +1,23 @@
-import type { User, Team, TeamDrawResult } from '@sportspay/shared';
+import type { AttendancePlayer, Team, TeamDrawResult } from '@sportspay/shared';
 import { TeamGenerator } from './team-generator';
 
 /** Fisher-Yates shuffle to produce random balanced teams. */
 export class RandomTeams extends TeamGenerator {
-  private teamsCount: number;
+  private readonly teamsCount: number;
 
   constructor(teamsCount: number) {
     super();
     this.teamsCount = teamsCount;
   }
 
-  generateTeam(players: User[]): TeamDrawResult {
+  generateTeam(players: AttendancePlayer[]): TeamDrawResult {
     if (this.teamsCount < 2) {
       throw new Error('Mínimo de 2 times');
     }
     if (this.teamsCount > players.length) {
-      throw new Error('Mais times do que jogadores confirmados');
+      throw new Error(
+        `Mais times (${this.teamsCount}) do que jogadores confirmados (${players.length})`,
+      );
     }
 
     const playersPerTeam = Math.floor(players.length / this.teamsCount);
@@ -29,24 +31,14 @@ export class RandomTeams extends TeamGenerator {
 
     const teams: Team[] = [];
     for (let i = 0; i < this.teamsCount; i++) {
-      const teamPlayers = shuffled.slice(i * playersPerTeam, (i + 1) * playersPerTeam);
       teams.push({
         id: `time_${i + 1}`,
         name: `Time ${i + 1}`,
-        players: teamPlayers.map((p) => ({
-          userId: p.uid,
-          userName: p.name,
-          avatarUrl: p.avatarUrl,
-        })),
+        players: shuffled.slice(i * playersPerTeam, (i + 1) * playersPerTeam),
       });
     }
 
-    const benchSlice = shuffled.slice(this.teamsCount * playersPerTeam);
-    const bench = benchSlice.map((p) => ({
-      userId: p.uid,
-      userName: p.name,
-      avatarUrl: p.avatarUrl,
-    }));
+    const bench = shuffled.slice(this.teamsCount * playersPerTeam);
 
     return { teams, bench, totalPlayers: players.length };
   }
