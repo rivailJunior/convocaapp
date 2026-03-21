@@ -47,6 +47,16 @@ pnpm --filter web dev      # Next.js web + API
 | Hosting (web) | AWS Amplify |
 | Cron | AWS EventBridge Scheduler |
 
+## Running Tests
+
+```bash
+# Run all tests
+pnpm --filter web test
+
+# Run a specific test file
+pnpm --filter web test -- <relative_path_to_test_file>
+```
+
 ## Key Decisions
 
 - **No SMS/OTP**: Google OAuth only in MVP. Eliminates per-SMS cost.
