@@ -50,7 +50,17 @@ sportspay/
 | Backend | Firebase (Auth, Firestore, FCM) + AWS (S3, Amplify) |
 | Payments | Asaas (Phase 8+) |
 
-## Current Status
+## Running Tests
+
+```bash
+# Run all tests
+pnpm --filter web test
+
+# Run a specific test file
+pnpm --filter web test -- <relative_path_to_test_file>
+```
+
+## Key Decisions
 
 **Phase**: Infrastructure setup (Phase 0)  
 **Timeline**: 10-11 weeks to MVP launch  
