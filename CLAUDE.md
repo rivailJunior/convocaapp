@@ -50,7 +50,7 @@ pnpm turbo type-check           # Type-check all packages
 ## Key Files
 
 - `TODO.md` — Master task list organized by phase. Source of truth for what to build next.
-- `.windsurf/rules/` — 14 rule files covering every aspect of the stack. Read the relevant rule before working on a feature:
+- `docs/rules/` — 14 rule files covering every aspect of the stack. Read the relevant rule before working on a feature:
   - `00-project-overview` — Stack decisions, structure
   - `01-code-style` — TypeScript, naming, formatting
   - `02-nextjs-web` — App Router, API Routes, SSR, shadcn/ui

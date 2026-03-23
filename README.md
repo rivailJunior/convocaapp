@@ -1,20 +1,8 @@
 # SportsPay
 
-Platform for managing sports group payments and event attendance.
+Mobile app for organizing amateur sports groups — manage participants, create events, generate teams, and share via WhatsApp.
 
-## Monorepo Structure
-
-```
-sportspay/
-├── packages/
-│   ├── app/          # React Native (Expo) — iOS & Android
-│   ├── web/          # Next.js 14 — frontend + API + cron
-│   └── shared/       # Types, schemas, utils (no runtime deps)
-├── .windsurf/
-│   └── rules/        # Windsurf AI rules (read before coding)
-├── turbo.json
-└── package.json
-```
+**Hybrid MVP approach**: Infrastructure-ready, launches with standalone features (local storage), backend features activate in later phases.
 
 ## Quick Start
 
@@ -30,50 +18,42 @@ pnpm --filter app start    # Expo app
 pnpm --filter web dev      # Next.js web + API
 ```
 
-## Tech Stack
+## Project Structure
+
+```
+sportspay/
+├── packages/
+│   ├── app/          # React Native (Expo) — iOS & Android
+│   ├── web/          # Next.js 14 — frontend + API + cron
+│   └── shared/       # Types, schemas, utils (no runtime deps)
+├── .windsurf/
+│   └── rules/        # Windsurf AI rules (read before coding)
+├── turbo.json
+└── package.json
+```
+
+## Learn More
+
+- **[Master Plan](./SportsPay_Master_Plan.md)** — Complete project details, phases, timeline, costs
+- **[Development Tasks](./TODO_MVP.md)** — Current sprint tasks and implementation details
+- **[Design System](./DESIGN.md)** — UI guidelines and visual principles
+- **[AI Assistant Guide](./CLAUDE.md)** — Project rules for Claude/Cascade AI
+
+## Tech Stack (Summary)
 
 | Layer | Technology |
 |-------|-----------|
 | App Mobile | React Native + Expo SDK 51 + Expo Router |
 | Web + API | Next.js 14 (App Router) |
-| Styling (app) | NativeWind (Tailwind for RN) |
-| Styling (web) | Tailwind CSS + shadcn/ui |
+| Styling | NativeWind (RN) + Tailwind CSS + shadcn/ui |
 | State | Zustand + React Query |
-| Auth | Firebase Auth — Google OAuth |
-| Database | Firebase Firestore |
-| Push | Firebase FCM |
-| Storage | AWS S3 |
-| Payments | Asaas (Pix + card) |
-| Hosting (web) | AWS Amplify |
-| Cron | AWS EventBridge Scheduler |
+| Backend | Firebase (Auth, Firestore, FCM) + AWS (S3, Amplify) |
+| Payments | Asaas (Phase 8+) |
 
-## Key Decisions
+## Current Status
 
-- **No SMS/OTP**: Google OAuth only in MVP. Eliminates per-SMS cost.
-- **No separate backend**: Next.js API Routes serve as the backend. No NestJS, no Express.
-- **Firestore real-time**: `onSnapshot` only for event attendance list.
-- **Centavos**: All monetary values stored as integers in centavos.
-- **Language**: Code in English, UI text in Portuguese (Brazil).
+**Phase**: Infrastructure setup (Phase 0)  
+**Timeline**: 10-11 weeks to MVP launch  
+**Cost**: $0-5/month (MVP), $10-15/month (with backend)
 
-## Environment Variables
-
-Copy `.env.example` to `.env.local` and fill in values.
-See `.windsurf/rules/07-aws-services.md` for the full reference.
-
-## AI Rules (Windsurf)
-
-Rules for Cascade AI are in `.windsurf/rules/`. Read them before starting a new feature:
-
-| File | Topic |
-|------|-------|
-| `00-project-overview.md` | Stack, decisions, structure |
-| `01-code-style.md` | TypeScript, naming, formatting |
-| `02-nextjs-web.md` | App Router, API Routes, SSR |
-| `03-expo-app.md` | Expo Router, auth, navigation |
-| `04-firebase-firestore.md` | Data model, queries, Admin SDK |
-| `05-authentication.md` | Google OAuth flow (app + web) |
-| `06-payments-asaas.md` | Asaas integration, webhooks |
-| `07-aws-services.md` | S3, EventBridge, Amplify, env vars |
-| `08-shared-package.md` | Types, schemas, utils |
-| `09-whatsapp.md` | Link templates, opening WhatsApp |
-| `10-roadmap.md` | Phase tracker, what's in/out of scope |
+See [Master Plan](./SportsPay_Master_Plan.md) for complete phase breakdown, features, and launch strategy.
