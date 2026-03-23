@@ -2,9 +2,9 @@
 > **Always On** — Read this first before any task.
 
 ## What is SportsPay
-A platform for managing sports group payments and event attendance.
-- Admins create groups, generate monthly charges, manage events, share links via WhatsApp
-- Members pay via Pix/card (web page), confirm event attendance, view payment status
+Mobile app for organizing amateur sports groups — manage participants, create events, generate teams, and share via WhatsApp.
+
+**Core value**: "Time from idea to shared event" — organize a game in under 3 minutes.
 
 ## Monorepo Structure
 ```
@@ -13,22 +13,28 @@ sportspay/
 │   ├── app/        # React Native + Expo (iOS & Android)
 │   ├── web/        # Next.js 14 (frontend + API Routes + cron endpoints)
 │   └── shared/     # TypeScript types, Zod schemas, utils (no runtime deps)
+├── docs/           # Project documentation and rules
 ├── turbo.json
 └── package.json    # pnpm workspaces
 ```
 
-## Core Tech Decisions (never change without asking)
+## Core Tech Decisions
 - **App**: Expo SDK 51+, Expo Router (file-based), NativeWind, React Query, Zustand
 - **Web**: Next.js 14 App Router, Tailwind, shadcn/ui, React Query
-- **Auth**: Firebase Auth — Google OAuth only (MVP). Facebook OAuth in Phase 2. NO SMS/OTP.
-- **Database**: Firestore only. No SQL. No DynamoDB.
-- **Real-time**: Firestore `onSnapshot` for live attendance list. No WebSockets.
-- **Storage**: AWS S3 with pre-signed URLs. Never proxy file uploads through the API.
-- **Backend logic**: Next.js API Routes only. No separate backend server. No NestJS. No Express.
-- **Cron jobs**: AWS EventBridge Scheduler calling `/api/cron/**` endpoints. No node-cron.
-- **Push notifications**: Firebase FCM. Never AWS SNS.
-- **Payments gateway**: Asaas (Brazilian gateway). Pix + credit/debit card.
-- **Infrastructure**: AWS Amplify Hosting (web), Expo EAS (app builds)
+- **Storage**: AsyncStorage for MVP (local persistence)
+- **Data**: No backend in MVP - local storage only
+- **Sharing**: WhatsApp text + image export
+- **Infrastructure**: Expo EAS (app builds)
+
+## MVP Features
+- Create/edit/delete groups (participants, Pix key)
+- Create/edit/delete events within groups
+- Generate teams automatically (3 modes)
+- Manual team editing (drag-and-drop)
+- Share event details (WhatsApp text + image)
+- Clone events
+- Dark mode
+- Onboarding flow
 
 ## Shared Package Imports
 Always import types and schemas from shared packages:
