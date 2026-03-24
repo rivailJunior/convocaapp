@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Editar Grupo - SportsPay</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#b2faa9",
+                        "primary-fixed-dim": "#a4eb9c",
+                        "on-tertiary": "#d4f9ff",
+                        "on-error": "#ffefec",
+                        "inverse-on-surface": "#9b9d9e",
+                        "tertiary-container": "#10eafe",
+                        "outline-variant": "#abadae",
+                        "on-tertiary-fixed": "#003d43",
+                        "surface-dim": "#d1d5d7",
+                        "on-background": "#2c2f30",
+                        "surface-container-low": "#eff1f2",
+                        "on-secondary-fixed": "#324600",
+                        "inverse-primary": "#b2faa9",
+                        "surface-variant": "#dadddf",
+                        "error-container": "#f95630",
+                        "tertiary-fixed-dim": "#00dbee",
+                        "on-primary-fixed": "#054e12",
+                        "on-error-container": "#520c00",
+                        "secondary-fixed-dim": "#ace700",
+                        "surface-tint": "#266829",
+                        "surface-container-highest": "#dadddf",
+                        "on-tertiary-fixed-variant": "#005c64",
+                        "tertiary-fixed": "#10eafe",
+                        "on-secondary-container": "#415a00",
+                        "surface-bright": "#f5f6f7",
+                        "inverse-surface": "#0c0f10",
+                        "on-surface-variant": "#595c5d",
+                        "secondary-fixed": "#b9f61d",
+                        "on-primary-container": "#1f6223",
+                        "on-secondary-fixed-variant": "#496400",
+                        "secondary-container": "#b9f61d",
+                        "on-secondary": "#deff97",
+                        "on-surface": "#2c2f30",
+                        "secondary-dim": "#3f5700",
+                        "primary-fixed": "#b2faa9",
+                        "primary": "#266829",
+                        "surface": "#f5f6f7",
+                        "outline": "#757778",
+                        "tertiary-dim": "#005861",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#b02500",
+                        "tertiary": "#00656f",
+                        "primary-dim": "#185c1e",
+                        "error-dim": "#b92902",
+                        "background": "#f5f6f7",
+                        "on-primary-fixed-variant": "#2a6c2c",
+                        "on-primary": "#d1ffc8",
+                        "surface-container-high": "#e0e3e4",
+                        "on-tertiary-container": "#005159",
+                        "surface-container": "#e6e8ea",
+                        "secondary": "#496400"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F6F7;
+        }
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(145deg, #266829 0%, #185c1e 100%);
+        }
+        .glass-header {
+            background: rgba(245, 246, 247, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-40 bg-[#F5F6F7] dark:bg-[#121212] flex items-center px-4 py-3">
+<div class="flex items-center gap-4 w-full">
+<button class="text-[#266829] dark:text-[#AEEA00] active:scale-95 duration-200">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-xl text-[#266829] dark:text-[#AEEA00]">Editar Grupo</h1>
+</div>
+<div class="absolute bottom-0 left-0 bg-[#EFF1F2] dark:bg-[#1C1C1C] h-px w-full"></div>
+</header>
+<main class="pt-20 pb-32 px-4 max-w-lg mx-auto space-y-8">
+<!-- Informações Básicas -->
+<section class="space-y-4">
+<h2 class="text-on-surface-variant font-bold text-sm uppercase tracking-widest">Informações Básicas</h2>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+<label class="block text-xs font-semibold text-on-surface-variant mb-1 uppercase tracking-wider" for="group-name">Nome do grupo</label>
+<input class="w-full bg-surface-container-high border-none rounded-lg p-3 text-on-surface font-medium focus:ring-2 focus:ring-secondary-fixed focus:ring-offset-2 outline-none transition-all" id="group-name" type="text" value="Fute de quinta"/>
+</div>
+</section>
+<!-- Esporte Grid -->
+<section class="space-y-4">
+<h2 class="text-on-surface-variant font-bold text-sm uppercase tracking-widest">Esporte</h2>
+<div class="grid grid-cols-2 gap-3">
+<!-- Selected -->
+<div class="bg-primary-container/30 border-2 border-primary p-4 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all hover:brightness-95">
+<span class="text-3xl">⚽</span>
+<span class="font-bold text-primary text-sm">Futebol</span>
+</div>
+<!-- Inactive -->
+<div class="bg-surface-container-lowest border-2 border-transparent p-4 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all hover:bg-surface-container-low">
+<span class="text-3xl">🏐</span>
+<span class="font-medium text-on-surface-variant text-sm">Vôlei</span>
+</div>
+<div class="bg-surface-container-lowest border-2 border-transparent p-4 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all hover:bg-surface-container-low">
+<span class="text-3xl">🏀</span>
+<span class="font-medium text-on-surface-variant text-sm">Basquete</span>
+</div>
+<div class="bg-surface-container-lowest border-2 border-transparent p-4 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all hover:bg-surface-container-low">
+<span class="text-3xl">⚙️</span>
+<span class="font-medium text-on-surface-variant text-sm">Outro</span>
+</div>
+</div>
+</section>
+<!-- Chave Pix -->
+<section class="space-y-4">
+<h2 class="text-on-surface-variant font-bold text-sm uppercase tracking-widest">Chave Pix do caixa</h2>
+<div class="bg-surface-container-lowest p-4 rounded-xl relative flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">credit_card</span>
+<input class="bg-transparent border-none p-0 w-full focus:ring-0 text-on-surface font-medium" type="text" value="joao@email.com"/>
+<span class="material-symbols-outlined text-outline-variant cursor-help">info</span>
+</div>
+</section>
+<!-- Participantes -->
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<h2 class="text-on-surface-variant font-bold text-sm uppercase tracking-widest">Participantes</h2>
+<span class="text-xs font-medium text-outline">3 de 20</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden">
+<!-- Row 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">JS</div>
+<span class="font-medium">João Silva</span>
+</div>
+<button class="text-error hover:bg-error/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="h-px bg-surface-container-low mx-4"></div>
+<!-- Row 2 -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary font-bold">MO</div>
+<span class="font-medium">Maria Oliveira</span>
+</div>
+<button class="text-error hover:bg-error/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="h-px bg-surface-container-low mx-4"></div>
+<!-- Row 3 -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/30 flex items-center justify-center text-tertiary font-bold">RS</div>
+<span class="font-medium">Ricardo Santos</span>
+</div>
+<button class="text-error hover:bg-error/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<button class="flex items-center gap-2 font-bold text-sm py-2 px-1 hover:opacity-80 transition-opacity" style="color: #1B5E20;">
+<span class="material-symbols-outlined">add_circle</span>
+                + Adicionar participante
+            </button>
+</section>
+<!-- Danger Zone -->
+<section class="pt-4">
+<div class="bg-on-error rounded-xl p-4 border border-error-container/20">
+<div class="flex items-start gap-3 mb-4">
+<span class="material-symbols-outlined text-error mt-0.5">report</span>
+<div>
+<h3 class="text-error font-bold text-sm uppercase">Excluir grupo</h3>
+<p class="text-outline text-xs mt-0.5">Esta ação não pode ser desfeita</p>
+</div>
+</div>
+<button class="w-full py-3 rounded-lg border border-error text-error font-bold text-xs uppercase tracking-widest hover:bg-error/5 transition-colors active:scale-[0.98]">
+                    Excluir Grupo Permanentemente
+                </button>
+</div>
+</section>
+</main>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full flex justify-center pb-safe bg-[#F5F6F7]/80 dark:bg-[#121212]/80 backdrop-blur-md z-50 rounded-t-3xl shadow-[0_-8px_24px_rgba(44,47,48,0.04)]">
+<button class="flex items-center justify-center w-full py-4 px-6 bg-gradient-to-br from-[#266829] to-[#185C1E] text-white rounded-xl mx-4 mb-6 font-['Inter'] font-bold text-sm uppercase tracking-wider hover:brightness-110 active:scale-[0.98] transition-transform duration-200">
+<span class="material-symbols-outlined mr-2">check_circle</span>
+            Salvar Alterações
+        </button>
+</div>
+<!-- Overlay / Confirmation Modal (Hidden by default, shown here for representation) -->
+<div class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-[100] flex items-end sm:items-center justify-center p-4 hidden">
+<div class="bg-surface-container-lowest w-full max-w-sm rounded-3xl p-6 shadow-2xl">
+<div class="flex flex-col items-center text-center space-y-3">
+<div class="w-16 h-16 bg-on-error rounded-full flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-error text-4xl" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<h4 class="text-xl font-extrabold text-on-surface font-headline">Tem certeza?</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Todos os eventos deste grupo também serão excluídos permanentemente.</p>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-8">
+<button class="py-3.5 rounded-xl bg-surface-container-high text-on-surface font-bold text-sm">Cancelar</button>
+<button class="py-3.5 rounded-xl bg-error text-white font-bold text-sm shadow-lg shadow-error/20">Excluir</button>
+</div>
+</div>
+</div>
+</body></html>

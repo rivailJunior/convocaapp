@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gerar Times - Editorial Athletics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#005159",
+              "on-secondary-container": "#415a00",
+              "on-primary": "#d1ffc8",
+              "background": "#f5f6f7",
+              "secondary-container": "#b9f61d",
+              "on-primary-container": "#1f6223",
+              "inverse-surface": "#0c0f10",
+              "on-primary-fixed": "#054e12",
+              "inverse-on-surface": "#9b9d9e",
+              "error-dim": "#b92902",
+              "secondary-dim": "#3f5700",
+              "surface-container-high": "#e0e3e4",
+              "tertiary-fixed": "#10eafe",
+              "error-container": "#f95630",
+              "on-background": "#2c2f30",
+              "primary-dim": "#185c1e",
+              "tertiary": "#00656f",
+              "surface-container": "#e6e8ea",
+              "primary-fixed": "#b2faa9",
+              "on-surface-variant": "#595c5d",
+              "surface": "#f5f6f7",
+              "outline-variant": "#abadae",
+              "surface-container-highest": "#dadddf",
+              "on-secondary-fixed-variant": "#496400",
+              "on-error-container": "#520c00",
+              "secondary": "#496400",
+              "primary-container": "#b2faa9",
+              "on-tertiary-fixed": "#003d43",
+              "primary-fixed-dim": "#a4eb9c",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#eff1f2",
+              "surface-tint": "#266829",
+              "surface-variant": "#dadddf",
+              "surface-dim": "#d1d5d7",
+              "on-secondary": "#deff97",
+              "surface-bright": "#f5f6f7",
+              "tertiary-dim": "#005861",
+              "inverse-primary": "#b2faa9",
+              "on-primary-fixed-variant": "#2a6c2c",
+              "primary": "#266829",
+              "on-tertiary-fixed-variant": "#005c64",
+              "outline": "#757778",
+              "tertiary-fixed-dim": "#00dbee",
+              "tertiary-container": "#10eafe",
+              "on-surface": "#2c2f30",
+              "on-tertiary": "#d4f9ff",
+              "on-secondary-fixed": "#324600",
+              "secondary-fixed-dim": "#ace700",
+              "secondary-fixed": "#b9f61d",
+              "on-error": "#ffefec",
+              "error": "#b02500"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .kinetic-gradient {
+        background: linear-gradient(145deg, #266829 0%, #185c1e 100%);
+      }
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#F5F6F7] dark:bg-slate-950 flex items-center justify-between w-full px-4 h-16 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[#266829] dark:text-green-500">arrow_back</span>
+</button>
+<h1 class="font-headline font-bold text-2xl text-[#266829] dark:text-green-500 tracking-tight">Gerar Times</h1>
+</div>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</header>
+<main class="px-4 py-2 max-w-2xl mx-auto">
+<!-- Subtitle & Context -->
+<div class="mb-6 px-1">
+<span class="text-on-surface-variant font-medium text-sm">25 participantes disponíveis</span>
+</div>
+<!-- Mode Selector -->
+<section class="mb-8">
+<div class="flex p-1 bg-surface-container-low rounded-full gap-1 overflow-x-auto hide-scrollbar">
+<button class="flex-1 py-3 px-6 rounded-full text-sm font-bold whitespace-nowrap bg-primary shadow-sm transition-all text-white">Por times</button>
+<button class="flex-1 py-3 px-6 rounded-full text-sm font-semibold whitespace-nowrap text-on-surface-variant hover:bg-surface-container transition-all">Por jogadores</button>
+<button class="flex-1 py-3 px-6 rounded-full text-sm font-semibold whitespace-nowrap text-on-surface-variant hover:bg-surface-container transition-all">Manual</button>
+</div>
+</section>
+<!-- Input Area (Mode 1 Selected) -->
+<section class="bg-surface-container-lowest p-6 rounded-xl mb-6 shadow-[0_8px_24px_rgba(44,47,48,0.04)]">
+<label class="block text-center font-headline font-bold text-on-surface-variant mb-4 tracking-tight">Quantos times?</label>
+<div class="flex flex-col items-center gap-2">
+<input class="w-full max-w-[200px] h-16 text-center text-3xl font-headline font-extrabold bg-surface-container-low border-none rounded-xl focus:ring-0 focus:border-b-4 focus:border-secondary-container transition-all" placeholder="Ex: 3" type="number" value="3"/>
+<p class="text-on-surface-variant text-xs font-medium mt-2">Resultado: 3 times de 8 jogadores • 1 no banco</p>
+</div>
+</section>
+<!-- Primary Action -->
+<section class="mb-12">
+<button class="kinetic-gradient w-full py-5 rounded-xl font-headline font-extrabold text-lg flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all text-white">
+<span>Sortear! 🎉</span>
+</button>
+</section>
+<!-- Results Section -->
+<section class="space-y-6">
+<h2 class="font-headline font-bold text-xl px-1">Times Gerados</h2>
+<!-- Time A -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(44,47,48,0.03)] border-l-8 border-primary">
+<div class="p-4 bg-primary/5 flex justify-between items-center">
+<h3 class="font-headline font-bold text-primary">Time A</h3>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">8 Jogadores</span>
+</div>
+<div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-bold">JS</div>
+<span class="text-sm font-medium text-on-surface">João Silva</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-bold">PS</div>
+<span class="text-sm font-medium text-on-surface">Pedro Santos</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-bold">LL</div>
+<span class="text-sm font-medium text-on-surface">Lucas Lima</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-bold">BS</div>
+<span class="text-sm font-medium text-on-surface">Bruno Souza</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-bold">CE</div>
+<span class="text-sm font-medium text-on-surface">Carlos Eduardo</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-bold">RD</div>
+<span class="text-sm font-medium text-on-surface">Roberto Dias</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-bold">MG</div>
+<span class="text-sm font-medium text-on-surface">Marcelo Guedes</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-bold">TR</div>
+<span class="text-sm font-medium text-on-surface">Tiago Rocha</span>
+</div>
+</div>
+</div>
+<!-- Time B -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(44,47,48,0.03)] border-l-8 border-tertiary">
+<div class="p-4 bg-tertiary/5 flex justify-between items-center">
+<h3 class="font-headline font-bold text-tertiary">Time B</h3>
+<span class="bg-tertiary/10 text-tertiary text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">8 Jogadores</span>
+</div>
+<div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center text-xs font-bold">AC</div>
+<span class="text-sm font-medium text-on-surface">Ana Costa</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center text-xs font-bold">MO</div>
+<span class="text-sm font-medium text-on-surface">Maria Oliveira</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center text-xs font-bold">RS</div>
+<span class="text-sm font-medium text-on-surface">Rafaela Santos</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center text-xs font-bold">JS</div>
+<span class="text-sm font-medium text-on-surface">Julia Santos</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center text-xs font-bold">BL</div>
+<span class="text-sm font-medium text-on-surface">Beatriz Lima</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center text-xs font-bold">AS</div>
+<span class="text-sm font-medium text-on-surface">Amanda Silva</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center text-xs font-bold">FS</div>
+<span class="text-sm font-medium text-on-surface">Fernanda Souza</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center text-xs font-bold">GR</div>
+<span class="text-sm font-medium text-on-surface">Gabriela Rocha</span>
+</div>
+</div>
+</div>
+<!-- Time C -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(44,47,48,0.03)] border-l-8 border-error-container">
+<div class="p-4 bg-error-container/5 flex justify-between items-center">
+<h3 class="font-headline font-bold text-error-container">Time C</h3>
+<span class="bg-error-container/10 text-error-container text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">8 Jogadores</span>
+</div>
+<div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error-container/10 text-error-container rounded-full flex items-center justify-center text-xs font-bold">PJ</div>
+<span class="text-sm font-medium text-on-surface">Paulo Jorge</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error-container/10 text-error-container rounded-full flex items-center justify-center text-xs font-bold">SM</div>
+<span class="text-sm font-medium text-on-surface">Sergio Mendes</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error-container/10 text-error-container rounded-full flex items-center justify-center text-xs font-bold">RG</div>
+<span class="text-sm font-medium text-on-surface">Ricardo Gomes</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error-container/10 text-error-container rounded-full flex items-center justify-center text-xs font-bold">AL</div>
+<span class="text-sm font-medium text-on-surface">Andre Luiz</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error-container/10 text-error-container rounded-full flex items-center justify-center text-xs font-bold">LF</div>
+<span class="text-sm font-medium text-on-surface">Luiz Felipe</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error-container/10 text-error-container rounded-full flex items-center justify-center text-xs font-bold">JC</div>
+<span class="text-sm font-medium text-on-surface">Jose Carlos</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error-container/10 text-error-container rounded-full flex items-center justify-center text-xs font-bold">AS</div>
+<span class="text-sm font-medium text-on-surface">Antonio Silva</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error-container/10 text-error-container rounded-full flex items-center justify-center text-xs font-bold">FJ</div>
+<span class="text-sm font-medium text-on-surface">Francisco Jose</span>
+</div>
+</div>
+</div>
+<!-- Banco -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-sm border-l-8 border-outline-variant">
+<div class="p-3 bg-surface-container-high flex justify-between items-center">
+<h3 class="font-headline font-bold text-on-surface-variant text-sm">Banco</h3>
+<span class="text-[10px] font-bold text-on-surface-variant px-2 py-1 rounded-full uppercase tracking-tighter">1 Jogador</span>
+</div>
+<div class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-outline-variant/20 text-on-surface-variant rounded-full flex items-center justify-center text-xs font-bold">ES</div>
+<span class="text-sm font-medium text-on-surface">Eduardo Silva</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Sticky Row -->
+<div class="fixed bottom-0 left-0 w-full z-40 bg-surface/80 backdrop-blur-md px-4 pt-4 pb-8 flex gap-3 shadow-[0_-8px_24px_rgba(44,47,48,0.06)]">
+<button class="flex-1 py-4 px-2 rounded-xl border-2 border-outline-variant text-on-surface font-headline font-bold text-sm transition-all hover:bg-surface-container active:scale-95">Refazer Sorteio</button>
+<button class="flex-[1.5] py-4 px-2 rounded-xl bg-primary font-headline font-bold text-sm shadow-md transition-all active:scale-95 text-white">Salvar Times</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#F5F6F7]/80 dark:bg-slate-950/80 backdrop-blur-md rounded-t-3xl shadow-[0_-8px_24px_rgba(44,47,48,0.04)] pointer-events-none opacity-0 invisible">
+<!-- Hidden as per task focusing on the generate teams screen flow -->
+</nav>
+</body></html>

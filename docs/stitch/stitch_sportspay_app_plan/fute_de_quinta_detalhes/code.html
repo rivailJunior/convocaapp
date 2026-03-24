@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(145deg, #266829 0%, #185c1e 100%);
+        }
+        .glass-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F6F7;
+        }
+        h1, h2, h3, .font-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#d1ffc8",
+                        "error-container": "#f95630",
+                        "background": "#f5f6f7",
+                        "tertiary-fixed": "#10eafe",
+                        "surface-dim": "#d1d5d7",
+                        "secondary-fixed": "#b9f61d",
+                        "inverse-on-surface": "#9b9d9e",
+                        "error-dim": "#b92902",
+                        "on-secondary-fixed": "#324600",
+                        "on-primary-fixed": "#054e12",
+                        "tertiary-fixed-dim": "#00dbee",
+                        "tertiary": "#00656f",
+                        "secondary-container": "#b9f61d",
+                        "outline": "#757778",
+                        "on-secondary": "#deff97",
+                        "surface-container": "#e6e8ea",
+                        "on-surface": "#2c2f30",
+                        "tertiary-dim": "#005861",
+                        "primary-container": "#b2faa9",
+                        "on-secondary-fixed-variant": "#496400",
+                        "outline-variant": "#abadae",
+                        "surface-container-high": "#e0e3e4",
+                        "inverse-surface": "#0c0f10",
+                        "surface-variant": "#dadddf",
+                        "secondary-fixed-dim": "#ace700",
+                        "surface-container-low": "#eff1f2",
+                        "surface-tint": "#266829",
+                        "inverse-primary": "#b2faa9",
+                        "primary": "#266829",
+                        "on-tertiary-fixed-variant": "#005c64",
+                        "surface-bright": "#f5f6f7",
+                        "secondary": "#496400",
+                        "on-tertiary-fixed": "#003d43",
+                        "on-primary-fixed-variant": "#2a6c2c",
+                        "primary-fixed-dim": "#a4eb9c",
+                        "surface": "#f5f6f7",
+                        "on-primary-container": "#1f6223",
+                        "primary-fixed": "#b2faa9",
+                        "primary-dim": "#185c1e",
+                        "on-tertiary": "#d4f9ff",
+                        "error": "#b02500",
+                        "secondary-dim": "#3f5700",
+                        "on-surface-variant": "#595c5d",
+                        "on-background": "#2c2f30",
+                        "tertiary-container": "#10eafe",
+                        "on-error-container": "#520c00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#415a00",
+                        "surface-container-highest": "#dadddf",
+                        "on-error": "#ffefec",
+                        "on-tertiary-container": "#005159"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface antialiased min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 flex items-center justify-between px-4 h-16 w-full bg-[#F5F6F7] dark:bg-slate-950 no-border tonal-shift bg-[#EFF1F2] dark:bg-slate-900">
+<div class="flex items-center gap-3">
+<button class="hover:bg-[#EFF1F2] dark:hover:bg-slate-800 transition-colors p-2 rounded-full scale-95 active:duration-100">
+<span class="material-symbols-outlined text-[#266829] dark:text-green-500">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-xl text-[#266829] dark:text-green-500">Fute de quinta</h1>
+</div>
+<button class="hover:bg-[#EFF1F2] dark:hover:bg-slate-800 transition-colors p-2 rounded-full scale-95 active:duration-100">
+<span class="material-symbols-outlined text-[#266829] dark:text-green-500">edit</span>
+</button>
+</header>
+<main class="px-4 mt-6 max-w-2xl mx-auto">
+<!-- Hero Card -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_8px_24px_rgba(44,47,48,0.04)] p-6 mb-8 border border-transparent">
+<div class="flex flex-col gap-4">
+<div class="flex items-center -space-x-3 overflow-hidden">
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" data-alt="User avatar male João" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGmfzFVoHawJVYRfOe5_LadEN49e_Qe7TBGllkbtJcmppRj73cojmcrFBrOZ6YmvudYJFQZAXZT58sbapoSDfiSBG7v2Usi8uPhFMT8b7D_VeuUJLpLRp878p24AI9w9Xdwphezl1wnT603PM8fbajJ0K2C8rFrS3A-kj12rI-ytBab2NZY6BQmd8Vsb4uYRk-3vqg2cvOgVPzBHp85NfLKNiGTaQX2Y8MRbpKkZjOLbBp3CYqse7Fonxm9geLoyX4S-fGnBA9hGu5"/>
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" data-alt="User avatar female Maria" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgbvftwDo8cV7edXphUwI5tipt2XxWcZ637g-1QPdGmXz_s6f9gFcHuRsdg5Ow51FjCbUeaghrQgQAAVaKr9ZiRrgln7biYS__YG7NU48bzswDcZrf29qz8jg8F4dD76JqKpAoDwDWIZC7DNAZQKJQ8X__qY7SPtgRhIs8YMzNSwlRBI-MWUqjMETgqy66z5hg8_ymISAe31BOltW1HeUHZ8pYpYcRlb73XbYF6srAaUkg_6XwwZwXykgzVZzJoVzXRGOBacqnS5Ox"/>
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" data-alt="User avatar male Lucas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8hqv8W4JIAG0xrTDQIRNQSyL9T2ULXDTeYO0PjbX3IlZMo4ENrTa7oJ_yqXNzxL5Oy0LVgQHKXnTZmH_gAEkxeP7tLDSbeFetHYFu6CjUbtUkET64gAw74uruFJ6FaK5Cn_HQoJ42eD35O7_Jv0uxBMR-LI6Wotn6-OiannUbGp_ztY1rC2pZf5QQku90wMvDp3wQKthHNRPWtg8mHmQab4QIsvbI1zDH8Oi2JixVZrstH59drgTxQc9r89pl66bdeCkq8EHjAZfR"/>
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" data-alt="User avatar female Ana" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACcg8P5kgo7ykZSb3sUttKh0kBKmOgJElyWTiBkcVveWC9nAItbqvFXx7VoSd25KxaKYC9wELSR3p2e_TOzYn1ZI8iD2J4ibLFdqRw4yAcJDbPMMaIQgVMUg9wN_dgXwdCrVSqWvXUaiquEGD6ASrq_21OSD98KtpPDL7dM6WJutDmvGopk4cugdNykJgC0FFhyZKtr1ycTxCUxkRSK34b0CI6PYCiKPHncJgB-WVwmuwkj1QY5xi4WysdKDFbTOJ_Q_mzoXylC46s"/>
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" data-alt="User avatar male Pedro" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtm1FIY8k0I6qO-RAgIzT1k5QXts14m0Jo-OqlsnKLFSH4E15crjwy-MgankhL_WLxdPNRO44JhBjO0zBsDPgFLSUNeaY63qt6MfR8vnS6LvRG0uzh2_ZINWSeIzBp0FXVYtfx_MPIM1dn9dxkEHX_w0G8_FrAKv5q5S5x0vF0UDYnf1tD1XKlWCCwejrO8Ma4Np3nAH0kP3NTKA5DZm_GmFheNFiyR8nliQUU3e8dAKlvLXVOvrVVf6XWc1lTIKQV9VUCDXJRPw_q"/>
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" data-alt="User avatar female Julia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmSqbNx80w2-rgx08XMr0Lp9h4LVp4jRGQ0fmIwOsy8S_oictBlTLmZ4CnrURUNqxSOB_vA8UTDSZqeo1C4cMv1XMqCEMnc4ZIqP81SBuqHxNIygOjElWX0PRrnJJFjI3ecC7rchVSdxjTTiLAG6lU4yKrvhLrSgcHFWxv5N3XVKB4Q2cUngqdqsemkNHS3ElRLQL5sujE1_2wWhzZFR7YFa86UeTjUZTZTLCsofk9ljrk348j4al7hW5KAh7ONm8pjLEBQjZglAhg"/>
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" data-alt="User avatar male Ricardo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvMDfK0B75_jnuJN_IODs6pQhdXA-QtHXPQjg5Llrv7cY_i4Ilu9LLW3D10bcLo6MsUpXPpvsVtIUYyULx__vxR-3sWw2-7erYm83f8CjDWobWjDV01L9b0_l4ZLGqLbf2K8kuw8hfZ-AuqY3xyHdV4tFr6bIZykXeRI88IMWMpC3IEIM02ISpL6m-neiF-5X1woyQrCu7w8saY84V8OUh7pNxQkuRtosZjNGM8q2lsW0z1iLFYW_9QGq9oh0NY55umF4LFG8tzwC0"/>
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" data-alt="User avatar female Clara" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Bb6ogfVbiDJBOhjUtjgM3GwikoVstNpBx5ChUROIvQ3xUAWPyRC_40rZeOh7vrw9G0PwnbpYsQTsqPXIgjxKI8xX1i3aw-c7I96qsSkSh3q57u7uyGh5qe90sxCGogHkcQ3Wpd0K79N_WrlJOa1q_icP8aNH3XjVJw6bXhLYJEkqvsFevMEUVbOyA1zJAZqPJF8hqvP-uvyRmzQ94JdbzPU-RVBUgXfftHFGStcWMqSDQsI1y0IeXVaqhyPlGAKjky96_DPI7g7X"/>
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-high ring-2 ring-white text-on-surface-variant text-xs font-bold">
+                        +4
+                    </div>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm font-medium font-body">12 participantes</p>
+</div>
+<div class="h-[1px] bg-outline-variant/15 w-full my-2"></div>
+<div class="flex items-center justify-between group cursor-pointer active:scale-[0.98] transition-all">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Chave Pix</span>
+<span class="text-on-surface font-semibold font-body">joao@email.com</span>
+</div>
+<button class="bg-surface-container-low p-2 rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-xl">content_copy</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section: Próximos Eventos -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h2 class="text-lg font-bold font-headline text-on-surface">Próximos Eventos</h2>
+</div>
+<!-- Event Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="font-bold text-on-surface text-base">Futebol 18/01</h3>
+<div class="flex items-center gap-1 text-on-surface-variant text-sm mt-1">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="font-medium">Sáb, 14h • Arena Beach</span>
+</div>
+</div>
+<div class="h-10 w-10 rounded-xl bg-primary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container text-xs font-bold flex items-center gap-1">
+                        Times gerados <span class="material-symbols-outlined text-[14px]">check_circle</span>
+</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold">
+                        9 confirmados
+                    </span>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="font-bold text-on-surface text-base">Futebol 25/01</h3>
+<div class="flex items-center gap-1 text-on-surface-variant text-sm mt-1">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="font-medium">Sáb, 14h • Arena Beach</span>
+</div>
+</div>
+<div class="h-10 w-10 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container text-xs font-bold flex items-center gap-1">
+                        Times gerados <span class="material-symbols-outlined text-[14px]">check_circle</span>
+</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold">
+                        7 confirmados
+                    </span>
+</div>
+</div>
+<!-- Collapsible Link -->
+<button class="flex items-center justify-center gap-2 text-primary font-bold text-sm py-2 hover:opacity-80 transition-opacity">
+                Ver eventos anteriores (5)
+                <span class="material-symbols-outlined">expand_more</span>
+</button>
+</section>
+</main>
+<!-- FAB -->
+<button class="fixed right-6 w-14 h-14 rounded-2xl shadow-xl flex items-center justify-center text-white hover:opacity-95 active:scale-90 transition-all z-50 bottom-32 bg-[#1B5E20]">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-2 bg-white/90 dark:bg-gray-950/80 backdrop-blur-xl rounded-t-3xl shadow-[0_-8px_24px_rgba(0,0,0,0.04)] border-t border-gray-100">
+<a class="flex flex-col items-center justify-center text-gray-400 px-5 py-2 hover:text-primary-brand transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-wider mt-1">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white rounded-2xl px-5 py-2 scale-90 transition-transform bg-[#1B5E20]" href="#">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-wider mt-1">Grupos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 px-5 py-2 hover:text-primary-brand transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-wider mt-1">Pagamentos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 px-5 py-2 hover:text-primary-brand transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-wider mt-1">Perfil</span>
+</a>
+</nav>
+<!-- Toast Component (Hidden by default, shown for demonstration simulation) -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 bg-primary text-secondary-fixed px-6 py-3 rounded-full shadow-xl font-bold text-sm flex items-center gap-2 opacity-0 pointer-events-none transform translate-y-4 transition-all duration-300">
+<span class="material-symbols-outlined">check_circle</span>
+        Copiado!
+    </div>
+</body></html>

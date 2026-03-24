@@ -1,0 +1,40 @@
+# SportsPay App Plan (MVP - Standalone Mode)
+
+SportsPay is a mobile app for managing amateur sports groups in Brazil, focusing on ease of use and local-first data storage.
+
+## Core User Flows & Screens
+
+1.  **Dashboard (Home Screen):** 
+    -   Overview of active groups.
+    -   Upcoming events/matches for today and next 7 days.
+    -   FAB to "Create Group" or "Add Event".
+    -   Top bar with Settings icon (no login/sync).
+
+2.  **Group Details:**
+    -   List of upcoming and past events for the specific group.
+    -   Member list with status badges.
+    -   Financial overview (collected vs. pending for events).
+    -   Quick action to share group link (to clipboard).
+
+3.  **Event Details (The "Match" view):**
+    -   Event info: Date (dd/MM), Time, Location (e.g., "Quadra da Vila").
+    -   List of participants with status: Confirmados (green), Pendentes (orange), Recusados (gray).
+    -   Cost per person in R$.
+    -   Button to confirm attendance (member view) or manage list (admin view).
+
+4.  **Create/Edit Event:**
+    -   Form to set event title (e.g., "Racha de Terça"), date, time, and location.
+    -   Set individual cost (R$).
+    -   Toggle for recurring events.
+    -   "Create" button with success toast on completion.
+
+5.  **Settings:**
+    -   App preferences (Units, Notifications).
+    -   Data management (Export/Backup to local file).
+    -   App version and information.
+
+## Visual Style & Components
+-   **Theme:** Sports-inspired (Deep Green #1B5E20) with high energy (Vibrant Lime #AEEA00).
+-   **Containers:** Card-based layout with 16px radius and 2px elevation.
+-   **Navigation:** Simple top navigation (back button and title), no complex bottom tabs for MVP.
+-   **Data:** Using Brazilian names (João Silva, Ana Costa) and currency (R$).

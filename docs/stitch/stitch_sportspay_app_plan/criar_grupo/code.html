@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SportsPay - Novo Grupo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error-dim": "#b92902",
+              "on-secondary-container": "#415a00",
+              "on-primary-fixed-variant": "#2a6c2c",
+              "on-surface": "#2c2f30",
+              "on-tertiary-fixed-variant": "#005c64",
+              "surface-variant": "#dadddf",
+              "on-secondary-fixed-variant": "#496400",
+              "secondary-fixed-dim": "#ace700",
+              "primary-fixed-dim": "#a4eb9c",
+              "on-error-container": "#520c00",
+              "on-tertiary": "#d4f9ff",
+              "error": "#b02500",
+              "on-primary-container": "#1f6223",
+              "tertiary": "#00656f",
+              "background": "#f5f6f7",
+              "on-background": "#2c2f30",
+              "outline": "#757778",
+              "secondary": "#496400",
+              "on-error": "#ffefec",
+              "surface-container-low": "#eff1f2",
+              "inverse-surface": "#0c0f10",
+              "surface-tint": "#266829",
+              "on-tertiary-container": "#005159",
+              "inverse-on-surface": "#9b9d9e",
+              "tertiary-dim": "#005861",
+              "on-tertiary-fixed": "#003d43",
+              "secondary-fixed": "#b9f61d",
+              "on-primary-fixed": "#054e12",
+              "surface-container-highest": "#dadddf",
+              "secondary-dim": "#3f5700",
+              "surface": "#f5f6f7",
+              "primary-dim": "#185c1e",
+              "tertiary-container": "#10eafe",
+              "surface-container-lowest": "#ffffff",
+              "inverse-primary": "#b2faa9",
+              "surface-container-high": "#e0e3e4",
+              "primary": "#266829",
+              "surface-container": "#e6e8ea",
+              "primary-container": "#b2faa9",
+              "primary-fixed": "#b2faa9",
+              "on-secondary": "#deff97",
+              "secondary-container": "#b9f61d",
+              "on-surface-variant": "#595c5d",
+              "on-secondary-fixed": "#324600",
+              "tertiary-fixed": "#10eafe",
+              "outline-variant": "#abadae",
+              "surface-bright": "#f5f6f7",
+              "surface-dim": "#d1d5d7",
+              "error-container": "#f95630",
+              "on-primary": "#d1ffc8",
+              "tertiary-fixed-dim": "#00dbee"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f6f7;
+            color: #2c2f30;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(145deg, #266829 0%, #185c1e 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<nav class="w-full top-0 sticky z-50 bg-[#F5F6F7] dark:bg-gray-900 no-line tonal-shift bg-[#EFF1F2] dark:bg-gray-800 flex items-center px-4 py-3 w-full">
+<div class="flex items-center w-full max-w-2xl mx-auto">
+<button class="text-[#266829] dark:text-green-500 hover:opacity-80 transition-opacity active:scale-95 duration-200 p-2">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-tight text-[#266829] dark:text-green-500 flex-1 text-center pr-10">Novo Grupo</h1>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto px-4 pb-32 pt-6 max-w-2xl mx-auto w-full">
+<!-- Section 1: Basic Info -->
+<section class="mb-8">
+<h2 class="font-headline font-bold text-lg mb-4 text-on-surface">Informações Básicas</h2>
+<div class="space-y-6">
+<!-- Group Name Input -->
+<div class="space-y-2">
+<label class="font-label font-semibold text-sm text-on-surface-variant">Nome do grupo</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-high border-none rounded-xl px-4 py-4 text-on-surface focus:ring-0 placeholder:text-outline focus:border-b-2 focus:border-secondary transition-all" placeholder="Ex: Fute de quinta" type="text"/>
+</div>
+</div>
+<!-- Sport Selection Grid -->
+<div class="space-y-2">
+<label class="font-label font-semibold text-sm text-on-surface-variant">Esporte</label>
+<div class="grid grid-cols-2 gap-4">
+<!-- Option Football (Selected State) -->
+<div class="relative border-2 border-primary bg-primary-container/20 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all active:scale-95">
+<span class="text-3xl mb-2">⚽</span>
+<span class="font-label font-bold text-sm text-primary">Futebol</span>
+</div>
+<!-- Option Volleyball -->
+<div class="relative border-2 border-transparent bg-surface-container-lowest rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all hover:bg-surface-container hover:shadow-sm active:scale-95">
+<span class="text-3xl mb-2">🏐</span>
+<span class="font-label font-bold text-sm text-on-surface-variant">Vôlei</span>
+</div>
+<!-- Option Basketball -->
+<div class="relative border-2 border-transparent bg-surface-container-lowest rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all hover:bg-surface-container hover:shadow-sm active:scale-95">
+<span class="text-3xl mb-2">🏀</span>
+<span class="font-label font-bold text-sm text-on-surface-variant">Basquete</span>
+</div>
+<!-- Option Other -->
+<div class="relative border-2 border-transparent bg-surface-container-lowest rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all hover:bg-surface-container hover:shadow-sm active:scale-95">
+<span class="text-3xl mb-2">⚙️</span>
+<span class="font-label font-bold text-sm text-on-surface-variant">Outro</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Pix Key -->
+<section class="mb-8">
+<div class="flex items-center gap-1 mb-4">
+<h2 class="font-headline font-bold text-lg text-on-surface">Chave Pix do caixa</h2>
+<span class="material-symbols-outlined text-outline text-lg" data-icon="info">info</span>
+</div>
+<div class="space-y-2">
+<div class="relative flex items-center bg-surface-container-high rounded-xl px-4">
+<span class="material-symbols-outlined text-on-surface-variant mr-3" data-icon="credit_card">credit_card</span>
+<input class="w-full bg-transparent border-none py-4 text-on-surface focus:ring-0 placeholder:text-outline" placeholder="Ex: joao@email.com" type="text"/>
+</div>
+<p class="text-[10px] text-on-surface-variant font-medium pl-1">Será usada para compartilhar cobrança nos eventos</p>
+</div>
+</section>
+<!-- Section 3: Participants -->
+<section class="mb-8">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline font-bold text-lg text-on-surface">Participantes (3)</h2>
+</div>
+<div class="space-y-3">
+<!-- Participant 1 -->
+<div class="flex items-center bg-surface-container-lowest rounded-xl p-1 pr-4 shadow-sm">
+<input class="flex-1 bg-transparent border-none px-4 py-3 text-on-surface font-medium focus:ring-0" type="text" value="João Silva"/>
+<button class="text-error-dim hover:bg-error-container/10 p-2 rounded-full transition-colors active:scale-90">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+<!-- Participant 2 -->
+<div class="flex items-center bg-surface-container-lowest rounded-xl p-1 pr-4 shadow-sm">
+<input class="flex-1 bg-transparent border-none px-4 py-3 text-on-surface font-medium focus:ring-0" type="text" value="Maria Oliveira"/>
+<button class="text-error-dim hover:bg-error-container/10 p-2 rounded-full transition-colors active:scale-90">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+<!-- Participant 3 -->
+<div class="flex items-center bg-surface-container-lowest rounded-xl p-1 pr-4 shadow-sm">
+<input class="flex-1 bg-transparent border-none px-4 py-3 text-on-surface font-medium focus:ring-0" type="text" value="Ricardo Santos"/>
+<button class="text-error-dim hover:bg-error-container/10 p-2 rounded-full transition-colors active:scale-90">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Action Buttons for Participants -->
+<div class="mt-4 flex flex-col gap-3">
+<button class="flex items-center justify-center gap-2 text-secondary-dim font-bold py-2 hover:opacity-80 transition-opacity active:scale-[0.98]">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                    Adicionar participante
+                </button>
+<button class="border-2 border-outline-variant text-on-surface font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-surface-container transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-lg" data-icon="upload">upload</span>
+                    Importar lista
+                </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Custom Shell for Floating Buttons) -->
+<div class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md shadow-[0_-8px_24px_rgba(44,47,48,0.04)] rounded-t-[24px]">
+<button class="flex flex-col items-center justify-center text-[#595C5D] px-6 py-2 hover:brightness-110 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-wider mt-1">Cancelar</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-gradient-to-br from-[#266829] to-[#185c1e] text-white rounded-xl px-12 py-3 hover:brightness-110 active:scale-[0.98] transition-transform shadow-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-['Inter'] text-sm font-bold uppercase tracking-wider">Criar Grupo</span>
+</div>
+</button>
+</div>
+</body></html>

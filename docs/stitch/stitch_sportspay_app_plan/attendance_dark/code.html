@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#121212",
+              "surface-container-high": "#252525",
+              "surface-container": "#1E1E1E",
+              "tertiary": "#00656f",
+              "surface-dim": "#121212",
+              "secondary-dim": "#3f5700",
+              "surface-bright": "#1a1a1a",
+              "inverse-on-surface": "#9b9d9e",
+              "primary": "#1B5E20",
+              "on-primary-fixed": "#054e12",
+              "secondary-fixed-dim": "#ace700",
+              "surface-container-low": "#2a2a2a",
+              "primary-dim": "#1B5E20",
+              "on-surface-variant": "#b0b0b0",
+              "outline-variant": "#333333",
+              "inverse-primary": "#b2faa9",
+              "primary-fixed-dim": "#a4eb9c",
+              "tertiary-dim": "#005861",
+              "tertiary-fixed": "#10eafe",
+              "error-container": "#f95630",
+              "surface-container-highest": "#333333",
+              "on-secondary-fixed": "#324600",
+              "tertiary-fixed-dim": "#00dbee",
+              "on-background": "#ffffff",
+              "primary-container": "#1B5E20",
+              "on-error-container": "#520c00",
+              "on-tertiary-fixed": "#003d43",
+              "on-secondary-container": "#415a00",
+              "error-dim": "#b92902",
+              "error": "#b02500",
+              "on-tertiary-fixed-variant": "#005c64",
+              "surface-container-lowest": "#1E1E1E",
+              "secondary": "#B9F61D",
+              "primary-fixed": "#b2faa9",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#2a6c2c",
+              "on-surface": "#ffffff",
+              "surface-tint": "#266829",
+              "on-tertiary-container": "#005159",
+              "secondary-fixed": "#B9F61D",
+              "on-primary-container": "#ffffff",
+              "surface-variant": "#dadddf",
+              "inverse-surface": "#0c0f10",
+              "tertiary-container": "#10eafe",
+              "on-error": "#ffefec",
+              "outline": "#757778",
+              "on-tertiary": "#d4f9ff",
+              "secondary-container": "#b9f61d",
+              "on-secondary-fixed-variant": "#496400",
+              "surface": "#121212",
+              "on-secondary": "#deff97"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(145deg, #1B5E20 0%, #0d2e10 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased min-h-screen pb-40">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-[#121212] flex items-center px-4 py-3 justify-between">
+<div class="flex items-center gap-4">
+<button class="text-[#B9F61D] hover:bg-white/10 transition-colors active:scale-95 duration-200 p-2 rounded-full leading-none">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-xl tracking-tight text-white">Lista de Presença</h1>
+</div>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:bg-white/10 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</div>
+</header>
+<div class="bg-white/5 h-px w-full"></div>
+<main class="max-w-md mx-auto">
+<!-- Summary Bar -->
+<section class="px-4 py-4">
+<div class="bg-primary/20 rounded-xl p-4 flex items-center justify-between border border-white/5">
+<div class="flex flex-wrap gap-y-2 gap-x-4 items-center font-medium text-white text-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[#B9F61D] text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>9 confirmados</span>
+</div>
+<span class="text-outline-variant opacity-50">•</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-orange-400 text-lg" data-icon="pending" style="font-variation-settings: 'FILL' 1;">pending</span>
+<span>3 pendentes</span>
+</div>
+<span class="text-outline-variant opacity-50">•</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-red-400 text-lg" data-icon="cancel" style="font-variation-settings: 'FILL' 1;">cancel</span>
+<span>1 recusou</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Filter Chips -->
+<section class="px-4 mb-6 overflow-x-auto whitespace-nowrap scrollbar-hide flex gap-2">
+<button class="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold shadow-md active:scale-95 transition-transform">Todos (13)</button>
+<button class="bg-surface-container-low text-on-surface-variant px-4 py-2 rounded-full text-sm font-semibold hover:bg-surface-container transition-colors">Confirmados (9)</button>
+<button class="bg-surface-container-low text-on-surface-variant px-4 py-2 rounded-full text-sm font-semibold hover:bg-surface-container transition-colors">Pendentes (3)</button>
+<button class="bg-surface-container-low text-on-surface-variant px-4 py-2 rounded-full text-sm font-semibold hover:bg-surface-container transition-colors">Recusados (1)</button>
+</section>
+<!-- Participant List -->
+<section class="px-4 space-y-2">
+<!-- Row 1 (Confirmed) -->
+<div class="bg-surface-container-lowest p-3 rounded-xl flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-[#B9F61D] font-bold text-sm">JS</div>
+<div>
+<p class="font-semibold text-white">João Silva</p>
+<p class="text-xs text-on-surface-variant">Confirmado às 14:30</p>
+</div>
+</div>
+<div class="flex items-center bg-background rounded-lg p-1 gap-1 border border-white/5">
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="help_outline">help_outline</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Row 2 (Pending) -->
+<div class="bg-surface-container-lowest p-3 rounded-xl flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container">
+<img alt="Ana Costa" class="w-full h-full object-cover" data-alt="Close up portrait of a smiling woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrpEHSCrrDDY4OOXdsjwXSwV_YsKdy-_mRSVaMSb0qTCY8-Kba7hSdSRbULZPAiaRH53eF0Fyh9U1j1pYfEoT0snt72eUGpLpPAdob2tPCtERVQIyJ8Kd--sUP7VySwEjG02pnbSkVp2iyU25mips-49kftUPsRUQmkPVpAG9W-GnmmfEiLMj1ic2alcGApLKccbER-bxJe1iU0XySvXQeixLOlXgUZkxt5YlaM2V7s2KlKoNixa94C1ZzvM9rQHdQbEsZb1ibdIuq"/>
+</div>
+<div>
+<p class="font-semibold text-white">Ana Costa</p>
+<p class="text-xs text-on-surface-variant">Aguardando resposta</p>
+</div>
+</div>
+<div class="flex items-center bg-background rounded-lg p-1 gap-1 border border-white/5">
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-orange-500 text-white shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="help" style="font-variation-settings: 'FILL' 1;">help</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Row 3 (Declined) -->
+<div class="bg-surface-container-lowest p-3 rounded-xl flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold text-sm">PS</div>
+<div>
+<p class="font-semibold text-white">Pedro Santos</p>
+<p class="text-xs text-on-surface-variant">Recusou: Indisponível</p>
+</div>
+</div>
+<div class="flex items-center bg-background rounded-lg p-1 gap-1 border border-white/5">
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="help_outline">help_outline</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-error text-white shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="close" style="font-variation-settings: 'wght' 700;">close</span>
+</button>
+</div>
+</div>
+<!-- Additional Rows for demonstration -->
+<div class="bg-surface-container-lowest p-3 rounded-xl flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary-fixed font-bold text-sm">RF</div>
+<div>
+<p class="font-semibold text-white">Ricardo Ferreira</p>
+<p class="text-xs text-on-surface-variant">Confirmado às 10:15</p>
+</div>
+</div>
+<div class="flex items-center bg-background rounded-lg p-1 gap-1 border border-white/5">
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant">
+<span class="material-symbols-outlined text-base" data-icon="help_outline">help_outline</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-xl flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container">
+<img alt="Lucas Lima" class="w-full h-full object-cover" data-alt="Portrait of a young man with beard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvIMKTibvCJOsu1Rw_8aU81rh_8wW60p4kwOjxdkL0TMw730_o18Hzm7GIXA9N1QYt_W4L45sPsnk1EhzrLeM0Pl5e-osvNcd97MHruZ2kj2bwJI48qHyrWnNkTaGP5K7ZqI5LELeK8hf6im2F7B8czVFI_TKN-6q3wNT7PlyT7AmDQL-YtumXsIdOSmbMz4hAnZenZL5tQOEKLhAXZjdkPIANtGi4Z9SEeU3JN6eSWxvNWgL4cOKEH7BD_kEfE2QvX7f9reDcP6F1"/>
+</div>
+<div>
+<p class="font-semibold text-white">Lucas Lima</p>
+<p class="text-xs text-on-surface-variant">Confirmado às 11:00</p>
+</div>
+</div>
+<div class="flex items-center bg-background rounded-lg p-1 gap-1 border border-white/5">
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant">
+<span class="material-symbols-outlined text-base" data-icon="help_outline">help_outline</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-xl flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-dim/20 flex items-center justify-center text-secondary font-bold text-sm">MP</div>
+<div>
+<p class="font-semibold text-white">Maria Paula</p>
+<p class="text-xs text-on-surface-variant">Confirmada às 11:45</p>
+</div>
+</div>
+<div class="flex items-center bg-background rounded-lg p-1 gap-1 border border-white/5">
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant">
+<span class="material-symbols-outlined text-base" data-icon="help_outline">help_outline</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Area -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex flex-col items-center px-4 pb-8 pt-4 bg-[#121212]/90 backdrop-blur-md shadow-[0_-8px_24px_rgba(0,0,0,0.4)] rounded-t-[24px] border-t border-white/5">
+<div class="w-full flex items-center justify-center gap-3 mb-6">
+<label class="flex items-center gap-3 cursor-pointer select-none">
+<input checked="" class="w-5 h-5 rounded border-white/20 text-primary focus:ring-primary/20 bg-surface-container-lowest" type="checkbox"/>
+<span class="font-['Inter'] font-semibold text-sm text-white">Gerar times com confirmados</span>
+</label>
+</div>
+<button class="flex flex-col items-center justify-center kinetic-gradient text-white rounded-xl px-6 py-4 w-full mx-4 active:scale-[0.98] duration-150 hover:opacity-90 transition-opacity shadow-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="sports_soccer">sports_soccer</span>
+<span class="font-['Inter'] font-semibold text-sm">Ir para Times</span>
+</div>
+</button>
+</nav>
+</body></html>
