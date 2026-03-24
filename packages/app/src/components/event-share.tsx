@@ -14,14 +14,14 @@ interface EventShareProps {
 
 function formatDate(iso: string): string {
   const date = new Date(iso);
-  return date.toLocaleDateString('pt-BR', {
+  return new Intl.DateTimeFormat('pt-BR', {
     weekday: 'long',
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
-  });
+  }).format(date);
 }
 
 function buildShareMessage(group: Group, event: Event, users: User[]): string {
@@ -38,6 +38,7 @@ function buildShareMessage(group: Group, event: Event, users: User[]): string {
     '',
     `📋 ${event.title}`,
     `📅 ${dateStr}`,
+    `💰 Valor: ${group.billingMode ? `R$ ${group.billingMode}` : 'Gratuito'}`,
     `📍 ${event.venueName}`,
     event.venueAddress ? `📌 ${event.venueAddress}` : '',
     `🔖 Status: ${status}`,
