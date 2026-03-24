@@ -1,9 +1,8 @@
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import Share from 'react-native-share';
 import {
   SPORTS,
   EVENT_STATUSES,
-  ATTENDANCE_STATUSES,
 } from '@sportspay/shared';
 import type { Group, Event, User } from '@sportspay/shared';
 
@@ -44,7 +43,7 @@ function buildShareMessage(group: Group, event: Event, users: User[]): string {
     `🔖 Status: ${status}`,
     '',
     `👥 Jogadores (${users.length}${event.maxPlayers ? `/${event.maxPlayers}` : ''}):`,
-    playerList || 'Nenhum jogador confirmado.',
+    playerList || 'Nenhum jogador na lista.',
     '',
     '🏟️ Compartilhado via SportsPay',
   ];
@@ -61,8 +60,25 @@ export function EventShare({ group, event, users }: EventShareProps) {
         title: `${event.title} — ${group.name}`,
         message,
       });
-    } catch {
-      // user dismissed the share sheet — no action needed
+    } catch (error: unknown) {
+      // Ignore known user dismissal/cancel cases, but surface unexpected errors (at least in dev).
+      if (error && typeof error === 'object') {
+        const maybeAny = error as { message?: unknown; error?: unknown };
+        const msg =
+          (typeof maybeAny.message === 'string' && maybeAny.message) ||
+          (typeof maybeAny.error === 'string' && maybeAny.error) ||
+          '';
+
+        if (typeof msg === 'string' && msg.includes('User did not share')) {
+          // User cancelled the share sheet — no action needed.
+          return;
+        }
+      }
+
+      if (__DEV__) {
+        // eslint-disable-next-line no-console
+        console.warn('Error sharing event', error);
+      }
     }
   };
 
