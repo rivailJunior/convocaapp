@@ -17,6 +17,7 @@
     "@tanstack/react-query": "^5.62.8",
     "axios": "^1.7.9",
     "expo": "~51.0.39",
+    "expo-ads-admob": "^13.0.0",
     "expo-constants": "^55.0.7",
     "expo-image-picker": "~15.0.7",
     "expo-linking": "~6.3.1",
