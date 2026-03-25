@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#266829",
+                        "tertiary-dim": "#005861",
+                        "surface-variant": "#dadddf",
+                        "primary-dim": "#185c1e",
+                        "surface-dim": "#d1d5d7",
+                        "secondary-fixed": "#b9f61d",
+                        "primary-fixed-dim": "#a4eb9c",
+                        "on-primary-container": "#1f6223",
+                        "primary-container": "#b2faa9",
+                        "on-tertiary": "#d4f9ff",
+                        "error": "#b02500",
+                        "surface-container-low": "#eff1f2",
+                        "secondary-fixed-dim": "#ace700",
+                        "on-tertiary-fixed": "#003d43",
+                        "on-primary-fixed-variant": "#2a6c2c",
+                        "tertiary-fixed-dim": "#00dbee",
+                        "surface-container-highest": "#dadddf",
+                        "on-error-container": "#520c00",
+                        "on-primary-fixed": "#054e12",
+                        "inverse-on-surface": "#9b9d9e",
+                        "on-background": "#2c2f30",
+                        "error-container": "#f95630",
+                        "outline": "#757778",
+                        "background": "#f5f6f7",
+                        "on-secondary-fixed-variant": "#496400",
+                        "on-secondary-fixed": "#324600",
+                        "tertiary-fixed": "#10eafe",
+                        "on-tertiary-container": "#005159",
+                        "error-dim": "#b92902",
+                        "tertiary": "#00656f",
+                        "surface-container": "#e6e8ea",
+                        "primary-fixed": "#b2faa9",
+                        "primary": "#266829",
+                        "on-surface": "#2c2f30",
+                        "surface-bright": "#f5f6f7",
+                        "on-secondary": "#deff97",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e0e3e4",
+                        "tertiary-container": "#10eafe",
+                        "inverse-surface": "#0c0f10",
+                        "outline-variant": "#abadae",
+                        "on-primary": "#d1ffc8",
+                        "secondary-dim": "#3f5700",
+                        "on-secondary-container": "#415a00",
+                        "secondary": "#496400",
+                        "surface": "#f5f6f7",
+                        "inverse-primary": "#b2faa9",
+                        "secondary-container": "#b9f61d",
+                        "on-error": "#ffefec",
+                        "on-surface-variant": "#595c5d",
+                        "on-tertiary-fixed-variant": "#005c64"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .drag-glow {
+            box-shadow: 0 0 0 2px #b9f61d, 0 8px 24px rgba(44,47,48,0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="flex items-center w-full px-4 h-16 bg-[#F5F6F7] sticky top-0 z-50 tonal-shift-no-border">
+<button class="p-2 hover:bg-[#EFF1F2] transition-colors rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[#266829]">arrow_back</span>
+</button>
+<h1 class="flex-1 text-center font-headline font-bold text-xl text-[#266829] pr-10">Editar Times</h1>
+</header>
+<main class="max-w-md mx-auto px-4 space-y-6 pt-4">
+<!-- Instruction Banner -->
+<div class="bg-[#E3F2FD] p-4 rounded-xl flex items-start gap-3 relative shadow-sm">
+<span class="material-symbols-outlined text-blue-600 mt-0.5">pan_tool</span>
+<p class="text-sm font-medium text-blue-900 pr-6 leading-tight">Arraste os jogadores para reorganizar os times</p>
+<button class="absolute top-3 right-3 text-blue-400 hover:text-blue-600">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Team A -->
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-6 bg-primary rounded-full"></div>
+<h2 class="font-headline font-bold text-lg text-on-background">Time A</h2>
+</div>
+<span class="text-xs font-bold text-on-surface-variant bg-surface-container-high px-2 py-1 rounded-md">8/8</span>
+</div>
+<div class="grid grid-cols-2 gap-3 p-4 border-2 border-dashed border-primary/20 rounded-xl bg-surface-container-low min-h-[120px]">
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">João Silva</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">drag_indicator</span>
+</div>
+<!-- Visual Feedback: Highlighted Drop Zone Item (Target Glow) -->
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab drag-glow">
+<span class="text-sm font-medium text-primary">Pedro Santos</span>
+<span class="material-symbols-outlined text-primary">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Lucas Lima</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Bruno Souza</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Carlos Eduardo</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Roberto Dias</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Marcelo Guedes</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Tiago Rocha</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+</div>
+</section>
+<!-- Team B -->
+<section class="space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-6 bg-blue-500 rounded-full"></div>
+<h2 class="font-headline font-bold text-lg text-on-background">Time B</h2>
+</div>
+<div class="grid grid-cols-2 gap-3 p-4 border-2 border-dashed border-blue-200 rounded-xl bg-surface-container-low min-h-[120px]">
+<!-- Dragged State Visual -->
+<div class="bg-surface-container-lowest p-3 rounded-lg scale-105 shadow-[0_12px_24px_rgba(44,47,48,0.12)] flex items-center justify-between border border-primary/20 cursor-grabbing z-10 ring-2 ring-primary">
+<span class="text-sm font-bold text-primary">Ana Costa</span>
+<span class="material-symbols-outlined text-primary">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab opacity-60">
+<span class="text-sm font-medium">Maria Oliveira</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Rafaela Santos</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Julia Santos</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Beatriz Lima</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Amanda Silva</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Fernanda Souza</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Gabriela Rocha</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+</div>
+</section>
+<!-- Team C -->
+<section class="space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-6 bg-orange-500 rounded-full"></div>
+<h2 class="font-headline font-bold text-lg text-on-background">Time C</h2>
+</div>
+<div class="grid grid-cols-2 gap-3 p-4 border-2 border-dashed border-orange-200 rounded-xl bg-surface-container-low min-h-[120px]">
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Paulo Jorge</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Sergio Mendes</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Ricardo Gomes</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Andre Luiz</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Luiz Felipe</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Jose Carlos</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Antonio Silva</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Francisco Jose</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+</div>
+</section>
+<!-- Banco Section -->
+<section class="space-y-3 pb-8">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-6 bg-outline-variant rounded-full"></div>
+<h2 class="font-headline font-bold text-lg text-on-background">Banco</h2>
+</div>
+<div class="p-4 border-2 border-dashed border-outline-variant/20 rounded-xl bg-surface-container-low min-h-[80px]">
+<div class="w-1/2 bg-surface-container-lowest p-3 rounded-lg shadow-[0_2px_8px_rgba(44,47,48,0.04)] flex items-center justify-between group cursor-grab">
+<span class="text-sm font-medium">Eduardo Silva</span>
+<span class="material-symbols-outlined text-outline-variant">drag_indicator</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar as Floating Action Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_-8px_24px_rgba(44,47,48,0.04)] rounded-t-[32px]">
+<button class="flex flex-col items-center justify-center text-[#595C5D] py-3 px-6 hover:opacity-90 transition-opacity active:scale-98">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+<span class="font-bold text-xs font-inter uppercase tracking-wider mt-1">Cancelar</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-gradient-to-br from-[#266829] to-[#185C1E] text-white rounded-xl py-3 px-10 mx-2 hover:opacity-90 transition-opacity active:scale-98 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" data-icon="save">save</span>
+<span class="font-bold text-xs font-inter uppercase tracking-wider mt-1">Salvar Alterações</span>
+</button>
+</nav>
+</body></html>

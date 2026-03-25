@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SportsPay - Meus Grupos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#0c0f10",
+              "surface-variant": "#dadddf",
+              "secondary-fixed": "#b9f61d",
+              "on-primary-container": "#1f6223",
+              "on-secondary": "#deff97",
+              "surface": "#121212",
+              "on-secondary-fixed-variant": "#496400",
+              "secondary-container": "#b9f61d",
+              "on-tertiary": "#d4f9ff",
+              "outline": "#757778",
+              "on-error": "#ffefec",
+              "tertiary-container": "#10eafe",
+              "on-tertiary-fixed-variant": "#005c64",
+              "error": "#b02500",
+              "error-dim": "#b92902",
+              "on-tertiary-fixed": "#003d43",
+              "on-secondary-container": "#415a00",
+              "on-error-container": "#520c00",
+              "primary-container": "#1B5E20",
+              "on-background": "#ffffff",
+              "tertiary-fixed-dim": "#00dbee",
+              "on-secondary-fixed": "#324600",
+              "surface-tint": "#266829",
+              "on-tertiary-container": "#005159",
+              "on-surface": "#ffffff",
+              "on-primary-fixed-variant": "#2a6c2c",
+              "on-primary": "#ffffff",
+              "primary-fixed": "#b2faa9",
+              "secondary": "#B9F61D",
+              "surface-container-lowest": "#1E1E1E",
+              "inverse-primary": "#b2faa9",
+              "outline-variant": "#333333",
+              "surface-container-low": "#2a2a2a",
+              "primary-dim": "#1B5E20",
+              "on-surface-variant": "#b0b0b0",
+              "secondary-fixed-dim": "#ace700",
+              "surface-container-highest": "#333333",
+              "error-container": "#f95630",
+              "tertiary-fixed": "#10eafe",
+              "tertiary-dim": "#005861",
+              "primary-fixed-dim": "#a4eb9c",
+              "secondary-dim": "#3f5700",
+              "surface-dim": "#121212",
+              "tertiary": "#00656f",
+              "surface-container": "#1E1E1E",
+              "surface-container-high": "#252525",
+              "background": "#121212",
+              "on-primary-fixed": "#054e12",
+              "primary": "#1B5E20",
+              "inverse-on-surface": "#9b9d9e",
+              "surface-bright": "#1a1a1a"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(145deg, #1B5E20 0%, #0d2e10 100%);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+            background-color: #121212;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#121212] flex justify-between items-center w-full px-4 h-16 sticky top-0 z-40">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#B9F61D] text-2xl" data-icon="sports_score">sports_score</span>
+<h1 class="font-headline font-bold text-2xl text-white">Meus Grupos</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[#B9F61D] text-2xl" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="px-4 mt-6">
+<!-- Summary Dashboard -->
+<section class="mb-8 p-6 kinetic-gradient rounded-2xl shadow-lg text-white">
+<p class="font-label text-xs uppercase tracking-widest opacity-80 mb-1">Saldo em Grupos</p>
+<h2 class="font-headline text-3xl font-extrabold mb-4">R$ 482,50</h2>
+<div class="flex gap-4">
+<div class="bg-black/20 px-3 py-1.5 rounded-lg backdrop-blur-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed text-sm" data-icon="trending_up">trending_up</span>
+<span class="text-xs font-bold font-label tracking-wide uppercase">4 ATIVOS</span>
+</div>
+</div>
+</section>
+<!-- Group List Title -->
+<div class="flex justify-between items-end mb-6">
+<h3 class="font-headline text-xl font-bold text-white">Próximas Partidas</h3>
+<span class="text-secondary font-bold text-sm">Ver tudo</span>
+</div>
+<!-- Group Cards List -->
+<div class="space-y-4">
+<!-- Card 1: Fute de Quinta -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl shadow-md flex items-center gap-4 border border-white/5 hover:border-white/10 transition-all">
+<div class="w-14 h-14 rounded-full bg-surface-container-low flex items-center justify-center text-2xl shadow-inner">
+                    ⚽
+                </div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-headline font-bold text-lg leading-tight text-white">Fute de Quinta</h4>
+<span class="bg-primary/20 text-[#B9F61D] px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tighter">PAGO</span>
+</div>
+<p class="text-on-surface-variant text-xs font-medium mb-1">12 participantes</p>
+<div class="flex items-center gap-1.5 text-secondary font-semibold text-[13px]">
+<span class="material-symbols-outlined text-sm" data-icon="event">event</span>
+                        Próximo: Qui 16/01 • 19h
+                    </div>
+</div>
+</div>
+<!-- Card 2: Vôlei de Domingo -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl shadow-md flex items-center gap-4 border border-white/5 hover:border-white/10 transition-all">
+<div class="w-14 h-14 rounded-full bg-surface-container-low flex items-center justify-center text-2xl shadow-inner">
+                    🏐
+                </div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-headline font-bold text-lg leading-tight text-white">Vôlei de Domingo</h4>
+<span class="bg-error/20 text-error-container px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tighter">PENDENTE</span>
+</div>
+<p class="text-on-surface-variant text-xs font-medium mb-1">16 participantes</p>
+<div class="flex items-center gap-1.5 text-secondary font-semibold text-[13px]">
+<span class="material-symbols-outlined text-sm" data-icon="event">event</span>
+                        Próximo: Dom 19/01 • 10h
+                    </div>
+</div>
+</div>
+<!-- Card 3: Basquete da Praça -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl shadow-md flex items-center gap-4 border border-white/5 hover:border-white/10 transition-all">
+<div class="w-14 h-14 rounded-full bg-surface-container-low flex items-center justify-center text-2xl shadow-inner">
+                    🏀
+                </div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-headline font-bold text-lg leading-tight text-white">Basquete da Praça</h4>
+<span class="bg-primary/20 text-[#B9F61D] px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tighter">PAGO</span>
+</div>
+<p class="text-on-surface-variant text-xs font-medium mb-1">8 participantes</p>
+<div class="flex items-center gap-1.5 text-secondary font-semibold text-[13px]">
+<span class="material-symbols-outlined text-sm" data-icon="event">event</span>
+                        Próximo: Sáb 18/01 • 14h
+                    </div>
+</div>
+</div>
+<!-- Card 4: Outros Esportes -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl shadow-md flex items-center gap-4 border border-white/5 hover:border-white/10 transition-all">
+<div class="w-14 h-14 rounded-full bg-surface-container-low flex items-center justify-center text-2xl shadow-inner">
+                    ⚙️
+                </div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-headline font-bold text-lg leading-tight text-white">Outros Esportes</h4>
+</div>
+<p class="text-on-surface-variant text-xs font-medium mb-1">5 participantes</p>
+<div class="flex items-center gap-1.5 text-on-surface-variant/60 font-semibold text-[13px]">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+                        Sem eventos marcados
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 w-14 h-14 rounded-2xl bg-primary shadow-lg flex items-center justify-center text-[#B9F61D] hover:opacity-90 active:scale-90 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#121212]/90 backdrop-blur-xl rounded-t-3xl border-t border-white/5">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-wider mt-1">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary text-[#B9F61D] rounded-2xl px-5 py-2 scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-wider mt-1">Grupos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-wider mt-1">Pagamentos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-wider mt-1">Perfil</span>
+</a>
+</nav>
+</body></html>

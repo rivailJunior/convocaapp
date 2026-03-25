@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SportsPay - Futebol 18/01</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1B5E20",
+                        "primary-dim": "#154d1a",
+                        "surface-dim": "#121212",
+                        "inverse-primary": "#b2faa9",
+                        "surface-container-low": "#2a2a2a",
+                        "tertiary-fixed-dim": "#00dbee",
+                        "surface": "#121212",
+                        "on-primary-container": "#ffffff",
+                        "on-primary-fixed": "#054e12",
+                        "on-tertiary-fixed-variant": "#005c64",
+                        "on-error-container": "#520c00",
+                        "surface-container-high": "#252525",
+                        "error-container": "#f95630",
+                        "error": "#b02500",
+                        "surface-container-highest": "#333333",
+                        "tertiary": "#00656f",
+                        "on-secondary-fixed": "#324600",
+                        "on-secondary-container": "#415a00",
+                        "secondary-dim": "#3f5700",
+                        "on-tertiary-fixed": "#003d43",
+                        "secondary-container": "#b9f61d",
+                        "surface-container-lowest": "#1E1E1E",
+                        "primary-fixed-dim": "#a4eb9c",
+                        "on-tertiary": "#d4f9ff",
+                        "secondary-fixed": "#b9f61d",
+                        "on-background": "#ffffff",
+                        "on-surface": "#ffffff",
+                        "on-primary-fixed-variant": "#2a6c2c",
+                        "error-dim": "#b92902",
+                        "outline": "#757778",
+                        "secondary-fixed-dim": "#ace700",
+                        "surface-tint": "#1B5E20",
+                        "outline-variant": "#333333",
+                        "inverse-on-surface": "#9b9d9e",
+                        "secondary": "#B9F61D",
+                        "on-tertiary-container": "#005159",
+                        "primary-container": "#1B5E20",
+                        "inverse-surface": "#0c0f10",
+                        "surface-container": "#1E1E1E",
+                        "tertiary-dim": "#005861",
+                        "tertiary-fixed": "#10eafe",
+                        "on-secondary": "#deff97",
+                        "on-surface-variant": "#b0b0b0",
+                        "background": "#121212",
+                        "surface-variant": "#dadddf",
+                        "on-error": "#ffefec",
+                        "on-secondary-fixed-variant": "#496400",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#10eafe",
+                        "primary-fixed": "#b2faa9",
+                        "surface-bright": "#1a1a1a"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "1rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#121212] flex items-center justify-between px-4 h-16 w-full top-0 sticky z-50 transition-colors">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-200 hover:bg-[#2c2f30] p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined text-[#B9F61D]">arrow_back</span>
+</button>
+<h1 class="font-headline font-extrabold text-xl text-white">Futebol 18/01</h1>
+</div>
+<div class="relative group">
+<details class="list-none">
+<summary class="list-none active:scale-95 duration-200 hover:bg-[#2c2f30] p-2 rounded-full transition-colors cursor-pointer inline-flex">
+<span class="material-symbols-outlined text-[#B9F61D]">more_vert</span>
+</summary>
+<div class="absolute right-0 mt-2 w-48 bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant overflow-hidden z-[60]">
+<button class="w-full text-left px-4 py-3 hover:bg-surface-container-low text-sm font-medium flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-sm">content_copy</span> Clonar Evento
+                </button>
+<button class="w-full text-left px-4 py-3 hover:bg-surface-container-low text-sm font-medium flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-sm">edit</span> Editar
+                </button>
+<button class="w-full text-left px-4 py-3 hover:bg-surface-container-low text-sm font-medium text-error-container flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">delete</span> Excluir
+                </button>
+</div>
+</details>
+</div>
+</header>
+<main class="px-4 py-6 space-y-6 max-w-2xl mx-auto">
+<!-- Hero Info Card -->
+<section class="bg-surface-container-lowest rounded-xl p-4 shadow-lg border border-outline-variant">
+<div class="space-y-3">
+<h2 class="font-headline font-extrabold text-lg text-white">Sábado, 18 de Janeiro • 14:00</h2>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-base">location_on</span>
+<span>Arena Beach Sports</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-base">notes</span>
+<span>Trazer água</span>
+</div>
+</div>
+<div class="my-4 h-[1px] bg-outline-variant"></div>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-[#1B5E20] text-white py-3 rounded-lg font-bold text-sm flex items-center justify-center gap-2 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-lg">groups</span>
+                Gerar Times
+            </button>
+<button class="border border-outline-variant text-on-surface-variant py-3 rounded-lg font-bold text-sm flex items-center justify-center gap-2 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-lg">share</span>
+                Compartilhar
+            </button>
+</div>
+</section>
+<!-- Times Gerados Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline font-extrabold text-lg text-white">Times Gerados</h3>
+<span class="bg-primary/20 text-[#B9F61D] text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">Novo</span>
+</div>
+<div class="flex overflow-x-auto gap-4 hide-scrollbar snap-x -mx-4 px-4">
+<!-- Time A -->
+<div class="min-w-[260px] bg-surface-container-lowest rounded-xl overflow-hidden snap-start shadow-md border border-outline-variant">
+<div class="bg-[#1B5E20] p-3 flex items-center justify-between">
+<span class="font-headline font-extrabold text-white">TIME A</span>
+<span class="material-symbols-outlined text-[#B9F61D]" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<ul class="p-4 space-y-3">
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">JS</div>
+                        João Silva
+                    </li>
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">PS</div>
+                        Pedro Santos
+                    </li>
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">LL</div>
+                        Lucas Lima
+                    </li>
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">BS</div>
+                        Bruno Souza
+                    </li>
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">CE</div>
+                        Carlos Eduardo
+                    </li>
+</ul>
+</div>
+<!-- Time B -->
+<div class="min-w-[260px] bg-surface-container-lowest rounded-xl overflow-hidden snap-start shadow-md border border-outline-variant">
+<div class="bg-tertiary-dim p-3 flex items-center justify-between">
+<span class="font-headline font-extrabold text-on-tertiary">TIME B</span>
+<span class="material-symbols-outlined text-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<ul class="p-4 space-y-3">
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">AC</div>
+                        Ana Costa
+                    </li>
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">MO</div>
+                        Maria Oliveira
+                    </li>
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">RS</div>
+                        Rafaela Silva
+                    </li>
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">JS</div>
+                        Julia Santos
+                    </li>
+<li class="flex items-center gap-3 text-sm font-medium text-white">
+<div class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-[10px] font-bold text-on-surface-variant">BL</div>
+                        Beatriz Lima
+                    </li>
+</ul>
+</div>
+</div>
+<button class="w-full border border-outline-variant text-on-surface-variant py-3 rounded-lg font-bold text-sm mt-2 active:scale-95 duration-150">
+            Editar Times
+        </button>
+</section>
+<!-- Confirmados Section -->
+<section class="bg-surface-container-lowest rounded-xl p-4 space-y-4 shadow-md border border-outline-variant">
+<div class="flex items-center justify-between">
+<h3 class="font-headline font-extrabold text-white">Confirmados (9)</h3>
+<button class="text-[#B9F61D] font-extrabold text-xs hover:underline">Ver lista completa</button>
+</div>
+<div class="grid grid-cols-4 sm:grid-cols-8 gap-4">
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 rounded-full bg-[#1B5E20] text-white flex items-center justify-center font-bold text-sm shadow-sm">JS</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-sm shadow-sm">MS</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-white flex items-center justify-center font-bold text-sm shadow-sm">RS</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-white flex items-center justify-center font-bold text-sm shadow-sm">AC</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-white flex items-center justify-center font-bold text-sm shadow-sm">PL</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-white flex items-center justify-center font-bold text-sm shadow-sm">GT</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-white flex items-center justify-center font-bold text-sm shadow-sm">FV</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-white flex items-center justify-center font-bold text-sm shadow-sm">MR</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB at bottom-right -->
+<button class="fixed bottom-6 right-6 z-50 bg-[#1B5E20] text-[#B9F61D] w-14 h-14 rounded-2xl shadow-2xl flex items-center justify-center active:scale-90 duration-200 hover:brightness-110">
+<span class="material-symbols-outlined text-2xl">share</span>
+</button>
+</body></html>
