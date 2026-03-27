@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './styles/group-page.module.css';
 
 import { GroupCard } from '@/components/group/group-card';
-import { useGroups } from '@/components/group/hook-use-groups';
+import { useGroups } from '@/components/group/hooks/hook-use-groups';
 
 export function GroupPage(): React.JSX.Element {
   const { groups } = useGroups();
@@ -37,8 +37,17 @@ export function GroupPage(): React.JSX.Element {
         </div>
       </main>
 
-      {/* TODO: FAB component */}
-      <div />
+      <div className={styles.fabWrapper}>
+        <button
+          className={styles.fab}
+          aria-label="Criar novo grupo"
+          type="button"
+        >
+          <span className={`material-symbols-outlined ${styles.fabIcon}`}>
+            add
+          </span>
+        </button>
+      </div>
 
       {/* TODO: BottomNavBar component */}
       <div />

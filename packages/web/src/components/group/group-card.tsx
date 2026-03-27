@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './styles/group-card.module.css';
 
-import type { GroupDisplayItem } from '@/components/group/hook-use-groups';
+import type { GroupDisplayItem } from '@/components/group/hooks/hook-use-groups';
 
-import { getSportEmoji } from '@/components/group/hook-use-groups';
+import { getSportEmoji } from '@/components/group/hooks/hook-use-groups';
 
 interface GroupCardProps {
   group: GroupDisplayItem;

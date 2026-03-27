@@ -76,9 +76,6 @@
 
 /* FAB */
 .fab {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 8rem;
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 1rem;
@@ -90,10 +87,24 @@
   color: #ffffff;
   border: none;
   cursor: pointer;
-  z-index: 50;
   transition: opacity 0.15s, transform 0.15s;
 }
 
 .fab:hover {
   opacity: 0.95;
+}
+
+.fab:active {
+  transform: scale(0.9);
+}
+
+.fabIcon {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.fabWrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5rem 1.5rem 0;
 }
