@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" data-lt-installed="true" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SportsPay - Home</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#b02500",
+              "surface-container": "#e6e8ea",
+              "inverse-on-surface": "#9b9d9e",
+              "inverse-primary": "#b2faa9",
+              "secondary-container": "#b9f61d",
+              "surface-dim": "#d1d5d7",
+              "error-container": "#f95630",
+              "secondary-fixed": "#b9f61d",
+              "inverse-surface": "#0c0f10",
+              "on-tertiary-fixed": "#003d43",
+              "on-tertiary": "#d4f9ff",
+              "tertiary-fixed": "#10eafe",
+              "secondary-fixed-dim": "#ace700",
+              "background": "#f5f6f7",
+              "surface-container-highest": "#dadddf",
+              "surface-variant": "#dadddf",
+              "on-surface-variant": "#595c5d",
+              "on-primary": "#d1ffc8",
+              "surface-bright": "#f5f6f7",
+              "outline": "#757778",
+              "primary-dim": "#185c1e",
+              "tertiary": "#00656f",
+              "on-tertiary-container": "#005159",
+              "outline-variant": "#abadae",
+              "tertiary-container": "#10eafe",
+              "on-secondary-fixed-variant": "#496400",
+              "on-background": "#2c2f30",
+              "primary": "#266829",
+              "primary-container": "#b2faa9",
+              "tertiary-fixed-dim": "#00dbee",
+              "on-secondary": "#deff97",
+              "tertiary-dim": "#005861",
+              "on-primary-fixed-variant": "#2a6c2c",
+              "on-surface": "#2c2f30",
+              "surface-container-low": "#eff1f2",
+              "on-secondary-fixed": "#324600",
+              "surface-container-high": "#e0e3e4",
+              "on-error": "#ffefec",
+              "on-secondary-container": "#415a00",
+              "secondary-dim": "#3f5700",
+              "primary-fixed-dim": "#a4eb9c",
+              "secondary": "#496400",
+              "on-tertiary-fixed-variant": "#005c64",
+              "on-primary-fixed": "#054e12",
+              "on-primary-container": "#1f6223",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#f5f6f7",
+              "on-error-container": "#520c00",
+              "primary-fixed": "#b2faa9",
+              "surface-tint": "#266829",
+              "error-dim": "#b92902"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(145deg, #266829 0%, #185c1e 100%);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f6f7;
+            color: #2c2f30;
+        }
+        h1, h2, h3, .font-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-[#F5F6F7] dark:bg-slate-900 flex justify-between items-center w-full px-4 h-16 sticky top-0 z-40 transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#266829] dark:text-[#B9F61D] text-2xl" data-icon="sports_soccer" style="">sports_soccer</span>
+<span class="text-[#266829] dark:text-[#B9F61D] font-['Plus_Jakarta_Sans'] font-extrabold tracking-tight text-xl" style="">SportsPay</span>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-200" style="">
+<span class="material-symbols-outlined text-[#595C5D] dark:text-slate-400" data-icon="settings" style="">settings</span>
+</button>
+</header>
+<main class="px-4 pt-4 space-y-6">
+<!-- Hero Card: Saldo -->
+<section class="relative overflow-hidden rounded-xl kinetic-gradient p-6 text-on-primary shadow-[0_8px_24px_rgba(44,47,48,0.04)]">
+<div class="relative z-10 flex flex-col gap-1">
+<span class="text-sm font-medium font-label text-white opacity-100" style="">Saldo Total em Grupos</span>
+<div class="flex items-end justify-between">
+<h1 class="text-3xl font-extrabold tracking-tight font-headline text-white" style="">R$ 482,50</h1>
+<div class="bg-[#B9F61D]/20 backdrop-blur-sm border border-[#B9F61D]/30 px-3 py-1 rounded-full flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#B9F61D] animate-pulse"></span>
+<span class="text-[10px] font-bold text-[#B9F61D] tracking-wider uppercase" style="">4 ATIVOS</span>
+</div>
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-10 -bottom-10 opacity-10">
+<span class="material-symbols-outlined text-[160px]" data-icon="account_balance_wallet" style="">account_balance_wallet</span>
+</div>
+</section>
+<!-- Section 1: Próximas Partidas (Horizontal Scroll) -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold font-headline text-on-background" style="">Próximas Partidas</h2>
+<button class="text-primary font-bold text-sm hover:opacity-80" style="">Ver tudo</button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+<!-- Card 1 -->
+<div class="min-w-[280px] bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="bg-primary-container text-on-primary-container text-[10px] font-bold px-2 py-1 rounded-md uppercase" style="">Futebol</span>
+<span class="text-on-surface-variant text-xs font-medium" style="">18/01 • 20:00</span>
+</div>
+<div>
+<h3 class="font-bold text-lg leading-tight" style="">Fute de Quinta</h3>
+<p class="text-on-surface-variant text-sm" style="">Arena Gol de Ouro</p>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="portrait of a smiling athletic man in sportswear outdoors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4eXMQ4WLnqJH86ACy3Y_UsszHRJlPAE6lPxcJS2jOUs0KulobsYpLLLlQuAWWLoa2T4Ysm7sh2Yxq7-ESdyX3BP6TqP40SfzhjHRnukGpvJs2aLeK51mC6oZL07bzTm-zeZ8MC3oGC2wf3a6M6iHXMsaDj9KHDy-IqVnKvX6ej6vOKGhZXtjXY5JlOZyCSc3HXgBmiosK-m_F3Vas6ddNMxI1AwDz4UnGQZ0DLd-5z2DxJt75SLaadjWdg60pO74JaxjwAIlG0zw4" style=""/>
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="portrait of a young man with beard looking confident" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTExYZfvLT6Y7iqdYa4Gg8o2j_FOsZUznHfScABkqYZCPPiNDdQfi47aRlm8UCh9_HTew-LjLBITwftFZJtHfjFx0To2aRu1xIAeCTpPoJ4OK49SMryhmffN562HdOkchkAOrP7KdTVBg1nFbHD3TIk2SjiuQgK4PjsFTjiiV1srfmyMpGp8DnZXqB2lsgb54xB4qJZq9sJDzPREaEBuWGvTkIPeiFuetGkcHI23dE_alabYwjoCwDZ3GxWc0uOoAdPdICIjFqm2qW" style=""/>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-surface-container-high flex items-center justify-center text-[8px] font-bold" style="">+8</div>
+</div>
+<span class="text-xs text-on-surface-variant" style="">Confirmados</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[280px] bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-1 rounded-md uppercase" style="">Vôlei</span>
+<span class="text-on-surface-variant text-xs font-medium" style="">19/01 • 09:30</span>
+</div>
+<div>
+<h3 class="font-bold text-lg leading-tight" style="">Vôlei de Domingo</h3>
+<p class="text-on-surface-variant text-sm" style="">Parque Ibirapuera</p>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="portrait of a happy young woman with athletic attire and warm smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9yaBWMjshsNdJibl-tg4lgt7n9EpelcrwrdpnUZmlx5IcGrnAj_U5ZyndCMbXbjD2TE-XTAbW6TJv9dnrbXacK4naR2m2ajLtuMwrFFNYHiUmiQDx3CaNnRFDwc51ohqJU6Z5v3lgunkfEUULtsEN2oSlC7AXkSt5Oa1wjFizClFyJqtc9T3IL-_lX7woJClIozcnlcZ-lBuosMFa7RRpwQePVS66235z2JqCO_3RJGAHDh91SNRTOcSnwr20RHaxm7HpKgsNIO8y" style=""/>
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="portrait of an athletic man in sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQJQuFLQOxNjSyt14ZuNoK5XfeRVco7vH_3CwVEcNcKyzUGuzo4Ny8t5qjiLKZBV5HZnX3arLmK7MuiWqYnC9XFF0-A9_a5Azcm7RjO1pdf02JR2rBTJYVrCxv1e6kSzj6MVJAGiQbrmfFiuWpM1iRFJBTZCXRmSqcOuwg0pIitoAKOaM_bd0dOTt1JZceLjIl4TcL6nU95s9xJT57Nv3OYjlsLZE_tRuQOxvndtgAmQDZjkJN4SjuLcYTva064JB9ml9uLLFBe-aB" style=""/>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-surface-container-high flex items-center justify-center text-[8px] font-bold" style="">+4</div>
+</div>
+<span class="text-xs text-on-surface-variant" style="">Confirmados</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Meus Grupos -->
+<section class="space-y-4">
+<h2 class="text-xl font-bold font-headline text-on-background" style="">Meus Grupos</h2>
+<div class="space-y-3">
+<!-- Group Item 1 -->
+<div class="flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="sports_soccer" style="">sports_soccer</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-on-background truncate" style="">Pelada dos Amigos</h4>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1 shrink-0" style=""><span class="material-symbols-outlined text-[12px]" data-icon="group" style="">group</span> 18</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate" style="">Próximo: Quinta-feira, 20h</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right" style="">chevron_right</span>
+</div>
+<!-- Group Item 2 -->
+<div class="flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container/20 flex items-center justify-center text-tertiary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="sports_volleyball" style="">sports_volleyball</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-on-background truncate" style="">Vôlei de Domingo</h4>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1 shrink-0" style=""><span class="material-symbols-outlined text-[12px]" data-icon="group" style="">group</span> 12</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate" style="">Próximo: Domingo, 09h30</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right" style="">chevron_right</span>
+</div>
+<!-- Group Item 3 -->
+<div class="flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/20 flex items-center justify-center text-secondary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="sports_tennis" style="">sports_tennis</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-on-background truncate" style="">Beach Tennis Club</h4>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1 shrink-0" style=""><span class="material-symbols-outlined text-[12px]" data-icon="group" style="">group</span> 8</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate" style="">Próximo: Sábado, 16h</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right" style="">chevron_right</span>
+</div>
+<!-- Group Item 4 -->
+<div class="flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface-variant group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="sports_basketball" style="">sports_basketball</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-on-background truncate" style="">Basquete 3x3</h4>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1 shrink-0" style=""><span class="material-symbols-outlined text-[12px]" data-icon="group" style="">group</span> 24</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate text-error font-medium" style="">Aguardando definição</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right" style="">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-28 right-6 w-16 h-16 rounded-2xl kinetic-gradient shadow-2xl flex items-center justify-center active:scale-90 transition-transform z-40 text-white" style="">
+<span class="material-symbols-outlined text-3xl" data-icon="add" style="">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#F5F6F7]/80 dark:bg-slate-900/80 backdrop-blur-md z-50 rounded-t-3xl shadow-[0_-8px_24px_rgba(44,47,48,0.04)]">
+<div class="flex flex-col items-center justify-center text-[#266829] dark:text-[#B9F61D] bg-[#266829]/10 dark:bg-[#B9F61D]/10 rounded-xl px-3 py-1 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined" data-icon="home" style="">home</span>
+<span class="font-['Inter'] text-[10px] font-medium" style="">Início</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#595C5D] dark:text-slate-400 hover:bg-[#EFF1F2] dark:hover:bg-slate-800 p-2 rounded-xl active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined" data-icon="group" style="">group</span>
+<span class="font-['Inter'] text-[10px] font-medium" style="">Grupos</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#595C5D] dark:text-slate-400 hover:bg-[#EFF1F2] dark:hover:bg-slate-800 p-2 rounded-xl active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined" data-icon="payments" style="">payments</span>
+<span class="font-['Inter'] text-[10px] font-medium" style="">Pagamentos</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#595C5D] dark:text-slate-400 hover:bg-[#EFF1F2] dark:hover:bg-slate-800 p-2 rounded-xl active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person" style="">person</span>
+<span class="font-['Inter'] text-[10px] font-medium" style="">Perfil</span>
+</div>
+</nav>
+</body></html>

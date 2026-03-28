@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AthleticLedger | Organize seu racha com precisão profissional</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#eff1f2",
+              "surface-bright": "#f5f6f7",
+              "on-primary-fixed-variant": "#2a6c2c",
+              "primary-fixed-dim": "#a4eb9c",
+              "tertiary-fixed": "#10eafe",
+              "surface-container": "#e6e8ea",
+              "secondary-container": "#b9f61d",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#005159",
+              "on-tertiary": "#d4f9ff",
+              "secondary-dim": "#3f5700",
+              "on-tertiary-fixed": "#003d43",
+              "on-primary-fixed": "#054e12",
+              "on-background": "#2c2f30",
+              "outline": "#757778",
+              "inverse-primary": "#b2faa9",
+              "secondary-fixed": "#b9f61d",
+              "error-container": "#f95630",
+              "surface": "#f5f6f7",
+              "secondary-fixed-dim": "#ace700",
+              "tertiary-container": "#10eafe",
+              "on-error": "#ffefec",
+              "tertiary": "#00656f",
+              "surface-container-high": "#e0e3e4",
+              "secondary": "#496400",
+              "on-surface": "#2c2f30",
+              "primary": "#266829",
+              "error-dim": "#b92902",
+              "error": "#b02500",
+              "primary-dim": "#185c1e",
+              "on-tertiary-fixed-variant": "#005c64",
+              "on-secondary-fixed-variant": "#496400",
+              "outline-variant": "#abadae",
+              "surface-container-highest": "#dadddf",
+              "primary-fixed": "#b2faa9",
+              "on-secondary": "#deff97",
+              "tertiary-fixed-dim": "#00dbee",
+              "surface-dim": "#d1d5d7",
+              "on-secondary-container": "#415a00",
+              "primary-container": "#b2faa9",
+              "on-primary": "#d1ffc8",
+              "surface-tint": "#266829",
+              "on-error-container": "#520c00",
+              "surface-variant": "#dadddf",
+              "on-surface-variant": "#595c5d",
+              "on-primary-container": "#1f6223",
+              "on-secondary-fixed": "#324600",
+              "background": "#f5f6f7",
+              "inverse-on-surface": "#9b9d9e",
+              "tertiary-dim": "#005861",
+              "inverse-surface": "#0c0f10"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .kinetic-gradient {
+        background: linear-gradient(145deg, #266829 0%, #185c1e 100%);
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+      }
+      .asymmetric-shadow {
+        box-shadow: 0 8px 24px rgba(44, 47, 48, 0.04);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Top Navigation (Shared Component Integration) -->
+<nav class="sticky top-0 w-full z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
+<span class="text-2xl font-extrabold text-emerald-900 dark:text-emerald-50 tracking-tighter">AthleticLedger</span>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-emerald-700 dark:text-emerald-300 border-b-2 border-lime-400 pb-1 font-['Plus_Jakarta_Sans'] font-bold tracking-tight" href="#">Features</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-emerald-600 transition-colors" href="#">How it Works</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-emerald-600 transition-colors" href="#">Download</a>
+</div>
+<button class="kinetic-gradient text-white px-6 py-2.5 rounded-xl font-bold text-sm scale-95 active:scale-90 transition-transform duration-200">
+                Get Started
+            </button>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-20 pb-32">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="relative z-10">
+<span class="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-wider mb-6">
+                        Fintech para Esportes
+                    </span>
+<h1 class="text-5xl lg:text-7xl font-extrabold text-on-surface leading-[1.1] tracking-tighter mb-8">
+                        Organize seu racha com <span class="text-primary italic">precisão</span> profissional.
+                    </h1>
+<p class="text-xl text-on-surface-variant leading-relaxed max-w-xl mb-10">
+                        A maneira mais justa e rápida de gerenciar seus grupos de esporte, sortear times e cobrar o Pix do churrasco.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="kinetic-gradient text-on-primary-fixed-variant bg-primary-fixed hover:bg-primary-fixed-dim px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 asymmetric-shadow transition-all group">
+<span>Baixar Agora</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">download</span>
+</button>
+<button class="bg-surface-container-high px-8 py-4 rounded-xl font-bold text-lg text-on-surface hover:bg-surface-container-highest transition-colors">
+                            Ver Demonstração
+                        </button>
+</div>
+<div class="mt-12 flex items-center gap-6">
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-white" data-alt="portrait of a young athletic man smiling outdoors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI8vf_roIRSmY8DiOB9eqsidQrYzx41Xrhuzny21IEE77mhGQEkLO-bYro2xB4Yl3vO1CvJF9OF63PcQxM7ktbUxNtI-LhQmCKz15H34YaNloFY_26TXES4VG4XupnwfpBos2i2km27grEpUds9Skk2dLaiEEuPxXXrprzB9yiqG56LOGbNa2H9NJ3rSBbbMDKOhbUXH5jwhHuysN-fX0vMWv2SPwM6OYCO5U7YDh9PwX-srIIeWUkZjFLOJUKhRqajeZN3D1Eq2kB"/>
+<img class="w-10 h-10 rounded-full border-2 border-white" data-alt="portrait of a confident woman in sports gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3nPUi3-bIYeGlG02onPILqGaLU2QLJ8mMKWq1LavXad06nA4yBxuOc5RkCa8dhZ9r_jwUGsGDwmnCPezHp20dU-hVtuSX6OHtasP_MHOvjJ9aALWBS_l9vXhOMuRIZZw2LU9vPIydXFoAvwCzmcSOomsDZho1mMYqFiT4V3wVwJF3aVhFo6udt-m-RA9lCp_UNprGPDcmABWX7IlOvX_JzyU_1u9H65OcvcT9V9ZQOJKlJggVQGYwKmb6WLA-e4BL2_l754sRV7g9"/>
+<img class="w-10 h-10 rounded-full border-2 border-white" data-alt="man with beard laughing in social setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc7DJVQrf4B4qWu0JdYrFifLAgeSM8fVyCjXqIlPuk-Kglr-e3bdeuSHu3ob8ThbvNRdiEN7qQ9chAfbJZEDeW8vx65Mspa8HoHAOSy_fHXv44tJ6emOQ34eiQjN0QkcpI0PCJFvemzVSdbbLmKDbRKCBdvamX6ySCOvHO62EWqoJ0BXJ5xt51yLM6xK_UmLeSueeiulSef09hnvsepMqHmi9MHsNsdfTT1bENdSl625CAGm3PBxaoH0umbK1Uotw-TIz0HI2f49cT"/>
+</div>
+<p class="text-sm text-on-surface-variant font-medium">
+<span class="text-primary font-bold">+50k</span> jogadores já utilizam
+                        </p>
+</div>
+</div>
+<div class="relative flex justify-center items-center">
+<!-- App Mockup Integration -->
+<div class="relative w-full max-w-[500px] h-[600px]">
+<!-- Background Shape -->
+<div class="absolute inset-0 bg-secondary-container/20 rounded-[4rem] rotate-6 scale-110"></div>
+<!-- Screen 1: Dashboard -->
+<div class="absolute top-0 left-0 w-64 h-[500px] rounded-[2.5rem] bg-white shadow-2xl overflow-hidden border-8 border-on-surface transform -rotate-6 z-20">
+<img class="w-full h-full object-cover" data-alt="mobile app screen showing dashboard with player lists and balance summary in a clean UI" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn5iK_cMmjAacuNGYwLqnk3oQ2Y7eFxfOCLFKvGNs4hNi4sgRI617AyQvxqwHKZQi3vhmgYGjeMw570Z5heET4C300HlYlFXeGbAALzLjalHmOLbZUu1e3VeSt8oK4WUcTUegqZ136oIiz7URSAiGNR0R5ZJ6NBzPPPcHC-s3au__onpmX9y0xsMYGUXBxpQYn2L9_QLzMGipcKY1jIdBMSyQn5VNqxikLW31rckIHnBlu0DRU30VuAeFcLoVPHV95XhuWVI8IEr3r"/>
+</div>
+<!-- Screen 2: Payments -->
+<div class="absolute bottom-0 right-0 w-64 h-[500px] rounded-[2.5rem] bg-white shadow-2xl overflow-hidden border-8 border-on-surface transform rotate-3 z-10">
+<img class="w-full h-full object-cover" data-alt="mobile app screen showing transaction history and pix payment confirmation with bright green accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCteAosvYGVFWOCVzyFx2xijmgfT4tjcsGiesRpoG41fU387J8zfsECQMzr2zTZY23vu9qPlQj5QUCuAv7VFvssGLSLA5omJWVKySO30D-3k2-jtdfruEF7sXS_5BKnVfr0w2GYW3CEEitSc8S9bavLWQn0F9LqH2Z7JWuWAsiDzb1jF7af8_iBQDW0ATSXQ_oglw5TjhDdosd91bhb4i75lex_3vh7nkcz1AiAuMEB3HR15t1CE7pS7V5L5u9gOWbaJX0W_FPa4yoJ"/>
+</div>
+<!-- Floating Badge -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 glass-card p-6 rounded-2xl asymmetric-shadow">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">payments</span>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-tight">Última Cobrança</p>
+<p class="text-lg font-extrabold text-on-surface">R$ 1.250,00</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-6">
+<div class="mb-16 text-center">
+<h2 class="text-4xl font-extrabold tracking-tight mb-4">Potencialize sua gestão esportiva</h2>
+<p class="text-on-surface-variant text-lg">Tudo o que você precisa para o seu grupo focar apenas no jogo.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-[2rem] asymmetric-shadow hover:translate-y-[-8px] transition-transform">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">groups</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">Gestão de Grupos</h3>
+<p class="text-on-surface-variant leading-relaxed">Organize todos os seus rachões em um só lugar, sem login. Centralize horários, locais e listas de presença de forma intuitiva.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-[2rem] asymmetric-shadow hover:translate-y-[-8px] transition-transform">
+<div class="w-14 h-14 rounded-2xl bg-secondary-container flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl">casino</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">Sorteio Inteligente</h3>
+<p class="text-on-surface-variant leading-relaxed">Times equilibrados por nível técnico ou sorteio aleatório em segundos. Acabe com as discussões e garanta competitividade.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-[2rem] asymmetric-shadow hover:translate-y-[-8px] transition-transform">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance_wallet</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">Pix Simplificado</h3>
+<p class="text-on-surface-variant leading-relaxed">Compartilhe sua chave e controle quem já pagou direto no WhatsApp. Notificações automáticas para os pendentes.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-32">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row gap-16 items-start">
+<div class="md:w-1/3">
+<h2 class="text-4xl font-extrabold tracking-tight mb-6 leading-tight">Quem joga, confia na <span class="text-primary">AthleticLedger</span></h2>
+<div class="flex gap-1 text-secondary-dim">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="mt-4 text-on-surface-variant font-medium">Nota 4.9/5 nas lojas de aplicativos</p>
+</div>
+<div class="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-surface-container p-8 rounded-3xl relative">
+<span class="material-symbols-outlined text-6xl text-primary/10 absolute top-4 right-8">format_quote</span>
+<p class="text-on-surface text-lg font-medium italic mb-6 leading-relaxed">
+                                "Finalmente parei de me estressar cobrando o Pix do churrasco. O app faz tudo sozinho e os times ficam muito bem equilibrados."
+                            </p>
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full" data-alt="portrait of João Silva, a satisfied user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfdEiFNcYPes1PmVMYRBF9yFTYhDhCUaTkJkuN13HQF1xgrGImkodf0cS769yr6Yy8p8Ah5Y1roAraToxeJbu0d3JhLopYdhkYkD_cDH-ByC-QmEU7KQx-2HWzufaU0xLbmShi0y-cQ_C-i1V_gLnHHgUCKazXM07NUJmlkTuS-JcYkqrgEVno0vRTqsHU3xC30Xbu9BeT3lM3kfQxJ9QtldDfrVTa0qtSWksOgFdxYRxh0FY6f0H-09308m03nKFeZs-6UuCLlVbG"/>
+<div>
+<p class="font-bold text-on-surface">João Silva</p>
+<p class="text-sm text-on-surface-variant">Capitão do Racha de Terça</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-8 rounded-3xl relative">
+<span class="material-symbols-outlined text-6xl text-primary/10 absolute top-4 right-8">format_quote</span>
+<p class="text-on-surface text-lg font-medium italic mb-6 leading-relaxed">
+                                "Uso para o vôlei de areia aos domingos. O sorteio por nível técnico mudou o jogo, as partidas agora duram muito mais."
+                            </p>
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full" data-alt="portrait of Ana Costa, an active sports player" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqslBnD3TFX1bGpG3AVwLgfvJHPb3rYiR_1dOpqzClPJWtljlXdjiXU7-nvxeC4qvFaUOQXJyHJcW1dd7yS6DwQ7-nwnD9eo76k0f4UEGekAp9OxBf1zjQvXi15GXNuEj7xicbtGeGyYU6OGad_QgjcZcd1THAfjCnE0zzLamBFrNQV7hgqmeNHOK1qDpqq2DCP07cH-Xg26TgQcgjJmto8cdkH3JKfYNu3sAm9OxZ8O4rIBGjKKk9uAYMAiUkYLirL0pD-xan1D3O"/>
+<div>
+<p class="font-bold text-on-surface">Ana Costa</p>
+<p class="text-sm text-on-surface-variant">Organizadora - Arena Beach</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 bg-primary rounded-[3rem] mx-6 mb-24 overflow-hidden relative">
+<div class="absolute top-0 right-0 w-1/2 h-full bg-secondary-dim/20 skew-x-[-15deg] translate-x-1/4"></div>
+<div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+<h2 class="text-4xl md:text-5xl font-extrabold text-on-primary tracking-tighter mb-8 leading-tight">Pronto para elevar o nível do seu racha?</h2>
+<p class="text-primary-fixed text-xl mb-12 opacity-90 max-w-2xl mx-auto leading-relaxed">
+                    Junte-se a milhares de organizadores que economizam horas de gestão toda semana.
+                </p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center">
+<button class="bg-secondary-container text-on-secondary-container px-10 py-5 rounded-2xl font-extrabold text-xl asymmetric-shadow hover:scale-105 transition-transform flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">ios</span>
+                        App Store
+                    </button>
+<button class="bg-secondary-container text-on-secondary-container px-10 py-5 rounded-2xl font-extrabold text-xl asymmetric-shadow hover:scale-105 transition-transform flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">play_arrow</span>
+                        Google Play
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component Integration) -->
+<footer class="bg-slate-50 dark:bg-emerald-950 w-full py-12 px-6">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+<div>
+<span class="text-xl font-bold text-emerald-900 dark:text-emerald-100">AthleticLedger</span>
+<p class="mt-4 text-slate-500 dark:text-slate-400 text-sm font-['Inter'] font-normal">
+                    © 2024 AthleticLedger. Kinetic precision for teams.
+                </p>
+</div>
+<div class="flex flex-wrap gap-6 justify-center">
+<a class="text-slate-500 hover:text-emerald-800 transition-all text-sm font-normal" href="#">Twitter</a>
+<a class="text-slate-500 hover:text-emerald-800 transition-all text-sm font-normal" href="#">Instagram</a>
+<a class="text-slate-500 hover:text-emerald-800 transition-all text-sm font-normal" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-emerald-800 transition-all text-sm font-normal" href="#">Privacy Policy</a>
+</div>
+<div class="flex justify-end gap-4">
+<span class="text-slate-500 font-medium text-sm">Download on</span>
+<div class="flex gap-2">
+<div class="w-8 h-8 rounded-lg bg-emerald-900/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-900 text-lg">smartphone</span>
+</div>
+<div class="w-8 h-8 rounded-lg bg-emerald-900/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-900 text-lg">laptop_mac</span>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

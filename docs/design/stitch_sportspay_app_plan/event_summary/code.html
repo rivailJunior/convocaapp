@@ -7,7 +7,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -60,7 +59,7 @@
                         "surface-variant": "#dadddf",
                         "on-error": "#ffefec",
                         "on-secondary-fixed-variant": "#496400",
-                        "on-primary": "#d1ffc8",
+                        "on-primary": "#ffffff",
                         "primary-dim": "#185c1e",
                         "tertiary-container": "#10eafe",
                         "primary-fixed": "#b2faa9",
@@ -87,16 +86,19 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        .team-card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
+        }
     </style>
 <style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
 <body class="bg-surface text-on-surface font-body min-h-screen pb-32">
 <!-- TopAppBar -->
-<header class="bg-[#F5F6F7] dark:bg-[#121212] flex items-center justify-between px-4 h-16 w-full docked w-full top-0 sticky z-50 transition-colors">
+<header class="bg-[#F5F6F7] dark:bg-[#121212] flex items-center justify-between px-4 h-16 w-full top-0 sticky z-50 transition-colors">
 <div class="flex items-center gap-4">
 <button class="active:scale-95 duration-200 hover:bg-[#eff1f2] dark:hover:bg-[#2c2f30] p-2 rounded-full transition-colors">
 <span class="material-symbols-outlined text-[#266829] dark:text-[#AEEA00]">arrow_back</span>
@@ -107,7 +109,7 @@
 <span class="material-symbols-outlined text-[#266829] dark:text-[#AEEA00]">more_vert</span>
 </button>
 </header>
-<main class="px-4 py-6 space-y-6 max-w-2xl mx-auto">
+<main class="px-4 py-6 space-y-8 max-w-2xl mx-auto">
 <!-- Hero Info Card -->
 <section class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_8px_24px_rgba(44,47,48,0.04)] border-b-2 border-surface-container">
 <div class="space-y-3">
@@ -123,7 +125,7 @@
 </div>
 <div class="my-4 h-[1px] bg-surface-container"></div>
 <div class="grid grid-cols-2 gap-3">
-<button class="bg-gradient-to-br from-primary to-primary-dim text-on-primary py-3 rounded-lg font-bold text-sm flex items-center justify-center gap-2 active:scale-95 duration-150">
+<button class="bg-gradient-to-br from-primary to-primary-dim text-white py-3 rounded-lg font-bold text-sm flex items-center justify-center gap-2 active:scale-95 duration-150">
 <span class="material-symbols-outlined text-lg">groups</span>
                     Gerar Times
                 </button>
@@ -135,71 +137,83 @@
 </section>
 <!-- Times Gerados Section -->
 <section class="space-y-4">
-<div class="flex items-center justify-between">
+<div class="flex items-center justify-between px-1">
 <h3 class="font-headline font-bold text-lg">Times Gerados</h3>
-<span class="bg-primary-container text-on-primary-container text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">Novo</span>
+<span class="bg-primary text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">Novo</span>
 </div>
-<div class="flex overflow-x-auto gap-4 hide-scrollbar snap-x -mx-4 px-4">
-<!-- Time A -->
-<div class="min-w-[260px] bg-surface-container-lowest rounded-xl overflow-hidden snap-start shadow-sm">
-<div class="bg-primary-container p-3 flex items-center justify-between">
-<span class="font-headline font-extrabold text-on-primary-container">TIME A</span>
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">stars</span>
+<!-- Horizontal Carousel -->
+<div class="flex overflow-x-auto gap-5 hide-scrollbar snap-x -mx-4 px-4 pb-4">
+<!-- Time A (Green Theme) -->
+<div class="min-w-[280px] bg-surface-container-lowest rounded-2xl overflow-hidden snap-center team-card-shadow border border-surface-container/50">
+<div class="bg-gradient-to-r from-primary to-primary-dim p-4 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline font-extrabold text-white text-xs opacity-80 uppercase tracking-widest">Equipe</span>
+<span class="font-headline font-black text-white text-lg leading-tight">TIME A</span>
 </div>
-<ul class="p-4 space-y-3">
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">JS</div>
-                            João Silva
-                        </li>
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">PS</div>
-                            Pedro Santos
-                        </li>
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">LL</div>
-                            Lucas Lima
-                        </li>
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">BS</div>
-                            Bruno Souza
-                        </li>
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">CE</div>
-                            Carlos Eduardo
-                        </li>
+<div class="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+<ul class="p-4 space-y-1">
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[11px] font-bold">JS</div>
+<span class="text-sm font-semibold text-on-surface">João Silva</span>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[11px] font-bold">PS</div>
+<span class="text-sm font-semibold text-on-surface">Pedro Santos</span>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[11px] font-bold">LL</div>
+<span class="text-sm font-semibold text-on-surface">Lucas Lima</span>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[11px] font-bold">BS</div>
+<span class="text-sm font-semibold text-on-surface">Bruno Souza</span>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[11px] font-bold">CE</div>
+<span class="text-sm font-semibold text-on-surface">Carlos Eduardo</span>
+</li>
 </ul>
 </div>
-<!-- Time B -->
-<div class="min-w-[260px] bg-surface-container-lowest rounded-xl overflow-hidden snap-start shadow-sm">
-<div class="bg-tertiary-container p-3 flex items-center justify-between">
-<span class="font-headline font-extrabold text-on-tertiary-container">TIME B</span>
-<span class="material-symbols-outlined text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">shield</span>
+<!-- Time B (Blue Theme) -->
+<div class="min-w-[280px] bg-surface-container-lowest rounded-2xl overflow-hidden snap-center team-card-shadow border border-surface-container/50">
+<div class="bg-gradient-to-r from-tertiary to-[#008290] p-4 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline font-extrabold text-white text-xs opacity-80 uppercase tracking-widest">Equipe</span>
+<span class="font-headline font-black text-white text-lg leading-tight">TIME B</span>
 </div>
-<ul class="p-4 space-y-3">
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">AC</div>
-                            Ana Costa
-                        </li>
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">MO</div>
-                            Maria Oliveira
-                        </li>
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">RS</div>
-                            Rafaela Silva
-                        </li>
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">JS</div>
-                            Julia Santos
-                        </li>
-<li class="flex items-center gap-3 text-sm font-medium">
-<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">BL</div>
-                            Beatriz Lima
-                        </li>
+<div class="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+</div>
+<ul class="p-4 space-y-1">
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center text-[11px] font-bold">AC</div>
+<span class="text-sm font-semibold text-on-surface">Ana Costa</span>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center text-[11px] font-bold">MO</div>
+<span class="text-sm font-semibold text-on-surface">Maria Oliveira</span>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center text-[11px] font-bold">RS</div>
+<span class="text-sm font-semibold text-on-surface">Rafaela Silva</span>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center text-[11px] font-bold">JS</div>
+<span class="text-sm font-semibold text-on-surface">Julia Santos</span>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container transition-colors">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center text-[11px] font-bold">BL</div>
+<span class="text-sm font-semibold text-on-surface">Beatriz Lima</span>
+</li>
 </ul>
 </div>
 </div>
-<button class="w-full border border-outline-variant text-on-surface-variant py-3 rounded-lg font-bold text-sm mt-2 active:scale-95 duration-150">
+<button class="w-full border-2 border-outline-variant text-on-surface-variant py-3.5 rounded-xl font-bold text-sm mt-2 active:scale-95 duration-150 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">edit</span>
                 Editar Times
             </button>
 </section>
@@ -211,7 +225,7 @@
 </div>
 <div class="grid grid-cols-4 sm:grid-cols-8 gap-4">
 <div class="flex flex-col items-center gap-1">
-<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm shadow-sm">JS</div>
+<div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm">JS</div>
 </div>
 <div class="flex flex-col items-center gap-1">
 <div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-sm shadow-sm">MS</div>
@@ -238,8 +252,8 @@
 </section>
 </main>
 <!-- BottomNavBar / Sticky CTA -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-center items-center px-4 pb-safe bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md rounded-t-[24px] shadow-[0_-8px_24px_rgba(44,47,48,0.04)] h-24">
-<button class="flex flex-row items-center justify-center gap-2 bg-gradient-to-br from-[#266829] to-[#185c1e] text-white rounded-[12px] w-full py-4 mx-4 mb-6 font-['Inter'] font-bold text-sm tracking-tight active:scale-[0.98] duration-150 hover:brightness-110 transition-all">
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-center items-center px-4 pb-safe bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md rounded-t-[24px] shadow-[0_-8px_24px_rgba(44,47,48,0.06)] h-24">
+<button class="flex flex-row items-center justify-center gap-2 bg-gradient-to-br from-[#266829] to-[#185c1e] text-white rounded-xl w-full py-4 mx-4 mb-6 font-['Inter'] font-bold text-sm tracking-tight active:scale-[0.98] duration-150 hover:brightness-110 transition-all shadow-lg shadow-primary/20">
 <span class="material-symbols-outlined">share</span>
             Compartilhar Evento
         </button>
