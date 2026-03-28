@@ -19,9 +19,7 @@ export function GroupPage(): React.JSX.Element {
 
   return (
     <div className={styles.page}>
-      {/* TODO: GroupHeader component */}
-      <div />
-
+      
       <main className={styles.main}>
         {summaries.length > 0 ? <GroupHeader summaries={summaries} /> : <div />}
 
