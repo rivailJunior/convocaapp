@@ -5,13 +5,17 @@ import React from 'react';
 import styles from './styles/group-page.module.css';
 
 import { GroupCard } from '@/components/group/group-card';
+import { EventCarousel } from '@/components/group/group-event-carousel';
 import { GroupHeader } from '@/components/group/group-header';
 import { useGroups } from '@/components/group/hooks/hook-use-groups';
+import { useUpcomingEvents } from '@/components/group/hooks/hook-use-upcoming-events';
 import { useTreasurySummary } from '@/components/group/hooks/hook-use-treasury-summary';
 
 export function GroupPage(): React.JSX.Element {
   const { groups } = useGroups();
   const { summaries } = useTreasurySummary();
+  const groupIds = groups.map((g) => g.id);
+  const { events } = useUpcomingEvents(groupIds);
 
   return (
     <div className={styles.page}>
@@ -21,10 +25,7 @@ export function GroupPage(): React.JSX.Element {
       <main className={styles.main}>
         {summaries.length > 0 ? <GroupHeader summaries={summaries} /> : <div />}
 
-        <div className={styles.listHeader}>
-          <h3 className={styles.listTitle}>Próximas Partidas</h3>
-          <span className={styles.listAction}>Ver tudo</span>
-        </div>
+        <EventCarousel events={events} />
 
         <div className={styles.cardList}>
           {groups.map((group) => (
