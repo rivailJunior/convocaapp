@@ -7,7 +7,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -97,7 +96,7 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head>
+</head>
 <body class="bg-background min-h-screen flex flex-col">
 <!-- TopAppBar -->
 <nav class="w-full top-0 sticky z-50 bg-[#F5F6F7] dark:bg-gray-900 no-line tonal-shift bg-[#EFF1F2] dark:bg-gray-800 flex items-center px-4 py-3 w-full">
@@ -200,6 +199,24 @@
 <button class="border-2 border-outline-variant text-on-surface font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-surface-container transition-colors active:scale-[0.98]">
 <span class="material-symbols-outlined text-lg" data-icon="upload">upload</span>
                     Importar lista
+                </button>
+</div>
+</section>
+<!-- New Section: Create Event Directly -->
+<section class="mb-8 pt-4 border-t border-outline-variant/30">
+<div class="bg-primary/5 rounded-2xl p-5 border border-primary/20 flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-primary">Agendar primeira partida?</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">Pule etapas criando o grupo e já agendando o primeiro evento com estes participantes.</p>
+</div>
+</div>
+<button class="w-full bg-white border-2 border-primary text-primary font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-primary/5 transition-colors active:scale-[0.98] shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="rocket_launch">rocket_launch</span>
+                    Criar Evento e mover participantes
                 </button>
 </div>
 </section>

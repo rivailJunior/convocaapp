@@ -7,7 +7,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -71,7 +70,7 @@
               "body": ["Inter"],
               "label": ["Inter"]
             },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
           },
         },
       }
@@ -94,13 +93,21 @@
         .bottom-heavy-input:focus-within {
             border-bottom-color: #B9F61D;
         }
+        /* Custom Toggle Switch Style */
+        .toggle-checkbox:checked {
+          right: 0;
+          border-color: #266829;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+          background-color: #266829;
+        }
     </style>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head>
+</head>
 <body class="flex flex-col min-h-screen bg-surface">
 <!-- TopAppBar -->
 <header class="flex items-center justify-between px-4 h-16 w-full fixed top-0 z-50 bg-[#eff1f2] dark:bg-[#1e1e1e]">
@@ -149,7 +156,57 @@
 <label class="block text-sm font-bold font-headline text-on-surface">Observações</label>
 <span class="text-xs font-label text-outline-variant">(opcional)</span>
 </div>
-<textarea class="w-full p-4 rounded-xl border-none bg-surface-container-high focus:ring-2 focus:ring-secondary text-on-surface placeholder:text-outline-variant font-body resize-none" placeholder="Notas ou instruções para o evento..." rows="4"></textarea>
+<textarea class="w-full p-4 rounded-xl border-none bg-surface-container-high focus:ring-2 focus:ring-secondary text-on-surface placeholder:text-outline-variant font-body resize-none" placeholder="Notas ou instruções para o evento..." rows="3"></textarea>
+</div>
+<!-- Form Section: Repetir Evento -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl border border-surface-container-high space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="repeat">repeat</span>
+<label class="font-headline font-bold text-on-surface">Repetir Evento</label>
+</div>
+<!-- Simple iOS-style Toggle -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Recurrence Options (Visible when enabled - usually handled by JS, but styled here) -->
+<div class="space-y-4 pt-2 border-t border-surface-container-low">
+<!-- Frequency Dropdown -->
+<div class="space-y-2">
+<label class="block text-xs font-bold font-headline text-on-surface-variant uppercase tracking-wider">Frequência</label>
+<div class="relative">
+<select class="w-full h-12 pl-4 pr-10 rounded-xl border-none bg-surface-container-low focus:ring-2 focus:ring-secondary text-on-surface font-body appearance-none">
+<option value="weekly">Semanal</option>
+<option value="biweekly">Quinzenal</option>
+<option value="monthly">Mensal</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Weekly Days (If Weekly is selected) -->
+<div class="space-y-2">
+<label class="block text-xs font-bold font-headline text-on-surface-variant uppercase tracking-wider">Dias da semana</label>
+<div class="flex justify-between items-center gap-1">
+<button class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs bg-primary text-white border-2 border-primary">S</button>
+<button class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs bg-surface-container-low text-on-surface-variant border-2 border-transparent">T</button>
+<button class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs bg-surface-container-low text-on-surface-variant border-2 border-transparent">Q</button>
+<button class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs bg-surface-container-low text-on-surface-variant border-2 border-transparent">Q</button>
+<button class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs bg-surface-container-low text-on-surface-variant border-2 border-transparent">S</button>
+<button class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs bg-surface-container-low text-on-surface-variant border-2 border-transparent">S</button>
+<button class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs bg-surface-container-low text-on-surface-variant border-2 border-transparent">D</button>
+</div>
+</div>
+<!-- End Date -->
+<div class="space-y-2">
+<label class="block text-xs font-bold font-headline text-on-surface-variant uppercase tracking-wider">Até quando?</label>
+<div class="relative">
+<input class="w-full h-12 px-4 rounded-xl border-none bg-surface-container-low focus:ring-2 focus:ring-secondary text-on-surface font-body" type="date" value="2025-03-18"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-primary text-lg pointer-events-none" data-icon="event">event</span>
+</div>
+</div>
+</div>
 </div>
 <!-- Bento-style Info Card (Visual Polish) -->
 <div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm flex items-start gap-4">
