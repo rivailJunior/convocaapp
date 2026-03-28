@@ -1,5 +1,6 @@
-import type { User } from '@sportspay/shared';
 import { RandomTeams } from './random-teams';
+
+import type { User } from '@sportspay/shared';
 
 const makePlayers = (count: number): User[] =>
   Array.from({ length: count }, (_, i) => ({

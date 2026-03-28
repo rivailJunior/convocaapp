@@ -1,5 +1,10 @@
-import type { User, Team, TeamDrawResult } from '@sportspay/shared';
 import { TeamGenerator } from './team-generator';
+
+import type { 
+  User, 
+  Team, 
+  TeamDrawResult 
+} from '@sportspay/shared';
 
 /** Fisher-Yates shuffle to produce random balanced teams. */
 export class RandomTeams extends TeamGenerator {

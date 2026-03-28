@@ -1,0 +1,110 @@
+.page {
+  background-color: #f8f9fa;
+  font-family: 'Inter', sans-serif;
+  color: #2c2f30;
+  min-height: 100vh;
+  padding-bottom: 8rem;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: between;
+  align-items: center;
+  width: 100%;
+  padding: 0 1.5rem;
+  height: 4rem;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: #f8f9fa;
+}
+
+/* Summary Dashboard */
+.summaryDashboard {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #1b5e20 0%, #0c3d0f 100%);
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 32px rgba(27, 94, 32, 0.12);
+  color: #ffffff;
+}
+
+/* Main */
+.main {
+  padding: 0 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* List Header */
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.listTitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #212121;
+}
+
+.listAction {
+  color: #1b5e20;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+/* Card List */
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Empty State */
+.emptyState {
+  border-radius: 0.75rem;
+  border: 1px dashed #d1d5db;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* FAB */
+.fab {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  background-color: #1b5e20;
+  box-shadow: 0 10px 25px rgba(27, 94, 32, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.fab:hover {
+  opacity: 0.95;
+}
+
+.fab:active {
+  transform: scale(0.9);
+}
+
+.fabIcon {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.fabWrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5rem 1.5rem 0;
+}
