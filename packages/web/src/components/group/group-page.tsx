@@ -5,10 +5,13 @@ import React from 'react';
 import styles from './styles/group-page.module.css';
 
 import { GroupCard } from '@/components/group/group-card';
+import { GroupHeader } from '@/components/group/group-header';
 import { useGroups } from '@/components/group/hooks/hook-use-groups';
+import { useTreasurySummary } from '@/components/group/hooks/hook-use-treasury-summary';
 
 export function GroupPage(): React.JSX.Element {
   const { groups } = useGroups();
+  const { summaries } = useTreasurySummary();
 
   return (
     <div className={styles.page}>
@@ -16,8 +19,7 @@ export function GroupPage(): React.JSX.Element {
       <div />
 
       <main className={styles.main}>
-        {/* TODO: GroupSummaryDashboard component */}
-        <div />
+        {summaries.length > 0 ? <GroupHeader summaries={summaries} /> : <div />}
 
         <div className={styles.listHeader}>
           <h3 className={styles.listTitle}>Próximas Partidas</h3>

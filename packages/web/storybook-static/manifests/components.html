@@ -576,13 +576,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">2 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">2/2 infos</a><span class="filter-pill ok" aria-disabled="true">4 stories ok</span></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">3 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">3/3 infos</a><span class="filter-pill ok" aria-disabled="true">9 stories ok</span></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.7s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.6s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -702,14 +702,160 @@
   no-story-error
   no-doc-error"
   role="listitem"
+  aria-label="GroupHeader">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> GroupHeader</h2>
+      <div class="badges">
+        <label for="c-1-components-group-groupheader-props" class="badge ok as-toggle">1 prop type</label>
+        <label for="c-1-components-group-groupheader-info" class="badge info as-toggle">1 info</label>
+        <label for="c-1-components-group-groupheader-stories" class="badge ok as-toggle">5 stories</label>
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/group/stories/group-header.stories.tsx">components-group-groupheader · ./src/components/group/stories/group-header.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-1-components-group-groupheader-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-1-components-group-groupheader-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  <input id="c-1-components-group-groupheader-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">1 prop type</span>
+            </div>
+            <pre><code>Component: src/components/group/group-header.tsx::GroupHeader</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>summaries: TreasurySummary[]</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { GroupHeader } from "@sportspay/web";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Multiple Summaries</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const MultipleSummaries = () =&gt; &lt;div className=&quot;w-[380px] p-4&quot;&gt;
+    &lt;GroupHeader
+        summaries={[
+          { balance: 15000, totalIn: 20000, totalOut: 5000 },
+          { balance: 8500, totalIn: 10000, totalOut: 1500 },
+          { balance: 12250, totalIn: 15000, totalOut: 2750 },
+          { balance: 12500, totalIn: 18000, totalOut: 5500 },
+        ]} /&gt;
+&lt;/div&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Single Summary</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const SingleSummary = () =&gt; &lt;div className=&quot;w-[380px] p-4&quot;&gt;
+    &lt;GroupHeader
+        summaries={[
+          { balance: 50000, totalIn: 80000, totalOut: 30000 },
+        ]} /&gt;
+&lt;/div&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Zero Balance</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ZeroBalance = () =&gt; &lt;div className=&quot;w-[380px] p-4&quot;&gt;
+    &lt;GroupHeader
+        summaries={[
+          { balance: 0, totalIn: 5000, totalOut: 5000 },
+        ]} /&gt;
+&lt;/div&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Negative Balance</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const NegativeBalance = () =&gt; &lt;div className=&quot;w-[380px] p-4&quot;&gt;
+    &lt;GroupHeader
+        summaries={[
+          { balance: -3000, totalIn: 2000, totalOut: 5000 },
+          { balance: -1500, totalIn: 1000, totalOut: 2500 },
+        ]} /&gt;
+&lt;/div&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Large Balance</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const LargeBalance = () =&gt; &lt;div className=&quot;w-[380px] p-4&quot;&gt;
+    &lt;GroupHeader
+        summaries={[
+          { balance: 1500000, totalIn: 2000000, totalOut: 500000 },
+          { balance: 750000, totalIn: 1000000, totalOut: 250000 },
+          { balance: 300000, totalIn: 500000, totalOut: 200000 },
+        ]} /&gt;
+&lt;/div&gt;;</code></pre>
+            </div>
+        </div>
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
   aria-label="GroupPage">
   <div class="head">
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> GroupPage</h2>
       <div class="badges">
         
-        <label for="c-1-components-group-grouppage-info" class="badge info as-toggle">1 info</label>
-        <label for="c-1-components-group-grouppage-stories" class="badge ok as-toggle">1 story</label>
+        <label for="c-2-components-group-grouppage-info" class="badge info as-toggle">1 info</label>
+        <label for="c-2-components-group-grouppage-stories" class="badge ok as-toggle">1 story</label>
         
       </div>
     </div>
@@ -721,8 +867,8 @@
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-1-components-group-grouppage-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-1-components-group-grouppage-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-2-components-group-grouppage-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-2-components-group-grouppage-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
 
