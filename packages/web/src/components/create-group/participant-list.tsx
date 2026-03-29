@@ -41,12 +41,17 @@ export function ParticipantList({
               value={participant.name}
               onChange={(e) => onChangeName(participant.id, e.target.value)}
               placeholder="Nome do participante"
+              aria-label="Nome do participante"
             />
             <button
               type="button"
               className={styles.removeButton}
               onClick={() => onRemove(participant.id)}
-              aria-label={`Remover ${participant.name}`}
+              aria-label={
+                participant.name && participant.name.trim()
+                  ? `Remover ${participant.name}`
+                  : 'Remover participante'
+              }
             >
               <Icon name="close" className="text-lg" />
             </button>

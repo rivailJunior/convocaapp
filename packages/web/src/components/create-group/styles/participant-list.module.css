@@ -101,7 +101,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border: 2px solid #abadae;
+  border: 2px solid rgba(171, 173, 174, 0.15);
   color: #2c2f30;
   font-family: 'Inter', sans-serif;
   font-weight: 700;

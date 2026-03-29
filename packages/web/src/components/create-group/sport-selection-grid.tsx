@@ -20,7 +20,7 @@ interface SportSelectionGridProps {
 export function SportSelectionGrid({ selected, onSelect, className }: SportSelectionGridProps): React.JSX.Element {
   return (
     <fieldset className={`${styles.wrapper} ${className ?? ''}`}>
-      <label className={styles.label}>Esporte</label>
+      <legend className={styles.label}>Esporte</legend>
       <div className={styles.grid}>
         {SPORT_OPTIONS.map((option) => {
           const isSelected = selected === option.value;

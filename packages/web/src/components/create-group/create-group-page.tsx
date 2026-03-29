@@ -47,8 +47,11 @@ export function CreateGroupPage({
           <h2 className={styles.sectionTitle}>Informações Básicas</h2>
           <div className={styles.fieldGroup}>
             <div className={styles.fieldWrapper}>
-              <label className={styles.fieldLabel}>Nome do grupo</label>
+              <label className={styles.fieldLabel} htmlFor="groupName">
+                Nome do grupo
+              </label>
               <input
+                id="groupName"
                 type="text"
                 className={styles.textInput}
                 placeholder="Ex: Fute de quinta"
@@ -94,7 +97,9 @@ export function CreateGroupPage({
           onChangeName={changeParticipantName}
           onRemove={removeParticipant}
           onAdd={addParticipant}
-          onImport={() => {}}
+          onImport={() => {
+            alert('A funcionalidade de importar lista ainda não está disponível.');
+          }}
         />
 
         {/* Section 4: Create Event Banner */}
@@ -109,6 +114,7 @@ export function CreateGroupPage({
         onSubmit={handleSubmit}
         submitLabel="Criar Grupo"
         isSubmitting={isSubmitting}
+        disabled={!isValid || isSubmitting}
       />
     </div>
   );
