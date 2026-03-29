@@ -1,0 +1,82 @@
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 -8px 24px rgba(44, 47, 48, 0.04);
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.cancelButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #595c5d;
+  padding: 0.5rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cancelButton:hover {
+  opacity: 0.8;
+}
+
+.cancelButton:active {
+  transform: scale(0.98);
+}
+
+.cancelLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(145deg, #266829 0%, #185c1e 100%);
+  color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0.75rem 3rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(44, 47, 48, 0.12);
+  transition: all 0.2s ease;
+}
+
+.submitButton:hover {
+  filter: brightness(1.1);
+}
+
+.submitButton:active {
+  transform: scale(0.98);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submitLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

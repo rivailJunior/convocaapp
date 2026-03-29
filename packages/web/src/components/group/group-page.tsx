@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import styles from './styles/group-page.module.css';
 
+import { CreateGroupPage } from '@/components/create-group/create-group-page';
 import { GroupCard } from '@/components/group/group-card';
 import { EventCarousel } from '@/components/group/group-event-carousel';
 import { GroupHeader } from '@/components/group/group-header';
@@ -16,6 +17,25 @@ export function GroupPage(): React.JSX.Element {
   const { summaries } = useTreasurySummary();
   const groupIds = groups.map((g) => g.id);
   const { events } = useUpcomingEvents(groupIds);
+  const [isCreating, setIsCreating] = useState(false);
+
+  const handleCreateGroup = useCallback(() => {
+    setIsCreating(true);
+  }, []);
+
+  const handleCloseCreateGroup = useCallback(() => {
+    setIsCreating(false);
+  }, []);
+
+  if (isCreating) {
+    return (
+      <CreateGroupPage
+        onBack={handleCloseCreateGroup}
+        onCancel={handleCloseCreateGroup}
+        onCreateEvent={() => {}}
+      />
+    );
+  }
 
   return (
     <div className={styles.page}>
@@ -43,6 +63,7 @@ export function GroupPage(): React.JSX.Element {
           className={styles.fab}
           aria-label="Criar novo grupo"
           type="button"
+          onClick={handleCreateGroup}
         >
           <span className={`material-symbols-outlined ${styles.fabIcon}`}>
             add

@@ -1,0 +1,122 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #2c2f30;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0.25rem;
+  padding-right: 1rem;
+  box-shadow: 0 4px 16px rgba(44, 47, 48, 0.04);
+}
+
+.itemInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1rem;
+  color: #2c2f30;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  outline: none;
+}
+
+.itemInput::placeholder {
+  color: #757778;
+}
+
+.removeButton {
+  color: #b92902;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.removeButton:hover {
+  background-color: rgba(249, 86, 48, 0.1);
+}
+
+.removeButton:active {
+  transform: scale(0.9);
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #3f5700;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.addButton:hover {
+  opacity: 0.8;
+}
+
+.addButton:active {
+  transform: scale(0.98);
+}
+
+.importButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid #abadae;
+  color: #2c2f30;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.importButton:hover {
+  background-color: #e6e8ea;
+}
+
+.importButton:active {
+  transform: scale(0.98);
+}
