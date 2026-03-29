@@ -39,7 +39,12 @@ export function EventCarousel({ events }: EventCarouselProps): React.JSX.Element
       {events.length === 0 ? (
         <div className={styles.empty}>Nenhum evento agendado.</div>
       ) : (
-        <div className={styles.track}>
+        <div
+          className={styles.track}
+          tabIndex={0}
+          role="region"
+          aria-label="Próximas partidas, rolagem horizontal para ver mais eventos"
+        >
           {events.map((event) => {
             const extraCount = event.confirmedCount - event.confirmedAvatars.length;
 

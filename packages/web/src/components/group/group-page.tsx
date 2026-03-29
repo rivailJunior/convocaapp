@@ -21,7 +21,7 @@ export function GroupPage(): React.JSX.Element {
     <div className={styles.page}>
       
       <main className={styles.main}>
-        {summaries.length > 0 ? <GroupHeader summaries={summaries} /> : <div />}
+        {summaries.length > 0 && <GroupHeader summaries={summaries} />}
 
         <EventCarousel events={events} />
 

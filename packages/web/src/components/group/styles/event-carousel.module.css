@@ -166,7 +166,8 @@
 /* Empty state */
 .empty {
   border-radius: 0.75rem;
-  border: 1px dashed #d1d5db;
+  background-color: #f9fafb;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
   padding: 1rem;
   text-align: center;
   font-size: 0.75rem;
