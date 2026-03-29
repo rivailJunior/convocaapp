@@ -33,7 +33,7 @@ export function EventCarousel({ events }: EventCarouselProps): React.JSX.Element
     <section className={styles.section}>
       <div className={styles.header}>
         <h2 className={styles.title}>Próximas Partidas</h2>
-        <button className={styles.viewAll} type="button">Ver tudo</button>
+        <button disabled=true className={styles.viewAll} type="button">Ver tudo</button>
       </div>
 
       {events.length === 0 ? (
