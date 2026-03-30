@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { GroupDisplayItem } from '@/components/group/hook-use-groups';
+import type { GroupDisplayItem } from '@/components/group/hooks/hook-use-groups';
 
 import { GroupCard } from '@/components/group/group-card';
 

@@ -5,7 +5,6 @@ import { SPORTS } from '@sportspay/shared';
 import styles from './styles/event-carousel.module.css';
 
 import type { UpcomingEventItem } from '@/components/group/hooks/hook-use-upcoming-events';
-
 import type { Sport } from '@sportspay/shared';
 
 interface EventCarouselProps {
