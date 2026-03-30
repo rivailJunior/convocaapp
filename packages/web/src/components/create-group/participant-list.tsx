@@ -73,7 +73,7 @@ export function ParticipantList({
         </button>
         <button
           type="button"
-          className="flex items-center justify-center gap-2 border-2 border-[#abadae] text-[#2c2f30] font-display font-bold text-sm py-3 rounded-xl bg-transparent cursor-pointer transition-colors duration-200 hover:bg-[#e6e8ea] active:scale-[0.98]"
+          className="flex items-center justify-center gap-2 border border-[rgba(171,173,174,0.15)] text-[#2c2f30] font-display font-bold text-sm py-3 rounded-xl bg-transparent cursor-pointer transition-colors duration-200 hover:bg-[#e6e8ea] active:scale-[0.98]"
           onClick={onImport}
         >
           <Icon name="upload" className="text-lg" />
