@@ -1,9 +1,9 @@
 import { View } from 'react-native';
 
-interface PageIndicatorProps {
+type PageIndicatorProps = {
   total: number;
   activeIndex: number;
-}
+};
 
 export function PageIndicator({ total, activeIndex }: PageIndicatorProps) {
   return (

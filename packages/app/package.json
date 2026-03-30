@@ -24,6 +24,7 @@
     "expo-router": "~6.0.23",
     "expo-secure-store": "~15.0.8",
     "expo-status-bar": "~3.0.9",
+    "lucide-react-native": "^1.7.0",
     "nativewind": "^4.1.23",
     "react": "19.1.0",
     "react-hook-form": "^7.54.2",
