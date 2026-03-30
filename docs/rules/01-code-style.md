@@ -20,8 +20,13 @@
 - Functional components only. No class components.
 - Always use named exports for components. No default exports except for Next.js pages/layouts.
 - Keep components small — if JSX exceeds ~80 lines, extract sub-components.
+- Before creating a component, check `src/components/` — reuse what already exists.
+- Keep page/screen files thin: import components and hooks, compose them, nothing else.
 - Custom hooks for any logic shared between 2+ components (prefix with `use`).
+- Extract all stateful logic, effects, and derived data into custom hooks — no `useState`/`useEffect` in page/screen files.
 - Never put business logic inside components — use hooks and services.
+- Never hardcode data inside components. Always receive values through props.
+- Define a props type for every component that accepts external data.
 
 ## Formatting
 - 2-space indentation
@@ -43,6 +48,17 @@
 - Log errors with context: `console.error('[payments] generate failed:', error)`
 
 ## Comments
-- Write comments to explain **why**, not **what**
-- JSDoc for all exported functions in `packages/shared`
-- TODO comments must include author and ticket: `// TODO(@username): fix after #123`
+- **DO NOT write comments.** Code must be self-explanatory through clear naming and small functions.
+- The only allowed comment is a TODO that includes author and ticket: `// TODO(@username): fix after #123`
+
+## Shared Code (STRICT)
+- **ALL hooks, types, and interfaces MUST be created inside `packages/shared`.** No exceptions.
+- Components, screens, and apps import from `packages/shared` — they never define their own shared types or hooks locally.
+- Page/screen-specific component props types are the only types allowed inside `packages/web` or `packages/app`.
+
+## Styling (STRICT)
+- **No custom CSS or inline styles.** Ever.
+- **Web**: use TailwindCSS classes exclusively.
+- **Mobile (React Native)**: use NativeWind classes exclusively.
+- If a utility class doesn't exist, extend the Tailwind/NativeWind config — do not write raw CSS.
+- Reference design tokens from `tailwind.config.js` — never hardcode hex colors.
