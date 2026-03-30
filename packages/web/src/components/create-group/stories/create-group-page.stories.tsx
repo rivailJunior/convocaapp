@@ -15,9 +15,9 @@ export default meta;
 export const Default = {
   render: () => (
     <CreateGroupPage
-      onBack={() => console.log('back')}
-      onCancel={() => console.log('cancel')}
-      onCreateEvent={() => console.log('create event')}
+      onBack={() => {}}
+      onCancel={() => {}}
+      onCreateEvent={() => {}}
     />
   ),
 };

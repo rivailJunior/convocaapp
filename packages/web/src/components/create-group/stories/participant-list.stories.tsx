@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import type { Participant } from '@/components/create-group/participant-list';
+
 import { ParticipantList } from '@/components/create-group/participant-list';
 
 const meta = {
@@ -21,7 +22,7 @@ const mockParticipants: Participant[] = [
 
 export const WithParticipants = {
   render: () => (
-    <div className="w-[380px] p-4 bg-[#f5f6f7]">
+    <div className="w-[380px] p-4 bg-surface-bright">
       <ParticipantList
         participants={mockParticipants}
         onChangeName={() => {}}
@@ -35,7 +36,7 @@ export const WithParticipants = {
 
 export const Empty = {
   render: () => (
-    <div className="w-[380px] p-4 bg-[#f5f6f7]">
+    <div className="w-[380px] p-4 bg-surface-bright">
       <ParticipantList
         participants={[]}
         onChangeName={() => {}}
@@ -53,7 +54,7 @@ function InteractiveTemplate() {
   const [participants, setParticipants] = useState<Participant[]>([...mockParticipants]);
 
   return (
-    <div className="w-[380px] p-4 bg-[#f5f6f7]">
+    <div className="w-[380px] p-4 bg-surface-bright">
       <ParticipantList
         participants={participants}
         onChangeName={(id, name) =>

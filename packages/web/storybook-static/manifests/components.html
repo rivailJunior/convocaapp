@@ -582,7 +582,7 @@
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.8s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>1.0s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -604,7 +604,7 @@
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> BottomActionBar</h2>
       <div class="badges">
-        <label for="c-0-components-group-creategroup-bottomactionbar-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-0-components-group-creategroup-bottomactionbar-props" class="badge ok as-toggle">6 prop types</label>
         <label for="c-0-components-group-creategroup-bottomactionbar-info" class="badge info as-toggle">1 info</label>
         <label for="c-0-components-group-creategroup-bottomactionbar-stories" class="badge ok as-toggle">3 stories</label>
         
@@ -638,11 +638,13 @@
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen)</small></span>
-              <span class="badge ok">5 prop types</span>
+              <span class="badge ok">6 prop types</span>
             </div>
             <pre><code>Component: src/components/create-group/bottom-action-bar.tsx::BottomActionBar</code></pre>
             <pre><code>Props:</code></pre>
             <pre><code>className?: string
+
+disabled?: boolean = false
 
 isSubmitting?: boolean = false
 
@@ -674,10 +676,10 @@ submitLabel: string</code></pre>
               
               
               <pre><code>const Default = () =&gt; (
-  &lt;div className=&quot;relative h-[200px] bg-[#f5f6f7]&quot;&gt;
+  &lt;div className=&quot;relative h-[200px] bg-surface-bright&quot;&gt;
     &lt;BottomActionBar
-      onCancel={() =&gt; console.log(&#39;cancel&#39;)}
-      onSubmit={() =&gt; console.log(&#39;submit&#39;)}
+      onCancel={() =&gt; {}}
+      onSubmit={() =&gt; {}}
       submitLabel=&quot;Criar Grupo&quot;
     /&gt;
   &lt;/div&gt;
@@ -691,7 +693,7 @@ submitLabel: string</code></pre>
               
               
               <pre><code>const Submitting = () =&gt; (
-  &lt;div className=&quot;relative h-[200px] bg-[#f5f6f7]&quot;&gt;
+  &lt;div className=&quot;relative h-[200px] bg-surface-bright&quot;&gt;
     &lt;BottomActionBar
       onCancel={() =&gt; {}}
       onSubmit={() =&gt; {}}
@@ -709,7 +711,7 @@ submitLabel: string</code></pre>
               
               
               <pre><code>const CustomLabel = () =&gt; (
-  &lt;div className=&quot;relative h-[200px] bg-[#f5f6f7]&quot;&gt;
+  &lt;div className=&quot;relative h-[200px] bg-surface-bright&quot;&gt;
     &lt;BottomActionBar
       onCancel={() =&gt; {}}
       onSubmit={() =&gt; {}}
@@ -798,8 +800,8 @@ onCreateEvent: () =&gt; void</code></pre>
               
               
               <pre><code>const Default = () =&gt; (
-  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
-    &lt;CreateEventBanner onCreateEvent={() =&gt; console.log(&#39;create event&#39;)} /&gt;
+  &lt;div className=&quot;w-[380px] p-4 bg-surface-bright&quot;&gt;
+    &lt;CreateEventBanner onCreateEvent={() =&gt; {}} /&gt;
   &lt;/div&gt;
 );</code></pre>
             </div>
@@ -886,9 +888,9 @@ onCreateEvent?: () =&gt; void</code></pre>
               
               <pre><code>const Default = () =&gt; (
   &lt;CreateGroupPage
-    onBack={() =&gt; console.log(&#39;back&#39;)}
-    onCancel={() =&gt; console.log(&#39;cancel&#39;)}
-    onCreateEvent={() =&gt; console.log(&#39;create event&#39;)}
+    onBack={() =&gt; {}}
+    onCancel={() =&gt; {}}
+    onCreateEvent={() =&gt; {}}
   /&gt;
 );</code></pre>
             </div>
@@ -1422,7 +1424,7 @@ participants: Participant[]</code></pre>
               
               
               <pre><code>const WithParticipants = () =&gt; (
-  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
+  &lt;div className=&quot;w-[380px] p-4 bg-surface-bright&quot;&gt;
     &lt;ParticipantList
       participants={mockParticipants}
       onChangeName={() =&gt; {}}
@@ -1441,7 +1443,7 @@ participants: Participant[]</code></pre>
               
               
               <pre><code>const Empty = () =&gt; (
-  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
+  &lt;div className=&quot;w-[380px] p-4 bg-surface-bright&quot;&gt;
     &lt;ParticipantList
       participants={[]}
       onChangeName={() =&gt; {}}
@@ -1543,7 +1545,7 @@ selected: Sport | null</code></pre>
               
               
               <pre><code>const NoSelection = () =&gt; (
-  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
+  &lt;div className=&quot;w-[380px] p-4 bg-surface-bright&quot;&gt;
     &lt;SportSelectionGrid selected={null} onSelect={() =&gt; {}} /&gt;
   &lt;/div&gt;
 );</code></pre>
@@ -1556,7 +1558,7 @@ selected: Sport | null</code></pre>
               
               
               <pre><code>const FootballSelected = () =&gt; (
-  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
+  &lt;div className=&quot;w-[380px] p-4 bg-surface-bright&quot;&gt;
     &lt;SportSelectionGrid selected=&quot;futebol&quot; onSelect={() =&gt; {}} /&gt;
   &lt;/div&gt;
 );</code></pre>
@@ -1649,7 +1651,7 @@ title: string</code></pre>
               </div>
               
               
-              <pre><code>const Default = () =&gt; &lt;TopAppBar title=&quot;Novo Grupo&quot; onBack={() =&gt; console.log(&#39;back&#39;)} /&gt;;</code></pre>
+              <pre><code>const Default = () =&gt; &lt;TopAppBar title=&quot;Novo Grupo&quot; onBack={() =&gt; {}} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -1658,7 +1660,7 @@ title: string</code></pre>
               </div>
               
               
-              <pre><code>const CustomTitle = () =&gt; &lt;TopAppBar title=&quot;Editar Grupo&quot; onBack={() =&gt; console.log(&#39;back&#39;)} /&gt;;</code></pre>
+              <pre><code>const CustomTitle = () =&gt; &lt;TopAppBar title=&quot;Editar Grupo&quot; onBack={() =&gt; {}} /&gt;;</code></pre>
             </div>
         </div>
     

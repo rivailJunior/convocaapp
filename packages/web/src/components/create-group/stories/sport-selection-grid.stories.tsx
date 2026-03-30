@@ -17,7 +17,7 @@ export default meta;
 function InteractiveTemplate() {
   const [selected, setSelected] = useState<Sport | null>(null);
   return (
-    <div className="w-[380px] p-4 bg-[#f5f6f7]">
+    <div className="w-[380px] p-4 bg-surface-bright">
       <SportSelectionGrid selected={selected} onSelect={setSelected} />
     </div>
   );
@@ -25,7 +25,7 @@ function InteractiveTemplate() {
 
 export const NoSelection = {
   render: () => (
-    <div className="w-[380px] p-4 bg-[#f5f6f7]">
+    <div className="w-[380px] p-4 bg-surface-bright">
       <SportSelectionGrid selected={null} onSelect={() => {}} />
     </div>
   ),
@@ -33,7 +33,7 @@ export const NoSelection = {
 
 export const FootballSelected = {
   render: () => (
-    <div className="w-[380px] p-4 bg-[#f5f6f7]">
+    <div className="w-[380px] p-4 bg-surface-bright">
       <SportSelectionGrid selected="futebol" onSelect={() => {}} />
     </div>
   ),

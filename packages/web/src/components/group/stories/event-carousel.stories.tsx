@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { EventCarousel } from '@/components/group/group-event-carousel';
-
 import type { UpcomingEventItem } from '@/components/group/hooks/hook-use-upcoming-events';
+
+import { EventCarousel } from '@/components/group/group-event-carousel';
 
 const mockEvents: UpcomingEventItem[] = [
   {

@@ -14,8 +14,8 @@ export default meta;
 
 export const Default = {
   render: () => (
-    <div className="w-[380px] p-4 bg-[#f5f6f7]">
-      <CreateEventBanner onCreateEvent={() => console.log('create event')} />
+    <div className="w-[380px] p-4 bg-surface-bright">
+      <CreateEventBanner onCreateEvent={() => {}} />
     </div>
   ),
 };

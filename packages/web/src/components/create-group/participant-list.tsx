@@ -27,7 +27,7 @@ export function ParticipantList({
   return (
     <section className={className}>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-lg text-[#2c2f30]">
+        <h2 className="font-display font-bold text-lg text-on-surface">
           Participantes ({participants.length})
         </h2>
       </div>
@@ -40,7 +40,7 @@ export function ParticipantList({
           >
             <input
               type="text"
-              className="flex-1 bg-transparent border-none py-3 px-4 text-[#2c2f30] font-display font-medium text-base outline-none placeholder:text-[#757778]"
+              className="flex-1 bg-transparent border-none py-3 px-4 text-on-surface font-display font-medium text-base outline-none placeholder:text-outline"
               value={participant.name}
               onChange={(e) => onChangeName(participant.id, e.target.value)}
               placeholder="Nome do participante"
@@ -48,7 +48,7 @@ export function ParticipantList({
             />
             <button
               type="button"
-              className="text-[#b92902] p-2 rounded-full bg-transparent border-none cursor-pointer flex items-center justify-center transition-colors duration-200 hover:bg-[rgba(249,86,48,0.1)] active:scale-90"
+              className="text-error p-2 rounded-full bg-transparent border-none cursor-pointer flex items-center justify-center transition-colors duration-200 hover:bg-error/10 active:scale-90"
               onClick={() => onRemove(participant.id)}
               aria-label={
                 participant.name && participant.name.trim()
@@ -65,7 +65,7 @@ export function ParticipantList({
       <div className="mt-4 flex flex-col gap-3">
         <button
           type="button"
-          className="flex items-center justify-center gap-2 text-[#3f5700] font-display font-bold text-sm p-2 bg-transparent border-none cursor-pointer transition-opacity duration-200 hover:opacity-80 active:scale-[0.98]"
+          className="flex items-center justify-center gap-2 text-primary font-display font-bold text-sm p-2 bg-transparent border-none cursor-pointer transition-opacity duration-200 hover:opacity-80 active:scale-[0.98]"
           onClick={onAdd}
         >
           <Icon name="add" className="text-lg" />
@@ -73,7 +73,7 @@ export function ParticipantList({
         </button>
         <button
           type="button"
-          className="flex items-center justify-center gap-2 border border-[rgba(171,173,174,0.15)] text-[#2c2f30] font-display font-bold text-sm py-3 rounded-xl bg-transparent cursor-pointer transition-colors duration-200 hover:bg-[#e6e8ea] active:scale-[0.98]"
+          className="flex items-center justify-center gap-2 border border-on-surface/15 text-on-surface font-display font-bold text-sm py-3 rounded-xl bg-transparent cursor-pointer transition-colors duration-200 hover:bg-surface-dim active:scale-[0.98]"
           onClick={onImport}
         >
           <Icon name="upload" className="text-lg" />

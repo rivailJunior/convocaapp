@@ -2,9 +2,8 @@
 
 import { useCallback, useState } from 'react';
 
-import type { Sport } from '@sportspay/shared';
-
 import type { Participant } from '../participant-list';
+import type { Sport } from '@sportspay/shared';
 
 interface CreateGroupFormState {
   groupName: string;

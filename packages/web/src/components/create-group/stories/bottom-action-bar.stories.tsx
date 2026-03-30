@@ -14,10 +14,10 @@ export default meta;
 
 export const Default = {
   render: () => (
-    <div className="relative h-[200px] bg-[#f5f6f7]">
+    <div className="relative h-[200px] bg-surface-bright">
       <BottomActionBar
-        onCancel={() => console.log('cancel')}
-        onSubmit={() => console.log('submit')}
+        onCancel={() => {}}
+        onSubmit={() => {}}
         submitLabel="Criar Grupo"
       />
     </div>
@@ -26,7 +26,7 @@ export const Default = {
 
 export const Submitting = {
   render: () => (
-    <div className="relative h-[200px] bg-[#f5f6f7]">
+    <div className="relative h-[200px] bg-surface-bright">
       <BottomActionBar
         onCancel={() => {}}
         onSubmit={() => {}}
@@ -39,7 +39,7 @@ export const Submitting = {
 
 export const CustomLabel = {
   render: () => (
-    <div className="relative h-[200px] bg-[#f5f6f7]">
+    <div className="relative h-[200px] bg-surface-bright">
       <BottomActionBar
         onCancel={() => {}}
         onSubmit={() => {}}
