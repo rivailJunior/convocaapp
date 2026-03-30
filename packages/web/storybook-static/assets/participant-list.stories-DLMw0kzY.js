@@ -1,0 +1,11 @@
+import{n as e,o as t}from"./chunk-vNrZSFDR.js";import{n,r}from"./iframe-CBp8o_jM.js";import{n as i,t as a}from"./participant-list-y7bKiGds.js";function o(){let[e,t]=(0,c.useState)([...u]);return(0,s.jsx)(`div`,{className:`w-[380px] p-4 bg-[#f5f6f7]`,children:(0,s.jsx)(a,{participants:e,onChangeName:(e,n)=>t(t=>t.map(t=>t.id===e?{...t,name:n}:t)),onRemove:e=>t(t=>t.filter(t=>t.id!==e)),onAdd:()=>{let e=String(p++);t(t=>[...t,{id:e,name:``}])},onImport:()=>{}})})}var s,c,l,u,d,f,p,m,h;e((()=>{s=n(),c=t(r()),i(),l={title:`Components/Group/CreateGroup/ParticipantList`,component:a,parameters:{layout:`centered`}},u=[{id:`1`,name:`João Silva`},{id:`2`,name:`Maria Oliveira`},{id:`3`,name:`Ricardo Santos`}],d={render:()=>(0,s.jsx)(`div`,{className:`w-[380px] p-4 bg-[#f5f6f7]`,children:(0,s.jsx)(a,{participants:u,onChangeName:()=>{},onRemove:()=>{},onAdd:()=>{},onImport:()=>{}})})},f={render:()=>(0,s.jsx)(`div`,{className:`w-[380px] p-4 bg-[#f5f6f7]`,children:(0,s.jsx)(a,{participants:[],onChangeName:()=>{},onRemove:()=>{},onAdd:()=>{},onImport:()=>{}})})},p=4,m={render:()=>(0,s.jsx)(o,{})},d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
+  render: () => <div className="w-[380px] p-4 bg-[#f5f6f7]">
+      <ParticipantList participants={mockParticipants} onChangeName={() => {}} onRemove={() => {}} onAdd={() => {}} onImport={() => {}} />
+    </div>
+}`,...d.parameters?.docs?.source}}},f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{
+  render: () => <div className="w-[380px] p-4 bg-[#f5f6f7]">
+      <ParticipantList participants={[]} onChangeName={() => {}} onRemove={() => {}} onAdd={() => {}} onImport={() => {}} />
+    </div>
+}`,...f.parameters?.docs?.source}}},m.parameters={...m.parameters,docs:{...m.parameters?.docs,source:{originalSource:`{
+  render: () => <InteractiveTemplate />
+}`,...m.parameters?.docs?.source}}},h=[`WithParticipants`,`Empty`,`Interactive`]}))();export{f as Empty,m as Interactive,d as WithParticipants,h as __namedExportsOrder,l as default};

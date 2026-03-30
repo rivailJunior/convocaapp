@@ -1,0 +1,3 @@
+import{n as e}from"./chunk-vNrZSFDR.js";import{n as t}from"./iframe-CBp8o_jM.js";import{n,t as r}from"./create-group-page-DMZZKxPc.js";var i,a,o,s;e((()=>{i=t(),n(),a={title:`Components/Group/CreateGroup/CreateGroupPage`,component:r,parameters:{layout:`fullscreen`}},o={render:()=>(0,i.jsx)(r,{onBack:()=>console.log(`back`),onCancel:()=>console.log(`cancel`),onCreateEvent:()=>console.log(`create event`)})},o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  render: () => <CreateGroupPage onBack={() => console.log('back')} onCancel={() => console.log('cancel')} onCreateEvent={() => console.log('create event')} />
+}`,...o.parameters?.docs?.source}}},s=[`Default`]}))();export{o as Default,s as __namedExportsOrder,a as default};

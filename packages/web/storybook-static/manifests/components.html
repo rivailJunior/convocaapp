@@ -576,13 +576,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">4 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">4/4 infos</a><span class="filter-pill ok" aria-disabled="true">13 stories ok</span></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">10 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">10/10 infos</a><span class="filter-pill ok" aria-disabled="true">26 stories ok</span></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>2.6s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.8s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -599,14 +599,318 @@
   no-story-error
   no-doc-error"
   role="listitem"
+  aria-label="BottomActionBar">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> BottomActionBar</h2>
+      <div class="badges">
+        <label for="c-0-components-group-creategroup-bottomactionbar-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-0-components-group-creategroup-bottomactionbar-info" class="badge info as-toggle">1 info</label>
+        <label for="c-0-components-group-creategroup-bottomactionbar-stories" class="badge ok as-toggle">3 stories</label>
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/create-group/stories/bottom-action-bar.stories.tsx">components-group-creategroup-bottomactionbar · ./src/components/create-group/stories/bottom-action-bar.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-0-components-group-creategroup-bottomactionbar-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-0-components-group-creategroup-bottomactionbar-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  <input id="c-0-components-group-creategroup-bottomactionbar-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">5 prop types</span>
+            </div>
+            <pre><code>Component: src/components/create-group/bottom-action-bar.tsx::BottomActionBar</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: string
+
+isSubmitting?: boolean = false
+
+onCancel: () =&gt; void
+
+onSubmit: () =&gt; void
+
+submitLabel: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { BottomActionBar } from "@sportspay/web";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; (
+  &lt;div className=&quot;relative h-[200px] bg-[#f5f6f7]&quot;&gt;
+    &lt;BottomActionBar
+      onCancel={() =&gt; console.log(&#39;cancel&#39;)}
+      onSubmit={() =&gt; console.log(&#39;submit&#39;)}
+      submitLabel=&quot;Criar Grupo&quot;
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Submitting</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Submitting = () =&gt; (
+  &lt;div className=&quot;relative h-[200px] bg-[#f5f6f7]&quot;&gt;
+    &lt;BottomActionBar
+      onCancel={() =&gt; {}}
+      onSubmit={() =&gt; {}}
+      submitLabel=&quot;Criar Grupo&quot;
+      isSubmitting
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Custom Label</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CustomLabel = () =&gt; (
+  &lt;div className=&quot;relative h-[200px] bg-[#f5f6f7]&quot;&gt;
+    &lt;BottomActionBar
+      onCancel={() =&gt; {}}
+      onSubmit={() =&gt; {}}
+      submitLabel=&quot;Salvar Alterações&quot;
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+        </div>
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="CreateEventBanner">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> CreateEventBanner</h2>
+      <div class="badges">
+        <label for="c-1-components-group-creategroup-createeventbanner-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-1-components-group-creategroup-createeventbanner-info" class="badge info as-toggle">1 info</label>
+        <label for="c-1-components-group-creategroup-createeventbanner-stories" class="badge ok as-toggle">1 story</label>
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/create-group/stories/create-event-banner.stories.tsx">components-group-creategroup-createeventbanner · ./src/components/create-group/stories/create-event-banner.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-1-components-group-creategroup-createeventbanner-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-1-components-group-creategroup-createeventbanner-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  <input id="c-1-components-group-creategroup-createeventbanner-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src/components/create-group/create-event-banner.tsx::CreateEventBanner</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: string
+
+onCreateEvent: () =&gt; void</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { CreateEventBanner } from "@sportspay/web";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; (
+  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
+    &lt;CreateEventBanner onCreateEvent={() =&gt; console.log(&#39;create event&#39;)} /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+        </div>
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="CreateGroupPage">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> CreateGroupPage</h2>
+      <div class="badges">
+        <label for="c-2-components-group-creategroup-creategrouppage-props" class="badge ok as-toggle">3 prop types</label>
+        <label for="c-2-components-group-creategroup-creategrouppage-info" class="badge info as-toggle">1 info</label>
+        <label for="c-2-components-group-creategroup-creategrouppage-stories" class="badge ok as-toggle">1 story</label>
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/create-group/stories/create-group-page.stories.tsx">components-group-creategroup-creategrouppage · ./src/components/create-group/stories/create-group-page.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-2-components-group-creategroup-creategrouppage-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-2-components-group-creategroup-creategrouppage-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  <input id="c-2-components-group-creategroup-creategrouppage-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src/components/create-group/create-group-page.tsx::CreateGroupPage</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>onBack?: () =&gt; void
+
+onCancel?: () =&gt; void
+
+onCreateEvent?: () =&gt; void</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { CreateGroupPage } from "@sportspay/web";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; (
+  &lt;CreateGroupPage
+    onBack={() =&gt; console.log(&#39;back&#39;)}
+    onCancel={() =&gt; console.log(&#39;cancel&#39;)}
+    onCreateEvent={() =&gt; console.log(&#39;create event&#39;)}
+  /&gt;
+);</code></pre>
+            </div>
+        </div>
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
   aria-label="EventCarousel">
   <div class="head">
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> EventCarousel</h2>
       <div class="badges">
-        <label for="c-0-components-group-eventcarousel-props" class="badge ok as-toggle">1 prop type</label>
-        <label for="c-0-components-group-eventcarousel-info" class="badge info as-toggle">1 info</label>
-        <label for="c-0-components-group-eventcarousel-stories" class="badge ok as-toggle">4 stories</label>
+        <label for="c-3-components-group-eventcarousel-props" class="badge ok as-toggle">1 prop type</label>
+        <label for="c-3-components-group-eventcarousel-info" class="badge info as-toggle">1 info</label>
+        <label for="c-3-components-group-eventcarousel-stories" class="badge ok as-toggle">4 stories</label>
         
       </div>
     </div>
@@ -618,10 +922,10 @@
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-0-components-group-eventcarousel-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-0-components-group-eventcarousel-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-3-components-group-eventcarousel-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-3-components-group-eventcarousel-stories" class="tg tg-stories" type="checkbox" hidden />
   
-  <input id="c-0-components-group-eventcarousel-props" class="tg tg-props" type="checkbox" hidden />
+  <input id="c-3-components-group-eventcarousel-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -725,9 +1029,9 @@
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> GroupCard</h2>
       <div class="badges">
-        <label for="c-1-components-group-groupcard-props" class="badge ok as-toggle">1 prop type</label>
-        <label for="c-1-components-group-groupcard-info" class="badge info as-toggle">1 info</label>
-        <label for="c-1-components-group-groupcard-stories" class="badge ok as-toggle">3 stories</label>
+        <label for="c-4-components-group-groupcard-props" class="badge ok as-toggle">1 prop type</label>
+        <label for="c-4-components-group-groupcard-info" class="badge info as-toggle">1 info</label>
+        <label for="c-4-components-group-groupcard-stories" class="badge ok as-toggle">3 stories</label>
         
       </div>
     </div>
@@ -739,10 +1043,10 @@
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-1-components-group-groupcard-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-1-components-group-groupcard-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-4-components-group-groupcard-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-4-components-group-groupcard-stories" class="tg tg-stories" type="checkbox" hidden />
   
-  <input id="c-1-components-group-groupcard-props" class="tg tg-props" type="checkbox" hidden />
+  <input id="c-4-components-group-groupcard-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -828,9 +1132,9 @@
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> GroupHeader</h2>
       <div class="badges">
-        <label for="c-2-components-group-groupheader-props" class="badge ok as-toggle">1 prop type</label>
-        <label for="c-2-components-group-groupheader-info" class="badge info as-toggle">1 info</label>
-        <label for="c-2-components-group-groupheader-stories" class="badge ok as-toggle">5 stories</label>
+        <label for="c-5-components-group-groupheader-props" class="badge ok as-toggle">1 prop type</label>
+        <label for="c-5-components-group-groupheader-info" class="badge info as-toggle">1 info</label>
+        <label for="c-5-components-group-groupheader-stories" class="badge ok as-toggle">5 stories</label>
         
       </div>
     </div>
@@ -842,10 +1146,10 @@
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-2-components-group-groupheader-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-2-components-group-groupheader-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-5-components-group-groupheader-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-5-components-group-groupheader-stories" class="tg tg-stories" type="checkbox" hidden />
   
-  <input id="c-2-components-group-groupheader-props" class="tg tg-props" type="checkbox" hidden />
+  <input id="c-5-components-group-groupheader-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -975,8 +1279,8 @@
       <h2><span class="status-dot dot-ok"></span> GroupPage</h2>
       <div class="badges">
         
-        <label for="c-3-components-group-grouppage-info" class="badge info as-toggle">1 info</label>
-        <label for="c-3-components-group-grouppage-stories" class="badge ok as-toggle">1 story</label>
+        <label for="c-6-components-group-grouppage-info" class="badge info as-toggle">1 info</label>
+        <label for="c-6-components-group-grouppage-stories" class="badge ok as-toggle">1 story</label>
         
       </div>
     </div>
@@ -988,8 +1292,8 @@
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-3-components-group-grouppage-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-3-components-group-grouppage-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-6-components-group-grouppage-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-6-components-group-grouppage-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
 
@@ -1029,6 +1333,332 @@
     &lt;GroupPage /&gt;
   &lt;/div&gt;
 );</code></pre>
+            </div>
+        </div>
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="ParticipantList">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> ParticipantList</h2>
+      <div class="badges">
+        <label for="c-7-components-group-creategroup-participantlist-props" class="badge ok as-toggle">6 prop types</label>
+        <label for="c-7-components-group-creategroup-participantlist-info" class="badge info as-toggle">1 info</label>
+        <label for="c-7-components-group-creategroup-participantlist-stories" class="badge ok as-toggle">3 stories</label>
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/create-group/stories/participant-list.stories.tsx">components-group-creategroup-participantlist · ./src/components/create-group/stories/participant-list.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-7-components-group-creategroup-participantlist-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-7-components-group-creategroup-participantlist-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  <input id="c-7-components-group-creategroup-participantlist-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">6 prop types</span>
+            </div>
+            <pre><code>Component: src/components/create-group/participant-list.tsx::ParticipantList</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: string
+
+onAdd: () =&gt; void
+
+onChangeName: (id: string, name: string) =&gt; void
+
+onImport: () =&gt; void
+
+onRemove: (id: string) =&gt; void
+
+participants: Participant[]</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ParticipantList } from "@sportspay/web";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Participants</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithParticipants = () =&gt; (
+  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
+    &lt;ParticipantList
+      participants={mockParticipants}
+      onChangeName={() =&gt; {}}
+      onRemove={() =&gt; {}}
+      onAdd={() =&gt; {}}
+      onImport={() =&gt; {}}
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Empty</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Empty = () =&gt; (
+  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
+    &lt;ParticipantList
+      participants={[]}
+      onChangeName={() =&gt; {}}
+      onRemove={() =&gt; {}}
+      onAdd={() =&gt; {}}
+      onImport={() =&gt; {}}
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Interactive</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Interactive = () =&gt; &lt;InteractiveTemplate /&gt;;</code></pre>
+            </div>
+        </div>
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="SportSelectionGrid">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> SportSelectionGrid</h2>
+      <div class="badges">
+        <label for="c-8-components-group-creategroup-sportselectiongrid-props" class="badge ok as-toggle">3 prop types</label>
+        <label for="c-8-components-group-creategroup-sportselectiongrid-info" class="badge info as-toggle">1 info</label>
+        <label for="c-8-components-group-creategroup-sportselectiongrid-stories" class="badge ok as-toggle">3 stories</label>
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/create-group/stories/sport-selection-grid.stories.tsx">components-group-creategroup-sportselectiongrid · ./src/components/create-group/stories/sport-selection-grid.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-8-components-group-creategroup-sportselectiongrid-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-8-components-group-creategroup-sportselectiongrid-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  <input id="c-8-components-group-creategroup-sportselectiongrid-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src/components/create-group/sport-selection-grid.tsx::SportSelectionGrid</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: string
+
+onSelect: (sport: Sport) =&gt; void
+
+selected: Sport | null</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { SportSelectionGrid } from "@sportspay/web";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">No Selection</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const NoSelection = () =&gt; (
+  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
+    &lt;SportSelectionGrid selected={null} onSelect={() =&gt; {}} /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Football Selected</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const FootballSelected = () =&gt; (
+  &lt;div className=&quot;w-[380px] p-4 bg-[#f5f6f7]&quot;&gt;
+    &lt;SportSelectionGrid selected=&quot;futebol&quot; onSelect={() =&gt; {}} /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Interactive</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Interactive = () =&gt; &lt;InteractiveTemplate /&gt;;</code></pre>
+            </div>
+        </div>
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="TopAppBar">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> TopAppBar</h2>
+      <div class="badges">
+        <label for="c-9-components-group-creategroup-topappbar-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-9-components-group-creategroup-topappbar-info" class="badge info as-toggle">1 info</label>
+        <label for="c-9-components-group-creategroup-topappbar-stories" class="badge ok as-toggle">2 stories</label>
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/create-group/stories/top-app-bar.stories.tsx">components-group-creategroup-topappbar · ./src/components/create-group/stories/top-app-bar.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-9-components-group-creategroup-topappbar-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-9-components-group-creategroup-topappbar-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  <input id="c-9-components-group-creategroup-topappbar-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src/components/create-group/top-app-bar.tsx::TopAppBar</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>onBack: () =&gt; void
+
+title: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { TopAppBar } from "@sportspay/web";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;TopAppBar title=&quot;Novo Grupo&quot; onBack={() =&gt; console.log(&#39;back&#39;)} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Custom Title</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CustomTitle = () =&gt; &lt;TopAppBar title=&quot;Editar Grupo&quot; onBack={() =&gt; console.log(&#39;back&#39;)} /&gt;;</code></pre>
             </div>
         </div>
     
