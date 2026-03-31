@@ -1,0 +1,104 @@
+import { ArrowLeft, Info, CreditCard } from 'lucide-react-native';
+import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { useCreateGroup } from '@sportspay/shared';
+
+import { BottomActionBar } from './components/BottomActionBar';
+import { CreateEventBanner } from './components/CreateEventBanner';
+import { ParticipantList } from './components/ParticipantList';
+import { SportSelectionGrid } from './components/SportSelectionGrid';
+
+export function CreateGroupPage(): React.JSX.Element {
+  const {
+    formState,
+    setGroupName,
+    setSport,
+    setPixKey,
+    addParticipant,
+    removeParticipant,
+    changeParticipantName,
+  } = useCreateGroup();
+
+  return (
+    <SafeAreaView className="flex-1 bg-surface">
+      <View className="flex-row items-center px-4 py-3">
+        <Pressable
+          disabled
+          className="p-2 rounded-full items-center justify-center opacity-60"
+        >
+          <ArrowLeft size={24} color="#266829" />
+        </Pressable>
+        <Text className="flex-1 text-center pr-10 font-bold text-xl tracking-tight text-primary">
+          Novo Grupo
+        </Text>
+      </View>
+
+      <ScrollView
+        className="flex-1 px-4 pt-6"
+        contentContainerClassName="pb-44"
+        showsVerticalScrollIndicator={false}
+      >
+        <View className="mb-8">
+          <Text className="font-bold text-lg text-on-surface mb-4">
+            Informações Básicas
+          </Text>
+          <View className="gap-6">
+            <View className="gap-2">
+              <Text className="font-semibold text-sm text-on-surface-variant">
+                Nome do grupo
+              </Text>
+              <TextInput
+                className="w-full bg-surface-container-high rounded-xl px-4 py-4 text-on-surface text-base"
+                placeholder="Ex: Fute de quinta"
+                placeholderTextColor="#757778"
+                value={formState.groupName}
+                onChangeText={setGroupName}
+              />
+            </View>
+
+            <SportSelectionGrid
+              selected={formState.sport}
+              onSelect={setSport}
+            />
+          </View>
+        </View>
+
+        <View className="mb-8">
+          <View className="flex-row items-center gap-1 mb-4">
+            <Text className="font-bold text-lg text-on-surface">
+              Chave Pix do caixa
+            </Text>
+            <Info size={18} color="#757778" />
+          </View>
+          <View className="gap-2">
+            <View className="flex-row items-center bg-surface-container-high rounded-xl px-4">
+              <CreditCard size={20} color="#595c5d" />
+              <TextInput
+                className="flex-1 bg-transparent py-4 ml-3 text-on-surface text-base"
+                placeholder="Ex: joao@email.com"
+                placeholderTextColor="#757778"
+                value={formState.pixKey}
+                onChangeText={setPixKey}
+              />
+            </View>
+            <Text className="text-[10px] font-medium text-on-surface-variant pl-1">
+              Será usada para compartilhar cobrança nos eventos
+            </Text>
+          </View>
+        </View>
+
+        <ParticipantList
+          participants={formState.participants}
+          onChangeName={changeParticipantName}
+          onRemove={removeParticipant}
+          onAdd={addParticipant}
+        />
+
+        <CreateEventBanner />
+      </ScrollView>
+
+      <BottomActionBar />
+    </SafeAreaView>
+  );
+}

@@ -1,3 +1,5 @@
+import type { Sport } from '../types';
+
 const MONTHS_PT = [
   'Janeiro',
   'Fevereiro',
@@ -13,7 +15,26 @@ const MONTHS_PT = [
   'Dezembro',
 ];
 
-/** Format centavos to BRL currency string: 5000 → 'R$ 50,00' */
+const SPORT_EMOJI: Record<Sport, string> = {
+  futebol: '⚽',
+  volei: '🏐',
+  basquete: '🏀',
+  outro: '⚙️',
+};
+
+export const getSportEmoji = (sport: Sport): string => {
+  return SPORT_EMOJI[sport] ?? '⚙️';
+};
+
+export const formatEventDate = (iso: string): string => {
+  const date = new Date(iso);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${day}/${month} • ${hours}:${minutes}`;
+};
+
 export const formatCurrency = (centavos: number): string => {
   const reais = centavos / 100;
   return reais.toLocaleString('pt-BR', {

@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 
 export const ConfirmationMessage = ({ name, status }: { name: string; status: string }) => {
   return (

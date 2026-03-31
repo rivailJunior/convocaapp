@@ -1,6 +1,8 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import Share from 'react-native-share';
+
 import { EventShare } from '../event-share';
+
 import type { Group, Event, User } from '@sportspay/shared';
 
 jest.mock('react-native-share', () => ({

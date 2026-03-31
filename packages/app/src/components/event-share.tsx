@@ -1,9 +1,11 @@
 import { Pressable, Text } from 'react-native';
 import Share from 'react-native-share';
+
 import {
   SPORTS,
   EVENT_STATUSES,
 } from '@sportspay/shared';
+
 import type { Group, Event, User } from '@sportspay/shared';
 
 interface EventShareProps {

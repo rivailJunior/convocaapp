@@ -184,3 +184,21 @@ export interface EventResult {
   totalVoters: number;
   createdAt: string;
 }
+
+export interface Participant {
+  id: string;
+  name: string;
+}
+
+export interface GroupDisplayItem extends Group {
+  memberCount: number;
+  nextEvent?: string;
+  paymentStatus?: PaymentStatus;
+}
+
+export interface UpcomingEventItem extends Event {
+  sport: Sport;
+  groupName: string;
+  confirmedCount: number;
+  confirmedAvatars: string[];
+}
