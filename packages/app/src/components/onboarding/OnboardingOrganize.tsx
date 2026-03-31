@@ -1,4 +1,5 @@
 import { Image, Text, View } from 'react-native';
+import { Users } from 'lucide-react-native';
 
 const ILLUSTRATION_URL =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuAI0NM7-tNai8L4atUvf5Q5tTwiwe_HdeSCxoXiVRU4KKNfh_R2ZK8KA8IjzABEK5tieXESbu0lrL8WhlasN83jHt5sT7wvrZZ7AquyXOS-xYJv3b_J0chjh9PUJy0mJ816G9rsYUc6aC97q6eujtJ2GMj2vNFUky1eyuwZmIpXznxMkSQUtJC4cIADK2FIy0ATBV3wwKcoXxaoqekcUE46QizxgrgjdT6uWF9GRYrc8xvOCJy_wxpmxpe2oceAm-xr4yMAQQkbB-kn';
@@ -38,13 +39,15 @@ export function OnboardingOrganize() {
         {/* Feature Micro-card */}
         <View className="bg-surface-container-low rounded-xl p-4 flex-row items-center gap-4">
           <View className="bg-primary p-3 rounded-full items-center justify-center">
-            <Text className="text-secondary-fixed text-2xl">👥</Text>
+            <Text className="text-secondary-fixed text-2xl">
+              <Users size={24} color="#fff" />
+            </Text>
           </View>
           <View>
             <Text className="font-bold text-on-surface text-base">
               Gestão de Grupos
             </Text>
-            <Text className="text-on-surface-variant text-sm">
+            <Text className="text-on-surface-variant text-md">
               Tudo num só lugar
             </Text>
           </View>

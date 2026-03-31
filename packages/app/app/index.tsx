@@ -10,6 +10,7 @@ import {
 import type { ViewToken } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
+import { ChevronRight, ChevronLeft } from 'lucide-react-native';
 
 import {
   PageIndicator,
@@ -75,7 +76,11 @@ export default function OnboardingScreen() {
           onPress={goBack}
           className="items-center justify-center active:opacity-70"
         >
-          <Text className="text-primary text-2xl">←</Text>
+          {
+            activeIndex > 0 && (
+              <ChevronLeft size={36} color="#000" />
+            )
+          }
         </Pressable>
         <Pressable
           onPress={() => {
@@ -83,7 +88,7 @@ export default function OnboardingScreen() {
           }}
           className="active:opacity-70"
         >
-          <Text className="text-on-surface-variant text-sm">Pular</Text>
+          <Text className="text-on-surface-variant text-lg">Pular</Text>
         </Pressable>
       </View>
 
@@ -121,7 +126,7 @@ export default function OnboardingScreen() {
             <Text className="text-white font-bold text-lg">
               {isLastSlide ? 'Começar' : 'Próximo'}
             </Text>
-            <Text className="text-secondary-fixed text-lg">›</Text>
+            <ChevronRight size={24} color="#fff" />
           </Pressable>
         </View>
       </View>

@@ -1,45 +1,6 @@
 import { Text, View } from 'react-native';
-
-function PlayerSlot({ variant }: { variant: 'a' | 'b' }) {
-  const bg = variant === 'a' ? 'bg-primary-fixed' : 'bg-secondary-container';
-  const textColor =
-    variant === 'a' ? 'text-on-primary-container' : 'text-on-secondary-container';
-
-  return (
-    <View className={`flex-1 aspect-square ${bg} rounded-lg items-center justify-center`}>
-      <Text className={`${textColor} text-lg`}>👤</Text>
-    </View>
-  );
-}
-
-function TeamRow({
-  label,
-  level,
-  variant,
-}: {
-  label: string;
-  level: string;
-  variant: 'a' | 'b';
-}) {
-  const labelColor = variant === 'a' ? 'text-primary' : 'text-secondary';
-
-  return (
-    <View className="gap-2">
-      <View className="flex-row justify-between items-center">
-        <Text className={`font-bold text-xs ${labelColor}`}>{label}</Text>
-        <Text className="text-[10px] text-on-surface-variant">
-          Nível: {level}
-        </Text>
-      </View>
-      <View className="flex-row gap-2">
-        <PlayerSlot variant={variant} />
-        <PlayerSlot variant={variant} />
-        <PlayerSlot variant={variant} />
-        <PlayerSlot variant={variant} />
-      </View>
-    </View>
-  );
-}
+import { TeamRow } from './components/TeamRow';
+import { Content } from './components/Content';
 
 export function OnboardingTeams() {
   return (
@@ -76,14 +37,7 @@ export function OnboardingTeams() {
       </View>
 
       {/* Content */}
-      <View className="items-center gap-4 w-full max-w-sm">
-        <Text className="font-extrabold text-3xl tracking-tight text-on-surface leading-tight text-center">
-          Gere times automaticamente
-        </Text>
-        <Text className="text-on-surface-variant text-base leading-relaxed text-center">
-          Sorteio justo por número de times ou jogadores por time
-        </Text>
-      </View>
+      <Content title="Gere times automaticamente" subTitle="Sorteio justo por número de times ou jogadores por time" />
     </View>
   );
 }
