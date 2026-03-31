@@ -190,6 +190,21 @@ export interface Participant {
   name: string;
 }
 
+export type ThemeMode = 'light' | 'dark';
+export type AppLanguage = 'pt-BR' | 'en-US' | 'es-ES';
+
+export interface AppSettings {
+  theme: ThemeMode;
+  language: AppLanguage;
+  version: string;
+}
+
+export interface FutureFeature {
+  id: string;
+  labelKey: string;
+  icon: string;
+}
+
 export interface GroupDisplayItem extends Group {
   memberCount: number;
   nextEvent?: string;
