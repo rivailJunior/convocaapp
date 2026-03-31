@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import type { UpcomingEventItem } from '../types';
 
 const MOCK_UPCOMING_EVENTS: UpcomingEventItem[] = [
@@ -51,13 +49,8 @@ const MOCK_UPCOMING_EVENTS: UpcomingEventItem[] = [
 
 interface UseUpcomingEventsReturn {
   events: UpcomingEventItem[];
-  isLoading: boolean;
 }
 
-export function useUpcomingEvents(
-  _groupIds: string[],
-  _limit = 3,
-): UseUpcomingEventsReturn {
-  const [events] = useState<UpcomingEventItem[]>(MOCK_UPCOMING_EVENTS);
-  return { events, isLoading: false };
+export function useUpcomingEvents(): UseUpcomingEventsReturn {
+  return { events: MOCK_UPCOMING_EVENTS };
 }

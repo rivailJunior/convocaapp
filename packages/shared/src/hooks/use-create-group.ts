@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import type { Participant, Sport } from '../types';
 
@@ -17,25 +17,16 @@ interface UseCreateGroupReturn {
   addParticipant: () => void;
   removeParticipant: (id: string) => void;
   changeParticipantName: (id: string, name: string) => void;
-  isValid: boolean;
-  isSubmitting: boolean;
-  handleSubmit: () => void;
 }
 
-let nextParticipantId = 4;
-
 export function useCreateGroup(): UseCreateGroupReturn {
+  const nextId = useRef(1);
   const [formState, setFormState] = useState<CreateGroupFormState>({
     groupName: '',
     sport: null,
     pixKey: '',
-    participants: [
-      { id: '1', name: '' },
-      { id: '2', name: '' },
-      { id: '3', name: '' },
-    ],
+    participants: [],
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const setGroupName = useCallback((name: string) => {
     setFormState((prev) => ({ ...prev, groupName: name }));
@@ -50,7 +41,7 @@ export function useCreateGroup(): UseCreateGroupReturn {
   }, []);
 
   const addParticipant = useCallback(() => {
-    const id = String(nextParticipantId++);
+    const id = String(nextId.current++);
     setFormState((prev) => ({
       ...prev,
       participants: [...prev.participants, { id, name: '' }],
@@ -73,19 +64,6 @@ export function useCreateGroup(): UseCreateGroupReturn {
     }));
   }, []);
 
-  const isValid =
-    formState.groupName.trim().length > 0 &&
-    formState.sport !== null &&
-    formState.participants.some((p) => p.name.trim().length > 0);
-
-  const handleSubmit = useCallback(() => {
-    if (!isValid || isSubmitting) return;
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-    }, 1000);
-  }, [isValid, isSubmitting]);
-
   return {
     formState,
     setGroupName,
@@ -94,8 +72,5 @@ export function useCreateGroup(): UseCreateGroupReturn {
     addParticipant,
     removeParticipant,
     changeParticipantName,
-    isValid,
-    isSubmitting,
-    handleSubmit,
   };
 }

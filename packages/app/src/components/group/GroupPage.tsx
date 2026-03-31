@@ -11,8 +11,7 @@ import { GroupHeader } from './components/GroupHeader';
 export function GroupPage(): React.JSX.Element {
   const { groups } = useGroups();
   const { summaries } = useTreasurySummary();
-  const groupIds = groups.map((g) => g.id);
-  const { events } = useUpcomingEvents(groupIds);
+  const { events } = useUpcomingEvents();
 
   return (
     <SafeAreaView className="flex-1 bg-surface">

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import type { TreasurySummary } from '../types';
 
 const MOCK_SUMMARIES: TreasurySummary[] = [
@@ -11,10 +9,8 @@ const MOCK_SUMMARIES: TreasurySummary[] = [
 
 interface UseTreasurySummaryReturn {
   summaries: TreasurySummary[];
-  isLoading: boolean;
 }
 
 export function useTreasurySummary(): UseTreasurySummaryReturn {
-  const [summaries] = useState<TreasurySummary[]>(MOCK_SUMMARIES);
-  return { summaries, isLoading: false };
+  return { summaries: MOCK_SUMMARIES };
 }

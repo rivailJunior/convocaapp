@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import type { GroupDisplayItem } from '../types';
 
 const MOCK_GROUPS: GroupDisplayItem[] = [
@@ -66,10 +64,8 @@ const MOCK_GROUPS: GroupDisplayItem[] = [
 
 interface UseGroupsReturn {
   groups: GroupDisplayItem[];
-  isLoading: boolean;
 }
 
 export function useGroups(): UseGroupsReturn {
-  const [groups] = useState<GroupDisplayItem[]>(MOCK_GROUPS);
-  return { groups, isLoading: false };
+  return { groups: MOCK_GROUPS };
 }
