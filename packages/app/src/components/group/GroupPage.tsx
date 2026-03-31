@@ -1,12 +1,12 @@
+import { Plus, Settings } from 'lucide-react-native';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Plus, Settings } from 'lucide-react-native';
 
 import { useGroups, useTreasurySummary, useUpcomingEvents } from '@sportspay/shared';
 
-import { GroupHeader } from './components/GroupHeader';
 import { EventCarousel } from './components/EventCarousel';
 import { GroupCard } from './components/GroupCard';
+import { GroupHeader } from './components/GroupHeader';
 
 export function GroupPage(): React.JSX.Element {
   const { groups } = useGroups();

@@ -1,4 +1,5 @@
 import { Text, View } from 'react-native';
+
 import { PlayerSlot } from './PlayerSlot';
 
 export function TeamRow({

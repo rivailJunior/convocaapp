@@ -1,5 +1,5 @@
-import { Pressable, Text, TextInput, View } from 'react-native';
 import { X, Plus, Upload } from 'lucide-react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 
 import type { Participant } from '@sportspay/shared';
 

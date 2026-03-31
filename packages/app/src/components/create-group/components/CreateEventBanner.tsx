@@ -1,5 +1,5 @@
-import { Pressable, Text, View } from 'react-native';
 import { Calendar, Rocket } from 'lucide-react-native';
+import { Pressable, Text, View } from 'react-native';
 
 export function CreateEventBanner(): React.JSX.Element {
   return (

@@ -1,5 +1,5 @@
-import { Pressable, Text, View } from 'react-native';
 import { X, CheckCircle } from 'lucide-react-native';
+import { Pressable, Text, View } from 'react-native';
 
 export function BottomActionBar(): React.JSX.Element {
   return (

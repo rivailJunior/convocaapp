@@ -1,13 +1,13 @@
+import { ArrowLeft, Info, CreditCard } from 'lucide-react-native';
 import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft, Info, CreditCard } from 'lucide-react-native';
 
 import { useCreateGroup } from '@sportspay/shared';
 
-import { SportSelectionGrid } from './components/SportSelectionGrid';
-import { ParticipantList } from './components/ParticipantList';
-import { CreateEventBanner } from './components/CreateEventBanner';
 import { BottomActionBar } from './components/BottomActionBar';
+import { CreateEventBanner } from './components/CreateEventBanner';
+import { ParticipantList } from './components/ParticipantList';
+import { SportSelectionGrid } from './components/SportSelectionGrid';
 
 export function CreateGroupPage(): React.JSX.Element {
   const {

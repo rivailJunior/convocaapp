@@ -1,5 +1,5 @@
-import { Image, Text, View } from 'react-native';
 import { Users } from 'lucide-react-native';
+import { Image, Text, View } from 'react-native';
 
 const ILLUSTRATION_URL =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuAI0NM7-tNai8L4atUvf5Q5tTwiwe_HdeSCxoXiVRU4KKNfh_R2ZK8KA8IjzABEK5tieXESbu0lrL8WhlasN83jHt5sT7wvrZZ7AquyXOS-xYJv3b_J0chjh9PUJy0mJ816G9rsYUc6aC97q6eujtJ2GMj2vNFUky1eyuwZmIpXznxMkSQUtJC4cIADK2FIy0ATBV3wwKcoXxaoqekcUE46QizxgrgjdT6uWF9GRYrc8xvOCJy_wxpmxpe2oceAm-xr4yMAQQkbB-kn';
