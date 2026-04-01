@@ -43,3 +43,14 @@ export const PAYMENT_METHODS = {
   debit_card: 'Cartão de débito',
   manual: 'Manual',
 } as const;
+
+export const APP_LANGUAGES = {
+  'pt-BR': 'Português (BR)',
+  'en-US': 'English (US)',
+  'es-ES': 'Español',
+} as const;
+
+export const THEME_LABELS = {
+  light: 'Claro',
+  dark: 'Escuro',
+} as const;
