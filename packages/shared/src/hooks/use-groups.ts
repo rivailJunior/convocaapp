@@ -1,0 +1,71 @@
+import type { GroupDisplayItem } from '../types';
+
+const MOCK_GROUPS: GroupDisplayItem[] = [
+  {
+    id: '1',
+    name: 'Pelada dos Amigos',
+    sport: 'futebol',
+    adminId: 'admin-1',
+    memberIds: Array.from({ length: 18 }, (_, i) => `user-${i}`),
+    memberCount: 18,
+    billingMode: 'fixed',
+    dueDay: 10,
+    paymentMethods: ['pix'],
+    inviteCode: 'INV001',
+    plan: 'free',
+    createdAt: '2026-01-01T00:00:00.000Z',
+    nextEvent: 'Quinta-feira, 20h',
+  },
+  {
+    id: '2',
+    name: 'Vôlei de Domingo',
+    sport: 'volei',
+    adminId: 'admin-1',
+    memberIds: Array.from({ length: 12 }, (_, i) => `user-${i}`),
+    memberCount: 12,
+    billingMode: 'fixed',
+    dueDay: 15,
+    paymentMethods: ['pix', 'credit_card'],
+    inviteCode: 'INV002',
+    plan: 'free',
+    createdAt: '2026-01-01T00:00:00.000Z',
+    nextEvent: 'Domingo, 09h30',
+  },
+  {
+    id: '3',
+    name: 'Beach Tennis Club',
+    sport: 'outro',
+    adminId: 'admin-1',
+    memberIds: Array.from({ length: 8 }, (_, i) => `user-${i}`),
+    memberCount: 8,
+    billingMode: 'field_split',
+    dueDay: 5,
+    paymentMethods: ['pix'],
+    inviteCode: 'INV003',
+    plan: 'pro',
+    createdAt: '2026-01-01T00:00:00.000Z',
+    nextEvent: 'Sábado, 16h',
+  },
+  {
+    id: '4',
+    name: 'Basquete 3x3',
+    sport: 'basquete',
+    adminId: 'admin-1',
+    memberIds: Array.from({ length: 24 }, (_, i) => `user-${i}`),
+    memberCount: 24,
+    billingMode: 'fixed',
+    dueDay: 10,
+    paymentMethods: ['pix'],
+    inviteCode: 'INV004',
+    plan: 'free',
+    createdAt: '2026-01-01T00:00:00.000Z',
+  },
+];
+
+interface UseGroupsReturn {
+  groups: GroupDisplayItem[];
+}
+
+export function useGroups(): UseGroupsReturn {
+  return { groups: MOCK_GROUPS };
+}

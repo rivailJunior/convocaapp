@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native';
-import { TeamRow } from './components/TeamRow';
+
 import { Content } from './components/Content';
+import { TeamRow } from './components/TeamRow';
 
 export function OnboardingTeams() {
   return (

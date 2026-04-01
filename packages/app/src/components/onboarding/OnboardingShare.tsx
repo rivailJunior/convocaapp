@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native';
-import { PhoneMockup } from './components/PhoneMock';
+
 import { Content } from './components/Content';
+import { PhoneMockup } from './components/PhoneMock';
 
 export function OnboardingShare() {
   return (
