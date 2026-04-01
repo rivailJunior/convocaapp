@@ -21,7 +21,8 @@ export function DateInput({ value, onChangeText, onPress }: DateInputProps) {
       <Calendar
         size={20}
         color="#266829"
-        style={{ position: 'absolute', right: 12, top: 14, pointerEvents: 'none' }}
+        pointerEvents="none"
+        style={{ position: 'absolute', right: 12, top: 14 }}
       />
     </View>
   );
