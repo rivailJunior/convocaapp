@@ -1,10 +1,11 @@
 import { View } from 'react-native';
 import { FormLabel } from './form-label';
+import type { ReactNode } from 'react';
 
 type FormSectionProps = {
   label: string;
   optional?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function FormSection({ label, optional, children }: FormSectionProps) {
