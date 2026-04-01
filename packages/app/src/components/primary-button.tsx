@@ -1,10 +1,10 @@
-import { Text, TouchableOpacity, View } from 'react-native';
-
+import { Text, TouchableOpacity } from 'react-native';
+import type { ReactNode } from 'react';
 
 type PrimaryButtonProps = {
   label: string;
   onPress: () => void;
-  icon?: React.ReactNode
+  icon?: ReactNode
 };
 
 export function PrimaryButton({ label, onPress, icon}: PrimaryButtonProps) {
