@@ -38,6 +38,7 @@ export interface Group {
   guestFee?: number;
   dueDay: number;
   paymentMethods: PaymentMethod[];
+  pixKey?: string;
   inviteCode: string;
   plan: GroupPlan;
   planExpiresAt?: string;
@@ -216,4 +217,9 @@ export interface UpcomingEventItem extends Event {
   groupName: string;
   confirmedCount: number;
   confirmedAvatars: string[];
+}
+
+export interface GroupEventItem extends Event {
+  confirmedCount: number;
+  hasTeams: boolean;
 }

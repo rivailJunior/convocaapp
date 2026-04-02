@@ -1,4 +1,6 @@
 export { useCreateGroup } from './use-create-group';
+export { useGroupDetails } from './use-group-details';
+export { useGroupEvents } from './use-group-events';
 export { useGroups } from './use-groups';
 export { useSettings } from './use-settings';
 export { useTreasurySummary } from './use-treasury-summary';
