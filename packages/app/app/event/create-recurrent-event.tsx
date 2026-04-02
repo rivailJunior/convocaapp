@@ -128,7 +128,7 @@ export default function CreateRecurrentEventScreen() {
             <CheckCircle
           size={20}
           color="#ffffff"
-          fill="primary"
+          fill="none"
           style={{ marginLeft: 8 }}
         />} />
         </View>
