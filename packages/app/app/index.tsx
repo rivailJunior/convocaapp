@@ -19,6 +19,8 @@ import {
   OnboardingShare,
 } from '../src/components/onboarding';
 
+import { PrimaryButton } from '../src/components/primary-button';
+
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const SLIDES = [
@@ -48,7 +50,7 @@ export default function OnboardingScreen() {
 
   const goToNext = () => {
     if (isLastSlide) {
-      // TODO: navigate to main app / finish onboarding
+      router.push('/event/create-recurrent-event');
       return;
     }
     flatListRef.current?.scrollToIndex({
@@ -83,9 +85,7 @@ export default function OnboardingScreen() {
           }
         </Pressable>
         <Pressable
-          onPress={() => {
-            // TODO: skip onboarding
-          }}
+          onPress={() => router.push('/event/create-recurrent-event')}
           className="active:opacity-70"
         >
           <Text className="text-on-surface-variant text-lg">Pular</Text>
@@ -119,15 +119,11 @@ export default function OnboardingScreen() {
           <PageIndicator total={TOTAL_SLIDES} activeIndex={activeIndex} />
 
           {/* Primary Action Button */}
-          <Pressable
+          <PrimaryButton
+            label={isLastSlide ? 'Começar' : 'Próximo'}
             onPress={goToNext}
-            className="bg-primary w-full py-4 rounded-xl flex-row items-center justify-center gap-2 active:opacity-90"
-          >
-            <Text className="text-white font-bold text-lg">
-              {isLastSlide ? 'Começar' : 'Próximo'}
-            </Text>
-            <ChevronRight size={24} color="#fff" />
-          </Pressable>
+            icon={<ChevronRight size={24} color="#fff" />}
+          />
         </View>
       </View>
     </SafeAreaView>
