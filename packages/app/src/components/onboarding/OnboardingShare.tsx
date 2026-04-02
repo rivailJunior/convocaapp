@@ -9,7 +9,7 @@ export function OnboardingShare() {
       {/* Phone Illustration */}
       <View className="relative w-full aspect-[4/5] items-center justify-center mt-4">
         {/* Background glow */}
-        <View className="absolute inset-0 bg-primary-container/20 rounded-full scale-75" />
+        <View key="background-glow" className="absolute inset-0 bg-primary-container/20 rounded-full scale-75" />
         <PhoneMockup />
         {/* Floating Kinetic Chip */}
         <View className="absolute bottom-10 right-2 bg-secondary-container px-4 py-3 rounded-xl flex-row items-center gap-3">
