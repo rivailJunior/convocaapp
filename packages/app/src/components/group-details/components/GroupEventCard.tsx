@@ -1,19 +1,9 @@
 import { Text, View } from 'react-native';
 
-import { getSportEmoji } from '@sportspay/shared';
+import { formatGroupEventDate, getSportEmoji } from '@sportspay/shared';
 
 import type { GroupEventItem } from '@sportspay/shared';
 import type { Sport } from '@sportspay/shared';
-
-const WEEKDAYS_PT = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-
-function formatGroupEventDate(iso: string): string {
-  const date = new Date(iso);
-  const weekday = WEEKDAYS_PT[date.getDay()];
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  return `${weekday}, ${hours}h${minutes !== '00' ? minutes : ''}`;
-}
 
 interface GroupEventCardProps {
   event: GroupEventItem;

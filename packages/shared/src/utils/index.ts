@@ -58,6 +58,17 @@ export const currentReferenceMonth = (): string => {
   return `${year}-${month}`;
 };
 
+const WEEKDAYS_PT = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+/** Format event date as weekday + time: '2026-01-18T14:00:00.000Z' → 'Sáb, 14h' */
+export const formatGroupEventDate = (iso: string): string => {
+  const date = new Date(iso);
+  const weekday = WEEKDAYS_PT[date.getDay()];
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = date.getMinutes();
+  return `${weekday}, ${hours}h${minutes !== 0 ? String(minutes).padStart(2, '0') : ''}`;
+};
+
 /** Build a WhatsApp deep link with pre-encoded message */
 export const whatsappLink = (phone: string, message: string): string => {
   const cleaned = phone.replace(/\D/g, '');
