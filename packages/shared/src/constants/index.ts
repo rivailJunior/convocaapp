@@ -25,6 +25,8 @@ export const RECURRENCES = {
   once: 'Avulso',
 } as const;
 
+export { TEAM_COLORS, BENCH_COLORS } from './team-colors';
+
 export const ATTENDANCE_STATUSES = {
   confirmed: 'Confirmado',
   declined: 'Recusado',
