@@ -1,4 +1,7 @@
+import { Calendar, CheckCircle2 } from 'lucide-react-native';
 import { Text, View } from 'react-native';
+
+import { colors } from '@sportspay/shared';
 
 import { formatGroupEventDate, getSportEmoji } from '@sportspay/shared';
 
@@ -18,8 +21,8 @@ export function GroupEventCard({ event, sport }: GroupEventCardProps): React.JSX
       <View className="flex-row justify-between items-start">
         <View className="flex-col gap-1 flex-1 mr-3">
           <Text className="font-bold text-on-surface text-base">{event.title}</Text>
-          <View className="flex-row items-center gap-1">
-            <Text className="text-on-surface-variant text-sm">📅</Text>
+          <View className="flex-row items-center gap-1.5">
+            <Calendar size={13} color={colors['on-surface-variant']} />
             <Text className="text-on-surface-variant text-sm font-medium">
               {formatGroupEventDate(event.date)} • {event.venueName}
             </Text>
@@ -27,11 +30,11 @@ export function GroupEventCard({ event, sport }: GroupEventCardProps): React.JSX
         </View>
 
         <View
-          className={`w-10 h-10 rounded-xl items-center justify-center ${
+          className={`w-12 h-12 rounded-2xl items-center justify-center ${
             isActive ? 'bg-primary-container' : 'bg-surface-container-high'
           }`}
         >
-          <Text className="text-xl">{getSportEmoji(sport)}</Text>
+          <Text className="text-2xl">{getSportEmoji(sport)}</Text>
         </View>
       </View>
 
@@ -41,7 +44,7 @@ export function GroupEventCard({ event, sport }: GroupEventCardProps): React.JSX
             <Text className="text-on-primary-container text-xs font-bold">
               Times gerados
             </Text>
-            <Text className="text-on-primary-container text-xs">✓</Text>
+            <CheckCircle2 size={12} color={colors['on-primary-container']} />
           </View>
         )}
         <View className="px-3 py-1 rounded-full bg-surface-container-high">

@@ -1,5 +1,8 @@
 import * as ExpoClipboard from 'expo-clipboard';
+import { Copy } from 'lucide-react-native';
 import { Image, Pressable, Text, View } from 'react-native';
+
+import { colors } from '@sportspay/shared';
 
 import type { GroupDisplayItem } from '@sportspay/shared';
 
@@ -67,23 +70,26 @@ export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element 
         </Text>
 
         {group.pixKey && (
-          <View className="flex-row items-center justify-between">
-            <View className="flex-col gap-0.5">
-              <Text className="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">
-                Chave Pix
-              </Text>
-              <Text className="text-on-surface font-semibold">
-                {group.pixKey}
-              </Text>
+          <>
+            <View className="h-px bg-surface-container-high" />
+            <View className="flex-row items-center justify-between">
+              <View className="flex-col gap-0.5">
+                <Text className="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">
+                  Chave Pix
+                </Text>
+                <Text className="text-on-surface font-semibold">
+                  {group.pixKey}
+                </Text>
+              </View>
+              <Pressable
+                onPress={handleCopyPix}
+                className="bg-surface-container-low p-3 rounded-xl active:bg-surface-container-high"
+                accessibilityLabel="Copiar chave Pix"
+              >
+                <Copy size={18} color={colors.primary} />
+              </Pressable>
             </View>
-            <Pressable
-              onPress={handleCopyPix}
-              className="bg-surface-container-low p-2 rounded-lg active:bg-surface-container-high"
-              accessibilityLabel="Copiar chave Pix"
-            >
-              <Text className="text-primary text-sm font-bold">Copiar</Text>
-            </Pressable>
-          </View>
+          </>
         )}
       </View>
     </View>

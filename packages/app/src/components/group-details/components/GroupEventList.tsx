@@ -1,5 +1,8 @@
 import { useState } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
+
+import { colors } from '@sportspay/shared';
 
 import { GroupEventCard } from './GroupEventCard';
 
@@ -52,9 +55,9 @@ export function GroupEventList({ upcoming, past, sport }: GroupEventListProps): 
                 ? 'Ocultar eventos anteriores'
                 : `Ver eventos anteriores (${past.length})`}
             </Text>
-            <Text className="text-primary text-sm">
-              {isPastExpanded ? '▲' : '▼'}
-            </Text>
+            {isPastExpanded
+              ? <ChevronUp size={16} color={colors.primary} />
+              : <ChevronDown size={16} color={colors.primary} />}
           </Pressable>
         </>
       )}

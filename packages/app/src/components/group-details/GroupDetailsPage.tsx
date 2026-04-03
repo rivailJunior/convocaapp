@@ -1,6 +1,8 @@
 import { router } from 'expo-router';
-import { Plus } from 'lucide-react-native';
+import { ChevronLeft, Pencil, Plus } from 'lucide-react-native';
 import { Pressable, ScrollView, Text, View } from 'react-native';
+
+import { colors } from '@sportspay/shared';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useGroupDetails, useGroupEvents } from '@sportspay/shared';
@@ -33,7 +35,7 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
             className="p-2 rounded-full active:bg-surface-container-high"
             accessibilityLabel="Voltar"
           >
-            <Text className="text-primary text-xl">←</Text>
+            <ChevronLeft size={24} color={colors.primary} />
           </Pressable>
           <Text className="font-bold text-xl text-primary" numberOfLines={1}>
             {group.name}
@@ -44,7 +46,7 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
           className="p-2 rounded-full opacity-60"
           accessibilityLabel="Editar grupo"
         >
-          <Text className="text-primary text-xl">✏️</Text>
+          <Pencil size={20} color={colors.primary} />
         </Pressable>
       </View>
 
