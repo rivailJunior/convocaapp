@@ -7,6 +7,9 @@ export default function GroupDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
   if (typeof id !== 'string') {
+    return null;
+  }
+  if (typeof id !== 'string') {
     return (
       <View className="flex-1 bg-surface items-center justify-center">
         <Text className="text-on-surface-variant">Grupo não encontrado.</Text>
