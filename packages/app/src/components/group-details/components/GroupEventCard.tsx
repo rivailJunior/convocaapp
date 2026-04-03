@@ -1,12 +1,18 @@
-import { Calendar, CheckCircle2 } from 'lucide-react-native';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { Calendar } from 'lucide-react-native';
 import { Text, View } from 'react-native';
 
-import { colors } from '@sportspay/shared';
-
-import { formatGroupEventDate, getSportEmoji } from '@sportspay/shared';
+import { colors, formatGroupEventDate } from '@sportspay/shared';
 
 import type { GroupEventItem } from '@sportspay/shared';
 import type { Sport } from '@sportspay/shared';
+
+const SPORT_ICON: Record<Sport, React.ComponentProps<typeof MaterialCommunityIcons>['name']> = {
+  futebol: 'soccer',
+  volei: 'volleyball',
+  basquete: 'basketball',
+  outro: 'help-circle-outline',
+};
 
 interface GroupEventCardProps {
   event: GroupEventItem;
@@ -34,17 +40,21 @@ export function GroupEventCard({ event, sport }: GroupEventCardProps): React.JSX
             isActive ? 'bg-primary-container' : 'bg-surface-container-high'
           }`}
         >
-          <Text className="text-2xl">{getSportEmoji(sport)}</Text>
+          <MaterialCommunityIcons
+            name={SPORT_ICON[sport]}
+            size={26}
+            color={isActive ? colors['on-primary-container'] : colors['on-surface-variant']}
+          />
         </View>
       </View>
 
       <View className="flex-row flex-wrap gap-2">
         {event.hasTeams && (
           <View className="flex-row items-center gap-1 px-3 py-1 rounded-full bg-primary-container">
-            <Text className="text-on-primary-container text-xs font-bold">
+            <Text className="text-on-primary-container text-xs font-medium">
               Times gerados
             </Text>
-            <CheckCircle2 size={12} color={colors['on-primary-container']} />
+            <MaterialCommunityIcons name="check-circle" size={14} color={colors['on-primary-container']} />
           </View>
         )}
         <View className="px-3 py-1 rounded-full bg-surface-container-high">
