@@ -24,6 +24,10 @@ Thumbs.db
 # turbo
 .turbo/
 
+# expo generated native folders (use prebuild to regenerate)
+packages/app/android/
+packages/app/ios/
+
 # expo
 *.jks
 *.p8
