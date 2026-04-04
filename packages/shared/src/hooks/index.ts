@@ -1,5 +1,7 @@
 export { useRecurrentEventForm } from './use-recurrent-event-form';
 export { useCreateGroup } from './use-create-group';
+export { useGroupDetails } from './use-group-details';
+export { useGroupEvents } from './use-group-events';
 export { useEditTeams } from './use-edit-teams';
 export { useGroups } from './use-groups';
 export { useSettings } from './use-settings';

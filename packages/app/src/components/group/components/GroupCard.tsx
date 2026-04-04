@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { ChevronRight, Users } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
@@ -12,8 +13,8 @@ interface GroupCardProps {
 export function GroupCard({ group }: GroupCardProps): React.JSX.Element {
   return (
     <Pressable
-      disabled
-      className="flex-row items-center gap-4 p-4 bg-surface-container-lowest rounded-xl opacity-90"
+      onPress={() => router.push(`/groups/${group.id}`)}
+      className="flex-row items-center gap-4 p-4 bg-surface-container-lowest rounded-xl active:opacity-80"
     >
       <View className="w-12 h-12 rounded-xl bg-primary-container/20 items-center justify-center">
         <Text className="text-2xl">{getSportEmoji(group.sport)}</Text>

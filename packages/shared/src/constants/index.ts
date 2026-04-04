@@ -26,6 +26,7 @@ export const RECURRENCES = {
 } as const;
 
 export { TEAM_COLORS, BENCH_COLORS } from './team-colors';
+export { colors } from './colors';
 
 export const ATTENDANCE_STATUSES = {
   confirmed: 'Confirmado',
