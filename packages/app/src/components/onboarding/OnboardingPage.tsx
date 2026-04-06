@@ -42,7 +42,7 @@ export const OnboardingPage = () => {
 
   const handleNext = () => {
     if (isLastSlide) {
-      router.push('/event/create-recurrent-event');
+      router.push('/home');
       return;
     }
     flatListRef.current?.scrollToIndex({
@@ -69,10 +69,7 @@ export const OnboardingPage = () => {
         <Pressable onPress={handleBack} className="items-center justify-center active:opacity-70">
           {activeIndex > 0 && <ChevronLeft size={36} color="#000" />}
         </Pressable>
-        <Pressable
-          onPress={() => router.push('/event/create-recurrent-event')}
-          className="active:opacity-70"
-        >
+        <Pressable onPress={() => router.push('/home')} className="active:opacity-70">
           <Text className="text-on-surface-variant text-lg">Pular</Text>
         </Pressable>
       </View>
