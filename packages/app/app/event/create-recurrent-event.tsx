@@ -1,17 +1,19 @@
-import { ScrollView,  TouchableOpacity, View } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
-import { ArrowLeft } from 'lucide-react-native';
-import { useRecurrentEventForm } from '@sportspay/shared';
-import { PageHeader } from '../../src/components/event/page-header';
-import { FormSection } from '../../src/components/event/form-section';
-import { TextInputField } from '../../src/components/event/text-input-field';
-import { DateTimeButton } from '../../src/components/event/date-time-button';
-import { TextInputWithIcon } from '../../src/components/event/text-input-with-icon';
-import { TextAreaField } from '../../src/components/event/text-area-field';
-import { RecurrenceCard } from '../../src/components/event/recurrence-card';
-import { InfoCard } from '../../src/components/event/info-card';
-import { PrimaryButton } from '../../src/components/primary-button';
 import { CheckCircle } from 'lucide-react-native';
+import { ArrowLeft } from 'lucide-react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
+
+import { useRecurrentEventForm } from '@sportspay/shared';
+
+import { DateTimeButton } from '../../src/components/event/date-time-button';
+import { FormSection } from '../../src/components/event/form-section';
+import { InfoCard } from '../../src/components/event/info-card';
+import { PageHeader } from '../../src/components/event/page-header';
+import { RecurrenceCard } from '../../src/components/event/recurrence-card';
+import { TextAreaField } from '../../src/components/event/text-area-field';
+import { TextInputField } from '../../src/components/event/text-input-field';
+import { TextInputWithIcon } from '../../src/components/event/text-input-with-icon';
+import { PrimaryButton } from '../../src/components/primary-button';
 
 export default function CreateRecurrentEventScreen() {
   const router = useRouter();
@@ -19,7 +21,6 @@ export default function CreateRecurrentEventScreen() {
     eventName,
     setEventName,
     dateTime,
-    setDateTime,
     location,
     setLocation,
     notes,
@@ -59,11 +60,14 @@ export default function CreateRecurrentEventScreen() {
             color: '#266829',
           },
           headerLeft: () => (
-            <TouchableOpacity onPress={() => router.back()} className='items-center justify-center w-10 h-10'>
+            <TouchableOpacity
+              onPress={() => router.back()}
+              className="items-center justify-center w-10 h-10"
+            >
               <ArrowLeft size={24} color="#266829" />
             </TouchableOpacity>
           ),
-          
+
           headerStyle: {
             backgroundColor: '#eff1f2',
           },
@@ -124,13 +128,11 @@ export default function CreateRecurrentEventScreen() {
         </ScrollView>
 
         <View className="absolute bottom-0 left-0 right-0 px-4 pb-8 bg-surface/80">
-          <PrimaryButton label="Criar Evento" onPress={handleCreateEvent} icon={
-            <CheckCircle
-          size={20}
-          color="#ffffff"
-          fill="none"
-          style={{ marginLeft: 8 }}
-        />} />
+          <PrimaryButton
+            label="Criar Evento"
+            onPress={handleCreateEvent}
+            icon={<CheckCircle size={20} color="#ffffff" fill="none" style={{ marginLeft: 8 }} />}
+          />
         </View>
       </View>
     </>

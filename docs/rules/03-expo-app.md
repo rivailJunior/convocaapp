@@ -95,3 +95,105 @@ packages/app/
 6. Use NativeWind classes exclusively — no `StyleSheet.create`, no inline styles.
 7. Reference design tokens from `tailwind.config.js` — no raw hex values.
 8. No comments. Name things clearly instead.
+
+## Reference Examples
+
+The Home feature illustrates the three-layer pattern: **Screen → Page → Component**.
+
+### 1. Screen (`app/home/index.tsx`)
+
+```tsx
+import { HomePage } from '@/components/home';
+
+export default function HomeScreen() {
+  return <HomePage />;
+}
+```
+
+- Pure delegation — no logic, no styling, just renders the page component.
+
+### 2. Page Component (`src/components/home/HomePage.tsx`)
+
+```tsx
+import { router } from 'expo-router';
+import { Plus } from 'lucide-react-native';
+import { Pressable, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { useGroups, useTreasurySummary, useUpcomingEvents } from '@sportspay/shared';
+
+import { BalanceCard } from './components/BalanceCard';
+import { HomeHeader } from './components/HomeHeader';
+import { MyGroupsList } from './components/MyGroupsList';
+import { UpcomingMatchesCarousel } from './components/UpcomingMatchesCarousel';
+
+export function HomePage(): React.JSX.Element {
+  const { groups } = useGroups();
+  const { summaries } = useTreasurySummary();
+  const { events } = useUpcomingEvents();
+
+  const handleCreateEvent = () => {
+    router.push('/event/create-recurrent-event');
+  };
+
+  return (
+    <SafeAreaView className="flex-1 bg-surface">
+      <HomeHeader />
+
+      <ScrollView
+        className="flex-1 px-4 pt-4"
+        contentContainerClassName="pb-32 gap-6"
+        showsVerticalScrollIndicator={false}
+      >
+        {summaries.length > 0 && <BalanceCard summaries={summaries} />}
+        <UpcomingMatchesCarousel events={events} />
+        <MyGroupsList groups={groups} />
+      </ScrollView>
+
+      <Pressable
+        className="absolute bottom-28 right-6 w-16 h-16 rounded-2xl bg-primary items-center justify-center"
+        accessibilityLabel="Criar evento"
+        onPress={handleCreateEvent}
+      >
+        <Plus size={28} color="#fff" />
+      </Pressable>
+    </SafeAreaView>
+  );
+}
+```
+
+- Named export — data fetching via shared hooks, composes child components.
+- Owns the layout and orchestrates the feature — this is where hooks live.
+- Event handlers prefixed with `handle`.
+
+### 3. Component (`src/components/home/components/HomeHeader.tsx`)
+
+```tsx
+import { router } from 'expo-router';
+import { Settings } from 'lucide-react-native';
+import { Pressable, Text, View } from 'react-native';
+
+export function HomeHeader(): React.JSX.Element {
+  return (
+    <View className="flex-row justify-between items-center px-4 h-14">
+      <View className="flex-row items-center gap-2">
+        <Text className="text-2xl">⚽</Text>
+        <Text className="text-primary font-extrabold tracking-tight text-xl">
+          SportsPay
+        </Text>
+      </View>
+      <Pressable
+        onPress={() => router.push('/settings')}
+        className="active:opacity-70"
+        accessibilityLabel="Configurações"
+      >
+        <Settings size={24} color="#595c5d" />
+      </Pressable>
+    </View>
+  );
+}
+```
+
+- Named export, single responsibility — renders the home header bar.
+- NativeWind classes only — no `StyleSheet.create`.
+- Semantic accessibility label on interactive elements.

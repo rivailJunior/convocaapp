@@ -1,5 +1,5 @@
-import { OnboardingPage } from '../src/components/onboarding';
+import { OnboardingPage } from '@/components/onboarding';
 
-export default function OnboardingScreen() {
+export default function HomeScreen() {
   return <OnboardingPage />;
 }
