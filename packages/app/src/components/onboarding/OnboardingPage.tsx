@@ -5,6 +5,7 @@ import { Dimensions, FlatList, Pressable, ScrollView, Text, View } from 'react-n
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { PrimaryButton } from '../primary-button';
+import { ROUTES } from '@/navigation';
 
 import { PageIndicator } from './components/PageIndicator';
 import { OnboardingOrganize } from './OnboardingOrganize';
@@ -42,7 +43,7 @@ export const OnboardingPage = () => {
 
   const handleNext = () => {
     if (isLastSlide) {
-      router.push('/home');
+      router.push(ROUTES.HOME);
       return;
     }
     flatListRef.current?.scrollToIndex({
@@ -69,7 +70,7 @@ export const OnboardingPage = () => {
         <Pressable onPress={handleBack} className="items-center justify-center active:opacity-70">
           {activeIndex > 0 && <ChevronLeft size={36} color="#000" />}
         </Pressable>
-        <Pressable onPress={() => router.push('/home')} className="active:opacity-70">
+        <Pressable onPress={() => router.push(ROUTES.HOME)} className="active:opacity-70">
           <Text className="text-on-surface-variant text-lg">Pular</Text>
         </Pressable>
       </View>

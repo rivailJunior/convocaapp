@@ -2,6 +2,8 @@ import { router } from 'expo-router';
 import { Settings } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
+import { ROUTES } from '@/navigation';
+
 export function HomeHeader(): React.JSX.Element {
   return (
     <View className="flex-row justify-between items-center px-4 h-14">
@@ -12,7 +14,7 @@ export function HomeHeader(): React.JSX.Element {
         </Text>
       </View>
       <Pressable
-        onPress={() => router.push('/settings')}
+        onPress={() => router.push(ROUTES.SETTINGS)}
         className="active:opacity-70"
         accessibilityLabel="Configurações"
       >

@@ -28,7 +28,7 @@ export function ParticipantList({
         {participants.map((participant) => (
           <View
             key={participant.id}
-            className="flex-row items-center bg-surface-container-lowest rounded-xl p-1 pr-4"
+            className="flex-row items-center bg-surface-container-lowest rounded-xl p-1 pr-4 shadow-sm"
           >
             <TextInput
               className="flex-1 bg-transparent px-4 py-3 text-on-surface font-medium text-base"
@@ -38,7 +38,7 @@ export function ParticipantList({
               placeholderTextColor="#757778"
             />
             <Pressable
-              className="p-2 rounded-full"
+              className="p-2 rounded-full active:bg-error-container/10"
               onPress={() => onRemove(participant.id)}
             >
               <X size={18} color="#b92902" />
@@ -49,7 +49,7 @@ export function ParticipantList({
 
       <View className="mt-4 gap-3">
         <Pressable
-          className="flex-row items-center justify-center gap-2 py-2"
+          className="flex-row items-center justify-center gap-2 py-2 active:scale-[0.98]"
           onPress={onAdd}
         >
           <Plus size={18} color="#3f5700" />
@@ -59,7 +59,7 @@ export function ParticipantList({
         </Pressable>
         <Pressable
           disabled
-          className="flex-row items-center justify-center gap-2 border-2 border-outline-variant py-3 rounded-xl opacity-60"
+          className="flex-row items-center justify-center gap-2 border-2 border-outline-variant py-3 rounded-xl opacity-60 active:scale-[0.98]"
         >
           <Upload size={18} color="#2c2f30" />
           <Text className="text-on-surface font-bold text-sm">

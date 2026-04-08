@@ -1,24 +1,19 @@
-import { router } from 'expo-router';
-import { Plus } from 'lucide-react-native';
-import { Pressable, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useGroups, useTreasurySummary, useUpcomingEvents } from '@sportspay/shared';
+import { ROUTES } from '@/navigation';
 
 import { BalanceCard } from './components/BalanceCard';
 import { HomeHeader } from './components/HomeHeader';
 import { MyGroupsList } from './components/MyGroupsList';
 import { UpcomingMatchesCarousel } from './components/UpcomingMatchesCarousel';
+import { FloatingAddButton } from '../floating-add-button';
 
 export function HomePage(): React.JSX.Element {
   const { groups } = useGroups();
   const { summaries } = useTreasurySummary();
   const { events } = useUpcomingEvents();
-
-  const handleCreateEvent = () => {
-    router.push('/event/create-recurrent-event');
-    // TODO: Navigate to create event screen
-  };
 
   return (
     <SafeAreaView className="flex-1 bg-surface">
@@ -34,13 +29,7 @@ export function HomePage(): React.JSX.Element {
         <MyGroupsList groups={groups} />
       </ScrollView>
 
-      <Pressable
-        className="absolute bottom-28 right-6 w-16 h-16 rounded-2xl bg-primary items-center justify-center"
-        accessibilityLabel="Criar evento"
-        onPress={handleCreateEvent}
-      >
-        <Plus size={28} color="#fff" />
-      </Pressable>
+      <FloatingAddButton page={ROUTES.GROUP as string} />
     </SafeAreaView>
   );
 }
