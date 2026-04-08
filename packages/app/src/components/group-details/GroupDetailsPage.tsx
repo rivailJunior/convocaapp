@@ -1,6 +1,5 @@
 import { router } from 'expo-router';
-import { ChevronLeft, Pencil, Plus } from 'lucide-react-native';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 

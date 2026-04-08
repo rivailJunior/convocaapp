@@ -34,7 +34,9 @@ const PageContainer = ({
                     },
                 }}
             />
-            <View className="flex-1 bg-surface">{children}</View>
+            <View className="flex-1 bg-surface">
+                {children}
+            </View>
         </>
     );
 };

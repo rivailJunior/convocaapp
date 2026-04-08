@@ -23,15 +23,10 @@ export function CreateGroupPage(): React.JSX.Element {
   } = useCreateGroup();
 
   return (
-
     <PageContainer title="Novo Grupo" onBack={() => router.back()} >
-
-      <ScrollView
-        className="flex-1 px-4 pt-4"
-        contentContainerClassName="pb-44"
-        showsVerticalScrollIndicator={false}
-      >
-        <View className="mb-8">
+      <ScrollView className="flex-1 px-4"
+        contentContainerStyle={{ paddingBottom: 120 }}>
+        <View className='mb-8 pt-8'>
           <Text className="font-bold text-lg text-on-surface mb-4">
             Informações Básicas
           </Text>
@@ -48,13 +43,13 @@ export function CreateGroupPage(): React.JSX.Element {
                 onChangeText={setGroupName}
               />
             </View>
-
-            <SportSelectionGrid
-              selected={formState.sport}
-              onSelect={setSport}
-            />
           </View>
         </View>
+
+        <SportSelectionGrid
+          selected={formState.sport}
+          onSelect={setSport}
+        />
 
         <View className="mb-8">
           <View className="flex-row items-center gap-1 mb-4">

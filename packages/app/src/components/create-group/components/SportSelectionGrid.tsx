@@ -16,7 +16,7 @@ interface SportSelectionGridProps {
 
 export function SportSelectionGrid({ selected, onSelect }: SportSelectionGridProps): React.JSX.Element {
   return (
-    <View className="gap-2">
+    <View className="gap-2 mb-8 flex-1">
       <Text className="font-semibold text-sm text-on-surface-variant">
         Esporte
       </Text>
