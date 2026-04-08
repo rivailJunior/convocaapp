@@ -5,8 +5,7 @@ import { useCallback } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useSettings } from '@sportspay/shared';
-
+import { useLocalSettings } from '../../hooks/use-local-settings';
 import { AboutSection } from './AboutSection';
 import { AppearanceSection } from './AppearanceSection';
 import { DataSection } from './DataSection';
@@ -14,7 +13,7 @@ import { FutureSection } from './FutureSection';
 
 export function SettingsPage(): React.JSX.Element {
   const appVersion = Constants.expoConfig?.version ?? '1.0.0';
-  const { settings, setTheme, setLanguage } = useSettings(appVersion);
+  const { settings, setTheme, setLanguage } = useLocalSettings(appVersion);
 
   const handleLanguagePress = useCallback(() => {
     const nextLanguage =
