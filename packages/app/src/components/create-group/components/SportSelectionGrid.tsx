@@ -16,17 +16,17 @@ interface SportSelectionGridProps {
 
 export function SportSelectionGrid({ selected, onSelect }: SportSelectionGridProps): React.JSX.Element {
   return (
-    <View className="gap-2 mb-8 flex-1">
+    <View className="gap-2 mb-8">
       <Text className="font-semibold text-sm text-on-surface-variant">
         Esporte
       </Text>
-      <View className="flex-row flex-wrap gap-4">
+      <View className="flex-row flex-wrap justify-between gap-y-4">
         {SPORT_OPTIONS.map((option) => {
           const isSelected = selected === option.value;
           return (
             <Pressable
               key={option.value}
-              className={`flex-1 min-w-[40%] border-2 rounded-xl p-4 items-center justify-center ${
+              className={`w-[48%] h-[100px] border-2 rounded-xl p-4 items-center justify-center ${
                 isSelected
                   ? 'border-primary bg-primary-container/20'
                   : 'border-transparent bg-surface-container-lowest'
