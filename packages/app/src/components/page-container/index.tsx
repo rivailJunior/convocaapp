@@ -1,3 +1,4 @@
+import React from 'react';
 import { Stack } from 'expo-router';
 import { TouchableOpacity, View } from 'react-native';
 import { ArrowLeft } from 'lucide-react-native';
@@ -24,7 +25,12 @@ const PageContainer = ({
                         color: '#266829',
                     },
                     headerLeft: () => (
-                        <TouchableOpacity onPress={onBack} className="items-center justify-center w-10 h-10">
+                        <TouchableOpacity
+                            onPress={onBack}
+                            className="items-center justify-center w-10 h-10"
+                            accessibilityLabel="Voltar"
+                            accessibilityRole="button"
+                        >
                             <ArrowLeft size={24} color="#266829" />
                         </TouchableOpacity>
                     ),

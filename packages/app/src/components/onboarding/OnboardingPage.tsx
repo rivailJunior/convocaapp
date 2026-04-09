@@ -4,9 +4,9 @@ import { useCallback, useRef, useState } from 'react';
 import { Dimensions, FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { PrimaryButton } from '../primary-button';
 import { ROUTES } from '@/navigation';
 
+import { PrimaryButton } from '../primary-button';
 import { PageIndicator } from './components/PageIndicator';
 import { OnboardingOrganize } from './OnboardingOrganize';
 import { OnboardingShare } from './OnboardingShare';

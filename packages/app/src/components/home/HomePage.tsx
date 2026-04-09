@@ -1,8 +1,9 @@
 import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useGroups, useTreasurySummary, useUpcomingEvents } from '@sportspay/shared';
 import { ROUTES } from '@/navigation';
+
+import { useGroups, useTreasurySummary, useUpcomingEvents } from '@sportspay/shared';
 
 import { BalanceCard } from './components/BalanceCard';
 import { HomeHeader } from './components/HomeHeader';

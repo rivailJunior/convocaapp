@@ -8,7 +8,7 @@ import { BottomActionBar } from './components/BottomActionBar';
 import { CreateEventBanner } from './components/CreateEventBanner';
 import { ParticipantList } from './components/ParticipantList';
 import { SportSelectionGrid } from './components/SportSelectionGrid';
-import { router, Stack } from 'expo-router';
+import { router } from 'expo-router';
 import { PageContainer } from '../page-container';
 
 export function CreateGroupPage(): React.JSX.Element {

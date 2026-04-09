@@ -1,12 +1,12 @@
 import { Plus } from 'lucide-react-native';
 import { Pressable } from 'react-native';
-import { router } from 'expo-router';
+import { router, type Href } from 'expo-router';
 
 
 
-export function FloatingAddButton({ page }: { page: string }) {
+export function FloatingAddButton({ page }: { page: Href }) {
     const handleCreateEvent = () => {
-        router.push(page as any);
+        router.push(page);
     };
     return (
         <Pressable

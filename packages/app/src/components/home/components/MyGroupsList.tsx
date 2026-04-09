@@ -3,9 +3,9 @@ import { ChevronRight, Users } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
 import { getSportEmoji } from '@sportspay/shared';
-import { ROUTES, createRoutes } from '@/navigation';
-
 import type { GroupDisplayItem } from '@sportspay/shared';
+
+import { createRoutes } from '@/navigation';
 
 interface MyGroupsListProps {
   groups: GroupDisplayItem[];
