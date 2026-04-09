@@ -3,8 +3,9 @@ import { ChevronRight, Users } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
 import { getSportEmoji } from '@sportspay/shared';
-
 import type { GroupDisplayItem } from '@sportspay/shared';
+
+import { createRoutes } from '@/navigation';
 
 interface MyGroupsListProps {
   groups: GroupDisplayItem[];
@@ -27,7 +28,7 @@ export function MyGroupsList({ groups }: MyGroupsListProps): React.JSX.Element {
         groups.map((group) => (
           <Pressable
             key={group.id}
-            onPress={() => router.push(`/groups/${group.id}`)}
+            onPress={() => router.push(createRoutes.GROUPS_DETAIL(group.id))}
             className="flex-row items-center gap-4 p-4 bg-surface-container-lowest rounded-xl active:opacity-80"
           >
             <View className="w-12 h-12 rounded-xl bg-primary-container/20 items-center justify-center">
