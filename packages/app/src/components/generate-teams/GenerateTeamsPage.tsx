@@ -53,14 +53,15 @@ export function GenerateTeamsPage(): React.JSX.Element {
           onChangeValue={setValue}
         />
 
-        {mode === 'manual' ? (
+        <DrawButton disabled={!canDraw} onPress={draw} />
+
+        {mode === 'manual' && (
           <View className="bg-surface-container-lowest p-6 rounded-xl mb-6 shadow-sm items-center">
             <Text className="text-on-surface-variant text-sm font-medium text-center">
-              No modo manual, arraste os jogadores entre os times após gerar.
+              Os times serão gerados aleatoriamente. Depois, você poderá
+              reorganizar os jogadores entre os times.
             </Text>
           </View>
-        ) : (
-          <DrawButton disabled={!canDraw} onPress={draw} />
         )}
 
         {error && (

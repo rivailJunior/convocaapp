@@ -5,7 +5,6 @@ import type { AttendancePlayer } from '@sportspay/shared';
 type TeamCardProps = {
   name: string;
   players: AttendancePlayer[];
-  borderColor: string;
   bgTint: string;
   textColor: string;
 };
@@ -25,9 +24,9 @@ function getInitials(name: string): string {
   return '';
 }
 
-export function TeamCard({ name, players, borderColor, bgTint, textColor }: TeamCardProps): React.JSX.Element {
+export function TeamCard({ name, players, bgTint, textColor }: TeamCardProps): React.JSX.Element {
   return (
-    <View className={`bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border-l-4 ${borderColor}`}>
+    <View className="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/15">
       <View className={`p-4 flex-row justify-between items-center ${bgTint}`}>
         <Text className={`font-headline font-bold ${textColor}`}>
           {name}

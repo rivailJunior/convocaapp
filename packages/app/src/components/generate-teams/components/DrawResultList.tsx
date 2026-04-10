@@ -10,12 +10,12 @@ type DrawResultListProps = {
 };
 
 const TEAM_STYLES = [
-  { borderColor: 'border-primary', bgTint: 'bg-primary/5', textColor: 'text-primary' },
-  { borderColor: 'border-tertiary', bgTint: 'bg-tertiary/5', textColor: 'text-tertiary' },
-  { borderColor: 'border-error-container', bgTint: 'bg-error-container/5', textColor: 'text-error-container' },
-  { borderColor: 'border-secondary', bgTint: 'bg-secondary/5', textColor: 'text-secondary' },
-  { borderColor: 'border-blue-500', bgTint: 'bg-blue-500/5', textColor: 'text-blue-500' },
-  { borderColor: 'border-purple-500', bgTint: 'bg-purple-500/5', textColor: 'text-purple-500' },
+  { bgTint: 'bg-primary/5', textColor: 'text-primary' },
+  { bgTint: 'bg-tertiary/5', textColor: 'text-tertiary' },
+  { bgTint: 'bg-error-container/5', textColor: 'text-error-container' },
+  { bgTint: 'bg-secondary/5', textColor: 'text-secondary' },
+  { bgTint: 'bg-blue-500/5', textColor: 'text-blue-500' },
+  { bgTint: 'bg-purple-500/5', textColor: 'text-purple-500' },
 ];
 
 export function DrawResultList({ result }: DrawResultListProps): React.JSX.Element {
@@ -31,7 +31,6 @@ export function DrawResultList({ result }: DrawResultListProps): React.JSX.Eleme
             key={team.id}
             name={team.name}
             players={team.players}
-            borderColor={style.borderColor}
             bgTint={style.bgTint}
             textColor={style.textColor}
           />

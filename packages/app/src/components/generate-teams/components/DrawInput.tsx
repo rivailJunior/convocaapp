@@ -10,16 +10,16 @@ type DrawInputProps = {
 const LABEL: Record<string, string> = {
   by_teams: 'Quantos times?',
   by_players: 'Jogadores por time?',
+  manual: 'Quantos times?',
 };
 
 const PLACEHOLDER: Record<string, string> = {
   by_teams: 'Ex: 3',
   by_players: 'Ex: 5',
+  manual: 'Ex: 3',
 };
 
 export function DrawInput({ mode, value, preview, onChangeValue }: DrawInputProps): React.JSX.Element | null {
-  if (mode === 'manual') return null;
-
   return (
     <View className="bg-surface-container-lowest p-6 rounded-xl mb-6 shadow-sm">
       <Text className="text-center font-headline font-bold text-on-surface-variant mb-4">

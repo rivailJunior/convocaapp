@@ -39,7 +39,7 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
   const preview = useMemo(() => {
     if (numericValue < 1 || players.length < 1) return null;
 
-    if (state.mode === 'by_teams') {
+    if (state.mode === 'by_teams' || state.mode === 'manual') {
       if (numericValue < 2) return null;
       if (numericValue > players.length) return null;
       const perTeam = Math.floor(players.length / numericValue);
@@ -59,10 +59,9 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
   }, [state.mode, numericValue, players.length]);
 
   const canDraw = useMemo(() => {
-    if (state.mode === 'manual') return false;
     if (numericValue < 1 || players.length < 4) return false;
 
-    if (state.mode === 'by_teams') {
+    if (state.mode === 'by_teams' || state.mode === 'manual') {
       return numericValue >= 2 && numericValue <= players.length;
     }
 
@@ -82,11 +81,28 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
   }, []);
 
   const draw = useCallback(() => {
-    if (state.mode === 'manual') return;
+    if (!Number.isInteger(numericValue) || numericValue <= 0) {
+      setState((prev) => ({
+        ...prev,
+        result: null,
+        error: 'Informe um número inteiro válido maior que zero.',
+      }));
+      return;
+    }
+
+    if (!canDraw) {
+      setState((prev) => ({
+        ...prev,
+        result: null,
+        error: 'Não é possível sortear com os valores informados.',
+      }));
+      return;
+    }
+
     try {
       const result = generateTeams({
         players,
-        mode: state.mode,
+        mode: state.mode === 'manual' ? 'by_teams' : state.mode,
         value: numericValue,
       });
       setState((prev) => ({ ...prev, result, error: null }));
@@ -94,7 +110,7 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
       const message = err instanceof Error ? err.message : 'Erro ao gerar times';
       setState((prev) => ({ ...prev, result: null, error: message }));
     }
-  }, [players, state.mode, numericValue]);
+  }, [players, state.mode, numericValue, canDraw]);
 
   const redraw = useCallback(() => {
     draw();

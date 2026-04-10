@@ -18,7 +18,7 @@ export function BenchCard({ players }: BenchCardProps): React.JSX.Element | null
   if (players.length === 0) return null;
 
   return (
-    <View className="bg-surface-container rounded-xl overflow-hidden shadow-sm border-l-4 border-outline-variant">
+    <View className="bg-surface-container rounded-xl overflow-hidden shadow-sm border border-outline-variant/15">
       <View className="p-3 bg-surface-container-high flex-row justify-between items-center">
         <Text className="font-headline font-bold text-sm text-on-surface-variant">
           Banco
