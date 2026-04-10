@@ -11,11 +11,18 @@ type TeamCardProps = {
 };
 
 function getInitials(name: string): string {
-  const parts = name.split(' ');
+  const normalizedName = name.trim();
+  const parts = normalizedName.split(/\s+/).filter(Boolean);
+
   if (parts.length >= 2) {
     return `${parts[0]![0]}${parts[parts.length - 1]![0]}`.toUpperCase();
   }
-  return name.slice(0, 2).toUpperCase();
+
+  if (parts.length === 1) {
+    return parts[0]!.slice(0, 2).toUpperCase();
+  }
+
+  return '';
 }
 
 export function TeamCard({ name, players, borderColor, bgTint, textColor }: TeamCardProps): React.JSX.Element {
