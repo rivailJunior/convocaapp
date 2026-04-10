@@ -1,4 +1,5 @@
 import { router } from 'expo-router';
+import { useCallback } from 'react';
 import { ScrollView, Text } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -18,6 +19,7 @@ interface GroupDetailsPageProps {
 export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.Element {
   const { group } = useGroupDetails(groupId);
   const { upcoming, past } = useGroupEvents(groupId);
+  const handleBack = useCallback(() => router.back(), []);
 
   if (!group) {
     return (
@@ -28,7 +30,7 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
   }
 
   return (
-    <PageContainer title={group.name} onBack={() => router.back()}>
+    <PageContainer title={group.name} onBack={handleBack}>
       <ScrollView
         className="flex-1 px-4 pt-6"
         contentContainerClassName="pb-32"

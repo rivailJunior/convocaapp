@@ -23,10 +23,12 @@ export function ModeSelector({ selected, onSelect }: ModeSelectorProps): React.J
             <Pressable
               key={key}
               onPress={() => onSelect(key)}
-              className={`flex-1 py-3 px-4 rounded-full items-center ${isActive ? 'bg-primary shadow-sm' : ''}`}
+              className="flex-1 py-3 px-4 rounded-full items-center"
+              style={isActive ? { backgroundColor: '#266829', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.2, shadowRadius: 1.41, elevation: 2 } : {}}
             >
-              <Text
-                className={`text-sm font-bold ${isActive ? 'text-white' : 'text-on-surface-variant'}`}
+              <Text 
+                className="text-sm font-bold"
+                style={{ color: isActive ? '#d1ffc8' : '#595c5d' }}
               >
                 {label}
               </Text>

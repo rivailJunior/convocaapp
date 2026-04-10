@@ -1,9 +1,9 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import type { AttendancePlayer, TeamDrawMode, TeamDrawResult } from '../types';
 import { generateTeams } from '../utils/team-draw';
 
-type GenerateTeamsMode = TeamDrawMode | 'manual';
+type GenerateTeamsMode = TeamDrawMode;
 
 type GenerateTeamsState = {
   mode: GenerateTeamsMode;
@@ -36,7 +36,7 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
 
   const numericValue = Number(state.value) || 0;
 
-  const preview = useMemo(() => {
+  const preview = (() => {
     if (numericValue < 1 || players.length < 1) return null;
 
     if (state.mode === 'by_teams' || state.mode === 'manual') {
@@ -56,10 +56,11 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
     }
 
     return null;
-  }, [state.mode, numericValue, players.length]);
+  })();
 
-  const canDraw = useMemo(() => {
-    if (numericValue < 1 || players.length < 4) return false;
+  const canDraw = (() => {
+    if (!players || players.length === 0) return false;
+    if (numericValue < 1) return false;
 
     if (state.mode === 'by_teams' || state.mode === 'manual') {
       return numericValue >= 2 && numericValue <= players.length;
@@ -70,17 +71,17 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
     }
 
     return false;
-  }, [state.mode, numericValue, players.length]);
+  })();
 
-  const setMode = useCallback((mode: GenerateTeamsMode) => {
+  const setMode = (mode: GenerateTeamsMode) => {
     setState((prev) => ({ ...prev, mode, value: '', result: null, error: null }));
-  }, []);
+  };
 
-  const setValue = useCallback((value: string) => {
+  const setValue = (value: string) => {
     setState((prev) => ({ ...prev, value, error: null }));
-  }, []);
+  };
 
-  const draw = useCallback(() => {
+  const draw = () => {
     if (!Number.isInteger(numericValue) || numericValue <= 0) {
       setState((prev) => ({
         ...prev,
@@ -110,15 +111,15 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
       const message = err instanceof Error ? err.message : 'Erro ao gerar times';
       setState((prev) => ({ ...prev, result: null, error: message }));
     }
-  }, [players, state.mode, numericValue, canDraw]);
+  };
 
-  const redraw = useCallback(() => {
+  const redraw = () => {
     draw();
-  }, [draw]);
+  };
 
-  const reset = useCallback(() => {
+  const reset = () => {
     setState({ mode: 'by_teams', value: '', result: null, error: null });
-  }, []);
+  };
 
   return {
     mode: state.mode,

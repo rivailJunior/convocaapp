@@ -9,6 +9,8 @@ import { GroupEventCard } from './GroupEventCard';
 import type { GroupEventItem } from '@sportspay/shared';
 import type { Sport } from '@sportspay/shared';
 
+import { router } from 'expo-router';
+
 
 interface GroupEventListProps {
   upcoming: GroupEventItem[];
@@ -32,7 +34,9 @@ export function GroupEventList({ upcoming, past, sport }: GroupEventListProps): 
       ) : (
         <View className="gap-6">
           {upcoming.map((event) => (
-            <GroupEventCard key={event.id} event={event} sport={sport} />
+            <Pressable key={event.id} onPress={() => router.push({ pathname: `/generate-teams/${event.id}`, params: { eventTitle: event.title, sport } } as any)}>
+              <GroupEventCard event={event} sport={sport} />
+            </Pressable>
           ))}
         </View>
       )}
@@ -42,7 +46,9 @@ export function GroupEventList({ upcoming, past, sport }: GroupEventListProps): 
           {isPastExpanded && (
             <View className="gap-6">
               {past.map((event) => (
-                <GroupEventCard key={event.id} event={event} sport={sport} />
+                <Pressable key={event.id} onPress={() => router.push({ pathname: `/generate-teams/${event.id}`, params: { eventTitle: event.title, sport } } as any)}>
+                  <GroupEventCard event={event} sport={sport} />
+                </Pressable>
               ))}
             </View>
           )}
