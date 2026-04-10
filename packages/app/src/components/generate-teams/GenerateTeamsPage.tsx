@@ -1,0 +1,82 @@
+import { ScrollView, Text, View } from 'react-native';
+import { router } from 'expo-router';
+
+import { useGenerateTeams } from '@sportspay/shared';
+
+import { PageContainer } from '../page-container';
+import { DrawButton } from './components/DrawButton';
+import { DrawInput } from './components/DrawInput';
+import { DrawResultList } from './components/DrawResultList';
+import { GenerateTeamsActionBar } from './components/GenerateTeamsActionBar';
+import { ModeSelector } from './components/ModeSelector';
+import { MOCK_PLAYERS } from './components/mock-players';
+
+export function GenerateTeamsPage(): React.JSX.Element {
+  const players = MOCK_PLAYERS;
+
+  const {
+    mode,
+    value,
+    result,
+    error,
+    preview,
+    canDraw,
+    setMode,
+    setValue,
+    draw,
+    redraw,
+  } = useGenerateTeams(players);
+
+  const handleSave = () => {
+    // TODO: implement save logic — POST /api/events/[id]/teams
+  };
+
+  return (
+    <PageContainer title="Gerar Times" onBack={() => router.back()}>
+      <ScrollView
+        className="flex-1 px-4"
+        contentContainerStyle={{ paddingBottom: result ? 120 : 32 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View className="mb-6 px-1 pt-4">
+          <Text className="text-on-surface-variant font-medium text-sm">
+            {players.length} participantes disponíveis
+          </Text>
+        </View>
+
+        <ModeSelector selected={mode} onSelect={setMode} />
+
+        <DrawInput
+          mode={mode}
+          value={value}
+          preview={preview}
+          onChangeValue={setValue}
+        />
+
+        {mode === 'manual' ? (
+          <View className="bg-surface-container-lowest p-6 rounded-xl mb-6 shadow-sm items-center">
+            <Text className="text-on-surface-variant text-sm font-medium text-center">
+              No modo manual, arraste os jogadores entre os times após gerar.
+            </Text>
+          </View>
+        ) : (
+          <DrawButton disabled={!canDraw} onPress={draw} />
+        )}
+
+        {error && (
+          <View className="bg-error-container/10 p-4 rounded-xl mb-6">
+            <Text className="text-error text-sm font-medium text-center">
+              {error}
+            </Text>
+          </View>
+        )}
+
+        {result && <DrawResultList result={result} />}
+      </ScrollView>
+
+      {result && (
+        <GenerateTeamsActionBar onRedraw={redraw} onSave={handleSave} />
+      )}
+    </PageContainer>
+  );
+}
