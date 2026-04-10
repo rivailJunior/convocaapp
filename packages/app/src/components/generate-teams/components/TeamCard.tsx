@@ -33,7 +33,7 @@ export function TeamCard({ name, players, bgTint, textColor }: TeamCardProps): R
         </Text>
         <View className={`px-2 py-1 rounded-full ${bgTint}`}>
           <Text className={`text-[10px] font-bold uppercase ${textColor}`}>
-            {players.length} Jogadores
+            {players.length} {players.length === 1 ? 'Jogador' : 'Jogadores'}
           </Text>
         </View>
       </View>

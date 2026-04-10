@@ -1,5 +1,5 @@
-import { ScrollView, Text, View } from 'react-native';
 import { router } from 'expo-router';
+import { ScrollView, Text, View } from 'react-native';
 
 import { useGenerateTeams } from '@sportspay/shared';
 
@@ -8,8 +8,8 @@ import { DrawButton } from './components/DrawButton';
 import { DrawInput } from './components/DrawInput';
 import { DrawResultList } from './components/DrawResultList';
 import { GenerateTeamsActionBar } from './components/GenerateTeamsActionBar';
-import { ModeSelector } from './components/ModeSelector';
 import { MOCK_PLAYERS } from './components/mock-players';
+import { ModeSelector } from './components/ModeSelector';
 
 export function GenerateTeamsPage(): React.JSX.Element {
   const players = MOCK_PLAYERS;
