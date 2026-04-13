@@ -5,6 +5,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { useEventPlayers, useGenerateTeams } from '@sportspay/shared';
 
 import { PageContainer } from '../page-container';
+
 import { DrawButton } from './components/DrawButton';
 import { DrawInput } from './components/DrawInput';
 import { DrawResultList } from './components/DrawResultList';
@@ -13,28 +14,21 @@ import { ModeSelector } from './components/ModeSelector';
 
 import type { Sport } from '@sportspay/shared';
 
+
 type GenerateTeamsPageProps = {
   eventId: string;
   eventTitle: string;
   sport: Sport;
 };
 
-export function GenerateTeamsPage({ eventId, eventTitle, sport }: GenerateTeamsPageProps): React.JSX.Element {
+export function GenerateTeamsPage({
+  eventId,
+  eventTitle,
+}: GenerateTeamsPageProps): React.JSX.Element {
   const { players } = useEventPlayers(eventId);
 
-  const {
-    mode,
-    value,
-    result,
-    error,
-    preview,
-    canDraw,
-    setMode,
-    setValue,
-    draw,
-    redraw,
-  } = useGenerateTeams(players);
-
+  const { mode, value, result, error, preview, canDraw, setMode, setValue, draw, redraw } =
+    useGenerateTeams(players);
 
   const handleBack = useCallback(() => {
     try {
@@ -43,6 +37,19 @@ export function GenerateTeamsPage({ eventId, eventTitle, sport }: GenerateTeamsP
       console.warn('Navigation error:', error);
     }
   }, []);
+
+  const handleNavigateToShare = () => {
+    if (!result) return;
+
+    router.push({
+      pathname: '/events/[id]/teams/share',
+      params: {
+        id: eventId,
+        eventTitle,
+        result: JSON.stringify(result),
+      },
+    });
+  };
 
   const handleSave = () => {
     // TODO: implement save logic — POST /api/events/[id]/teams
@@ -65,38 +72,33 @@ export function GenerateTeamsPage({ eventId, eventTitle, sport }: GenerateTeamsP
 
         <ModeSelector selected={mode} onSelect={setMode} />
 
-        <DrawInput
-          mode={mode}
-          value={value}
-          preview={preview}
-          onChangeValue={setValue}
-        />
+        <DrawInput mode={mode} value={value} preview={preview} onChangeValue={setValue} />
 
-        <DrawButton disabled={shouldDisble} onPress={draw} />
+        <DrawButton
+          disabled={shouldDisble}
+          onPress={result ? redraw : draw}
+          label={result ? 'Refazer Sorteio' : 'Sortear'}
+        />
 
         {mode === 'manual' && (
           <View className="bg-surface-container-lowest p-6 rounded-xl mb-6 shadow-sm items-center">
             <Text className="text-on-surface-variant text-sm font-medium text-center">
-              Os times serão gerados aleatoriamente. Depois, você poderá
-              reorganizar os jogadores entre os times.
+              Os times serão gerados aleatoriamente. Depois, você poderá reorganizar os jogadores
+              entre os times.
             </Text>
           </View>
         )}
 
         {error && (
           <View className="bg-error-container/10 p-4 rounded-xl mb-6">
-            <Text className="text-error text-sm font-medium text-center">
-              {error}
-            </Text>
+            <Text className="text-error text-sm font-medium text-center">{error}</Text>
           </View>
         )}
 
         {result && <DrawResultList result={result} />}
       </ScrollView>
 
-      {result && (
-        <GenerateTeamsActionBar onRedraw={redraw} onSave={handleSave} />
-      )}
+      {result && <GenerateTeamsActionBar onShare={handleNavigateToShare} onSave={handleSave} />}
     </PageContainer>
   );
 }

@@ -1,8 +1,9 @@
 import { useLocalSearchParams } from 'expo-router';
 
+import type { Sport } from '@sportspay/shared';
+
 import { GenerateTeamsPage } from '@/components/generate-teams/GenerateTeamsPage';
 
-import type { Sport } from '@sportspay/shared';
 
 export default function GenerateTeamsScreen() {
   const { id, eventTitle, sport } = useLocalSearchParams<{
