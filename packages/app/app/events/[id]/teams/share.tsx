@@ -10,9 +10,6 @@ export default function ShareTeamsScreen() {
     result: string;
   }>();
 
-  console.log('event title', eventTitle);
-  console.log('result', result);
-
   const parsedResult: TeamDrawResult | null = (() => {
     try {
       return result ? (JSON.parse(result) as TeamDrawResult) : null;

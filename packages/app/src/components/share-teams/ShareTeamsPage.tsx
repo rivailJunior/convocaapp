@@ -1,10 +1,14 @@
 import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
-import { Copy, Share2 } from 'lucide-react-native';
-import { useCallback, useMemo, useState } from 'react';
+import * as Sharing from 'expo-sharing';
+import { Camera, Copy, MessageCircle } from 'lucide-react-native';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, Share, Text, View } from 'react-native';
+import ViewShot from 'react-native-view-shot';
 
 import { PageContainer } from '../page-container';
+
+import { EventStoryCard } from './EventStoryCard';
 
 import type { TeamDrawResult } from '@sportspay/shared';
 
@@ -48,6 +52,7 @@ const buildShareMessage = (eventTitle: string, result: TeamDrawResult): string =
 
 export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): React.JSX.Element {
   const [copied, setCopied] = useState(false);
+  const storyCardRef = useRef<ViewShot>(null);
 
   const shareMessage = useMemo(() => buildShareMessage(eventTitle, result), [eventTitle, result]);
 
@@ -65,13 +70,27 @@ export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): Rea
     setTimeout(() => setCopied(false), 2000);
   }, [shareMessage]);
 
-  const handleShare = useCallback(async () => {
+  const handleShareWhatsApp = useCallback(async () => {
     try {
       await Share.share({ title: eventTitle, message: shareMessage }, { dialogTitle: eventTitle });
     } catch (error: unknown) {
       if (__DEV__) console.warn('Error sharing', error);
     }
   }, [eventTitle, shareMessage]);
+
+  const handleShareInstagram = useCallback(async () => {
+    try {
+      const uri = await storyCardRef.current?.capture?.();
+      if (!uri) return;
+
+      await Sharing.shareAsync(`file://${uri}`, {
+        mimeType: 'image/png',
+        dialogTitle: eventTitle,
+      });
+    } catch (error: unknown) {
+      if (__DEV__) console.warn('Error sharing to Instagram', error);
+    }
+  }, [eventTitle]);
 
   return (
     <PageContainer title="Compartilhar Times" onBack={handleBack}>
@@ -102,6 +121,20 @@ export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): Rea
               {copied ? 'Copiado!' : 'Copiar Texto'}
             </Text>
           </Pressable>
+        </View>
+
+        {/* Imagem do Evento — visual export for Instagram */}
+        <View className="mb-6">
+          <Text className="font-headline font-bold text-lg text-on-surface mb-1">
+            Imagem do Evento
+          </Text>
+          <Text className="text-sm text-on-surface-variant mb-4">Visual export</Text>
+
+          <View className="items-center">
+            <ViewShot ref={storyCardRef} options={{ format: 'png', quality: 1 }}>
+              <EventStoryCard eventTitle={eventTitle} result={result} />
+            </ViewShot>
+          </View>
         </View>
 
         {/* Teams visual preview */}
@@ -176,18 +209,18 @@ export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): Rea
       {/* Bottom action bar */}
       <View className="absolute bottom-0 left-0 right-0 flex-row items-center gap-3 px-4 pb-8 pt-4 bg-surface/80 rounded-t-[24px] shadow-sm">
         <Pressable
-          onPress={handleCopy}
+          onPress={handleShareWhatsApp}
           className="flex-1 flex-col items-center justify-center gap-1 py-3 rounded-xl bg-primary active:scale-[0.98]"
         >
-          <Copy size={20} color="#fff" />
-          <Text className="text-[11px] font-bold text-white">{copied ? 'Copiado!' : 'Copiar'}</Text>
+          <MessageCircle size={20} color="#fff" />
+          <Text className="text-[11px] font-bold text-white">WhatsApp</Text>
         </Pressable>
         <Pressable
-          onPress={handleShare}
-          className="flex-[1.5] flex-col items-center justify-center gap-1 py-3 rounded-xl bg-primary active:scale-[0.98]"
+          onPress={handleShareInstagram}
+          className="flex-1 flex-col items-center justify-center gap-1 py-3 rounded-xl bg-primary active:scale-[0.98]"
         >
-          <Share2 size={20} color="#fff" />
-          <Text className="text-[11px] font-bold text-white">Compartilhar</Text>
+          <Camera size={20} color="#fff" />
+          <Text className="text-[11px] font-bold text-white">Instagram</Text>
         </Pressable>
       </View>
     </PageContainer>
