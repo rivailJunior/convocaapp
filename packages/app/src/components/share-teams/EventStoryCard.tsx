@@ -3,6 +3,10 @@ import { Text, View } from 'react-native';
 
 import type { TeamDrawResult } from '@sportspay/shared';
 
+// Instagram Stories: 1080×1920 (9:16). Preview scaled to fit on screen.
+const STORY_WIDTH = 320;
+const STORY_HEIGHT = Math.round(STORY_WIDTH * (16 / 9)); // 569
+
 const STORY_CARD_COLORS = {
   GRADIENT_START: '#1B5E20',
   GRADIENT_MID: '#2E7D32',
@@ -31,8 +35,8 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={{
-        width: 360,
-        minHeight: 640,
+        width: STORY_WIDTH,
+        height: STORY_HEIGHT,
         borderRadius: 24,
         padding: 24,
         overflow: 'hidden',
@@ -44,7 +48,7 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: 32,
+          marginBottom: 24,
         }}
       >
         <View
@@ -97,7 +101,7 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
       />
 
       {/* Teams */}
-      <View style={{ gap: 16 }}>
+      <View style={{ flex: 1, gap: 12 }}>
         {result.teams.map((team) => (
           <View
             key={team.id}
@@ -227,7 +231,7 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
       </View>
 
       {/* Footer branding */}
-      <View style={{ alignItems: 'center', marginTop: 24, paddingBottom: 8 }}>
+      <View style={{ alignItems: 'center', marginTop: 16, paddingBottom: 4 }}>
         <Text
           style={{
             color: STORY_CARD_COLORS.WHITE_40,

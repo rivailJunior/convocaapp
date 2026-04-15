@@ -3,6 +3,10 @@ import { Text, View } from 'react-native';
 
 import type { AttendancePlayer, Team } from '@sportspay/shared';
 
+// Instagram Stories: 1080×1920 (9:16). Preview scaled to fit on screen.
+const STORY_WIDTH = 320;
+const STORY_HEIGHT = Math.round(STORY_WIDTH * (16 / 9)); // 569
+
 const STORY_CARD_COLORS = {
   GRADIENT_START: '#1B5E20',
   GRADIENT_MID: '#2E7D32',
@@ -40,8 +44,8 @@ export function TeamStoryCard({
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={{
-        width: 300,
-        minHeight: 400,
+        width: STORY_WIDTH,
+        height: STORY_HEIGHT,
         borderRadius: 24,
         padding: 24,
         overflow: 'hidden',
