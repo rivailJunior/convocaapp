@@ -23,7 +23,11 @@ type EventStoryCardProps = {
 export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): React.JSX.Element {
   return (
     <LinearGradient
-      colors={[STORY_CARD_COLORS.GRADIENT_START, STORY_CARD_COLORS.GRADIENT_MID, STORY_CARD_COLORS.GRADIENT_END]}
+      colors={[
+        STORY_CARD_COLORS.GRADIENT_START,
+        STORY_CARD_COLORS.GRADIENT_MID,
+        STORY_CARD_COLORS.GRADIENT_END,
+      ]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={{
@@ -35,7 +39,14 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
       }}
     >
       {/* Header: badge + icon */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 32,
+        }}
+      >
         <View
           style={{
             backgroundColor: STORY_CARD_COLORS.BADGE_BG,
@@ -44,7 +55,14 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
             borderRadius: 20,
           }}
         >
-          <Text style={{ color: STORY_CARD_COLORS.WHITE, fontSize: 10, fontWeight: '800', letterSpacing: 1.5 }}>
+          <Text
+            style={{
+              color: STORY_CARD_COLORS.WHITE,
+              fontSize: 10,
+              fontWeight: '800',
+              letterSpacing: 1.5,
+            }}
+          >
             CONVOCA EXCLUSIVE
           </Text>
         </View>
@@ -115,7 +133,10 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
             {/* Players */}
             <View style={{ gap: 10 }}>
               {team.players.map((player, playerIndex) => (
-                <View key={player.userId} style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                <View
+                  key={player.userId}
+                  style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}
+                >
                   <View
                     style={{
                       width: 28,
@@ -126,7 +147,9 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
                       justifyContent: 'center',
                     }}
                   >
-                    <Text style={{ color: STORY_CARD_COLORS.WHITE, fontSize: 11, fontWeight: '700' }}>
+                    <Text
+                      style={{ color: STORY_CARD_COLORS.WHITE, fontSize: 11, fontWeight: '700' }}
+                    >
                       {String(playerIndex + 1).padStart(2, '0')}
                     </Text>
                   </View>
@@ -171,7 +194,10 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
             </View>
             <View style={{ gap: 10 }}>
               {result.bench.map((player, i) => (
-                <View key={player.userId} style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                <View
+                  key={player.userId}
+                  style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}
+                >
                   <View
                     style={{
                       width: 28,
@@ -182,11 +208,15 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
                       justifyContent: 'center',
                     }}
                   >
-                    <Text style={{ color: STORY_CARD_COLORS.WHITE_70, fontSize: 11, fontWeight: '700' }}>
+                    <Text
+                      style={{ color: STORY_CARD_COLORS.WHITE_70, fontSize: 11, fontWeight: '700' }}
+                    >
                       {String(i + 1).padStart(2, '0')}
                     </Text>
                   </View>
-                  <Text style={{ color: STORY_CARD_COLORS.WHITE_70, fontSize: 15, fontWeight: '600' }}>
+                  <Text
+                    style={{ color: STORY_CARD_COLORS.WHITE_70, fontSize: 15, fontWeight: '600' }}
+                  >
                     {player.userName}
                   </Text>
                 </View>
@@ -198,7 +228,14 @@ export function EventStoryCard({ eventTitle, result }: EventStoryCardProps): Rea
 
       {/* Footer branding */}
       <View style={{ alignItems: 'center', marginTop: 24, paddingBottom: 8 }}>
-        <Text style={{ color: STORY_CARD_COLORS.WHITE_40, fontSize: 11, fontWeight: '600', letterSpacing: 1 }}>
+        <Text
+          style={{
+            color: STORY_CARD_COLORS.WHITE_40,
+            fontSize: 11,
+            fontWeight: '600',
+            letterSpacing: 1,
+          }}
+        >
           🏟️ Compartilhado via Convoca
         </Text>
       </View>

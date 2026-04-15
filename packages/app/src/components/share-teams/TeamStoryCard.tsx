@@ -1,0 +1,184 @@
+import { LinearGradient } from 'expo-linear-gradient';
+import { Text, View } from 'react-native';
+
+import type { AttendancePlayer, Team } from '@sportspay/shared';
+
+const STORY_CARD_COLORS = {
+  GRADIENT_START: '#1B5E20',
+  GRADIENT_MID: '#2E7D32',
+  GRADIENT_END: '#388E3C',
+  TEAM_CARD_BG: 'rgba(255, 255, 255, 0.12)',
+  PLAYER_NUMBER_BG: 'rgba(255, 255, 255, 0.2)',
+  BADGE_BG: 'rgba(255, 255, 255, 0.15)',
+  WHITE: '#FFFFFF',
+  WHITE_70: 'rgba(255, 255, 255, 0.7)',
+  WHITE_40: 'rgba(255, 255, 255, 0.4)',
+} as const;
+
+type TeamStoryCardProps = {
+  eventTitle: string;
+  team: Team;
+  isBench?: boolean;
+};
+
+export function TeamStoryCard({
+  eventTitle,
+  team,
+  isBench = false,
+}: TeamStoryCardProps): React.JSX.Element {
+  const textColor = isBench ? STORY_CARD_COLORS.WHITE_70 : STORY_CARD_COLORS.WHITE;
+  const dotColor = isBench ? STORY_CARD_COLORS.WHITE_70 : STORY_CARD_COLORS.WHITE;
+  const numberTextColor = isBench ? STORY_CARD_COLORS.WHITE_70 : STORY_CARD_COLORS.WHITE;
+
+  return (
+    <LinearGradient
+      colors={[
+        STORY_CARD_COLORS.GRADIENT_START,
+        STORY_CARD_COLORS.GRADIENT_MID,
+        STORY_CARD_COLORS.GRADIENT_END,
+      ]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={{
+        width: 300,
+        minHeight: 400,
+        borderRadius: 24,
+        padding: 24,
+        overflow: 'hidden',
+      }}
+    >
+      {/* Header: badge + icon */}
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 24,
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: STORY_CARD_COLORS.BADGE_BG,
+            paddingHorizontal: 12,
+            paddingVertical: 6,
+            borderRadius: 20,
+          }}
+        >
+          <Text
+            style={{
+              color: STORY_CARD_COLORS.WHITE,
+              fontSize: 10,
+              fontWeight: '800',
+              letterSpacing: 1.5,
+            }}
+          >
+            CONVOCA EXCLUSIVE
+          </Text>
+        </View>
+        <Text style={{ fontSize: 24 }}>⚽</Text>
+      </View>
+
+      {/* Event title */}
+      <View style={{ alignItems: 'center', marginBottom: 16 }}>
+        <Text
+          style={{
+            color: STORY_CARD_COLORS.WHITE,
+            fontSize: 24,
+            fontWeight: '900',
+            textAlign: 'center',
+            textTransform: 'uppercase',
+            letterSpacing: 2,
+            lineHeight: 30,
+          }}
+        >
+          {eventTitle}
+        </Text>
+      </View>
+
+      {/* Divider */}
+      <View
+        style={{
+          height: 1,
+          backgroundColor: STORY_CARD_COLORS.WHITE_40,
+          marginBottom: 20,
+          marginHorizontal: 24,
+        }}
+      />
+
+      {/* Team block */}
+      <View
+        style={{
+          backgroundColor: STORY_CARD_COLORS.TEAM_CARD_BG,
+          borderRadius: 16,
+          padding: 16,
+          flex: 1,
+        }}
+      >
+        {/* Team name header */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+          <View
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              backgroundColor: dotColor,
+            }}
+          />
+          <Text
+            style={{
+              color: textColor,
+              fontSize: 13,
+              fontWeight: '800',
+              textTransform: 'uppercase',
+              letterSpacing: 2,
+            }}
+          >
+            {team.name}
+          </Text>
+        </View>
+
+        {/* Players */}
+        <View style={{ gap: 10 }}>
+          {team.players.map((player: AttendancePlayer, playerIndex: number) => (
+            <View
+              key={player.userId}
+              style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}
+            >
+              <View
+                style={{
+                  width: 28,
+                  height: 28,
+                  borderRadius: 14,
+                  backgroundColor: STORY_CARD_COLORS.PLAYER_NUMBER_BG,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ color: numberTextColor, fontSize: 11, fontWeight: '700' }}>
+                  {String(playerIndex + 1).padStart(2, '0')}
+                </Text>
+              </View>
+              <Text style={{ color: textColor, fontSize: 15, fontWeight: '600' }}>
+                {player.userName}
+              </Text>
+            </View>
+          ))}
+        </View>
+      </View>
+
+      {/* Footer branding */}
+      <View style={{ alignItems: 'center', marginTop: 20, paddingBottom: 8 }}>
+        <Text
+          style={{
+            color: STORY_CARD_COLORS.WHITE_40,
+            fontSize: 11,
+            fontWeight: '600',
+            letterSpacing: 1,
+          }}
+        >
+          🏟️ Compartilhado via Convoca
+        </Text>
+      </View>
+    </LinearGradient>
+  );
+}

@@ -1,9 +1,9 @@
 import { Text, View } from 'react-native';
 
-import type { TeamDrawResult } from '@sportspay/shared';
-
 import { BenchCard } from './BenchCard';
 import { TeamCard } from './TeamCard';
+
+import type { TeamDrawResult } from '@sportspay/shared';
 
 type DrawResultListProps = {
   result: TeamDrawResult;
@@ -21,9 +21,7 @@ const TEAM_STYLES = [
 export function DrawResultList({ result }: DrawResultListProps): React.JSX.Element {
   return (
     <View className="gap-6">
-      <Text className="font-headline font-bold text-xl px-1">
-        Times Gerados
-      </Text>
+      <Text className="font-headline font-bold text-xl px-1">Times Gerados</Text>
       {result.teams.map((team, index) => {
         const style = TEAM_STYLES[index % TEAM_STYLES.length]!;
         return (

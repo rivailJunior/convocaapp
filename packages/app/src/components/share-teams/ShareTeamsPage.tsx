@@ -1,16 +1,16 @@
 import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
 import * as Sharing from 'expo-sharing';
-import { Camera, Copy, MessageCircle } from 'lucide-react-native';
+import { Camera, Copy, Images, MessageCircle, Share2 } from 'lucide-react-native';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Pressable, ScrollView, Share, Text, View } from 'react-native';
+import { Dimensions, FlatList, Pressable, ScrollView, Share, Text, View } from 'react-native';
 import ViewShot from 'react-native-view-shot';
 
 import { PageContainer } from '../page-container';
 
-import { EventStoryCard } from './EventStoryCard';
+import { TeamStoryCard } from './TeamStoryCard';
 
-import type { TeamDrawResult } from '@sportspay/shared';
+import type { Team, TeamDrawResult } from '@sportspay/shared';
 
 type ShareTeamsPageProps = {
   eventTitle: string;
@@ -50,11 +50,43 @@ const buildShareMessage = (eventTitle: string, result: TeamDrawResult): string =
   return lines.join('\n');
 };
 
+type CarouselItem = {
+  key: string;
+  team: Team;
+  isBench: boolean;
+};
+
+const CARD_WIDTH = 300;
+const CARD_GAP = 16;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SNAP_INTERVAL = CARD_WIDTH + CARD_GAP;
+const HORIZONTAL_PADDING = (SCREEN_WIDTH - CARD_WIDTH) / 2;
+
 export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): React.JSX.Element {
   const [copied, setCopied] = useState(false);
-  const storyCardRef = useRef<ViewShot>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [showShareMenu, setShowShareMenu] = useState(false);
+  const cardRefs = useRef<(ViewShot | null)[]>([]);
 
   const shareMessage = useMemo(() => buildShareMessage(eventTitle, result), [eventTitle, result]);
+
+  const carouselItems = useMemo<CarouselItem[]>(() => {
+    const items: CarouselItem[] = result.teams.map((team) => ({
+      key: team.id,
+      team,
+      isBench: false,
+    }));
+
+    if (result.bench.length > 0) {
+      items.push({
+        key: 'bench',
+        team: { id: 'bench', name: 'Banco', players: result.bench },
+        isBench: true,
+      });
+    }
+
+    return items;
+  }, [result]);
 
   const handleBack = useCallback(() => {
     try {
@@ -78,9 +110,10 @@ export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): Rea
     }
   }, [eventTitle, shareMessage]);
 
-  const handleShareInstagram = useCallback(async () => {
+  const handleShareCurrentCard = useCallback(async () => {
     try {
-      const uri = await storyCardRef.current?.capture?.();
+      const ref = cardRefs.current[activeIndex];
+      const uri = await ref?.capture?.();
       if (!uri) return;
 
       await Sharing.shareAsync(`file://${uri}`, {
@@ -88,19 +121,47 @@ export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): Rea
         dialogTitle: eventTitle,
       });
     } catch (error: unknown) {
-      if (__DEV__) console.warn('Error sharing to Instagram', error);
+      if (__DEV__) console.warn('Error sharing card', error);
+    } finally {
+      setShowShareMenu(false);
+    }
+  }, [eventTitle, activeIndex]);
+
+  const handleShareAllCards = useCallback(async () => {
+    try {
+      const uris: string[] = [];
+      for (const ref of cardRefs.current) {
+        const uri = await ref?.capture?.();
+        if (uri) uris.push(`file://${uri}`);
+      }
+      if (uris.length === 0) return;
+
+      for (const uri of uris) {
+        await Sharing.shareAsync(uri, {
+          mimeType: 'image/png',
+          dialogTitle: eventTitle,
+        });
+      }
+    } catch (error: unknown) {
+      if (__DEV__) console.warn('Error sharing all cards', error);
+    } finally {
+      setShowShareMenu(false);
     }
   }, [eventTitle]);
+
+  const handleSetCardRef = useCallback((index: number, ref: ViewShot | null) => {
+    cardRefs.current[index] = ref;
+  }, []);
 
   return (
     <PageContainer title="Compartilhar Times" onBack={handleBack}>
       <ScrollView
-        className="flex-1 px-4"
+        className="flex-1"
         contentContainerStyle={{ paddingBottom: 140 }}
         showsVerticalScrollIndicator={false}
       >
         {/* WhatsApp text section */}
-        <View className="pt-6 mb-6">
+        <View className="pt-6 mb-6 px-4">
           <Text className="font-headline font-bold text-lg text-on-surface mb-1">
             Texto para WhatsApp
           </Text>
@@ -123,22 +184,55 @@ export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): Rea
           </Pressable>
         </View>
 
-        {/* Imagem do Evento — visual export for Instagram */}
-        <View className="mb-6">
+        {/* Imagem do Evento — horizontal carousel */}
+        <View className="mb-6 px-4">
           <Text className="font-headline font-bold text-lg text-on-surface mb-1">
             Imagem do Evento
           </Text>
-          <Text className="text-sm text-on-surface-variant mb-4">Visual export</Text>
+          <Text className="text-sm text-on-surface-variant mb-4">Deslize para ver cada time</Text>
+        </View>
 
-          <View className="items-center">
-            <ViewShot ref={storyCardRef} options={{ format: 'png', quality: 1 }}>
-              <EventStoryCard eventTitle={eventTitle} result={result} />
-            </ViewShot>
+        <View style={{ marginBottom: 24 }}>
+          <FlatList
+            data={carouselItems}
+            keyExtractor={(item) => item.key}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            snapToInterval={SNAP_INTERVAL}
+            decelerationRate="fast"
+            contentContainerStyle={{
+              paddingHorizontal: HORIZONTAL_PADDING,
+            }}
+            ItemSeparatorComponent={() => <View style={{ width: CARD_GAP }} />}
+            onMomentumScrollEnd={(e) => {
+              const index = Math.round(e.nativeEvent.contentOffset.x / SNAP_INTERVAL);
+              setActiveIndex(Math.max(0, Math.min(index, carouselItems.length - 1)));
+            }}
+            renderItem={({ item, index }) => (
+              <ViewShot
+                ref={(ref) => handleSetCardRef(index, ref)}
+                options={{ format: 'png', quality: 1 }}
+              >
+                <TeamStoryCard eventTitle={eventTitle} team={item.team} isBench={item.isBench} />
+              </ViewShot>
+            )}
+          />
+
+          {/* Dot indicators */}
+          <View className="flex-row justify-center gap-2 mt-4">
+            {carouselItems.map((item, index) => (
+              <View
+                key={item.key}
+                className={`w-2 h-2 rounded-full ${
+                  index === activeIndex ? 'bg-primary' : 'bg-outline-variant/40'
+                }`}
+              />
+            ))}
           </View>
         </View>
 
         {/* Teams visual preview */}
-        <View className="mb-6">
+        <View className="mb-6 px-4">
           <Text className="font-headline font-bold text-lg text-on-surface mb-1">Times</Text>
           <Text className="text-sm text-on-surface-variant mb-4">
             {result.totalPlayers} jogadores em {result.teams.length} times
@@ -207,21 +301,47 @@ export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): Rea
       </ScrollView>
 
       {/* Bottom action bar */}
-      <View className="absolute bottom-0 left-0 right-0 flex-row items-center gap-3 px-4 pb-8 pt-4 bg-surface/80 rounded-t-[24px] shadow-sm">
-        <Pressable
-          onPress={handleShareWhatsApp}
-          className="flex-1 flex-col items-center justify-center gap-1 py-3 rounded-xl bg-primary active:scale-[0.98]"
-        >
-          <MessageCircle size={20} color="#fff" />
-          <Text className="text-[11px] font-bold text-white">WhatsApp</Text>
-        </Pressable>
-        <Pressable
-          onPress={handleShareInstagram}
-          className="flex-1 flex-col items-center justify-center gap-1 py-3 rounded-xl bg-primary active:scale-[0.98]"
-        >
-          <Camera size={20} color="#fff" />
-          <Text className="text-[11px] font-bold text-white">Instagram</Text>
-        </Pressable>
+      <View className="absolute bottom-0 left-0 right-0 px-4 pb-8 pt-4 bg-surface/80 rounded-t-[24px] shadow-sm">
+        {/* Share menu overlay — positioned above the buttons */}
+        {showShareMenu && (
+          <View
+            className="absolute left-4 right-4 bg-surface-container rounded-xl border border-outline-variant/20 overflow-hidden"
+            style={{ bottom: 80 }}
+          >
+            <Pressable
+              onPress={handleShareCurrentCard}
+              className="flex-row items-center gap-3 px-4 py-3.5 active:bg-surface-container-highest"
+            >
+              <Camera size={18} color="#595c5d" />
+              <Text className="text-sm font-semibold text-on-surface">Compartilhar Time Atual</Text>
+            </Pressable>
+            <View className="h-px bg-outline-variant/20" />
+            <Pressable
+              onPress={handleShareAllCards}
+              className="flex-row items-center gap-3 px-4 py-3.5 active:bg-surface-container-highest"
+            >
+              <Images size={18} color="#595c5d" />
+              <Text className="text-sm font-semibold text-on-surface">Compartilhar Todos</Text>
+            </Pressable>
+          </View>
+        )}
+
+        <View className="flex-row items-center gap-3">
+          <Pressable
+            onPress={handleShareWhatsApp}
+            className="flex-1 flex-col items-center justify-center gap-1 py-3 rounded-xl bg-primary active:scale-[0.98]"
+          >
+            <MessageCircle size={20} color="#fff" />
+            <Text className="text-[11px] font-bold text-white">WhatsApp</Text>
+          </Pressable>
+          <Pressable
+            onPress={() => setShowShareMenu((prev) => !prev)}
+            className="flex-1 flex-col items-center justify-center gap-1 py-3 rounded-xl bg-primary active:scale-[0.98]"
+          >
+            <Share2 size={20} color="#fff" />
+            <Text className="text-[11px] font-bold text-white">Compartilhar</Text>
+          </Pressable>
+        </View>
       </View>
     </PageContainer>
   );

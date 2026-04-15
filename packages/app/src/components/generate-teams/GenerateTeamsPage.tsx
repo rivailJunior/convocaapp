@@ -14,7 +14,6 @@ import { ModeSelector } from './components/ModeSelector';
 
 import type { Sport } from '@sportspay/shared';
 
-
 type GenerateTeamsPageProps = {
   eventId: string;
   eventTitle: string;
