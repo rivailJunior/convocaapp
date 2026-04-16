@@ -17,15 +17,6 @@ type ShareTeamsPageProps = {
   result: TeamDrawResult;
 };
 
-const TEAM_COLORS = [
-  { dot: 'bg-primary', label: 'text-primary' },
-  { dot: 'bg-tertiary', label: 'text-tertiary' },
-  { dot: 'bg-error-container', label: 'text-error-container' },
-  { dot: 'bg-secondary', label: 'text-secondary' },
-  { dot: 'bg-blue-500', label: 'text-blue-500' },
-  { dot: 'bg-purple-500', label: 'text-purple-500' },
-];
-
 const buildShareMessage = (eventTitle: string, result: TeamDrawResult): string => {
   const lines: string[] = [`⚽ *${eventTitle}*`, ''];
 
@@ -231,73 +222,6 @@ export function ShareTeamsPage({ eventTitle, result }: ShareTeamsPageProps): Rea
           </View>
         </View>
 
-        {/* Teams visual preview */}
-        <View className="mb-6 px-4">
-          <Text className="font-headline font-bold text-lg text-on-surface mb-1">Times</Text>
-          <Text className="text-sm text-on-surface-variant mb-4">
-            {result.totalPlayers} jogadores em {result.teams.length} times
-          </Text>
-
-          <View className="gap-4">
-            {result.teams.map((team, teamIndex) => {
-              const style = TEAM_COLORS[teamIndex % TEAM_COLORS.length]!;
-              return (
-                <View
-                  key={team.id}
-                  className="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/10"
-                >
-                  <View className="flex-row items-center gap-2 mb-3">
-                    <View className={`w-3 h-3 rounded-full ${style.dot}`} />
-                    <Text
-                      className={`font-headline font-bold text-sm uppercase tracking-widest ${style.label}`}
-                    >
-                      {team.name}
-                    </Text>
-                  </View>
-                  <View className="gap-2.5">
-                    {team.players.map((player, playerIndex) => (
-                      <View key={player.userId} className="flex-row items-center gap-3">
-                        <View className="w-7 h-7 rounded-full bg-surface-container items-center justify-center">
-                          <Text className="text-[10px] font-bold text-on-surface-variant">
-                            {String(playerIndex + 1).padStart(2, '0')}
-                          </Text>
-                        </View>
-                        <Text className="text-sm font-medium text-on-surface">
-                          {player.userName}
-                        </Text>
-                      </View>
-                    ))}
-                  </View>
-                </View>
-              );
-            })}
-
-            {result.bench.length > 0 && (
-              <View className="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/10">
-                <View className="flex-row items-center gap-2 mb-3">
-                  <View className="w-3 h-3 rounded-full bg-outline-variant" />
-                  <Text className="font-headline font-bold text-sm uppercase tracking-widest text-on-surface-variant">
-                    Banco
-                  </Text>
-                </View>
-                <View className="gap-2.5">
-                  {result.bench.map((player, i) => (
-                    <View key={player.userId} className="flex-row items-center gap-3">
-                      <View className="w-7 h-7 rounded-full bg-surface-container items-center justify-center">
-                        <Text className="text-[10px] font-bold text-on-surface-variant">
-                          {String(i + 1).padStart(2, '0')}
-                        </Text>
-                      </View>
-                      <Text className="text-sm font-medium text-on-surface-variant">
-                        {player.userName}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              </View>
-            )}
-          </View>
-        </View>
       </ScrollView>
 
       {/* Bottom action bar */}

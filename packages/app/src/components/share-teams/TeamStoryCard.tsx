@@ -47,7 +47,7 @@ export function TeamStoryCard({
         width: STORY_WIDTH,
         height: STORY_HEIGHT,
         borderRadius: 24,
-        padding: 24,
+        padding: 20,
         overflow: 'hidden',
       }}
     >
@@ -55,9 +55,11 @@ export function TeamStoryCard({
       <View
         style={{
           flexDirection: 'row',
-          justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: 24,
+          marginBottom: 10,
+          width: '100%',
+          justifyContent: 'flex-end',
+          gap: 10,
         }}
       >
         <View
@@ -76,38 +78,38 @@ export function TeamStoryCard({
               letterSpacing: 1.5,
             }}
           >
-            CONVOCA EXCLUSIVE
+            {eventTitle}
           </Text>
         </View>
-        <Text style={{ fontSize: 24 }}>⚽</Text>
+        {/* <Text style={{ fontSize: 24 }}>⚽</Text> */}
       </View>
 
       {/* Event title */}
-      <View style={{ alignItems: 'center', marginBottom: 16 }}>
+      <View style={{ alignItems: 'flex-start', marginBottom: 10, width: '100%' }}>
         <Text
           style={{
             color: STORY_CARD_COLORS.WHITE,
             fontSize: 24,
             fontWeight: '900',
-            textAlign: 'center',
-            textTransform: 'uppercase',
+            textAlign: 'left',
+            textTransform: 'capitalize',
             letterSpacing: 2,
             lineHeight: 30,
           }}
         >
-          {eventTitle}
+          {team.name}
         </Text>
       </View>
 
       {/* Divider */}
-      <View
+      {/* <View
         style={{
           height: 1,
           backgroundColor: STORY_CARD_COLORS.WHITE_40,
           marginBottom: 20,
           marginHorizontal: 24,
         }}
-      />
+      /> */}
 
       {/* Team block */}
       <View
@@ -119,27 +121,27 @@ export function TeamStoryCard({
         }}
       >
         {/* Team name header */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-          <View
-            style={{
-              width: 10,
-              height: 10,
-              borderRadius: 5,
-              backgroundColor: dotColor,
-            }}
-          />
+        {/* <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 8,
+            marginBottom: 12,
+          }}
+        >
+          {' '}
           <Text
             style={{
               color: textColor,
-              fontSize: 13,
+              fontSize: 20,
               fontWeight: '800',
-              textTransform: 'uppercase',
+              textTransform: 'capitalize',
               letterSpacing: 2,
             }}
           >
             {team.name}
           </Text>
-        </View>
+        </View> */}
 
         {/* Players */}
         <View style={{ gap: 10 }}>
@@ -171,7 +173,7 @@ export function TeamStoryCard({
       </View>
 
       {/* Footer branding */}
-      <View style={{ alignItems: 'center', marginTop: 20, paddingBottom: 8 }}>
+      <View style={{ alignItems: 'center', marginTop: 10 }}>
         <Text
           style={{
             color: STORY_CARD_COLORS.WHITE_40,
