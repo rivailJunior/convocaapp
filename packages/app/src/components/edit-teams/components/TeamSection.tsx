@@ -1,8 +1,9 @@
 import { Text, View } from 'react-native';
 
+import { PlayerCard } from './PlayerCard';
+
 import type { User } from '@sportspay/shared';
 
-import { PlayerCard } from './PlayerCard';
 
 interface TeamSectionProps {
   name: string;

@@ -1,16 +1,17 @@
 import { router } from 'expo-router';
 import { useCallback } from 'react';
 import { ScrollView, Text } from 'react-native';
-
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useGroupDetails, useGroupEvents } from '@sportspay/shared';
 
+import { FloatingAddButton } from '../floating-add-button';
+import { PageContainer } from '../page-container';
+
 import { GroupEventList } from './components/GroupEventList';
 import { GroupHeroCard } from './components/GroupHeroCard';
+
 import { ROUTES } from '@/navigation/routes';
-import { PageContainer } from '../page-container';
-import { FloatingAddButton } from '../floating-add-button';
 
 interface GroupDetailsPageProps {
   groupId: string;
@@ -40,7 +41,7 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
         <GroupEventList upcoming={upcoming} past={past} sport={group.sport} />
       </ScrollView>
 
-      <FloatingAddButton page={ROUTES.EVENT_CREATE_RECURRENT as string} />
+      <FloatingAddButton page={ROUTES.EVENT_CREATE_RECURRENT} />
     </PageContainer>
   );
 }

@@ -1,12 +1,13 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
-import Share from 'react-native-share';
+import * as Sharing from 'expo-sharing';
 
 import { EventShare } from '../event-share';
 
 import type { Group, Event, User } from '@sportspay/shared';
 
-jest.mock('react-native-share', () => ({
-  open: jest.fn().mockResolvedValue(undefined),
+jest.mock('expo-sharing', () => ({
+  isAvailableAsync: jest.fn().mockResolvedValue(true),
+  shareAsync: jest.fn().mockResolvedValue(undefined),
 }));
 
 const mockGroup: Group = {
@@ -69,26 +70,25 @@ describe('EventShare', () => {
     expect(screen.getByText('Compartilhar Evento')).toBeTruthy();
   });
 
-  it('calls Share.open with correct title and message on press', async () => {
+  it('calls Sharing.shareAsync with correct title and message on press', async () => {
     render(<EventShare group={mockGroup} event={mockEvent} users={mockUsers} />);
 
     fireEvent.press(screen.getByText('Compartilhar Evento'));
 
     await waitFor(() => {
-      expect(Share.open).toHaveBeenCalledTimes(1);
+      expect(Sharing.shareAsync).toHaveBeenCalledTimes(1);
     });
 
-    const call = (Share.open as jest.Mock).mock.calls[0][0];
-    expect(call.title).toBe('Futebol Quinta — Pelada da Quinta');
-    expect(call.message).toContain('⚽ Pelada da Quinta — Futebol');
-    expect(call.message).toContain('📋 Futebol Quinta');
-    expect(call.message).toContain('📍 Campo Society Central');
-    expect(call.message).toContain('📌 Rua das Flores, 123');
-    expect(call.message).toContain('🔖 Status: Agendado');
-    expect(call.message).toContain('1. João Silva');
-    expect(call.message).toContain('2. Maria Santos');
-    expect(call.message).toContain('👥 Jogadores (2/14):');
-    expect(call.message).toContain('🏟️ Compartilhado via SportsPay');
+    const call = (Sharing.shareAsync as jest.Mock).mock.calls[0][0];
+    expect(call).toContain('Pelada da Quinta - Futebol');
+    expect(call).toContain('Futebol Quinta');
+    expect(call).toContain('Campo Society Central');
+    expect(call).toContain('Rua das Flores, 123');
+    expect(call).toContain('Status: Agendado');
+    expect(call).toContain('1. João Silva');
+    expect(call).toContain('2. Maria Santos');
+    expect(call).toContain('Jogadores (2/14):');
+    expect(call).toContain('Compartilhado via SportsPay');
   });
 
   it('includes billingMode value when present', async () => {
@@ -97,11 +97,11 @@ describe('EventShare', () => {
     fireEvent.press(screen.getByText('Compartilhar Evento'));
 
     await waitFor(() => {
-      expect(Share.open).toHaveBeenCalledTimes(1);
+      expect(Sharing.shareAsync).toHaveBeenCalledTimes(1);
     });
 
-    const call = (Share.open as jest.Mock).mock.calls[0][0];
-    expect(call.message).toContain('💰 Valor: R$ fixed');
+    const call = (Sharing.shareAsync as jest.Mock).mock.calls[0][0];
+    expect(call).toContain('Valor: R$ fixed');
   });
 
   it('shows "Gratuito" when billingMode is falsy', async () => {
@@ -112,11 +112,11 @@ describe('EventShare', () => {
     fireEvent.press(screen.getByText('Compartilhar Evento'));
 
     await waitFor(() => {
-      expect(Share.open).toHaveBeenCalledTimes(1);
+      expect(Sharing.shareAsync).toHaveBeenCalledTimes(1);
     });
 
-    const call = (Share.open as jest.Mock).mock.calls[0][0];
-    expect(call.message).toContain('💰 Valor: Gratuito');
+    const call = (Sharing.shareAsync as jest.Mock).mock.calls[0][0];
+    expect(call).toContain('💰 Valor: Gratuito');
   });
 
   it('omits venue address line when venueAddress is empty', async () => {
@@ -127,11 +127,11 @@ describe('EventShare', () => {
     fireEvent.press(screen.getByText('Compartilhar Evento'));
 
     await waitFor(() => {
-      expect(Share.open).toHaveBeenCalledTimes(1);
+      expect(Sharing.shareAsync).toHaveBeenCalledTimes(1);
     });
 
-    const call = (Share.open as jest.Mock).mock.calls[0][0];
-    expect(call.message).not.toContain('📌');
+    const call = (Sharing.shareAsync as jest.Mock).mock.calls[0][0];
+    expect(call).not.toContain('📌');
   });
 
   it('shows player count without max when maxPlayers is undefined', async () => {
@@ -142,12 +142,12 @@ describe('EventShare', () => {
     fireEvent.press(screen.getByText('Compartilhar Evento'));
 
     await waitFor(() => {
-      expect(Share.open).toHaveBeenCalledTimes(1);
+      expect(Sharing.shareAsync).toHaveBeenCalledTimes(1);
     });
 
-    const call = (Share.open as jest.Mock).mock.calls[0][0];
-    expect(call.message).toContain('👥 Jogadores (2):');
-    expect(call.message).not.toContain('👥 Jogadores (2/');
+    const call = (Sharing.shareAsync as jest.Mock).mock.calls[0][0];
+    expect(call).toContain('👥 Jogadores (2):');
+    expect(call).not.toContain('👥 Jogadores (2/');
   });
 
   it('shows fallback text when users list is empty', async () => {
@@ -156,16 +156,16 @@ describe('EventShare', () => {
     fireEvent.press(screen.getByText('Compartilhar Evento'));
 
     await waitFor(() => {
-      expect(Share.open).toHaveBeenCalledTimes(1);
+      expect(Sharing.shareAsync).toHaveBeenCalledTimes(1);
     });
 
-    const call = (Share.open as jest.Mock).mock.calls[0][0];
-    expect(call.message).toContain('Nenhum jogador na lista.');
-    expect(call.message).toContain('👥 Jogadores (0/14):');
+    const call = (Sharing.shareAsync as jest.Mock).mock.calls[0][0];
+    expect(call).toContain('Nenhum jogador na lista.');
+    expect(call).toContain('👥 Jogadores (0/14):');
   });
 
   it('silently handles user cancellation', async () => {
-    (Share.open as jest.Mock).mockRejectedValueOnce({
+    (Sharing.shareAsync as jest.Mock).mockRejectedValueOnce({
       message: 'User did not share',
     });
 
@@ -174,7 +174,7 @@ describe('EventShare', () => {
     fireEvent.press(screen.getByText('Compartilhar Evento'));
 
     await waitFor(() => {
-      expect(Share.open).toHaveBeenCalledTimes(1);
+      expect(Sharing.shareAsync).toHaveBeenCalledTimes(1);
     });
 
     // Should not throw — component remains rendered
@@ -182,7 +182,7 @@ describe('EventShare', () => {
   });
 
   it('silently handles cancellation via error property', async () => {
-    (Share.open as jest.Mock).mockRejectedValueOnce({
+    (Sharing.shareAsync as jest.Mock).mockRejectedValueOnce({
       error: 'User did not share',
     });
 
@@ -191,7 +191,7 @@ describe('EventShare', () => {
     fireEvent.press(screen.getByText('Compartilhar Evento'));
 
     await waitFor(() => {
-      expect(Share.open).toHaveBeenCalledTimes(1);
+      expect(Sharing.shareAsync).toHaveBeenCalledTimes(1);
     });
 
     expect(screen.getByText('Compartilhar Evento')).toBeTruthy();
@@ -199,7 +199,7 @@ describe('EventShare', () => {
 
   it('logs warning in dev mode for unexpected errors', async () => {
     const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
-    (Share.open as jest.Mock).mockRejectedValueOnce(new Error('Network failed'));
+    (Sharing.shareAsync as jest.Mock).mockRejectedValueOnce(new Error('Network failed'));
 
     render(<EventShare group={mockGroup} event={mockEvent} users={mockUsers} />);
 

@@ -1,10 +1,8 @@
+import * as Clipboard from 'expo-clipboard';
+import * as Sharing from 'expo-sharing';
 import { Pressable, Text } from 'react-native';
-import Share from 'react-native-share';
 
-import {
-  SPORTS,
-  EVENT_STATUSES,
-} from '@sportspay/shared';
+import { SPORTS, EVENT_STATUSES } from '@sportspay/shared';
 
 import type { Group, Event, User } from '@sportspay/shared';
 
@@ -31,9 +29,7 @@ function buildShareMessage(group: Group, event: Event, users: User[]): string {
   const status = EVENT_STATUSES[event.status];
   const dateStr = formatDate(event.date);
 
-  const playerList = users
-    .map((u, i) => `${i + 1}. ${u.name}`)
-    .join('\n');
+  const playerList = users.map((u, i) => `${i + 1}. ${u.name}`).join('\n');
 
   const lines = [
     `⚽ ${group.name} — ${sport}`,
@@ -59,25 +55,15 @@ export function EventShare({ group, event, users }: EventShareProps) {
     const message = buildShareMessage(group, event, users);
 
     try {
-      await Share.open({
-        title: `${event.title} — ${group.name}`,
-        message,
-      });
-    } catch (error: unknown) {
-      // Ignore known user dismissal/cancel cases, but surface unexpected errors (at least in dev).
-      if (error && typeof error === 'object') {
-        const maybeAny = error as { message?: unknown; error?: unknown };
-        const msg =
-          (typeof maybeAny.message === 'string' && maybeAny.message) ||
-          (typeof maybeAny.error === 'string' && maybeAny.error) ||
-          '';
-
-        if (typeof msg === 'string' && msg.includes('User did not share')) {
-          // User cancelled the share sheet — no action needed.
-          return;
-        }
+      const isAvailable = await Sharing.isAvailableAsync();
+      if (!isAvailable) {
+        await Clipboard.setStringAsync(message);
+        // Could show a toast here that message was copied to clipboard
+        return;
       }
 
+      await Sharing.shareAsync(message);
+    } catch (error: unknown) {
       if (__DEV__) {
         // eslint-disable-next-line no-console
         console.warn('Error sharing event', error);
@@ -90,9 +76,7 @@ export function EventShare({ group, event, users }: EventShareProps) {
       onPress={handleShare}
       className="flex-row items-center justify-center rounded-lg bg-green-600 px-4 py-3"
     >
-      <Text className="text-base font-semibold text-white">
-        Compartilhar Evento
-      </Text>
+      <Text className="text-base font-semibold text-white">Compartilhar Evento</Text>
     </Pressable>
   );
 }

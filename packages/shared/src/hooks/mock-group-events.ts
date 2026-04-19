@@ -1,4 +1,4 @@
-import { GroupEventItem } from '../types';
+import type { GroupEventItem } from '../types';
 
 export const MOCK_GROUP_EVENTS: GroupEventItem[] = [
   {

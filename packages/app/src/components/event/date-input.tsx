@@ -1,5 +1,5 @@
-import { TextInput, View } from 'react-native';
 import { Calendar } from 'lucide-react-native';
+import { TextInput, View } from 'react-native';
 
 type DateInputProps = {
   value: string;

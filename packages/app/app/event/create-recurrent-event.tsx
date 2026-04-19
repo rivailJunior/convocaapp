@@ -12,8 +12,8 @@ import { RecurrenceCard } from '../../src/components/event/recurrence-card';
 import { TextAreaField } from '../../src/components/event/text-area-field';
 import { TextInputField } from '../../src/components/event/text-input-field';
 import { TextInputWithIcon } from '../../src/components/event/text-input-with-icon';
-import { PrimaryButton } from '../../src/components/primary-button';
 import { PageContainer } from '../../src/components/page-container';
+import { PrimaryButton } from '../../src/components/primary-button';
 
 export default function CreateRecurrentEventScreen() {
   const router = useRouter();

@@ -4,12 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { TEAM_COLORS, useEditTeams } from '@sportspay/shared';
 
-import type { User } from '@sportspay/shared';
 
 import { BenchSection } from './components/BenchSection';
 import { EditTeamsActionBar } from './components/EditTeamsActionBar';
 import { InstructionBanner } from './components/InstructionBanner';
 import { TeamSection } from './components/TeamSection';
+
+import type { User } from '@sportspay/shared';
 
 interface EditTeamsPageProps {
   teams: Map<string, User[]>;
