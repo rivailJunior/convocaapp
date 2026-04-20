@@ -1,10 +1,11 @@
+
 import * as Clipboard from 'expo-clipboard';
 import * as Sharing from 'expo-sharing';
 import { Pressable, Text } from 'react-native';
 
-import { SPORTS, EVENT_STATUSES } from '@sportspay/shared';
+import { EVENT_STATUSES, SPORTS } from '@sportspay/shared';
 
-import type { Group, Event, User } from '@sportspay/shared';
+import type { Event, Group, User } from '@sportspay/shared';
 
 interface EventShareProps {
   group: Group;
