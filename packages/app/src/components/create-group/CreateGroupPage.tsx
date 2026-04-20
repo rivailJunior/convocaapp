@@ -9,6 +9,7 @@ import { CreateEventBanner } from './components/CreateEventBanner';
 import { ParticipantList } from './components/ParticipantList';
 import { SportSelectionGrid } from './components/SportSelectionGrid';
 import { router } from 'expo-router';
+import { useCallback } from 'react';
 import { PageContainer } from '../page-container';
 
 export function CreateGroupPage(): React.JSX.Element {
@@ -22,8 +23,10 @@ export function CreateGroupPage(): React.JSX.Element {
     changeParticipantName,
   } = useCreateGroup();
 
+  const handleBack = useCallback(() => router.back(), []);
+
   return (
-    <PageContainer title="Novo Grupo" onBack={() => router.back()} >
+    <PageContainer title="Novo Grupo" onBack={handleBack} >
       <ScrollView className="flex-1 px-4"
         contentContainerStyle={{ paddingBottom: 120 }}>
         <View className='mb-8 pt-8'>

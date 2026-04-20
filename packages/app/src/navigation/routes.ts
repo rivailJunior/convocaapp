@@ -7,10 +7,13 @@ export const ROUTES = {
 
 export const createRoutes = {
   GROUPS_DETAIL: (id: string): `/groups/${string}` => `/groups/${id}`,
+  SHARE_TEAMS: (eventId: string): `/events/${string}/teams/share` =>
+    `/events/${eventId}/teams/share`,
 } as const;
 
 export type RouteParams = {
   GROUPS_DETAIL: { id: string };
+  SHARE_TEAMS: { eventId: string };
 };
 
 export type NavigationRoutes = keyof typeof ROUTES;
