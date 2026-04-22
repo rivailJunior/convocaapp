@@ -41,6 +41,7 @@
     "react-native-screens": "~4.16.0",
     "react-native-view-shot": "^4.0.3",
     "zod": "^3.23.8",
+     "expo-sqlite": "^55.0.11",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
