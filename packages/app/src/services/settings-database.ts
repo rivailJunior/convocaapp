@@ -18,8 +18,8 @@ export interface UserSettingsRow {
 
 const DB_NAME = 'sportspay.db';
 
-let dbInstance: SQLite.SQLiteDatabase | null = null;
-let isInitialized = false;
+let dbPromise: Promise<SQLite.SQLiteDatabase> | null = null;
+let initPromise: Promise<void> | null = null;
 
 function validateTheme(theme: string): ThemeMode {
   return VALID_THEMES.includes(theme as ThemeMode) ? (theme as ThemeMode) : DEFAULT_THEME;
@@ -31,47 +31,54 @@ function validateLanguage(language: string): AppLanguage {
     : DEFAULT_LANGUAGE;
 }
 
-function ensureInitialized(): void {
-  if (!isInitialized) {
-    try {
-      const db = getDb();
-      db.execSync(`
-        CREATE TABLE IF NOT EXISTS UserSettings (
-          id INTEGER PRIMARY KEY CHECK (id = 1),
-          theme TEXT NOT NULL DEFAULT '${DEFAULT_THEME}' CHECK (theme IN (${toSqlList(VALID_THEMES)})),
-          language TEXT NOT NULL DEFAULT '${DEFAULT_LANGUAGE}' CHECK (language IN (${toSqlList(VALID_LANGUAGES)})),
-          onboarded INTEGER NOT NULL DEFAULT 0
-        );
-      `);
+async function ensureInitialized(): Promise<void> {
+  if (!initPromise) {
+    initPromise = performInit();
+  }
+  return initPromise;
+}
 
-      // Ensure a single row always exists
-      db.runSync(
-        `INSERT OR IGNORE INTO UserSettings (id, theme, language, onboarded) VALUES (1, '${DEFAULT_THEME}', '${DEFAULT_LANGUAGE}', 0)`,
+async function performInit(): Promise<void> {
+  try {
+    const db = await getDb();
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS UserSettings (
+        id INTEGER PRIMARY KEY CHECK (id = 1),
+        theme TEXT NOT NULL DEFAULT '${DEFAULT_THEME}' CHECK (theme IN (${toSqlList(VALID_THEMES)})),
+        language TEXT NOT NULL DEFAULT '${DEFAULT_LANGUAGE}' CHECK (language IN (${toSqlList(VALID_LANGUAGES)})),
+        onboarded INTEGER NOT NULL DEFAULT 0
       );
+    `);
 
-      isInitialized = true;
-    } catch (error) {
-      console.error('[SettingsDB] Failed to initialize database:', error);
+    // Ensure a single row always exists
+    await db.runAsync(
+      `INSERT OR IGNORE INTO UserSettings (id, theme, language, onboarded) VALUES (1, '${DEFAULT_THEME}', '${DEFAULT_LANGUAGE}', 0)`,
+    );
+  } catch (error) {
+    initPromise = null; // Allow retry on failure
+    console.error('[SettingsDB] Failed to initialize database:', error);
+    throw error;
+  }
+}
+
+async function getDb(): Promise<SQLite.SQLiteDatabase> {
+  if (!dbPromise) {
+    dbPromise = SQLite.openDatabaseAsync(DB_NAME).catch((error) => {
+      dbPromise = null;
       throw error;
-    }
+    });
   }
+  return dbPromise;
 }
 
-function getDb(): SQLite.SQLiteDatabase {
-  if (!dbInstance) {
-    dbInstance = SQLite.openDatabaseSync(DB_NAME);
-  }
-  return dbInstance;
+export async function initSettingsDatabase(): Promise<void> {
+  await ensureInitialized();
 }
 
-export function initSettingsDatabase(): void {
-  ensureInitialized();
-}
-
-export function getSettings(): UserSettingsRow {
-  ensureInitialized();
-  const db = getDb();
-  const row = db.getFirstSync<{
+export async function getSettings(): Promise<UserSettingsRow> {
+  await ensureInitialized();
+  const db = await getDb();
+  const row = await db.getFirstAsync<{
     id: number;
     theme: string;
     language: string;
@@ -90,28 +97,33 @@ export function getSettings(): UserSettingsRow {
   };
 }
 
-export function updateTheme(theme: ThemeMode): void {
-  ensureInitialized();
-  const db = getDb();
-  db.runSync('UPDATE UserSettings SET theme = ? WHERE id = 1', [theme]);
+export async function updateTheme(theme: ThemeMode): Promise<void> {
+  await ensureInitialized();
+  const db = await getDb();
+  await db.runAsync('UPDATE UserSettings SET theme = ? WHERE id = 1', [theme]);
 }
 
-export function updateLanguage(language: AppLanguage): void {
-  ensureInitialized();
-  const db = getDb();
-  db.runSync('UPDATE UserSettings SET language = ? WHERE id = 1', [language]);
+export async function updateLanguage(language: AppLanguage): Promise<void> {
+  await ensureInitialized();
+  const db = await getDb();
+  await db.runAsync('UPDATE UserSettings SET language = ? WHERE id = 1', [language]);
 }
 
-export function updateOnboarded(onboarded: boolean): void {
-  ensureInitialized();
-  const db = getDb();
-  db.runSync('UPDATE UserSettings SET onboarded = ? WHERE id = 1', [onboarded ? 1 : 0]);
+export async function updateOnboarded(onboarded: boolean): Promise<void> {
+  await ensureInitialized();
+  const db = await getDb();
+  await db.runAsync('UPDATE UserSettings SET onboarded = ? WHERE id = 1', [onboarded ? 1 : 0]);
 }
 
-export function isOnboarded(): boolean {
-  ensureInitialized();
-  const db = getDb();
-  const row = db.getFirstSync<{ onboarded: number }>(
+export function _resetForTesting(): void {
+  dbPromise = null;
+  initPromise = null;
+}
+
+export async function isOnboarded(): Promise<boolean> {
+  await ensureInitialized();
+  const db = await getDb();
+  const row = await db.getFirstAsync<{ onboarded: number }>(
     'SELECT onboarded FROM UserSettings WHERE id = 1',
   );
   return row !== null && row.onboarded !== 0;
