@@ -1,7 +1,6 @@
-import { Stack, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { CheckCircle } from 'lucide-react-native';
-import { ArrowLeft } from 'lucide-react-native';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { useRecurrentEventForm } from '@sportspay/shared';
 
@@ -13,6 +12,7 @@ import { RecurrenceCard } from '../../src/components/event/recurrence-card';
 import { TextAreaField } from '../../src/components/event/text-area-field';
 import { TextInputField } from '../../src/components/event/text-input-field';
 import { TextInputWithIcon } from '../../src/components/event/text-input-with-icon';
+import { PageContainer } from '../../src/components/page-container';
 import { PrimaryButton } from '../../src/components/primary-button';
 
 export default function CreateRecurrentEventScreen() {
@@ -48,33 +48,7 @@ export default function CreateRecurrentEventScreen() {
   };
 
   return (
-    <>
-      <Stack.Screen
-        options={{
-          headerShown: true,
-          headerTitle: 'Novo Evento',
-          headerTitleStyle: {
-            fontFamily: 'Plus Jakarta Sans',
-            fontWeight: 'bold',
-            fontSize: 16,
-            color: '#266829',
-          },
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => router.back()}
-              className="items-center justify-center w-10 h-10"
-            >
-              <ArrowLeft size={24} color="#266829" />
-            </TouchableOpacity>
-          ),
-
-          headerStyle: {
-            backgroundColor: '#eff1f2',
-          },
-        }}
-      />
-
-      <View className="flex-1 bg-surface">
+    <PageContainer title="Novo Evento" onBack={() => router.back()}>
         <ScrollView className="flex-1 px-4" contentContainerStyle={{ paddingBottom: 120 }}>
           <PageHeader subtitle="Preencha os detalhes para organizar sua partida." />
 
@@ -134,7 +108,6 @@ export default function CreateRecurrentEventScreen() {
             icon={<CheckCircle size={20} color="#ffffff" fill="none" style={{ marginLeft: 8 }} />}
           />
         </View>
-      </View>
-    </>
+    </PageContainer>
   );
 }

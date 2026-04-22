@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from 'react';
 import { Dimensions, FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+
 import { PrimaryButton } from '../primary-button';
 
 import { PageIndicator } from './components/PageIndicator';
@@ -12,6 +13,8 @@ import { OnboardingShare } from './OnboardingShare';
 import { OnboardingTeams } from './OnboardingTeams';
 
 import type { ViewToken } from 'react-native';
+
+import { ROUTES } from '@/navigation';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -42,7 +45,7 @@ export const OnboardingPage = () => {
 
   const handleNext = () => {
     if (isLastSlide) {
-      router.push('/home');
+      router.push(ROUTES.HOME);
       return;
     }
     flatListRef.current?.scrollToIndex({
@@ -69,7 +72,7 @@ export const OnboardingPage = () => {
         <Pressable onPress={handleBack} className="items-center justify-center active:opacity-70">
           {activeIndex > 0 && <ChevronLeft size={36} color="#000" />}
         </Pressable>
-        <Pressable onPress={() => router.push('/home')} className="active:opacity-70">
+        <Pressable onPress={() => router.push(ROUTES.HOME)} className="active:opacity-70">
           <Text className="text-on-surface-variant text-lg">Pular</Text>
         </Pressable>
       </View>
