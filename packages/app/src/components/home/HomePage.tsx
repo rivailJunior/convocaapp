@@ -1,15 +1,17 @@
 import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { ROUTES } from '@/navigation';
 
 import { useGroups, useTreasurySummary, useUpcomingEvents } from '@sportspay/shared';
+
+import { FloatingAddButton } from '../floating-add-button';
 
 import { BalanceCard } from './components/BalanceCard';
 import { HomeHeader } from './components/HomeHeader';
 import { MyGroupsList } from './components/MyGroupsList';
 import { UpcomingMatchesCarousel } from './components/UpcomingMatchesCarousel';
-import { FloatingAddButton } from '../floating-add-button';
+
+import { ROUTES } from '@/navigation';
 
 export function HomePage(): React.JSX.Element {
   const { groups } = useGroups();
@@ -30,7 +32,7 @@ export function HomePage(): React.JSX.Element {
         <MyGroupsList groups={groups} />
       </ScrollView>
 
-      <FloatingAddButton page={ROUTES.GROUP as string} />
+      <FloatingAddButton page={ROUTES.GROUP} />
     </SafeAreaView>
   );
 }

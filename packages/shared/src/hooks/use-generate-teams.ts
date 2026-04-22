@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import type { AttendancePlayer, TeamDrawMode, TeamDrawResult } from '../types';
 import { generateTeams } from '../utils/team-draw';
+
+import type { AttendancePlayer, TeamDrawMode, TeamDrawResult } from '../types';
 
 type GenerateTeamsMode = TeamDrawMode;
 

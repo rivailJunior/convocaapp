@@ -1,5 +1,5 @@
-import { TextInput, View } from 'react-native';
 import { MapPin } from 'lucide-react-native';
+import { TextInput, View } from 'react-native';
 
 type TextInputWithIconProps = {
   value: string;
@@ -17,11 +17,7 @@ export function TextInputWithIcon({ value, onChangeText, placeholder }: TextInpu
         placeholderTextColor="#abadae"
         className="w-full h-14 px-4 pr-12 rounded-xl bg-surface-container-high text-on-surface font-body"
       />
-      <MapPin
-        size={20}
-        color="#abadae"
-        style={{ position: 'absolute', right: 16, top: 17 }}
-      />
+      <MapPin size={20} color="#abadae" style={{ position: 'absolute', right: 16, top: 17 }} />
     </View>
   );
 }

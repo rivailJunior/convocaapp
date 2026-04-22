@@ -31,7 +31,7 @@ export function TeamStoryCard({
   isBench = false,
 }: TeamStoryCardProps): React.JSX.Element {
   const textColor = isBench ? STORY_CARD_COLORS.WHITE_70 : STORY_CARD_COLORS.WHITE;
-  const dotColor = isBench ? STORY_CARD_COLORS.WHITE_70 : STORY_CARD_COLORS.WHITE;
+  const _dotColor = isBench ? STORY_CARD_COLORS.WHITE_70 : STORY_CARD_COLORS.WHITE;
   const numberTextColor = isBench ? STORY_CARD_COLORS.WHITE_70 : STORY_CARD_COLORS.WHITE;
 
   return (

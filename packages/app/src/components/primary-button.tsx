@@ -1,4 +1,5 @@
 import { Text, TouchableOpacity } from 'react-native';
+
 import type { ReactNode } from 'react';
 
 type PrimaryButtonProps = {

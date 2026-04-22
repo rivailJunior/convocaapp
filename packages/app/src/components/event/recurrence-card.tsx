@@ -1,10 +1,11 @@
-import { Text, View } from 'react-native';
 import { Repeat } from 'lucide-react-native';
-import { ToggleSwitch } from './toggle-switch';
-import { SectionLabel } from './section-label';
-import { FrequencyPicker } from './frequency-picker';
-import { WeekdaySelector } from './weekday-selector';
+import { Text, View } from 'react-native';
+
 import { DateInput } from './date-input';
+import { FrequencyPicker } from './frequency-picker';
+import { SectionLabel } from './section-label';
+import { ToggleSwitch } from './toggle-switch';
+import { WeekdaySelector } from './weekday-selector';
 
 type RecurrenceCardProps = {
   isEnabled: boolean;
@@ -34,9 +35,7 @@ export function RecurrenceCard({
       <View className="flex-row items-center justify-between mb-4">
         <View className="flex-row items-center gap-2">
           <Repeat size={24} color="#266829" />
-          <Text className="font-headline font-bold text-on-surface">
-            Repetir Evento
-          </Text>
+          <Text className="font-headline font-bold text-on-surface">Repetir Evento</Text>
         </View>
         <ToggleSwitch value={isEnabled} onValueChange={onToggle} />
       </View>
@@ -55,11 +54,7 @@ export function RecurrenceCard({
 
           <View className="gap-2">
             <SectionLabel label="Até quando?" />
-            <DateInput
-              value={endDate}
-              onChangeText={onEndDateChange}
-              onPress={onEndDatePress}
-            />
+            <DateInput value={endDate} onChangeText={onEndDateChange} onPress={onEndDatePress} />
           </View>
         </View>
       )}

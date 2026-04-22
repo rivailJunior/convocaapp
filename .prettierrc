@@ -5,5 +5,22 @@
   "semi": true,
   "printWidth": 100,
   "bracketSpacing": true,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "quoteProps": "as-needed",
+  "bracketSameLine": false,
+  "proseWrap": "preserve",
+  "htmlWhitespaceSensitivity": "css",
+  "embeddedLanguageFormatting": "auto",
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "react-native",
+    "^expo(.*)",
+    "^@expo(.*)",
+    "^@sportspay/shared(.*)",
+    "^[./]",
+    ""
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

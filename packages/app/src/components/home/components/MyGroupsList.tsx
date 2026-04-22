@@ -3,6 +3,7 @@ import { ChevronRight, Users } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
 import { getSportEmoji } from '@sportspay/shared';
+
 import type { GroupDisplayItem } from '@sportspay/shared';
 
 import { createRoutes } from '@/navigation';
