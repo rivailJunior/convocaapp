@@ -15,42 +15,8 @@ module.exports = {
       'error',
       { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
     ],
-    '@typescript-eslint/consistent-type-imports': [
-      'error',
-      { prefer: 'type-imports' },
-    ],
-    'import/order': [
-      'error',
-      {
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-          'type',
-        ],
-        pathGroups: [
-          {
-            pattern: '@sportspay/**',
-            group: 'internal',
-            position: 'before',
-          },
-        ],
-        pathGroupsExcludedImportTypes: ['type'],
-        'newlines-between': 'always',
-        alphabetize: { order: 'asc', caseInsensitive: true },
-      },
-    ],
+    '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
     'no-console': ['warn', { allow: ['warn', 'error'] }],
   },
-  ignorePatterns: [
-    'node_modules/',
-    'dist/',
-    '.next/',
-    '.expo/',
-    '*.config.js',
-    '*.config.mjs',
-  ],
+  ignorePatterns: ['node_modules/', 'dist/', '.next/', '.expo/', '*.config.js', '*.config.mjs'],
 };

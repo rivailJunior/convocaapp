@@ -1,5 +1,7 @@
 import { getAdapter } from '../../database-adapter';
 
+
+
 import type { Sport } from '@sportspay/shared';
 
 export interface GroupEntity {
@@ -97,6 +99,28 @@ export async function getGroups(): Promise<GroupEntity[]> {
   await ensureGroupInitialized();
   const db = getAdapter();
   return db.getAllAsync<GroupEntity>('SELECT * FROM Groups ORDER BY createdAt DESC');
+}
+
+interface GroupWithMemberCount {
+  id: number;
+  name: string;
+  sport: string;
+  pixKey: string;
+  createdAt: string;
+  memberCount: number;
+}
+
+export async function getGroupDisplayItems(): Promise<GroupWithMemberCount[]> {
+  await ensureGroupInitialized();
+  const db = getAdapter();
+  return db.getAllAsync<GroupWithMemberCount>(
+    `SELECT g.id, g.name, g.sport, g.pixKey, g.createdAt,
+            COUNT(gp.id) AS memberCount
+     FROM Groups g
+     LEFT JOIN GroupParticipants gp ON gp.groupId = g.id
+     GROUP BY g.id
+     ORDER BY g.createdAt DESC`,
+  );
 }
 
 export async function getGroupById(id: number): Promise<GroupWithParticipants | null> {
