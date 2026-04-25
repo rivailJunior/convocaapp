@@ -1,4 +1,4 @@
-import { _resetConnectionForTesting, getDb } from './connection';
+import { _resetAdapterForTesting, getAdapter } from './adapter';
 import {
   DEFAULT_LANGUAGE,
   DEFAULT_THEME,
@@ -11,7 +11,7 @@ let initPromise: Promise<void> | null = null;
 
 async function performInit(): Promise<void> {
   try {
-    const db = await getDb();
+    const db = getAdapter();
     await db.execAsync(`
       CREATE TABLE IF NOT EXISTS UserSettings (
         id INTEGER PRIMARY KEY CHECK (id = 1),
@@ -44,6 +44,6 @@ export async function initSettingsDatabase(): Promise<void> {
 }
 
 export function _resetForTesting(): void {
-  _resetConnectionForTesting();
+  _resetAdapterForTesting();
   initPromise = null;
 }

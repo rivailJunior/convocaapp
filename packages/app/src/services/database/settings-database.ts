@@ -1,4 +1,4 @@
-import { getDb } from './connection';
+import { getAdapter } from './adapter';
 import { DEFAULT_LANGUAGE, DEFAULT_THEME } from './constants';
 import { validateLanguage } from './language';
 import { ensureInitialized } from './setup';
@@ -14,7 +14,7 @@ export { updateTheme } from './theme';
 
 export async function getSettings(): Promise<UserSettingsRow> {
   await ensureInitialized();
-  const db = await getDb();
+  const db = getAdapter();
   const row = await db.getFirstAsync<{
     id: number;
     theme: string;

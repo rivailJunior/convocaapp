@@ -1,4 +1,4 @@
-import { getDb } from './connection';
+import { getAdapter } from './adapter';
 import { DEFAULT_LANGUAGE, VALID_LANGUAGES } from './constants';
 import { ensureInitialized } from './setup';
 
@@ -12,6 +12,6 @@ export function validateLanguage(language: string): AppLanguage {
 
 export async function updateLanguage(language: AppLanguage): Promise<void> {
   await ensureInitialized();
-  const db = await getDb();
+  const db = getAdapter();
   await db.runAsync('UPDATE UserSettings SET language = ? WHERE id = 1', [language]);
 }

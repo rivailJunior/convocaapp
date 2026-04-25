@@ -1,4 +1,4 @@
-import { getDb } from './connection';
+import { getAdapter } from './adapter';
 import { DEFAULT_THEME, VALID_THEMES } from './constants';
 import { ensureInitialized } from './setup';
 
@@ -10,6 +10,6 @@ export function validateTheme(theme: string): ThemeMode {
 
 export async function updateTheme(theme: ThemeMode): Promise<void> {
   await ensureInitialized();
-  const db = await getDb();
+  const db = getAdapter();
   await db.runAsync('UPDATE UserSettings SET theme = ? WHERE id = 1', [theme]);
 }

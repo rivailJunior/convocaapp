@@ -1,4 +1,4 @@
-import { getDb } from './connection';
+import { getAdapter } from './adapter';
 
 import type { Sport } from '@sportspay/shared';
 
@@ -31,7 +31,7 @@ let groupInitPromise: Promise<void> | null = null;
 
 async function performGroupInit(): Promise<void> {
   try {
-    const db = await getDb();
+    const db = getAdapter();
     await db.execAsync(`
       CREATE TABLE IF NOT EXISTS Groups (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -70,7 +70,7 @@ export async function initGroupDatabase(): Promise<void> {
 
 export async function createGroup(input: CreateGroupInput): Promise<number> {
   await ensureGroupInitialized();
-  const db = await getDb();
+  const db = getAdapter();
 
   let groupId = 0;
 
@@ -95,13 +95,13 @@ export async function createGroup(input: CreateGroupInput): Promise<number> {
 
 export async function getGroups(): Promise<GroupRow[]> {
   await ensureGroupInitialized();
-  const db = await getDb();
+  const db = getAdapter();
   return db.getAllAsync<GroupRow>('SELECT * FROM Groups ORDER BY createdAt DESC');
 }
 
 export async function getGroupById(id: number): Promise<GroupWithParticipants | null> {
   await ensureGroupInitialized();
-  const db = await getDb();
+  const db = getAdapter();
 
   const group = await db.getFirstAsync<GroupRow>('SELECT * FROM Groups WHERE id = ?', [id]);
   if (!group) return null;
@@ -119,7 +119,7 @@ export async function getGroupById(id: number): Promise<GroupWithParticipants | 
 
 export async function deleteGroup(id: number): Promise<void> {
   await ensureGroupInitialized();
-  const db = await getDb();
+  const db = getAdapter();
 
   await db.withTransactionAsync(async () => {
     await db.runAsync('DELETE FROM GroupParticipants WHERE groupId = ?', [id]);
