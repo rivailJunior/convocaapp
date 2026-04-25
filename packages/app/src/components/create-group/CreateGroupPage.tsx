@@ -1,29 +1,61 @@
+import { CreditCard, Info } from 'lucide-react-native';
+import { Alert, ScrollView, Text, TextInput, View } from 'react-native';
 import { router } from 'expo-router';
-import { Info, CreditCard } from 'lucide-react-native';
-import { useCallback } from 'react';
-import { ScrollView, Text, TextInput, View } from 'react-native';
+import { useCallback, useState } from 'react';
 
 import { useCreateGroup } from '@sportspay/shared';
 
+import { createGroup } from '../../services/database/entities/group/group';
 import { PageContainer } from '../page-container';
-
 import { BottomActionBar } from './components/BottomActionBar';
-import { CreateEventBanner } from './components/CreateEventBanner';
 import { ParticipantList } from './components/ParticipantList';
 import { SportSelectionGrid } from './components/SportSelectionGrid';
 
 export function CreateGroupPage(): React.JSX.Element {
   const {
     formState,
+    canSubmit,
     setGroupName,
     setSport,
     setPixKey,
     addParticipant,
+    importParticipants,
     removeParticipant,
     changeParticipantName,
+    resetForm,
   } = useCreateGroup();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleBack = useCallback(() => router.back(), []);
+
+  const handleCancel = useCallback(() => {
+    resetForm();
+    router.back();
+  }, [resetForm]);
+
+  const handleSave = useCallback(async () => {
+    if (!formState.sport) return;
+
+    setIsSubmitting(true);
+    try {
+      await createGroup({
+        name: formState.groupName.trim(),
+        sport: formState.sport,
+        pixKey: formState.pixKey.trim(),
+        participants: formState.participants
+          .filter((p) => p.name.trim().length > 0)
+          .map((p) => ({ name: p.name.trim() })),
+      });
+      resetForm();
+      router.back();
+    } catch (error) {
+      console.error('[CreateGroupPage] Failed to save group:', error);
+      Alert.alert('Erro', 'Não foi possível criar o grupo. Tente novamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [formState, resetForm]);
 
   return (
     <PageContainer title="Novo Grupo" onBack={handleBack}>
@@ -73,12 +105,18 @@ export function CreateGroupPage(): React.JSX.Element {
           onChangeName={changeParticipantName}
           onRemove={removeParticipant}
           onAdd={addParticipant}
+          onImport={importParticipants}
         />
 
-        <CreateEventBanner />
+        {/* <CreateEventBanner /> */}
       </ScrollView>
 
-      <BottomActionBar />
+      <BottomActionBar
+        onCancel={handleCancel}
+        onSave={handleSave}
+        canSave={canSubmit}
+        isSubmitting={isSubmitting}
+      />
     </PageContainer>
   );
 }

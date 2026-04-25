@@ -1,14 +1,15 @@
 import {
   _resetForTesting,
-  initSettingsDatabase,
   getSettings,
-  updateTheme,
+  initSettingsDatabase,
+  isOnboarded,
   updateLanguage,
   updateOnboarded,
-  isOnboarded,
-} from '../settings-database';
+  updateTheme,
+} from '../database/entities/settings/settings';
 
 import type * as SQLiteTypes from 'expo-sqlite';
+
 
 const mockExecAsync = jest.fn().mockResolvedValue(undefined);
 const mockRunAsync = jest.fn().mockResolvedValue(undefined);
@@ -139,10 +140,9 @@ describe('settings-database', () => {
     it('runs UPDATE with the given theme', async () => {
       await updateTheme('dark');
 
-      expect(mockRunAsync).toHaveBeenCalledWith(
-        'UPDATE UserSettings SET theme = ? WHERE id = 1',
-        ['dark'],
-      );
+      expect(mockRunAsync).toHaveBeenCalledWith('UPDATE UserSettings SET theme = ? WHERE id = 1', [
+        'dark',
+      ]);
     });
   });
 

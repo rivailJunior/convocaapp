@@ -1,5 +1,8 @@
-import { X, Plus, Upload } from 'lucide-react-native';
+import { Plus, Upload, X } from 'lucide-react-native';
 import { Pressable, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
+
+import { ImportListModal } from './ImportListModal';
 
 import type { Participant } from '@sportspay/shared';
 
@@ -8,6 +11,7 @@ interface ParticipantListProps {
   onChangeName: (id: string, name: string) => void;
   onRemove: (id: string) => void;
   onAdd: () => void;
+  onImport: (names: string[]) => void;
 }
 
 export function ParticipantList({
@@ -15,7 +19,9 @@ export function ParticipantList({
   onChangeName,
   onRemove,
   onAdd,
+  onImport,
 }: ParticipantListProps): React.JSX.Element {
+  const [isImportModalVisible, setIsImportModalVisible] = useState(false);
   return (
     <View className="mb-8">
       <View className="flex-row items-center justify-between mb-4">
@@ -53,20 +59,22 @@ export function ParticipantList({
           onPress={onAdd}
         >
           <Plus size={18} color="#3f5700" />
-          <Text className="text-secondary-dim font-bold text-sm">
-            Adicionar participante
-          </Text>
+          <Text className="text-secondary-dim font-bold text-sm">Adicionar participante</Text>
         </Pressable>
         <Pressable
-          disabled
-          className="flex-row items-center justify-center gap-2 border-2 border-outline-variant py-3 rounded-xl opacity-60 active:scale-[0.98]"
+          className="flex-row items-center justify-center gap-2 border-2 border-outline-variant py-3 rounded-xl active:scale-[0.98]"
+          onPress={() => setIsImportModalVisible(true)}
         >
           <Upload size={18} color="#2c2f30" />
-          <Text className="text-on-surface font-bold text-sm">
-            Importar lista
-          </Text>
+          <Text className="text-on-surface font-bold text-sm">Importar lista</Text>
         </Pressable>
       </View>
+
+      <ImportListModal
+        visible={isImportModalVisible}
+        onClose={() => setIsImportModalVisible(false)}
+        onImport={onImport}
+      />
     </View>
   );
 }
