@@ -1,25 +1,33 @@
-import { router } from 'expo-router';
-import { useCallback } from 'react';
 import { ScrollView, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
+import { ROUTES } from '@/navigation/routes';
+import { useCallback, useEffect, useState } from 'react';
 
-import { useGroupDetails, useGroupEvents } from '@sportspay/shared';
+import { useGroupEvents } from '@sportspay/shared';
 
+import { useLocalGroups } from '../../hooks/use-local-groups';
 import { FloatingAddButton } from '../floating-add-button';
 import { PageContainer } from '../page-container';
-
 import { GroupEventList } from './components/GroupEventList';
 import { GroupHeroCard } from './components/GroupHeroCard';
 
-import { ROUTES } from '@/navigation/routes';
+import type { GroupWithParticipants } from '../../services/database/entities/group/group';
 
 interface GroupDetailsPageProps {
-  groupId: string;
+  groupId: number;
 }
 
 export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.Element {
-  const { group } = useGroupDetails(groupId);
-  const { upcoming, past } = useGroupEvents(groupId);
+  const { getSingleGroup } = useLocalGroups();
+
+  const [group, setGroup] = useState<GroupWithParticipants | null>(null);
+
+  useEffect(() => {
+    getSingleGroup(groupId).then(setGroup);
+  }, [groupId, getSingleGroup]);
+
+  const { upcoming, past } = useGroupEvents(groupId.toString());
   const handleBack = useCallback(() => router.back(), []);
 
   if (!group) {

@@ -1,33 +1,32 @@
+import { Copy, User } from 'lucide-react-native';
+import { Pressable, Text, View } from 'react-native';
 import * as ExpoClipboard from 'expo-clipboard';
-import { Copy } from 'lucide-react-native';
-import { Image, Pressable, Text, View } from 'react-native';
 
 import { colors } from '@sportspay/shared';
 
-import type { GroupDisplayItem } from '@sportspay/shared';
+import type { GroupWithParticipants } from '../../../services/database/entities/group/group';
 
 const MAX_VISIBLE_AVATARS = 8;
-const PLACEHOLDER_AVATARS = [
-  'https://i.pravatar.cc/40?u=1',
-  'https://i.pravatar.cc/40?u=2',
-  'https://i.pravatar.cc/40?u=3',
-  'https://i.pravatar.cc/40?u=4',
-  'https://i.pravatar.cc/40?u=5',
-  'https://i.pravatar.cc/40?u=6',
-  'https://i.pravatar.cc/40?u=7',
-  'https://i.pravatar.cc/40?u=8',
+
+const AVATAR_COLORS = [
+  { bg: '#DCE775', icon: '#33691E' },
+  { bg: '#81D4FA', icon: '#01579B' },
+  { bg: '#F48FB1', icon: '#880E4F' },
+  { bg: '#CE93D8', icon: '#4A148C' },
+  { bg: '#FFCC80', icon: '#E65100' },
+  { bg: '#80CBC4', icon: '#004D40' },
+  { bg: '#EF9A9A', icon: '#B71C1C' },
+  { bg: '#A5D6A7', icon: '#1B5E20' },
 ];
 
 interface GroupHeroCardProps {
-  group: GroupDisplayItem;
+  group: GroupWithParticipants;
 }
 
 export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element {
-  const visibleAvatars = PLACEHOLDER_AVATARS.slice(
-    0,
-    Math.min(group.memberCount, MAX_VISIBLE_AVATARS),
-  );
-  const overflowCount = group.memberCount - visibleAvatars.length;
+  const memberCount = group.participants.length;
+  const visibleParticipants = group.participants.slice(0, MAX_VISIBLE_AVATARS);
+  const overflowCount = memberCount - visibleParticipants.length;
 
   const handleCopyPix = async () => {
     if (group.pixKey) {
@@ -41,32 +40,34 @@ export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element 
         <View
           className="flex-row items-center"
           accessible
-          accessibilityLabel={`${group.memberCount} participantes`}
+          accessibilityLabel={`${memberCount} participantes`}
         >
-          {visibleAvatars.map((uri, i) => (
-            <Image
-              key={`avatar-${i}`}
-              source={{ uri }}
-              className="w-10 h-10 rounded-full border-2 border-white"
-              style={{ marginLeft: i === 0 ? 0 : -12 }}
-              accessible={false}
-            />
-          ))}
+          {visibleParticipants.map((participant, i) => {
+            const palette = AVATAR_COLORS[i % AVATAR_COLORS.length];
+            return (
+              <View
+                key={participant.id}
+                className="w-10 h-10 rounded-full border-2 border-white items-center justify-center"
+                style={{ marginLeft: i === 0 ? 0 : -12, backgroundColor: palette.bg }}
+                accessible={false}
+              >
+                <User size={18} color={palette.icon} />
+              </View>
+            );
+          })}
           {overflowCount > 0 && (
             <View
               className="w-10 h-10 rounded-full bg-surface-container-high border-2 border-white items-center justify-center"
               style={{ marginLeft: -12 }}
               accessible={false}
             >
-              <Text className="text-xs font-bold text-on-surface-variant">
-                +{overflowCount}
-              </Text>
+              <Text className="text-xs font-bold text-on-surface-variant">+{overflowCount}</Text>
             </View>
           )}
         </View>
 
         <Text className="text-sm font-medium text-on-surface-variant">
-          {group.memberCount} participantes
+          {memberCount} participantes
         </Text>
 
         {group.pixKey && (
@@ -77,9 +78,7 @@ export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element 
                 <Text className="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">
                   Chave Pix
                 </Text>
-                <Text className="text-on-surface font-semibold">
-                  {group.pixKey}
-                </Text>
+                <Text className="text-on-surface font-semibold">{group.pixKey}</Text>
               </View>
               <Pressable
                 onPress={handleCopyPix}

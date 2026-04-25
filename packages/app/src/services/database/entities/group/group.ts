@@ -1,7 +1,5 @@
 import { getAdapter } from '../../database-adapter';
 
-
-
 import type { Sport } from '@sportspay/shared';
 
 export interface GroupEntity {

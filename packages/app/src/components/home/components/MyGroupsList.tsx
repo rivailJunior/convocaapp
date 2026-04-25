@@ -1,12 +1,11 @@
-import { router } from 'expo-router';
 import { ChevronRight, Users } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
+import { router } from 'expo-router';
+import { createRoutes } from '@/navigation';
 
 import { getSportEmoji } from '@sportspay/shared';
 
 import type { GroupDisplayItem } from '@sportspay/shared';
-
-import { createRoutes } from '@/navigation';
 
 interface MyGroupsListProps {
   groups: GroupDisplayItem[];
@@ -15,9 +14,7 @@ interface MyGroupsListProps {
 export function MyGroupsList({ groups }: MyGroupsListProps): React.JSX.Element {
   return (
     <View className="gap-3">
-      <Text className="text-xl font-bold text-on-background">
-        Meus Grupos
-      </Text>
+      <Text className="text-xl font-bold text-on-background">Meus Grupos</Text>
 
       {groups.length === 0 ? (
         <View className="rounded-xl border border-dashed border-outline-variant p-4 items-center">
@@ -43,9 +40,7 @@ export function MyGroupsList({ groups }: MyGroupsListProps): React.JSX.Element {
                 </Text>
                 <View className="flex-row items-center gap-1 shrink-0">
                   <Users size={12} color="#595c5d" />
-                  <Text className="text-[10px] text-on-surface-variant">
-                    {group.memberCount}
-                  </Text>
+                  <Text className="text-[10px] text-on-surface-variant">{group.memberCount}</Text>
                 </View>
               </View>
               <Text

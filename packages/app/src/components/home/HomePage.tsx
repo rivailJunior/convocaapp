@@ -5,6 +5,8 @@ import { useLocalGroups } from '@/hooks/use-local-groups';
 import { ROUTES } from '@/navigation';
 import { useCallback } from 'react';
 
+
+
 import { useTreasurySummary, useUpcomingEvents } from '@sportspay/shared';
 
 import { FloatingAddButton } from '../floating-add-button';
@@ -12,6 +14,10 @@ import { BalanceCard } from './components/BalanceCard';
 import { HomeHeader } from './components/HomeHeader';
 import { MyGroupsList } from './components/MyGroupsList';
 import { UpcomingMatchesCarousel } from './components/UpcomingMatchesCarousel';
+
+
+
+
 
 export function HomePage(): React.JSX.Element {
   const { groups, refetch } = useLocalGroups();
