@@ -1,4 +1,4 @@
-import { X, Plus, Upload } from 'lucide-react-native';
+import { Plus, X } from 'lucide-react-native';
 import { Pressable, Text, TextInput, View } from 'react-native';
 
 import type { Participant } from '@sportspay/shared';
@@ -53,11 +53,9 @@ export function ParticipantList({
           onPress={onAdd}
         >
           <Plus size={18} color="#3f5700" />
-          <Text className="text-secondary-dim font-bold text-sm">
-            Adicionar participante
-          </Text>
+          <Text className="text-secondary-dim font-bold text-sm">Adicionar participante</Text>
         </Pressable>
-        <Pressable
+        {/* <Pressable
           disabled
           className="flex-row items-center justify-center gap-2 border-2 border-outline-variant py-3 rounded-xl opacity-60 active:scale-[0.98]"
         >
@@ -65,7 +63,7 @@ export function ParticipantList({
           <Text className="text-on-surface font-bold text-sm">
             Importar lista
           </Text>
-        </Pressable>
+        </Pressable> */}
       </View>
     </View>
   );

@@ -1,16 +1,16 @@
-import { router } from 'expo-router';
-import { Info, CreditCard } from 'lucide-react-native';
-import { useCallback } from 'react';
+import { CreditCard, Info } from 'lucide-react-native';
 import { ScrollView, Text, TextInput, View } from 'react-native';
+
+import { router } from 'expo-router';
 
 import { useCreateGroup } from '@sportspay/shared';
 
 import { PageContainer } from '../page-container';
-
 import { BottomActionBar } from './components/BottomActionBar';
-import { CreateEventBanner } from './components/CreateEventBanner';
 import { ParticipantList } from './components/ParticipantList';
 import { SportSelectionGrid } from './components/SportSelectionGrid';
+
+import { useCallback } from 'react';
 
 export function CreateGroupPage(): React.JSX.Element {
   const {
@@ -75,7 +75,7 @@ export function CreateGroupPage(): React.JSX.Element {
           onAdd={addParticipant}
         />
 
-        <CreateEventBanner />
+        {/* <CreateEventBanner /> */}
       </ScrollView>
 
       <BottomActionBar />
