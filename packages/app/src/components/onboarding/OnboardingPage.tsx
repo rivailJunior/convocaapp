@@ -1,20 +1,18 @@
-import { router } from 'expo-router';
 import { ChevronLeft, ChevronRight } from 'lucide-react-native';
-import { useCallback, useRef, useState } from 'react';
 import { Dimensions, FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import { router } from 'expo-router';
+import { ROUTES } from '@/navigation';
+import { updateOnboarded } from '@/services/database/entities/settings/onboarding';
+import { useCallback, useRef, useState } from 'react';
 
 import { PrimaryButton } from '../primary-button';
-
 import { PageIndicator } from './components/PageIndicator';
 import { OnboardingOrganize } from './OnboardingOrganize';
 import { OnboardingShare } from './OnboardingShare';
 import { OnboardingTeams } from './OnboardingTeams';
 
 import type { ViewToken } from 'react-native';
-
-import { ROUTES } from '@/navigation';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -43,9 +41,14 @@ export const OnboardingPage = () => {
 
   const viewabilityConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
+  const handleComplete = async () => {
+    await updateOnboarded(true);
+    router.replace(ROUTES.HOME);
+  };
+
   const handleNext = () => {
     if (isLastSlide) {
-      router.push(ROUTES.HOME);
+      handleComplete();
       return;
     }
     flatListRef.current?.scrollToIndex({
@@ -72,7 +75,7 @@ export const OnboardingPage = () => {
         <Pressable onPress={handleBack} className="items-center justify-center active:opacity-70">
           {activeIndex > 0 && <ChevronLeft size={36} color="#000" />}
         </Pressable>
-        <Pressable onPress={() => router.push(ROUTES.HOME)} className="active:opacity-70">
+        <Pressable onPress={handleComplete} className="active:opacity-70">
           <Text className="text-on-surface-variant text-lg">Pular</Text>
         </Pressable>
       </View>
