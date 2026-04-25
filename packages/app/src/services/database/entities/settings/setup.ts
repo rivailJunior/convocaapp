@@ -1,11 +1,11 @@
-import { _resetAdapterForTesting, getAdapter } from './adapter';
 import {
   DEFAULT_LANGUAGE,
   DEFAULT_THEME,
   toSqlList,
   VALID_LANGUAGES,
   VALID_THEMES,
-} from './constants';
+} from '../../constants';
+import { _resetAdapterForTesting, getAdapter } from '../../database-adapter';
 
 let initPromise: Promise<void> | null = null;
 

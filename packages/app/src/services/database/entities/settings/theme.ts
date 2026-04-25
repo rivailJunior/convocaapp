@@ -1,5 +1,6 @@
-import { getAdapter } from './adapter';
-import { DEFAULT_THEME, VALID_THEMES } from './constants';
+import { DEFAULT_THEME, VALID_THEMES } from '../../constants';
+import { getAdapter } from '../../database-adapter';
+
 import { ensureInitialized } from './setup';
 
 import type { ThemeMode } from '@sportspay/shared';

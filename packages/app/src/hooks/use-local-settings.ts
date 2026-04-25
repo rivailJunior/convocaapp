@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+
+
 import {
   updateLanguage as dbUpdateLanguage,
   updateOnboarded as dbUpdateOnboarded,
   updateTheme as dbUpdateTheme,
   getSettings,
   initSettingsDatabase,
-} from '../services/database/settings-database';
+} from '../services/database/entities/settings/settings';
 
 import type { AppLanguage, AppSettings, ThemeMode } from '@sportspay/shared';
 

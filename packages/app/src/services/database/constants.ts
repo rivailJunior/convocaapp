@@ -8,7 +8,7 @@ export const DEFAULT_LANGUAGE: AppLanguage = 'pt-BR';
 export const toSqlList = (values: readonly string[]): string =>
   values.map((v) => `'${v}'`).join(', ');
 
-export interface UserSettingsRow {
+export interface UserSettingsEntity {
   id: number;
   theme: ThemeMode;
   language: AppLanguage;

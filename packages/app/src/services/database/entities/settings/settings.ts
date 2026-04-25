@@ -1,18 +1,19 @@
-import { getAdapter } from './adapter';
-import { DEFAULT_LANGUAGE, DEFAULT_THEME } from './constants';
+import { DEFAULT_LANGUAGE, DEFAULT_THEME } from '../../constants';
+import { getAdapter } from '../../database-adapter';
+
 import { validateLanguage } from './language';
 import { ensureInitialized } from './setup';
 import { validateTheme } from './theme';
 
-import type { UserSettingsRow } from './constants';
+import type { UserSettingsEntity } from '../../constants';
 
-export type { UserSettingsRow } from './constants';
+export type { UserSettingsEntity } from '../../constants';
 export { updateLanguage } from './language';
 export { isOnboarded, updateOnboarded } from './onboarding';
 export { _resetForTesting, initSettingsDatabase } from './setup';
 export { updateTheme } from './theme';
 
-export async function getSettings(): Promise<UserSettingsRow> {
+export async function getSettings(): Promise<UserSettingsEntity> {
   await ensureInitialized();
   const db = getAdapter();
   const row = await db.getFirstAsync<{

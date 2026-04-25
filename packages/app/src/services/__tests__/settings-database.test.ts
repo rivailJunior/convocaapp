@@ -1,5 +1,3 @@
-import type * as SQLiteTypes from 'expo-sqlite';
-
 import {
   _resetForTesting,
   getSettings,
@@ -8,7 +6,10 @@ import {
   updateLanguage,
   updateOnboarded,
   updateTheme,
-} from '../database/settings-database';
+} from '../database/entities/settings/settings';
+
+import type * as SQLiteTypes from 'expo-sqlite';
+
 
 const mockExecAsync = jest.fn().mockResolvedValue(undefined);
 const mockRunAsync = jest.fn().mockResolvedValue(undefined);

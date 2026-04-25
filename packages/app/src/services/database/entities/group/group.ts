@@ -1,8 +1,8 @@
-import { getAdapter } from './adapter';
+import { getAdapter } from '../../database-adapter';
 
 import type { Sport } from '@sportspay/shared';
 
-export interface GroupRow {
+export interface GroupEntity {
   id: number;
   name: string;
   sport: Sport;
@@ -10,13 +10,13 @@ export interface GroupRow {
   createdAt: string;
 }
 
-interface GroupParticipantRow {
+interface GroupParticipantEntity {
   id: number;
   groupId: number;
   name: string;
 }
 
-export interface GroupWithParticipants extends GroupRow {
+export interface GroupWithParticipants extends GroupEntity {
   participants: { id: string; name: string }[];
 }
 
@@ -93,20 +93,20 @@ export async function createGroup(input: CreateGroupInput): Promise<number> {
   return groupId;
 }
 
-export async function getGroups(): Promise<GroupRow[]> {
+export async function getGroups(): Promise<GroupEntity[]> {
   await ensureGroupInitialized();
   const db = getAdapter();
-  return db.getAllAsync<GroupRow>('SELECT * FROM Groups ORDER BY createdAt DESC');
+  return db.getAllAsync<GroupEntity>('SELECT * FROM Groups ORDER BY createdAt DESC');
 }
 
 export async function getGroupById(id: number): Promise<GroupWithParticipants | null> {
   await ensureGroupInitialized();
   const db = getAdapter();
 
-  const group = await db.getFirstAsync<GroupRow>('SELECT * FROM Groups WHERE id = ?', [id]);
+  const group = await db.getFirstAsync<GroupEntity>('SELECT * FROM Groups WHERE id = ?', [id]);
   if (!group) return null;
 
-  const rows = await db.getAllAsync<GroupParticipantRow>(
+  const rows = await db.getAllAsync<GroupParticipantEntity>(
     'SELECT id, name FROM GroupParticipants WHERE groupId = ? ORDER BY id',
     [id],
   );

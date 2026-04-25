@@ -1,4 +1,5 @@
-import { getAdapter } from './adapter';
+import { getAdapter } from '../../database-adapter';
+
 import { ensureInitialized } from './setup';
 
 export async function updateOnboarded(onboarded: boolean): Promise<void> {

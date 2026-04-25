@@ -1,5 +1,6 @@
-import { getAdapter } from './adapter';
-import { DEFAULT_LANGUAGE, VALID_LANGUAGES } from './constants';
+import { DEFAULT_LANGUAGE, VALID_LANGUAGES } from '../../constants';
+import { getAdapter } from '../../database-adapter';
+
 import { ensureInitialized } from './setup';
 
 import type { AppLanguage } from '@sportspay/shared';
