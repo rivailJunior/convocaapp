@@ -1,18 +1,24 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { getGroupDisplayItems } from '../services/database/entities/group/group';
+import { getGroupById, getGroupDisplayItems } from '../services/database/entities/group/group';
 
+import type { GroupWithParticipants } from '../services/database/entities/group/group';
 import type { GroupDisplayItem } from '@sportspay/shared';
 
 interface UseLocalGroupsReturn {
   groups: GroupDisplayItem[];
   isLoading: boolean;
   refetch: () => void;
+  getSingleGroup: (id: number) => Promise<GroupWithParticipants | null>;
 }
 
 export function useLocalGroups(): UseLocalGroupsReturn {
   const [groups, setGroups] = useState<GroupDisplayItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const getSingleGroup = useCallback(async (id: number) => {
+    return getGroupById(id);
+  }, []);
 
   const refetch = useCallback(async () => {
     try {
@@ -44,5 +50,5 @@ export function useLocalGroups(): UseLocalGroupsReturn {
     refetch();
   }, [refetch]);
 
-  return { groups, isLoading, refetch };
+  return { groups, isLoading, refetch, getSingleGroup };
 }
