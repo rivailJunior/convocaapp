@@ -23,6 +23,7 @@ interface UseCreateGroupReturn {
   setSport: (sport: Sport) => void;
   setPixKey: (key: string) => void;
   addParticipant: () => void;
+  importParticipants: (names: string[]) => void;
   removeParticipant: (id: string) => void;
   changeParticipantName: (id: string, name: string) => void;
   resetForm: () => void;
@@ -50,6 +51,20 @@ export function useCreateGroup(): UseCreateGroupReturn {
       ...prev,
       participants: [...prev.participants, { id, name: '' }],
     }));
+  }, []);
+
+  const importParticipants = useCallback((names: string[]) => {
+    setFormState((prev) => {
+      const existingNames = new Set(prev.participants.map((p) => p.name.trim().toLowerCase()));
+      const newParticipants: Participant[] = names
+        .filter((name) => !existingNames.has(name.trim().toLowerCase()))
+        .map((name) => ({ id: String(nextId.current++), name: name.trim() }));
+
+      return {
+        ...prev,
+        participants: [...prev.participants, ...newParticipants],
+      };
+    });
   }, []);
 
   const removeParticipant = useCallback((id: string) => {
@@ -84,6 +99,7 @@ export function useCreateGroup(): UseCreateGroupReturn {
     setSport,
     setPixKey,
     addParticipant,
+    importParticipants,
     removeParticipant,
     changeParticipantName,
     resetForm,
