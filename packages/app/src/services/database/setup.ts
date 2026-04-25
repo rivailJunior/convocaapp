@@ -1,27 +1,13 @@
-import * as SQLite from 'expo-sqlite';
-
+import { _resetConnectionForTesting, getDb } from './connection';
 import {
   DEFAULT_LANGUAGE,
   DEFAULT_THEME,
+  toSqlList,
   VALID_LANGUAGES,
   VALID_THEMES,
-  toSqlList,
 } from './constants';
 
-const DB_NAME = 'sportspay.db';
-
-let dbPromise: Promise<SQLite.SQLiteDatabase> | null = null;
 let initPromise: Promise<void> | null = null;
-
-export async function getDb(): Promise<SQLite.SQLiteDatabase> {
-  if (!dbPromise) {
-    dbPromise = SQLite.openDatabaseAsync(DB_NAME).catch((error) => {
-      dbPromise = null;
-      throw error;
-    });
-  }
-  return dbPromise;
-}
 
 async function performInit(): Promise<void> {
   try {
@@ -58,6 +44,6 @@ export async function initSettingsDatabase(): Promise<void> {
 }
 
 export function _resetForTesting(): void {
-  dbPromise = null;
+  _resetConnectionForTesting();
   initPromise = null;
 }

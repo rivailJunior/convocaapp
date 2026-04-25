@@ -1,8 +1,10 @@
+import { getDb } from './connection';
 import { DEFAULT_LANGUAGE, DEFAULT_THEME } from './constants';
-import type { UserSettingsRow } from './constants';
 import { validateLanguage } from './language';
-import { ensureInitialized, getDb } from './setup';
+import { ensureInitialized } from './setup';
 import { validateTheme } from './theme';
+
+import type { UserSettingsRow } from './constants';
 
 export type { UserSettingsRow } from './constants';
 export { updateLanguage } from './language';

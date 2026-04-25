@@ -1,4 +1,5 @@
-import { ensureInitialized, getDb } from './setup';
+import { getDb } from './connection';
+import { ensureInitialized } from './setup';
 
 export async function updateOnboarded(onboarded: boolean): Promise<void> {
   await ensureInitialized();

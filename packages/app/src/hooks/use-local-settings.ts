@@ -1,4 +1,4 @@
-import type { AppLanguage, AppSettings, ThemeMode } from '@sportspay/shared';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
   updateLanguage as dbUpdateLanguage,
@@ -8,7 +8,8 @@ import {
   initSettingsDatabase,
 } from '../services/database/settings-database';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import type { AppLanguage, AppSettings, ThemeMode } from '@sportspay/shared';
+
 
 export interface LocalAppSettings extends AppSettings {
   onboarded: boolean;
