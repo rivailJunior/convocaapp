@@ -19,6 +19,7 @@ export function CreateGroupPage(): React.JSX.Element {
     setSport,
     setPixKey,
     addParticipant,
+    importParticipants,
     removeParticipant,
     changeParticipantName,
     resetForm,
@@ -104,6 +105,7 @@ export function CreateGroupPage(): React.JSX.Element {
           onChangeName={changeParticipantName}
           onRemove={removeParticipant}
           onAdd={addParticipant}
+          onImport={importParticipants}
         />
 
         {/* <CreateEventBanner /> */}
