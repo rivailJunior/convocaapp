@@ -1,31 +1,21 @@
 import { getAdapter } from '../../database-adapter';
 
-import type { Sport } from '@sportspay/shared';
 
-export interface GroupEntity {
-  id: number;
-  name: string;
-  sport: Sport;
-  pixKey: string;
-  createdAt: string;
-}
 
-interface GroupParticipantEntity {
-  id: number;
-  groupId: number;
-  name: string;
-}
+import type {
+  CreateLocalGroupInput,
+  GroupEntity,
+  GroupParticipantEntity,
+  GroupWithMemberCount,
+  GroupWithParticipants,
+} from '@sportspay/shared';
 
-export interface GroupWithParticipants extends GroupEntity {
-  participants: { id: string; name: string }[];
-}
-
-export interface CreateGroupInput {
-  name: string;
-  sport: Sport;
-  pixKey: string;
-  participants: { name: string }[];
-}
+export type {
+  CreateLocalGroupInput,
+  GroupEntity,
+  GroupWithMemberCount,
+  GroupWithParticipants,
+} from '@sportspay/shared';
 
 let groupInitPromise: Promise<void> | null = null;
 
@@ -68,7 +58,7 @@ export async function initGroupDatabase(): Promise<void> {
   await ensureGroupInitialized();
 }
 
-export async function createGroup(input: CreateGroupInput): Promise<number> {
+export async function createGroup(input: CreateLocalGroupInput): Promise<number> {
   await ensureGroupInitialized();
   const db = getAdapter();
 
@@ -97,15 +87,6 @@ export async function getGroups(): Promise<GroupEntity[]> {
   await ensureGroupInitialized();
   const db = getAdapter();
   return db.getAllAsync<GroupEntity>('SELECT * FROM Groups ORDER BY createdAt DESC');
-}
-
-interface GroupWithMemberCount {
-  id: number;
-  name: string;
-  sport: string;
-  pixKey: string;
-  createdAt: string;
-  memberCount: number;
 }
 
 export async function getGroupDisplayItems(): Promise<GroupWithMemberCount[]> {

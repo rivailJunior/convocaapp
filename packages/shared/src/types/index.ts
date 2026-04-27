@@ -1,3 +1,5 @@
+export * from './database';
+
 // Sport & status unions — never use enum
 export type Sport = 'futebol' | 'volei' | 'basquete' | 'outro';
 export type PaymentStatus = 'pending' | 'paid' | 'overdue' | 'cancelled';

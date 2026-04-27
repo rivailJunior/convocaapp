@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 
+
+
 import { getGroupById, getGroupDisplayItems } from '../services/database/entities/group/group';
 
-import type { GroupWithParticipants } from '../services/database/entities/group/group';
-import type { GroupDisplayItem } from '@sportspay/shared';
+import type { GroupDisplayItem, GroupWithParticipants } from '@sportspay/shared';
+
 
 interface UseLocalGroupsReturn {
   groups: GroupDisplayItem[];

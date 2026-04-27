@@ -4,6 +4,8 @@ import { router } from 'expo-router';
 import { ROUTES } from '@/navigation/routes';
 import { useCallback, useEffect, useState } from 'react';
 
+
+
 import { useGroupEvents } from '@sportspay/shared';
 
 import { useLocalGroups } from '../../hooks/use-local-groups';
@@ -12,7 +14,8 @@ import { PageContainer } from '../page-container';
 import { GroupEventList } from './components/GroupEventList';
 import { GroupHeroCard } from './components/GroupHeroCard';
 
-import type { GroupWithParticipants } from '../../services/database/entities/group/group';
+import type { GroupWithParticipants } from '@sportspay/shared';
+
 
 interface GroupDetailsPageProps {
   groupId: number;
