@@ -1,14 +1,13 @@
-import { router } from 'expo-router';
 import { ChevronDown, ChevronUp } from 'lucide-react-native';
-import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { router } from 'expo-router';
+import { useState } from 'react';
 
 import { colors } from '@sportspay/shared';
 
 import { GroupEventCard } from './GroupEventCard';
 
-import type { GroupEventItem } from '@sportspay/shared';
-import type { Sport } from '@sportspay/shared';
+import type { GroupEventItem, Sport } from '@sportspay/shared';
 
 interface GroupEventListProps {
   upcoming: GroupEventItem[];

@@ -1,5 +1,6 @@
 import type { Sport } from '../types';
 
+
 const MONTHS_PT = [
   'Janeiro',
   'Fevereiro',
@@ -67,6 +68,17 @@ export const formatGroupEventDate = (iso: string): string => {
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = date.getMinutes();
   return `${weekday}, ${hours}h${minutes !== 0 ? String(minutes).padStart(2, '0') : ''}`;
+};
+
+/** Format local date string as weekday + time: '30/04/2026, 20:30' → 'Qua, 20h30' */
+export const formatLocalEventDate = (dateStr: string): string => {
+  const [datePart, timePart] = dateStr.split(', ') as [string, string];
+  const [day, month, year] = datePart.split('/').map(Number) as [number, number, number];
+  const [hours, minutes] = timePart.split(':').map(Number) as [number, number];
+  const date = new Date(year, month - 1, day, hours, minutes);
+  const weekday = WEEKDAYS_PT[date.getDay()];
+  const hh = String(hours).padStart(2, '0');
+  return `${weekday}, ${hh}h${minutes !== 0 ? String(minutes).padStart(2, '0') : ''}`;
 };
 
 /** Build a WhatsApp deep link with pre-encoded message */

@@ -1,5 +1,5 @@
-import { useLocalSearchParams } from 'expo-router';
 import { Text, View } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
 
 import { GroupDetailsPage } from '../../src/components/group-details';
 
@@ -17,5 +17,5 @@ export default function GroupDetailsScreen() {
     );
   }
 
-  return <GroupDetailsPage groupId={id} />;
+  return <GroupDetailsPage groupId={parseInt(id)} />;
 }

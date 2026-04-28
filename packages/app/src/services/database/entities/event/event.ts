@@ -1,6 +1,9 @@
 import { getAdapter } from '../../database-adapter';
 
+
+
 import type { CreateRecurrentEventInput, RecurrentEventEntity } from '@sportspay/shared';
+
 
 export type { CreateRecurrentEventInput, RecurrentEventEntity } from '@sportspay/shared';
 
@@ -12,6 +15,7 @@ async function performEventInit(): Promise<void> {
     await db.execAsync(`
       CREATE TABLE IF NOT EXISTS RecurrentEvents (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        groupId INTEGER NOT NULL DEFAULT 0,
         name TEXT NOT NULL,
         dateTime TEXT NOT NULL,
         location TEXT NOT NULL DEFAULT '',
@@ -23,6 +27,13 @@ async function performEventInit(): Promise<void> {
         createdAt TEXT NOT NULL DEFAULT (datetime('now'))
       );
     `);
+
+    // Migration: add groupId column for existing tables created before this change
+    await db.execAsync(`
+      ALTER TABLE RecurrentEvents ADD COLUMN groupId INTEGER NOT NULL DEFAULT 0;
+    `).catch(() => {
+      // Column already exists — ignore
+    });
   } catch (error) {
     eventInitPromise = null;
     console.error('[EventDB] Failed to initialize event table:', error);
@@ -46,9 +57,10 @@ export async function createRecurrentEvent(input: CreateRecurrentEventInput): Pr
   const db = getAdapter();
 
   const result = await db.runAsync(
-    `INSERT INTO RecurrentEvents (name, dateTime, location, notes, isRecurring, frequency, selectedDays, endDate)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO RecurrentEvents (groupId, name, dateTime, location, notes, isRecurring, frequency, selectedDays, endDate)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
+      input.groupId,
       input.name,
       input.dateTime,
       input.location ?? '',
@@ -66,6 +78,7 @@ export async function createRecurrentEvent(input: CreateRecurrentEventInput): Pr
 function mapRowToEntity(row: Record<string, unknown>): RecurrentEventEntity {
   return {
     id: row.id as number,
+    groupId: (row.groupId as number) ?? 0,
     name: row.name as string,
     dateTime: row.dateTime as string,
     location: row.location as string,
@@ -102,4 +115,16 @@ export async function deleteRecurrentEvent(id: number): Promise<void> {
   await ensureEventInitialized();
   const db = getAdapter();
   await db.runAsync('DELETE FROM RecurrentEvents WHERE id = ?', [id]);
+}
+
+export async function getRecurrentEventsByGroupId(
+  groupId: number,
+): Promise<RecurrentEventEntity[]> {
+  await ensureEventInitialized();
+  const db = getAdapter();
+  const rows = await db.getAllAsync<Record<string, unknown>>(
+    'SELECT * FROM RecurrentEvents WHERE groupId = ? ORDER BY dateTime DESC',
+    [groupId],
+  );
+  return rows.map(mapRowToEntity);
 }

@@ -1,11 +1,10 @@
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Calendar } from 'lucide-react-native';
 import { Text, View } from 'react-native';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-import { colors, formatGroupEventDate } from '@sportspay/shared';
+import { colors, formatLocalEventDate } from '@sportspay/shared';
 
-import type { GroupEventItem } from '@sportspay/shared';
-import type { Sport } from '@sportspay/shared';
+import type { GroupEventItem, Sport } from '@sportspay/shared';
 
 const SPORT_ICON: Record<Sport, React.ComponentProps<typeof MaterialCommunityIcons>['name']> = {
   futebol: 'soccer',
@@ -22,6 +21,8 @@ interface GroupEventCardProps {
 export function GroupEventCard({ event, sport }: GroupEventCardProps): React.JSX.Element {
   const isActive = event.status === 'scheduled';
 
+  console.log('event ==>', event);
+
   return (
     <View className="bg-surface-container-lowest rounded-xl p-4 gap-4">
       <View className="flex-row justify-between items-start">
@@ -30,7 +31,7 @@ export function GroupEventCard({ event, sport }: GroupEventCardProps): React.JSX
           <View className="flex-row items-center gap-1.5">
             <Calendar size={13} color={colors['on-surface-variant']} />
             <Text className="text-on-surface-variant text-sm font-medium">
-              {formatGroupEventDate(event.date)} • {event.venueName}
+              {formatLocalEventDate(event.date)} • {event.venueName}
             </Text>
           </View>
         </View>
@@ -51,10 +52,12 @@ export function GroupEventCard({ event, sport }: GroupEventCardProps): React.JSX
       <View className="flex-row flex-wrap gap-2">
         {event.hasTeams && (
           <View className="flex-row items-center gap-1 px-3 py-1 rounded-full bg-primary-container">
-            <Text className="text-on-primary-container text-xs font-medium">
-              Times gerados
-            </Text>
-            <MaterialCommunityIcons name="check-circle" size={14} color={colors['on-primary-container']} />
+            <Text className="text-on-primary-container text-xs font-medium">Times gerados</Text>
+            <MaterialCommunityIcons
+              name="check-circle"
+              size={14}
+              color={colors['on-primary-container']}
+            />
           </View>
         )}
         <View className="px-3 py-1 rounded-full bg-surface-container-high">

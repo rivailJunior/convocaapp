@@ -63,6 +63,7 @@ export interface GroupWithMemberCount {
 // Recurrent event entities
 export interface RecurrentEventEntity {
   id: number;
+  groupId: number;
   name: string;
   dateTime: string;
   location: string;
@@ -75,6 +76,7 @@ export interface RecurrentEventEntity {
 }
 
 export interface CreateRecurrentEventInput {
+  groupId: number;
   name: string;
   dateTime: string;
   location?: string;

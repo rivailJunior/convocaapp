@@ -1,7 +1,7 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { CheckCircle } from 'lucide-react-native';
-import { Platform, ScrollView, View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Alert, Platform, ScrollView, View } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 
 import { useRecurrentEventForm } from '@sportspay/shared';
@@ -16,11 +16,13 @@ import { TextInputField } from '../../src/components/event/text-input-field';
 import { TextInputWithIcon } from '../../src/components/event/text-input-with-icon';
 import { PageContainer } from '../../src/components/page-container';
 import { PrimaryButton } from '../../src/components/primary-button';
+import { createRecurrentEvent } from '../../src/services/database/entities/event/event';
 
 import type { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 
 export default function CreateRecurrentEventScreen() {
   const router = useRouter();
+  const { groupId } = useLocalSearchParams<{ groupId?: string }>();
   const {
     eventName,
     setEventName,
@@ -113,8 +115,25 @@ export default function CreateRecurrentEventScreen() {
     }
   };
 
-  const handleCreateEvent = () => {
-    console.log('Create event');
+  const handleCreateEvent = async () => {
+    try {
+      await createRecurrentEvent({
+        groupId: groupId ? Number(groupId) : 0,
+        name: eventName,
+        dateTime: dateTime || formatDateTime(selectedDate),
+        location,
+        notes,
+        isRecurring,
+        frequency,
+        selectedDays,
+        endDate: endDate || formatDate(endDateSelected),
+      });
+
+      router.back();
+      Alert.alert('Novo Evento Criado');
+    } catch (error) {
+      console.error('[CreateEvent] Failed to create event:', error);
+    }
   };
 
   return (
