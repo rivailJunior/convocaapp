@@ -2,9 +2,12 @@ import { Copy, User } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 import * as ExpoClipboard from 'expo-clipboard';
 
+
+
 import { colors } from '@sportspay/shared';
 
-import type { GroupWithParticipants } from '../../../services/database/entities/group/group';
+import type { GroupWithParticipants } from '@sportspay/shared';
+
 
 const MAX_VISIBLE_AVATARS = 8;
 

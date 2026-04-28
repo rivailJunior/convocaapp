@@ -1,5 +1,6 @@
 import type { ExpoConfig } from 'expo/config';
 
+
 const config: ExpoConfig = {
   name: 'SportsPay',
   slug: 'sportspay',
@@ -24,7 +25,7 @@ const config: ExpoConfig = {
     },
     package: 'com.sportspay.app',
   },
-  plugins: ['expo-router', 'expo-secure-store'],
+  plugins: ['expo-router', 'expo-secure-store', '@react-native-community/datetimepicker'],
   experiments: {
     typedRoutes: true,
   },

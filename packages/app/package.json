@@ -16,9 +16,11 @@
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",
     "@hookform/resolvers": "^3.9.1",
+    "@react-native-community/datetimepicker": "8.4.4",
     "@sportspay/shared": "workspace:*",
     "@tanstack/react-query": "^5.62.8",
     "axios": "^1.7.9",
+    "burnt": "^0.13.0",
     "expo": "~54.0.0",
     "expo-clipboard": "~7.0.0",
     "expo-constants": "~18.0.13",
@@ -29,6 +31,7 @@
     "expo-router": "~6.0.23",
     "expo-secure-store": "~15.0.8",
     "expo-sharing": "^55.0.18",
+    "expo-sqlite": "^55.0.11",
     "expo-status-bar": "~3.0.9",
     "lucide-react-native": "^1.7.0",
     "nativewind": "^4.1.23",
@@ -41,7 +44,6 @@
     "react-native-screens": "~4.16.0",
     "react-native-view-shot": "^4.0.3",
     "zod": "^3.23.8",
-     "expo-sqlite": "^55.0.11",
     "zustand": "^5.0.2"
   },
   "devDependencies": {

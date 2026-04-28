@@ -4,15 +4,14 @@ import { router } from 'expo-router';
 import { ROUTES } from '@/navigation/routes';
 import { useCallback, useEffect, useState } from 'react';
 
-import { useGroupEvents } from '@sportspay/shared';
-
+import { useLocalGroupEvents } from '../../hooks/use-local-group-events';
 import { useLocalGroups } from '../../hooks/use-local-groups';
 import { FloatingAddButton } from '../floating-add-button';
 import { PageContainer } from '../page-container';
 import { GroupEventList } from './components/GroupEventList';
 import { GroupHeroCard } from './components/GroupHeroCard';
 
-import type { GroupWithParticipants } from '../../services/database/entities/group/group';
+import type { GroupWithParticipants } from '@sportspay/shared';
 
 interface GroupDetailsPageProps {
   groupId: number;
@@ -27,8 +26,12 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
     getSingleGroup(groupId).then(setGroup);
   }, [groupId, getSingleGroup]);
 
-  const { upcoming, past } = useGroupEvents(groupId.toString());
+  const { upcoming, past } = useLocalGroupEvents(groupId);
   const handleBack = useCallback(() => router.back(), []);
+
+  console.log('group', group);
+  console.log('upcoming', upcoming);
+  console.log('past', past);
 
   if (!group) {
     return (
@@ -49,7 +52,7 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
         <GroupEventList upcoming={upcoming} past={past} sport={group.sport} />
       </ScrollView>
 
-      <FloatingAddButton page={ROUTES.EVENT_CREATE_RECURRENT} />
+      <FloatingAddButton page={`${ROUTES.EVENT_CREATE_RECURRENT}?groupId=${groupId}` as never} />
     </PageContainer>
   );
 }
