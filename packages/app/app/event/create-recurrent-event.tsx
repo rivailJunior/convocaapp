@@ -1,6 +1,8 @@
-import { useRouter } from 'expo-router';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { CheckCircle } from 'lucide-react-native';
-import { ScrollView, View } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
 
 import { useRecurrentEventForm } from '@sportspay/shared';
 
@@ -15,12 +17,15 @@ import { TextInputWithIcon } from '../../src/components/event/text-input-with-ic
 import { PageContainer } from '../../src/components/page-container';
 import { PrimaryButton } from '../../src/components/primary-button';
 
+import type { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+
 export default function CreateRecurrentEventScreen() {
   const router = useRouter();
   const {
     eventName,
     setEventName,
     dateTime,
+    setDateTime,
     location,
     setLocation,
     notes,
@@ -35,8 +40,47 @@ export default function CreateRecurrentEventScreen() {
     setEndDate,
   } = useRecurrentEventForm();
 
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showPicker, setShowPicker] = useState(false);
+  const [pickerMode, setPickerMode] = useState<'date' | 'time'>('date');
+
+  const formatDateTime = (date: Date) => {
+    return new Intl.DateTimeFormat('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    }).format(date);
+  };
+
   const handleDateTimePress = () => {
-    console.log('Open date/time picker');
+    setPickerMode('date');
+    setShowPicker(true);
+  };
+
+  const handlePickerChange = (_event: DateTimePickerEvent, date?: Date) => {
+    if (_event.type === 'dismissed') {
+      setShowPicker(false);
+      return;
+    }
+
+    const chosen = date ?? selectedDate;
+    setSelectedDate(chosen);
+
+    if (Platform.OS === 'android') {
+      if (pickerMode === 'date') {
+        setShowPicker(false);
+        setPickerMode('time');
+        setTimeout(() => setShowPicker(true), 100);
+      } else {
+        setShowPicker(false);
+        setPickerMode('date');
+        setDateTime(formatDateTime(chosen));
+      }
+    } else {
+      setDateTime(formatDateTime(chosen));
+    }
   };
 
   const handleEndDatePress = () => {
@@ -49,65 +93,77 @@ export default function CreateRecurrentEventScreen() {
 
   return (
     <PageContainer title="Novo Evento" onBack={() => router.back()}>
-        <ScrollView className="flex-1 px-4" contentContainerStyle={{ paddingBottom: 120 }}>
-          <PageHeader subtitle="Preencha os detalhes para organizar sua partida." />
+      <ScrollView className="flex-1 px-4" contentContainerStyle={{ paddingBottom: 120 }}>
+        <PageHeader subtitle="Preencha os detalhes para organizar sua partida." />
 
-          <View className="gap-6">
-            <FormSection label="Nome do evento">
-              <TextInputField
-                value={eventName}
-                onChangeText={setEventName}
-                placeholder="Ex: Futebol 18/01"
-              />
-            </FormSection>
-
-            <FormSection label="Data e hora">
-              <DateTimeButton value={dateTime} onPress={handleDateTimePress} />
-            </FormSection>
-
-            <FormSection label="Local" optional>
-              <TextInputWithIcon
-                value={location}
-                onChangeText={setLocation}
-                placeholder="Ex: Arena Beach Sports"
-              />
-            </FormSection>
-
-            <FormSection label="Observações" optional>
-              <TextAreaField
-                value={notes}
-                onChangeText={setNotes}
-                placeholder="Notas ou instruções para o evento..."
-                rows={3}
-              />
-            </FormSection>
-
-            <RecurrenceCard
-              isEnabled={isRecurring}
-              onToggle={setIsRecurring}
-              frequency={frequency}
-              onFrequencyChange={setFrequency}
-              selectedDays={selectedDays}
-              onToggleDay={toggleDay}
-              endDate={endDate}
-              onEndDateChange={setEndDate}
-              onEndDatePress={handleEndDatePress}
+        <View className="gap-6">
+          <FormSection label="Nome do evento">
+            <TextInputField
+              value={eventName}
+              onChangeText={setEventName}
+              placeholder="Ex: Futebol 18/01"
             />
+          </FormSection>
 
-            <InfoCard
-              title="Notificações Ativas"
-              description="Enviaremos lembretes para os participantes 2 horas antes do início."
+          <FormSection label="Data e hora">
+            <DateTimeButton
+              value={dateTime || formatDateTime(selectedDate)}
+              onPress={handleDateTimePress}
             />
-          </View>
-        </ScrollView>
+            {showPicker && (
+              <DateTimePicker
+                value={selectedDate}
+                mode={Platform.OS === 'ios' ? 'datetime' : pickerMode}
+                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                onChange={handlePickerChange}
+                locale="pt-BR"
+              />
+            )}
+          </FormSection>
 
-        <View className="absolute bottom-0 left-0 right-0 px-4 pb-8 bg-surface/80">
-          <PrimaryButton
-            label="Criar Evento"
-            onPress={handleCreateEvent}
-            icon={<CheckCircle size={20} color="#ffffff" fill="none" style={{ marginLeft: 8 }} />}
+          <FormSection label="Local" optional>
+            <TextInputWithIcon
+              value={location}
+              onChangeText={setLocation}
+              placeholder="Ex: Arena Beach Sports"
+            />
+          </FormSection>
+
+          <FormSection label="Observações" optional>
+            <TextAreaField
+              value={notes}
+              onChangeText={setNotes}
+              placeholder="Notas ou instruções para o evento..."
+              rows={3}
+            />
+          </FormSection>
+
+          <RecurrenceCard
+            isEnabled={isRecurring}
+            onToggle={setIsRecurring}
+            frequency={frequency}
+            onFrequencyChange={setFrequency}
+            selectedDays={selectedDays}
+            onToggleDay={toggleDay}
+            endDate={endDate}
+            onEndDateChange={setEndDate}
+            onEndDatePress={handleEndDatePress}
+          />
+
+          <InfoCard
+            title="Notificações Ativas"
+            description="Enviaremos lembretes para os participantes 2 horas antes do início."
           />
         </View>
+      </ScrollView>
+
+      <View className="absolute bottom-0 left-0 right-0 px-4 pb-8 bg-surface/80">
+        <PrimaryButton
+          label="Criar Evento"
+          onPress={handleCreateEvent}
+          icon={<CheckCircle size={20} color="#ffffff" fill="none" style={{ marginLeft: 8 }} />}
+        />
+      </View>
     </PageContainer>
   );
 }
