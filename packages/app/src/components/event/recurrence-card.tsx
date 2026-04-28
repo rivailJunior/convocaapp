@@ -1,11 +1,14 @@
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { Repeat } from 'lucide-react-native';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
-import { DateInput } from './date-input';
+import { DateTimeButton } from './date-time-button';
 import { FrequencyPicker } from './frequency-picker';
 import { SectionLabel } from './section-label';
 import { ToggleSwitch } from './toggle-switch';
 import { WeekdaySelector } from './weekday-selector';
+
+import type { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 
 type RecurrenceCardProps = {
   isEnabled: boolean;
@@ -15,8 +18,10 @@ type RecurrenceCardProps = {
   selectedDays: number[];
   onToggleDay: (day: number) => void;
   endDate: string;
-  onEndDateChange: (date: string) => void;
-  onEndDatePress?: () => void;
+  onEndDatePress: () => void;
+  showEndDatePicker: boolean;
+  endDatePickerValue: Date;
+  onEndDatePickerChange: (event: DateTimePickerEvent, date?: Date) => void;
 };
 
 export function RecurrenceCard({
@@ -27,8 +32,10 @@ export function RecurrenceCard({
   selectedDays,
   onToggleDay,
   endDate,
-  onEndDateChange,
   onEndDatePress,
+  showEndDatePicker,
+  endDatePickerValue,
+  onEndDatePickerChange,
 }: RecurrenceCardProps) {
   return (
     <View className="bg-surface-container-lowest p-4 rounded-2xl border border-surface-container-high">
@@ -54,7 +61,16 @@ export function RecurrenceCard({
 
           <View className="gap-2">
             <SectionLabel label="Até quando?" />
-            <DateInput value={endDate} onChangeText={onEndDateChange} onPress={onEndDatePress} />
+            <DateTimeButton value={endDate} onPress={onEndDatePress} />
+            {showEndDatePicker && (
+              <DateTimePicker
+                value={endDatePickerValue}
+                mode="date"
+                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                onChange={onEndDatePickerChange}
+                locale="pt-BR"
+              />
+            )}
           </View>
         </View>
       )}

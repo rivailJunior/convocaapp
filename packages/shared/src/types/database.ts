@@ -1,5 +1,6 @@
 import type { AppLanguage, Sport, ThemeMode } from './index';
 
+
 // Database adapter types
 export type BindValue = string | number | boolean | null | Uint8Array;
 
@@ -57,4 +58,29 @@ export interface GroupWithMemberCount {
   pixKey: string;
   createdAt: string;
   memberCount: number;
+}
+
+// Recurrent event entities
+export interface RecurrentEventEntity {
+  id: number;
+  name: string;
+  dateTime: string;
+  location: string;
+  notes: string;
+  isRecurring: boolean;
+  frequency: string;
+  selectedDays: number[];
+  endDate: string;
+  createdAt: string;
+}
+
+export interface CreateRecurrentEventInput {
+  name: string;
+  dateTime: string;
+  location?: string;
+  notes?: string;
+  isRecurring: boolean;
+  frequency: string;
+  selectedDays: number[];
+  endDate?: string;
 }

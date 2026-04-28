@@ -44,6 +44,9 @@ export default function CreateRecurrentEventScreen() {
   const [showPicker, setShowPicker] = useState(false);
   const [pickerMode, setPickerMode] = useState<'date' | 'time'>('date');
 
+  const [endDateSelected, setEndDateSelected] = useState(new Date());
+  const [showEndDatePicker, setShowEndDatePicker] = useState(false);
+
   const formatDateTime = (date: Date) => {
     return new Intl.DateTimeFormat('pt-BR', {
       day: '2-digit',
@@ -83,8 +86,31 @@ export default function CreateRecurrentEventScreen() {
     }
   };
 
+  const formatDate = (date: Date) => {
+    return new Intl.DateTimeFormat('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    }).format(date);
+  };
+
   const handleEndDatePress = () => {
-    console.log('Open end date picker');
+    setShowEndDatePicker(true);
+  };
+
+  const handleEndDatePickerChange = (_event: DateTimePickerEvent, date?: Date) => {
+    if (_event.type === 'dismissed') {
+      setShowEndDatePicker(false);
+      return;
+    }
+
+    const chosen = date ?? endDateSelected;
+    setEndDateSelected(chosen);
+    setEndDate(formatDate(chosen));
+
+    if (Platform.OS === 'android') {
+      setShowEndDatePicker(false);
+    }
   };
 
   const handleCreateEvent = () => {
@@ -145,9 +171,11 @@ export default function CreateRecurrentEventScreen() {
             onFrequencyChange={setFrequency}
             selectedDays={selectedDays}
             onToggleDay={toggleDay}
-            endDate={endDate}
-            onEndDateChange={setEndDate}
+            endDate={endDate || formatDate(endDateSelected)}
             onEndDatePress={handleEndDatePress}
+            showEndDatePicker={showEndDatePicker}
+            endDatePickerValue={endDateSelected}
+            onEndDatePickerChange={handleEndDatePickerChange}
           />
 
           <InfoCard
