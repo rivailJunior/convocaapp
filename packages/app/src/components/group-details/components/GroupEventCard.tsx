@@ -21,8 +21,6 @@ interface GroupEventCardProps {
 export function GroupEventCard({ event, sport }: GroupEventCardProps): React.JSX.Element {
   const isActive = event.status === 'scheduled';
 
-  console.log('event ==>', event);
-
   return (
     <View className="bg-surface-container-lowest rounded-xl p-4 gap-4">
       <View className="flex-row justify-between items-start">

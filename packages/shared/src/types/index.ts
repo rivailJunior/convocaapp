@@ -10,6 +10,7 @@ export type EventStatus = 'scheduled' | 'cancelled' | 'finished';
 export type BillingMode = 'fixed' | 'field_split';
 export type AttendanceType = 'member' | 'guest';
 export type TeamDrawMode = 'by_players' | 'by_teams' | 'manual';
+export type EventPaymentStatus = 'pending' | 'paid';
 export type TreasuryEntryType = 'in' | 'out';
 export type TreasuryCategory = 'guest_payment' | 'field_payment' | 'equipment' | 'other';
 export type GroupPlan = 'free' | 'pro' | 'club';
@@ -139,6 +140,8 @@ export interface AttendancePlayer {
   userId: string;
   userName: string;
   avatarUrl?: string;
+  status: AttendanceStatus;
+  paymentStatus: EventPaymentStatus;
 }
 
 export interface Team {

@@ -29,10 +29,6 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
   const { upcoming, past } = useLocalGroupEvents(groupId);
   const handleBack = useCallback(() => router.back(), []);
 
-  console.log('group', group);
-  console.log('upcoming', upcoming);
-  console.log('past', past);
-
   if (!group) {
     return (
       <SafeAreaView className="flex-1 bg-surface items-center justify-center">

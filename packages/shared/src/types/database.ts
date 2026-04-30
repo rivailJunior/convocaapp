@@ -72,6 +72,8 @@ export interface RecurrentEventEntity {
   frequency: string;
   selectedDays: number[];
   endDate: string;
+  arenaValue: number;
+  participantValue: number;
   createdAt: string;
 }
 
@@ -85,4 +87,6 @@ export interface CreateRecurrentEventInput {
   frequency: string;
   selectedDays: number[];
   endDate?: string;
+  arenaValue?: number;
+  participantValue?: number;
 }

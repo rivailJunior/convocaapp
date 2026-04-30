@@ -1,8 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import { MOCK_ATTENDANCE_LIST } from './mock-attendance-list';
-
-import type { Attendance, AttendanceStatus } from '../types';
+import type { Attendance, AttendancePlayer, AttendanceStatus } from '../types';
 
 type AttendanceFilter = 'all' | AttendanceStatus;
 
@@ -24,10 +22,26 @@ interface UseAttendanceListReturn {
   updateAttendanceStatus: (userId: string, status: AttendanceStatus) => void;
 }
 
-export function useAttendanceList(eventId: string): UseAttendanceListReturn {
-  const [allAttendances, setAllAttendances] = useState<Attendance[]>(
-    () => MOCK_ATTENDANCE_LIST[eventId] ?? [],
-  );
+interface UseAttendanceListOptions {
+  onStatusChange?: (userId: string, status: AttendanceStatus) => void;
+}
+
+export function useAttendanceList(
+  players: AttendancePlayer[],
+  options?: UseAttendanceListOptions,
+): UseAttendanceListReturn {
+  const [allAttendances, setAllAttendances] = useState<Attendance[]>([]);
+
+  useEffect(() => {
+    setAllAttendances(
+      players.map((p) => ({
+        userId: p.userId,
+        userName: p.userName,
+        avatarUrl: p.avatarUrl,
+        status: p.status ?? 'pending',
+      })),
+    );
+  }, [players]);
   const [filter, setFilter] = useState<AttendanceFilter>('all');
   const [isGenerateWithConfirmed, setIsGenerateWithConfirmed] = useState(true);
 
@@ -51,6 +65,7 @@ export function useAttendanceList(eventId: string): UseAttendanceListReturn {
         a.userId === userId ? { ...a, status, respondedAt: new Date().toISOString() } : a,
       ),
     );
+    options?.onStatusChange?.(userId, status);
   };
 
   return {

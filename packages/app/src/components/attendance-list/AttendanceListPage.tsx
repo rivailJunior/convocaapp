@@ -5,6 +5,7 @@ import { useCallback, useState } from 'react';
 
 import { useAttendanceList } from '@sportspay/shared';
 
+import { useLocalEventPlayers } from '../../hooks/use-local-event-players';
 import { PageContainer } from '../page-container';
 import { AttendanceBottomBar } from './components/AttendanceBottomBar';
 import { AttendanceFilterChips } from './components/AttendanceFilterChips';
@@ -17,6 +18,7 @@ type AttendanceListPageProps = {
 };
 
 export function AttendanceListPage({ eventId }: AttendanceListPageProps): React.JSX.Element {
+  const { players, updateStatus } = useLocalEventPlayers(eventId);
   const {
     attendances,
     filter,
@@ -25,7 +27,7 @@ export function AttendanceListPage({ eventId }: AttendanceListPageProps): React.
     setFilter,
     setIsGenerateWithConfirmed,
     updateAttendanceStatus,
-  } = useAttendanceList(eventId);
+  } = useAttendanceList(players, { onStatusChange: updateStatus });
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchVisible, setIsSearchVisible] = useState(false);

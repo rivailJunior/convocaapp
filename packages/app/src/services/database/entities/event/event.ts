@@ -2,7 +2,7 @@ import { getAdapter } from '../../database-adapter';
 
 
 
-import type { CreateRecurrentEventInput, RecurrentEventEntity } from '@sportspay/shared';
+import type { AttendanceStatus, CreateRecurrentEventInput, EventPaymentStatus, RecurrentEventEntity } from '@sportspay/shared';
 
 
 export type { CreateRecurrentEventInput, RecurrentEventEntity } from '@sportspay/shared';
@@ -34,6 +34,40 @@ async function performEventInit(): Promise<void> {
     `).catch(() => {
       // Column already exists — ignore
     });
+
+    // Migration: add arenaValue and participantValue columns
+    await db.execAsync(`
+      ALTER TABLE RecurrentEvents ADD COLUMN arenaValue REAL NOT NULL DEFAULT 0;
+    `).catch(() => {});
+    await db.execAsync(`
+      ALTER TABLE RecurrentEvents ADD COLUMN participantValue REAL NOT NULL DEFAULT 0;
+    `).catch(() => {});
+
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS EventAttendances (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        eventId INTEGER NOT NULL,
+        participantId INTEGER NOT NULL,
+        status TEXT NOT NULL DEFAULT 'pending',
+        respondedAt TEXT,
+        UNIQUE(eventId, participantId),
+        FOREIGN KEY (eventId) REFERENCES RecurrentEvents(id) ON DELETE CASCADE,
+        FOREIGN KEY (participantId) REFERENCES GroupParticipants(id) ON DELETE CASCADE
+      );
+    `);
+
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS EventPayments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        eventId INTEGER NOT NULL,
+        participantId INTEGER NOT NULL,
+        status TEXT NOT NULL DEFAULT 'pending',
+        paidAt TEXT,
+        UNIQUE(eventId, participantId),
+        FOREIGN KEY (eventId) REFERENCES RecurrentEvents(id) ON DELETE CASCADE,
+        FOREIGN KEY (participantId) REFERENCES GroupParticipants(id) ON DELETE CASCADE
+      );
+    `);
   } catch (error) {
     eventInitPromise = null;
     console.error('[EventDB] Failed to initialize event table:', error);
@@ -57,8 +91,8 @@ export async function createRecurrentEvent(input: CreateRecurrentEventInput): Pr
   const db = getAdapter();
 
   const result = await db.runAsync(
-    `INSERT INTO RecurrentEvents (groupId, name, dateTime, location, notes, isRecurring, frequency, selectedDays, endDate)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO RecurrentEvents (groupId, name, dateTime, location, notes, isRecurring, frequency, selectedDays, endDate, arenaValue, participantValue)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       input.groupId,
       input.name,
@@ -69,6 +103,8 @@ export async function createRecurrentEvent(input: CreateRecurrentEventInput): Pr
       input.frequency,
       JSON.stringify(input.selectedDays),
       input.endDate ?? '',
+      input.arenaValue ?? 0,
+      input.participantValue ?? 0,
     ],
   );
 
@@ -87,6 +123,8 @@ function mapRowToEntity(row: Record<string, unknown>): RecurrentEventEntity {
     frequency: row.frequency as string,
     selectedDays: JSON.parse((row.selectedDays as string) || '[]') as number[],
     endDate: row.endDate as string,
+    arenaValue: (row.arenaValue as number) ?? 0,
+    participantValue: (row.participantValue as number) ?? 0,
     createdAt: row.createdAt as string,
   };
 }
@@ -127,4 +165,63 @@ export async function getRecurrentEventsByGroupId(
     [groupId],
   );
   return rows.map(mapRowToEntity);
+}
+
+interface EventPlayerRow {
+  userId: string;
+  userName: string;
+  status: AttendanceStatus;
+  paymentStatus: EventPaymentStatus;
+}
+
+export async function getEventPlayers(
+  eventId: number,
+): Promise<EventPlayerRow[]> {
+  await ensureEventInitialized();
+  const db = getAdapter();
+  return db.getAllAsync<EventPlayerRow>(
+    `SELECT CAST(gp.id AS TEXT) AS userId,
+            gp.name AS userName,
+            COALESCE(ea.status, 'pending') AS status,
+            COALESCE(ep.status, 'pending') AS paymentStatus
+     FROM GroupParticipants gp
+     INNER JOIN RecurrentEvents re ON re.groupId = gp.groupId
+     LEFT JOIN EventAttendances ea ON ea.participantId = gp.id AND ea.eventId = re.id
+     LEFT JOIN EventPayments ep ON ep.participantId = gp.id AND ep.eventId = re.id
+     WHERE re.id = ?
+     ORDER BY gp.id`,
+    [eventId],
+  );
+}
+
+export async function upsertEventPayment(
+  eventId: number,
+  participantId: number,
+  status: EventPaymentStatus,
+): Promise<void> {
+  await ensureEventInitialized();
+  const db = getAdapter();
+  await db.runAsync(
+    `INSERT INTO EventPayments (eventId, participantId, status, paidAt)
+     VALUES (?, ?, ?, CASE WHEN ? = 'paid' THEN datetime('now') ELSE NULL END)
+     ON CONFLICT(eventId, participantId)
+     DO UPDATE SET status = excluded.status, paidAt = excluded.paidAt`,
+    [eventId, participantId, status, status],
+  );
+}
+
+export async function upsertEventAttendance(
+  eventId: number,
+  participantId: number,
+  status: AttendanceStatus,
+): Promise<void> {
+  await ensureEventInitialized();
+  const db = getAdapter();
+  await db.runAsync(
+    `INSERT INTO EventAttendances (eventId, participantId, status, respondedAt)
+     VALUES (?, ?, ?, datetime('now'))
+     ON CONFLICT(eventId, participantId)
+     DO UPDATE SET status = excluded.status, respondedAt = excluded.respondedAt`,
+    [eventId, participantId, status],
+  );
 }
