@@ -3,7 +3,11 @@ import { FlatList, Pressable, TextInput, View } from 'react-native';
 import { router } from 'expo-router';
 import { useCallback, useState } from 'react';
 
+
+
 import { useAttendanceList } from '@sportspay/shared';
+
+
 
 import { useLocalEventPlayers } from '../../hooks/use-local-event-players';
 import { PageContainer } from '../page-container';
@@ -11,7 +15,10 @@ import { AttendanceBottomBar } from './components/AttendanceBottomBar';
 import { AttendanceFilterChips } from './components/AttendanceFilterChips';
 import { AttendanceRow } from './components/AttendanceRow';
 
+
+
 import type { Attendance, AttendanceStatus } from '@sportspay/shared';
+
 
 type AttendanceListPageProps = {
   eventId: string;
@@ -90,7 +97,9 @@ export function AttendanceListPage({ eventId }: AttendanceListPageProps): React.
           </View>
         )}
 
-        <AttendanceFilterChips activeFilter={filter} counts={counts} onFilterChange={setFilter} />
+        <View>
+          <AttendanceFilterChips activeFilter={filter} counts={counts} onFilterChange={setFilter} />
+        </View>
 
         <FlatList
           data={filteredAttendances}
