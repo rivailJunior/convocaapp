@@ -1,11 +1,12 @@
+import { ClipboardList } from 'lucide-react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { useCallback } from 'react';
-import { ScrollView, Text, View } from 'react-native';
 
-import { useEventPlayers, useGenerateTeams } from '@sportspay/shared';
+import { useAttendanceList, useGenerateTeams } from '@sportspay/shared';
 
+import { useLocalEventPlayers } from '../../hooks/use-local-event-players';
 import { PageContainer } from '../page-container';
-
 import { DrawButton } from './components/DrawButton';
 import { DrawInput } from './components/DrawInput';
 import { DrawResultList } from './components/DrawResultList';
@@ -24,10 +25,13 @@ export function GenerateTeamsPage({
   eventId,
   eventTitle,
 }: GenerateTeamsPageProps): React.JSX.Element {
-  const { players } = useEventPlayers(eventId);
+  const { players } = useLocalEventPlayers(eventId);
+  const { counts } = useAttendanceList(players);
 
   const { mode, value, result, error, preview, canDraw, setMode, setValue, draw, redraw } =
     useGenerateTeams(players);
+
+  const hasUnconfirmedAttendances = counts.all > 0 && counts.confirmed < counts.all;
 
   const handleBack = useCallback(() => {
     try {
@@ -47,6 +51,13 @@ export function GenerateTeamsPage({
         eventTitle,
         result: JSON.stringify(result),
       },
+    });
+  };
+
+  const handleNavigateToAttendance = () => {
+    router.push({
+      pathname: '/events/[id]/attendance',
+      params: { id: eventId },
     });
   };
 
@@ -72,6 +83,18 @@ export function GenerateTeamsPage({
         <ModeSelector selected={mode} onSelect={setMode} />
 
         <DrawInput mode={mode} value={value} preview={preview} onChangeValue={setValue} />
+
+        {hasUnconfirmedAttendances && (
+          <Pressable
+            onPress={handleNavigateToAttendance}
+            className="w-full py-4 rounded-xl items-center justify-center mb-4 bg-surface-container-low flex-row gap-2"
+          >
+            <ClipboardList size={20} color="#266829" />
+            <Text className="font-headline font-bold text-sm text-primary">
+              Lista de Presença ({counts.confirmed}/{counts.all})
+            </Text>
+          </Pressable>
+        )}
 
         <DrawButton
           disabled={shouldDisble}

@@ -9,3 +9,4 @@ export { useTreasurySummary } from './use-treasury-summary';
 export { useUpcomingEvents } from './use-upcoming-events';
 export { useGenerateTeams } from './use-generate-teams';
 export { useEventPlayers } from './use-event-players';
+export { useAttendanceList } from './use-attendance-list';
