@@ -167,6 +167,26 @@ export async function getRecurrentEventsByGroupId(
   return rows.map(mapRowToEntity);
 }
 
+export async function getConfirmedCountsByGroupId(
+  groupId: number,
+): Promise<Record<number, number>> {
+  await ensureEventInitialized();
+  const db = getAdapter();
+  const rows = await db.getAllAsync<{ eventId: number; count: number }>(
+    `SELECT ea.eventId, COUNT(*) AS count
+     FROM EventAttendances ea
+     INNER JOIN RecurrentEvents re ON re.id = ea.eventId
+     WHERE re.groupId = ? AND ea.status = 'confirmed'
+     GROUP BY ea.eventId`,
+    [groupId],
+  );
+  const map: Record<number, number> = {};
+  for (const row of rows) {
+    map[row.eventId] = row.count;
+  }
+  return map;
+}
+
 interface EventPlayerRow {
   userId: string;
   userName: string;
