@@ -4,7 +4,11 @@ import { Alert, Platform, ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 
+
+
 import { useRecurrentEventForm } from '@sportspay/shared';
+
+
 
 import { DateTimeButton } from '../../src/components/event/date-time-button';
 import { FormSection } from '../../src/components/event/form-section';
@@ -18,7 +22,10 @@ import { PageContainer } from '../../src/components/page-container';
 import { PrimaryButton } from '../../src/components/primary-button';
 import { createRecurrentEvent } from '../../src/services/database/entities/event/event';
 
+
+
 import type { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+
 
 export default function CreateRecurrentEventScreen() {
   const router = useRouter();
@@ -40,6 +47,10 @@ export default function CreateRecurrentEventScreen() {
     toggleDay,
     endDate,
     setEndDate,
+    arenaValue,
+    setArenaValue,
+    participantValue,
+    setParticipantValue,
   } = useRecurrentEventForm();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -48,6 +59,25 @@ export default function CreateRecurrentEventScreen() {
 
   const [endDateSelected, setEndDateSelected] = useState(new Date());
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
+
+  const formatCurrencyBRL = (raw: string): string => {
+    const digits = raw.replace(/\D/g, '');
+    const cents = parseInt(digits || '0', 10);
+    return (cents / 100).toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+  };
+
+  const handleArenaValueChange = (text: string) => {
+    const digits = text.replace(/\D/g, '');
+    setArenaValue(digits ? formatCurrencyBRL(digits) : '');
+  };
+
+  const handleParticipantValueChange = (text: string) => {
+    const digits = text.replace(/\D/g, '');
+    setParticipantValue(digits ? formatCurrencyBRL(digits) : '');
+  };
 
   const formatDateTime = (date: Date) => {
     return new Intl.DateTimeFormat('pt-BR', {
@@ -127,6 +157,12 @@ export default function CreateRecurrentEventScreen() {
         frequency,
         selectedDays,
         endDate: endDate || formatDate(endDateSelected),
+        arenaValue: arenaValue
+          ? parseFloat(arenaValue.replace(/[^\d,]/g, '').replace(',', '.'))
+          : undefined,
+        participantValue: participantValue
+          ? parseFloat(participantValue.replace(/[^\d,]/g, '').replace(',', '.'))
+          : undefined,
       });
 
       router.back();
@@ -171,6 +207,24 @@ export default function CreateRecurrentEventScreen() {
               value={location}
               onChangeText={setLocation}
               placeholder="Ex: Arena Beach Sports"
+            />
+          </FormSection>
+
+          <FormSection label="Valor da Arena" optional>
+            <TextInputField
+              value={arenaValue}
+              onChangeText={handleArenaValueChange}
+              placeholder="R$ 0,00"
+              keyboardType="numeric"
+            />
+          </FormSection>
+
+          <FormSection label="Valor por Participante" optional>
+            <TextInputField
+              value={participantValue}
+              onChangeText={handleParticipantValueChange}
+              placeholder="R$ 0,00"
+              keyboardType="numeric"
             />
           </FormSection>
 

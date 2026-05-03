@@ -9,6 +9,8 @@ type RecurrentEventFormData = {
   frequency: string;
   selectedDays: number[];
   endDate: string;
+  arenaValue: string;
+  participantValue: string;
 };
 
 type RecurrentEventFormActions = {
@@ -20,6 +22,8 @@ type RecurrentEventFormActions = {
   setFrequency: (value: string) => void;
   toggleDay: (day: number) => void;
   setEndDate: (value: string) => void;
+  setArenaValue: (value: string) => void;
+  setParticipantValue: (value: string) => void;
   resetForm: () => void;
 };
 
@@ -34,6 +38,8 @@ const INITIAL_STATE: RecurrentEventFormData = {
   frequency: 'weekly',
   selectedDays: [],
   endDate: '',
+  arenaValue: '',
+  participantValue: '',
 };
 
 export function useRecurrentEventForm(): UseRecurrentEventFormReturn {
@@ -45,10 +51,12 @@ export function useRecurrentEventForm(): UseRecurrentEventFormReturn {
   const [frequency, setFrequency] = useState(INITIAL_STATE.frequency);
   const [selectedDays, setSelectedDays] = useState<number[]>(INITIAL_STATE.selectedDays);
   const [endDate, setEndDate] = useState(INITIAL_STATE.endDate);
+  const [arenaValue, setArenaValue] = useState(INITIAL_STATE.arenaValue);
+  const [participantValue, setParticipantValue] = useState(INITIAL_STATE.participantValue);
 
   const toggleDay = (day: number) => {
     setSelectedDays((prev: number[]) =>
-      prev.includes(day) ? prev.filter((d: number) => d !== day) : [...prev, day]
+      prev.includes(day) ? prev.filter((d: number) => d !== day) : [...prev, day],
     );
   };
 
@@ -61,6 +69,8 @@ export function useRecurrentEventForm(): UseRecurrentEventFormReturn {
     setFrequency(INITIAL_STATE.frequency);
     setSelectedDays(INITIAL_STATE.selectedDays);
     setEndDate(INITIAL_STATE.endDate);
+    setArenaValue(INITIAL_STATE.arenaValue);
+    setParticipantValue(INITIAL_STATE.participantValue);
   };
 
   return {
@@ -72,6 +82,8 @@ export function useRecurrentEventForm(): UseRecurrentEventFormReturn {
     frequency,
     selectedDays,
     endDate,
+    arenaValue,
+    participantValue,
     setEventName,
     setDateTime,
     setLocation,
@@ -80,6 +92,8 @@ export function useRecurrentEventForm(): UseRecurrentEventFormReturn {
     setFrequency,
     toggleDay,
     setEndDate,
+    setArenaValue,
+    setParticipantValue,
     resetForm,
   };
 }
