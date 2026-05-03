@@ -1,6 +1,6 @@
 import { ScrollView, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { ROUTES } from '@/navigation/routes';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -26,7 +26,13 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
     getSingleGroup(groupId).then(setGroup);
   }, [groupId, getSingleGroup]);
 
-  const { upcoming, past } = useLocalGroupEvents(groupId);
+  const { upcoming, past, refetch } = useLocalGroupEvents(groupId);
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
   const handleBack = useCallback(() => router.back(), []);
 
   if (!group) {

@@ -1,10 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { getRecurrentEventsByGroupId } from '../services/database/entities/event/event';
+import {
+  getConfirmedCountsByGroupId,
+  getRecurrentEventsByGroupId,
+} from '../services/database/entities/event/event';
 
 import type { GroupEventItem, RecurrentEventEntity } from '@sportspay/shared';
 
-function mapEntityToGroupEvent(entity: RecurrentEventEntity): GroupEventItem {
+function mapEntityToGroupEvent(
+  entity: RecurrentEventEntity,
+  confirmedCounts: Record<number, number>,
+): GroupEventItem {
   const dateTime = entity.dateTime;
 
   return {
@@ -20,7 +26,7 @@ function mapEntityToGroupEvent(entity: RecurrentEventEntity): GroupEventItem {
     status: 'scheduled',
     createdBy: '',
     createdAt: entity.createdAt,
-    confirmedCount: 0,
+    confirmedCount: confirmedCounts[entity.id] ?? 0,
     hasTeams: false,
   };
 }
@@ -46,8 +52,11 @@ export function useLocalGroupEvents(groupId: number): UseLocalGroupEventsReturn 
   const refetch = useCallback(async () => {
     try {
       setIsLoading(true);
-      const entities = await getRecurrentEventsByGroupId(groupId);
-      const events = entities.map(mapEntityToGroupEvent);
+      const [entities, confirmedCounts] = await Promise.all([
+        getRecurrentEventsByGroupId(groupId),
+        getConfirmedCountsByGroupId(groupId),
+      ]);
+      const events = entities.map((e) => mapEntityToGroupEvent(e, confirmedCounts));
 
       setUpcoming(events.filter((e) => isUpcoming(e.date)));
       setPast(events.filter((e) => !isUpcoming(e.date)));

@@ -2,25 +2,11 @@ import { Copy, User } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 import * as ExpoClipboard from 'expo-clipboard';
 
-
-
 import { colors } from '@sportspay/shared';
 
 import type { GroupWithParticipants } from '@sportspay/shared';
 
-
-const MAX_VISIBLE_AVATARS = 8;
-
-const AVATAR_COLORS = [
-  { bg: '#DCE775', icon: '#33691E' },
-  { bg: '#81D4FA', icon: '#01579B' },
-  { bg: '#F48FB1', icon: '#880E4F' },
-  { bg: '#CE93D8', icon: '#4A148C' },
-  { bg: '#FFCC80', icon: '#E65100' },
-  { bg: '#80CBC4', icon: '#004D40' },
-  { bg: '#EF9A9A', icon: '#B71C1C' },
-  { bg: '#A5D6A7', icon: '#1B5E20' },
-];
+const MAX_VISIBLE_AVATARS = 10;
 
 interface GroupHeroCardProps {
   group: GroupWithParticipants;
@@ -34,27 +20,30 @@ export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element 
   const handleCopyPix = async () => {
     if (group.pixKey) {
       await ExpoClipboard.setStringAsync(group.pixKey);
+      alert('Chave PIX copiada!');
     }
   };
 
   return (
     <View className="bg-surface-container-lowest rounded-xl p-6 mb-8">
-      <View className="gap-6">
+      <View className="gap-2">
+        <Text className="text-sm font-medium text-on-surface-variant">
+          {memberCount > 0 ? `${memberCount} Participantes` : 'Sem participantes'}
+        </Text>
         <View
           className="flex-row items-center"
           accessible
           accessibilityLabel={`${memberCount} participantes`}
         >
-          {visibleParticipants.map((participant, i) => {
-            const palette = AVATAR_COLORS[i % AVATAR_COLORS.length];
+          {visibleParticipants?.map((participant, i) => {
             return (
               <View
                 key={participant.id}
                 className="w-10 h-10 rounded-full border-2 border-white items-center justify-center"
-                style={{ marginLeft: i === 0 ? 0 : -12, backgroundColor: palette.bg }}
+                style={{ marginLeft: i === 0 ? 0 : -12, backgroundColor: '#33691E' }}
                 accessible={false}
               >
-                <User size={18} color={palette.icon} />
+                <User size={18} color={'white'} />
               </View>
             );
           })}
@@ -69,12 +58,8 @@ export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element 
           )}
         </View>
 
-        <Text className="text-sm font-medium text-on-surface-variant">
-          {memberCount} participantes
-        </Text>
-
         {group.pixKey && (
-          <>
+          <View className="mt-4 gap-4 ">
             <View className="h-px bg-surface-container-high" />
             <View className="flex-row items-center justify-between">
               <View className="flex-col gap-0.5">
@@ -91,7 +76,7 @@ export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element 
                 <Copy size={18} color={colors.primary} />
               </Pressable>
             </View>
-          </>
+          </View>
         )}
       </View>
     </View>

@@ -27,8 +27,8 @@ export function GroupEventList({ upcoming, past, sport }: GroupEventListProps): 
           <Text className="text-xs text-on-surface-variant">Nenhum evento agendado.</Text>
         </View>
       ) : (
-        <View className="gap-6">
-          {upcoming.map((event) => (
+        <View className="gap-2">
+          {upcoming?.reverse()?.map((event) => (
             <Pressable
               key={event.id}
               onPress={() => router.push(`/generate-teams/${event.id}` as `/generate-teams/[id]`)}
