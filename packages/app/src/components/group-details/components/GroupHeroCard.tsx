@@ -1,8 +1,10 @@
-import { Copy, User } from 'lucide-react-native';
+import { Copy } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 import * as ExpoClipboard from 'expo-clipboard';
 
 import { colors } from '@sportspay/shared';
+
+import { AvatarStack } from '../../ui/AvatarStack';
 
 import type { GroupWithParticipants } from '@sportspay/shared';
 
@@ -14,8 +16,6 @@ interface GroupHeroCardProps {
 
 export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element {
   const memberCount = group.participants.length;
-  const visibleParticipants = group.participants.slice(0, MAX_VISIBLE_AVATARS);
-  const overflowCount = memberCount - visibleParticipants.length;
 
   const handleCopyPix = async () => {
     if (group.pixKey) {
@@ -30,32 +30,8 @@ export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element 
         <Text className="text-sm font-medium text-on-surface-variant">
           {memberCount > 0 ? `${memberCount} Participantes` : 'Sem participantes'}
         </Text>
-        <View
-          className="flex-row items-center"
-          accessible
-          accessibilityLabel={`${memberCount} participantes`}
-        >
-          {visibleParticipants?.map((participant, i) => {
-            return (
-              <View
-                key={participant.id}
-                className="w-10 h-10 rounded-full border-2 border-white items-center justify-center"
-                style={{ marginLeft: i === 0 ? 0 : -12, backgroundColor: '#33691E' }}
-                accessible={false}
-              >
-                <User size={18} color={'white'} />
-              </View>
-            );
-          })}
-          {overflowCount > 0 && (
-            <View
-              className="w-10 h-10 rounded-full bg-surface-container-high border-2 border-white items-center justify-center"
-              style={{ marginLeft: -12 }}
-              accessible={false}
-            >
-              <Text className="text-xs font-bold text-on-surface-variant">+{overflowCount}</Text>
-            </View>
-          )}
+        <View accessible accessibilityLabel={`${memberCount} participantes`}>
+          <AvatarStack count={memberCount} maxVisible={MAX_VISIBLE_AVATARS} />
         </View>
 
         {group.pixKey && (

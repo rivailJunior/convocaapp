@@ -230,6 +230,36 @@ export async function upsertEventPayment(
   );
 }
 
+interface UpcomingEventRow {
+  id: number;
+  groupId: number;
+  name: string;
+  dateTime: string;
+  location: string;
+  frequency: string;
+  createdAt: string;
+  sport: string;
+  groupName: string;
+  confirmedCount: number;
+}
+
+export async function getUpcomingEventItems(): Promise<UpcomingEventRow[]> {
+  await ensureEventInitialized();
+  const db = getAdapter();
+  return db.getAllAsync<UpcomingEventRow>(
+    `SELECT re.id, re.groupId, re.name, re.dateTime, re.location,
+            re.frequency, re.createdAt,
+            g.sport, g.name AS groupName,
+            COUNT(CASE WHEN ea.status = 'confirmed' THEN 1 END) AS confirmedCount
+     FROM RecurrentEvents re
+     INNER JOIN Groups g ON g.id = re.groupId
+     LEFT JOIN EventAttendances ea ON ea.eventId = re.id
+     WHERE re.dateTime >= datetime('now')
+     GROUP BY re.id
+     ORDER BY re.dateTime ASC`,
+  );
+}
+
 export async function upsertEventAttendance(
   eventId: number,
   participantId: number,

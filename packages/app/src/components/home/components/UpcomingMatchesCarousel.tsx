@@ -1,6 +1,8 @@
-import { Image, Pressable, ScrollView, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 
-import { SPORTS, formatEventDate } from '@sportspay/shared';
+import { formatLocalEventDate, SPORTS } from '@sportspay/shared';
+
+import { AvatarStack } from '../../ui/AvatarStack';
 
 import type { Sport, UpcomingEventItem } from '@sportspay/shared';
 
@@ -15,13 +17,13 @@ interface UpcomingMatchesCarouselProps {
   events: UpcomingEventItem[];
 }
 
-export function UpcomingMatchesCarousel({ events }: UpcomingMatchesCarouselProps): React.JSX.Element {
+export function UpcomingMatchesCarousel({
+  events,
+}: UpcomingMatchesCarouselProps): React.JSX.Element {
   return (
     <View className="gap-4">
       <View className="flex-row items-center justify-between">
-        <Text className="text-xl font-bold text-on-background">
-          Próximas Partidas
-        </Text>
+        <Text className="text-xl font-bold text-on-background">Próximas Partidas</Text>
         <Pressable disabled className="opacity-60">
           <Text className="text-primary font-bold text-sm">Ver tudo</Text>
         </Pressable>
@@ -29,9 +31,7 @@ export function UpcomingMatchesCarousel({ events }: UpcomingMatchesCarouselProps
 
       {events.length === 0 ? (
         <View className="rounded-xl bg-surface-container-lowest p-4 items-center">
-          <Text className="text-xs text-on-surface-variant">
-            Nenhum evento agendado.
-          </Text>
+          <Text className="text-xs text-on-surface-variant">Nenhum evento agendado.</Text>
         </View>
       ) : (
         <ScrollView
@@ -39,9 +39,7 @@ export function UpcomingMatchesCarousel({ events }: UpcomingMatchesCarouselProps
           showsHorizontalScrollIndicator={false}
           contentContainerClassName="gap-4"
         >
-          {events.map((event) => {
-            const extraCount = event.confirmedCount - event.confirmedAvatars.length;
-
+          {events?.reverse().map((event) => {
             return (
               <View
                 key={event.id}
@@ -54,7 +52,7 @@ export function UpcomingMatchesCarousel({ events }: UpcomingMatchesCarouselProps
                     {SPORTS[event.sport]}
                   </Text>
                   <Text className="text-on-surface-variant text-xs font-medium">
-                    {formatEventDate(event.date)}
+                    {formatLocalEventDate(event.date)}
                   </Text>
                 </View>
 
@@ -62,32 +60,12 @@ export function UpcomingMatchesCarousel({ events }: UpcomingMatchesCarouselProps
                   <Text className="font-bold text-lg leading-tight text-on-surface">
                     {event.title}
                   </Text>
-                  <Text className="text-on-surface-variant text-sm">
-                    {event.venueName}
-                  </Text>
+                  <Text className="text-on-surface-variant text-sm">{event.venueName}</Text>
                 </View>
 
                 <View className="flex-row items-center gap-2 mt-2">
-                  <View className="flex-row">
-                    {event.confirmedAvatars.map((url, i) => (
-                      <Image
-                        key={`${event.id}-avatar-${i}`}
-                        className="w-6 h-6 rounded-full border-2 border-white -ml-2 first:ml-0"
-                        source={{ uri: url }}
-                        accessibilityLabel="Jogador confirmado"
-                      />
-                    ))}
-                    {extraCount > 0 && (
-                      <View className="w-6 h-6 rounded-full border-2 border-white bg-surface-container-high items-center justify-center -ml-2">
-                        <Text className="text-[8px] font-bold text-on-surface">
-                          +{extraCount}
-                        </Text>
-                      </View>
-                    )}
-                  </View>
-                  <Text className="text-xs text-on-surface-variant">
-                    Confirmados
-                  </Text>
+                  <AvatarStack count={event.confirmedCount} size="sm" />
+                  <Text className="text-xs text-on-surface-variant">Confirmados</Text>
                 </View>
               </View>
             );
