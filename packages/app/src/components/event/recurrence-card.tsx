@@ -1,19 +1,12 @@
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { Repeat } from 'lucide-react-native';
-import { Platform, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
-
-
-import { DateTimeButton } from './date-time-button';
 import { FrequencyPicker } from './frequency-picker';
 import { SectionLabel } from './section-label';
 import { ToggleSwitch } from './toggle-switch';
 import { WeekdaySelector } from './weekday-selector';
 
-
-
 import type { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-
 
 type RecurrenceCardProps = {
   isEnabled: boolean;
