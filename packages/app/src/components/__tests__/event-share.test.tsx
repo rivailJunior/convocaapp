@@ -1,9 +1,9 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import * as Sharing from 'expo-sharing';
 
 import { EventShare } from '../event-share';
 
-import type { Group, Event, User } from '@sportspay/shared';
+import type { Event, Group, User } from '@sportspay/shared';
 
 jest.mock('expo-sharing', () => ({
   isAvailableAsync: jest.fn().mockResolvedValue(true),
@@ -80,7 +80,7 @@ describe('EventShare', () => {
     });
 
     const call = (Sharing.shareAsync as jest.Mock).mock.calls[0][0];
-    expect(call).toContain('Pelada da Quinta - Futebol');
+    expect(call).toContain('Pelada da Quinta — Futebol');
     expect(call).toContain('Futebol Quinta');
     expect(call).toContain('Campo Society Central');
     expect(call).toContain('Rua das Flores, 123');
@@ -206,10 +206,7 @@ describe('EventShare', () => {
     fireEvent.press(screen.getByText('Compartilhar Evento'));
 
     await waitFor(() => {
-      expect(warnSpy).toHaveBeenCalledWith(
-        'Error sharing event',
-        expect.any(Error),
-      );
+      expect(warnSpy).toHaveBeenCalledWith('Error sharing event', expect.any(Error));
     });
 
     warnSpy.mockRestore();
