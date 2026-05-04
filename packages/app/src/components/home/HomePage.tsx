@@ -2,12 +2,11 @@ import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from 'expo-router';
 import { useLocalGroups } from '@/hooks/use-local-groups';
+import { useLocalUpcomingEvents } from '@/hooks/use-local-upcoming-events';
 import { ROUTES } from '@/navigation';
 import { useCallback } from 'react';
 
-
-
-import { useTreasurySummary, useUpcomingEvents } from '@sportspay/shared';
+import { useTreasurySummary } from '@sportspay/shared';
 
 import { FloatingAddButton } from '../floating-add-button';
 import { BalanceCard } from './components/BalanceCard';
@@ -15,20 +14,17 @@ import { HomeHeader } from './components/HomeHeader';
 import { MyGroupsList } from './components/MyGroupsList';
 import { UpcomingMatchesCarousel } from './components/UpcomingMatchesCarousel';
 
-
-
-
-
 export function HomePage(): React.JSX.Element {
   const { groups, refetch } = useLocalGroups();
+  const { events, refetch: refetchEvents } = useLocalUpcomingEvents();
 
   useFocusEffect(
     useCallback(() => {
       refetch();
-    }, [refetch]),
+      refetchEvents();
+    }, [refetch, refetchEvents]),
   );
   const { summaries } = useTreasurySummary();
-  const { events } = useUpcomingEvents();
 
   return (
     <SafeAreaView className="flex-1 bg-surface">

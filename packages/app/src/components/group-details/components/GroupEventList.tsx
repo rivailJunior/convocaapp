@@ -31,7 +31,12 @@ export function GroupEventList({ upcoming, past, sport }: GroupEventListProps): 
           {upcoming?.reverse()?.map((event) => (
             <Pressable
               key={event.id}
-              onPress={() => router.push(`/generate-teams/${event.id}` as `/generate-teams/[id]`)}
+              onPress={() =>
+                router.push({
+                  pathname: '/generate-teams/[id]',
+                  params: { id: event.id, eventTitle: event.title, sport },
+                })
+              }
             >
               <GroupEventCard event={event} sport={sport} />
             </Pressable>
@@ -47,7 +52,10 @@ export function GroupEventList({ upcoming, past, sport }: GroupEventListProps): 
                 <Pressable
                   key={event.id}
                   onPress={() =>
-                    router.push(`/generate-teams/${event.id}` as `/generate-teams/[id]`)
+                    router.push({
+                      pathname: '/generate-teams/[id]',
+                      params: { id: event.id, eventTitle: event.title, sport },
+                    })
                   }
                 >
                   <GroupEventCard event={event} sport={sport} />
