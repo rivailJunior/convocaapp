@@ -1,4 +1,5 @@
 import { Pressable, ScrollView, Text, View } from 'react-native';
+import { router } from 'expo-router';
 
 import { formatLocalEventDate, SPORTS } from '@sportspay/shared';
 
@@ -24,9 +25,9 @@ export function UpcomingMatchesCarousel({
     <View className="gap-4">
       <View className="flex-row items-center justify-between">
         <Text className="text-xl font-bold text-on-background">Próximas Partidas</Text>
-        <Pressable disabled className="opacity-60">
+        {/* <Pressable disabled className="opacity-60">
           <Text className="text-primary font-bold text-sm">Ver tudo</Text>
-        </Pressable>
+        </Pressable> */}
       </View>
 
       {events.length === 0 ? (
@@ -40,10 +41,18 @@ export function UpcomingMatchesCarousel({
           contentContainerClassName="gap-4"
         >
           {events?.reverse().map((event) => {
+            const handlePress = () => {
+              router.push({
+                pathname: '/generate-teams/[id]',
+                params: { id: event.id, eventTitle: event.title, sport: event.sport },
+              });
+            };
+
             return (
-              <View
+              <Pressable
                 key={event.id}
-                className="w-72 bg-surface-container-lowest rounded-xl p-4 gap-3"
+                onPress={handlePress}
+                className="w-72 bg-surface-container-lowest rounded-xl p-4 gap-3 active:opacity-80"
               >
                 <View className="flex-row items-center justify-between">
                   <Text
@@ -67,7 +76,7 @@ export function UpcomingMatchesCarousel({
                   <AvatarStack count={event.confirmedCount} size="sm" />
                   <Text className="text-xs text-on-surface-variant">Confirmados</Text>
                 </View>
-              </View>
+              </Pressable>
             );
           })}
         </ScrollView>
