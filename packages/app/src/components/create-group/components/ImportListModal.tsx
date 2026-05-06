@@ -3,7 +3,13 @@ import { Alert, Keyboard, Modal, Pressable, Text, TextInput, View } from 'react-
 import * as Clipboard from 'expo-clipboard';
 import { useCallback, useState } from 'react';
 
+
+
 import { parseWhatsappList } from '@sportspay/shared';
+
+
+
+
 
 interface ImportListModalProps {
   visible: boolean;
@@ -73,7 +79,7 @@ export function ImportListModal({
 
           <View className="bg-surface-container-high rounded-xl p-3 mb-3 min-h-[160px] max-h-[240px]">
             <TextInput
-              className="flex-1 text-on-surface text-sm"
+              className="flex-1 text-on-surface"
               multiline
               textAlignVertical="top"
               placeholder={'Ex:\n1 - João ✅\n2 - Maria ✅\n3 - Pedro'}

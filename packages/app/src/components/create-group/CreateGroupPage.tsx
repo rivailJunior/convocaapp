@@ -62,12 +62,12 @@ export function CreateGroupPage(): React.JSX.Element {
       <ScrollView className="flex-1 px-4" contentContainerStyle={{ paddingBottom: 120 }}>
         <View className="mb-8 pt-8">
           <Text className="font-bold text-lg text-on-surface mb-4">Informações Básicas</Text>
-          <Text className="font-semibold text-sm text-on-surface-variant">Nome do grupo</Text>
           <View className="gap-6">
             <View className="gap-2">
+              <Text className="font-semibold text-sm text-on-surface-variant">Nome do grupo</Text>
               <View>
                 <TextInput
-                  className="w-full bg-surface-container-high rounded-xl px-4 py-4 text-on-surface text-base"
+                  className="w-full bg-surface-container-high rounded-xl p-4 text-on-surface"
                   placeholder="Ex: Fute de quinta"
                   placeholderTextColor="#757778"
                   value={formState.groupName}
@@ -89,7 +89,7 @@ export function CreateGroupPage(): React.JSX.Element {
             <View className="flex-row items-center bg-surface-container-high rounded-xl px-4">
               <CreditCard size={20} color="#595c5d" />
               <TextInput
-                className="flex-1 bg-transparent py-4 ml-3 text-on-surface text-base"
+                className="flex-1 bg-transparent py-4 ml-3 text-on-surface "
                 placeholder="Ex: joao@email.com"
                 placeholderTextColor="#757778"
                 value={formState.pixKey}
