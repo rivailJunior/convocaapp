@@ -16,7 +16,7 @@ import { useCreateGroup } from '@sportspay/shared';
 import { createGroup } from '../../services/database/entities/group/group';
 import { PageContainer } from '../page-container';
 import { BottomActionBar } from './components/BottomActionBar';
-import { CreateEventBanner } from './components/CreateEventBanner';
+
 import { ParticipantList } from './components/ParticipantList';
 import { SportSelectionGrid } from './components/SportSelectionGrid';
 
