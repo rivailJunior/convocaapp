@@ -1,10 +1,6 @@
 import { TeamGenerator } from './team-generator';
 
-import type { 
-  User, 
-  Team, 
-  TeamDrawResult 
-} from '@sportspay/shared';
+import type { Team, TeamDrawResult, User } from '@sportspay/shared';
 
 /** Fisher-Yates shuffle to produce random balanced teams. */
 export class RandomTeams extends TeamGenerator {
@@ -42,6 +38,8 @@ export class RandomTeams extends TeamGenerator {
           userId: p.uid,
           userName: p.name,
           avatarUrl: p.avatarUrl,
+          status: 'confirmed' as const,
+          paymentStatus: 'pending' as const,
         })),
       });
     }
@@ -51,6 +49,8 @@ export class RandomTeams extends TeamGenerator {
       userId: p.uid,
       userName: p.name,
       avatarUrl: p.avatarUrl,
+      status: 'confirmed' as const,
+      paymentStatus: 'pending' as const,
     }));
 
     return { teams, bench, totalPlayers: players.length };
