@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "turbo dev",
     "start:app": "pnpm --filter app start",
+    "test:app": "pnpm --filter app test",
+    "type-check:app": "pnpm --filter app type-check",
     "build": "turbo build",
     "lint": "turbo lint",
+    "test": "turbo test",
     "type-check": "turbo type-check",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\""

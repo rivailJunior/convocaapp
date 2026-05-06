@@ -10,9 +10,8 @@ import {
 
 import type * as SQLiteTypes from 'expo-sqlite';
 
-
 const mockExecAsync = jest.fn().mockResolvedValue(undefined);
-const mockRunAsync = jest.fn().mockResolvedValue(undefined);
+const mockRunAsync = jest.fn().mockResolvedValue({ lastInsertRowId: 1, changes: 1 });
 const mockGetFirstAsync = jest.fn().mockResolvedValue(null);
 
 const mockDb: Partial<SQLiteTypes.SQLiteDatabase> = {
@@ -42,6 +41,7 @@ describe('settings-database', () => {
       expect(mockRunAsync).toHaveBeenCalledTimes(1);
       expect(mockRunAsync).toHaveBeenCalledWith(
         expect.stringContaining('INSERT OR IGNORE INTO UserSettings'),
+        [],
       );
     });
 
