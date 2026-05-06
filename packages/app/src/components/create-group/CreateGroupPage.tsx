@@ -8,6 +8,7 @@ import { useCreateGroup } from '@sportspay/shared';
 import { createGroup } from '../../services/database/entities/group/group';
 import { PageContainer } from '../page-container';
 import { BottomActionBar } from './components/BottomActionBar';
+import { CreateEventBanner } from './components/CreateEventBanner';
 import { ParticipantList } from './components/ParticipantList';
 import { SportSelectionGrid } from './components/SportSelectionGrid';
 
@@ -89,7 +90,7 @@ export function CreateGroupPage(): React.JSX.Element {
             <View className="flex-row items-center bg-surface-container-high rounded-xl px-4">
               <CreditCard size={20} color="#595c5d" />
               <TextInput
-                className="flex-1 bg-transparent py-4 ml-3 text-on-surface "
+                className="flex-1 bg-transparent p-4 ml-3 text-on-surface "
                 placeholder="Ex: joao@email.com"
                 placeholderTextColor="#757778"
                 value={formState.pixKey}

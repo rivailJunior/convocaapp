@@ -1,6 +1,9 @@
 import { TextInput, View } from 'react-native';
 
+
+
 import type { KeyboardTypeOptions } from 'react-native';
+
 
 type TextInputFieldProps = {
   value: string;
@@ -24,7 +27,7 @@ export function TextInputField({
         placeholderTextColor="#abadae"
         accessibilityLabel={placeholder}
         keyboardType={keyboardType}
-        className="w-full h-14 px-4 rounded-xl bg-surface-container-high text-on-surface font-body"
+        className="w-full h-14 p-4 rounded-xl bg-surface-container-high text-on-surface font-body"
       />
     </View>
   );

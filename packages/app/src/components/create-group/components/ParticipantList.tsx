@@ -37,7 +37,7 @@ export function ParticipantList({
             className="flex-row items-center bg-surface-container-lowest rounded-xl p-1 pr-4 shadow-sm"
           >
             <TextInput
-              className="flex-1 bg-transparent px-4 py-3 text-on-surface font-medium"
+              className="flex-1 bg-transparent p-4 text-on-surface font-medium"
               value={participant.name}
               onChangeText={(text) => onChangeName(participant.id, text)}
               placeholder="Nome do participante"

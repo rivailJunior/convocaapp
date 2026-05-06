@@ -15,7 +15,7 @@ export function TextInputWithIcon({ value, onChangeText, placeholder }: TextInpu
         onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor="#abadae"
-        className="w-full h-14 px-4 pr-12 rounded-xl bg-surface-container-high text-on-surface font-body"
+        className="w-full h-14 p-4 pr-12 rounded-xl bg-surface-container-high text-on-surface font-body"
       />
       <MapPin size={20} color="#abadae" style={{ position: 'absolute', right: 16, top: 17 }} />
     </View>

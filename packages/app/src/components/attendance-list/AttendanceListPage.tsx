@@ -91,7 +91,7 @@ export function AttendanceListPage({ eventId }: AttendanceListPageProps): React.
               onChangeText={setSearchQuery}
               placeholder="Buscar participante..."
               placeholderTextColor="#595c5d"
-              className="bg-surface-container-low rounded-xl px-4 py-3 text-on-surface text-sm font-body"
+              className="bg-surface-container-low rounded-xl p-4 text-on-surface text-sm font-body"
               autoFocus
             />
           </View>
