@@ -5,9 +5,15 @@ type TextInputWithIconProps = {
   value: string;
   onChangeText: (text: string) => void;
   placeholder: string;
+  onFocus?: () => void;
 };
 
-export function TextInputWithIcon({ value, onChangeText, placeholder }: TextInputWithIconProps) {
+export function TextInputWithIcon({
+  value,
+  onChangeText,
+  placeholder,
+  onFocus,
+}: TextInputWithIconProps) {
   return (
     <View className="relative">
       <TextInput
@@ -15,7 +21,8 @@ export function TextInputWithIcon({ value, onChangeText, placeholder }: TextInpu
         onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor="#abadae"
-        className="w-full h-14 px-4 pr-12 rounded-xl bg-surface-container-high text-on-surface font-body"
+        onFocus={onFocus}
+        className="w-full h-14 p-4 pr-12 rounded-xl bg-surface-container-high text-on-surface font-body"
       />
       <MapPin size={20} color="#abadae" style={{ position: 'absolute', right: 16, top: 17 }} />
     </View>

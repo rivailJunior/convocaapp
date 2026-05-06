@@ -1,14 +1,10 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { CheckCircle } from 'lucide-react-native';
-import { Alert, Platform, ScrollView, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState } from 'react';
-
-
+import { useRef, useState } from 'react';
 
 import { useRecurrentEventForm } from '@sportspay/shared';
-
-
 
 import { DateTimeButton } from '../../src/components/event/date-time-button';
 import { FormSection } from '../../src/components/event/form-section';
@@ -22,10 +18,7 @@ import { PageContainer } from '../../src/components/page-container';
 import { PrimaryButton } from '../../src/components/primary-button';
 import { createRecurrentEvent } from '../../src/services/database/entities/event/event';
 
-
-
 import type { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-
 
 export default function CreateRecurrentEventScreen() {
   const router = useRouter();
@@ -56,6 +49,7 @@ export default function CreateRecurrentEventScreen() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
   const [pickerMode, setPickerMode] = useState<'date' | 'time'>('date');
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const [endDateSelected, setEndDateSelected] = useState(new Date());
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
@@ -79,7 +73,17 @@ export default function CreateRecurrentEventScreen() {
     setParticipantValue(digits ? formatCurrencyBRL(digits) : '');
   };
 
-  const formatDateTime = (date: Date) => {
+  const formatDateTimeForStorage = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  };
+
+  const formatDateTimeForDisplay = (date: Date) => {
     return new Intl.DateTimeFormat('pt-BR', {
       day: '2-digit',
       month: '2-digit',
@@ -111,10 +115,10 @@ export default function CreateRecurrentEventScreen() {
       } else {
         setShowPicker(false);
         setPickerMode('date');
-        setDateTime(formatDateTime(chosen));
+        setDateTime(formatDateTimeForDisplay(chosen));
       }
     } else {
-      setDateTime(formatDateTime(chosen));
+      setDateTime(formatDateTimeForDisplay(chosen));
     }
   };
 
@@ -147,10 +151,12 @@ export default function CreateRecurrentEventScreen() {
 
   const handleCreateEvent = async () => {
     try {
+      const eventDateTime = dateTime || formatDateTimeForStorage(selectedDate);
+
       await createRecurrentEvent({
         groupId: groupId ? Number(groupId) : 0,
         name: eventName,
-        dateTime: dateTime || formatDateTime(selectedDate),
+        dateTime: eventDateTime,
         location,
         notes,
         isRecurring,
@@ -165,8 +171,8 @@ export default function CreateRecurrentEventScreen() {
           : undefined,
       });
 
-      router.back();
       Alert.alert('Novo Evento Criado');
+      router.back();
     } catch (error) {
       console.error('[CreateEvent] Failed to create event:', error);
     }
@@ -174,89 +180,125 @@ export default function CreateRecurrentEventScreen() {
 
   return (
     <PageContainer title="Novo Evento" onBack={() => router.back()}>
-      <ScrollView className="flex-1 px-4" contentContainerStyle={{ paddingBottom: 120 }}>
-        <PageHeader subtitle="Preencha os detalhes para organizar sua partida." />
+      <KeyboardAvoidingView
+        className="flex-1"
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+      >
+        <ScrollView
+          ref={scrollViewRef}
+          className="flex-1 px-4"
+          contentContainerStyle={{ paddingBottom: 120 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          <PageHeader subtitle="Preencha os detalhes para organizar sua partida." />
 
-        <View className="gap-6">
-          <FormSection label="Nome do evento">
-            <TextInputField
-              value={eventName}
-              onChangeText={setEventName}
-              placeholder="Ex: Futebol 18/01"
-            />
-          </FormSection>
-
-          <FormSection label="Data e hora">
-            <DateTimeButton
-              value={dateTime || formatDateTime(selectedDate)}
-              onPress={handleDateTimePress}
-            />
-            {showPicker && (
-              <DateTimePicker
-                value={selectedDate}
-                mode={Platform.OS === 'ios' ? 'datetime' : pickerMode}
-                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                onChange={handlePickerChange}
-                locale="pt-BR"
+          <View className="gap-6">
+            <FormSection label="Nome do evento">
+              <TextInputField
+                value={eventName}
+                onChangeText={setEventName}
+                placeholder="Ex: Futebol 18/01"
+                onFocus={() => {
+                  setTimeout(() => {
+                    scrollViewRef.current?.scrollTo({ y: 100, animated: true });
+                  }, 100);
+                }}
               />
-            )}
-          </FormSection>
+            </FormSection>
 
-          <FormSection label="Local" optional>
-            <TextInputWithIcon
-              value={location}
-              onChangeText={setLocation}
-              placeholder="Ex: Arena Beach Sports"
+            <FormSection label="Data e hora">
+              <DateTimeButton
+                value={dateTime || formatDateTimeForDisplay(selectedDate)}
+                onPress={handleDateTimePress}
+              />
+              {showPicker && (
+                <DateTimePicker
+                  value={selectedDate}
+                  mode={Platform.OS === 'ios' ? 'datetime' : pickerMode}
+                  display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                  onChange={handlePickerChange}
+                  locale="pt-BR"
+                />
+              )}
+            </FormSection>
+
+            <FormSection label="Local" optional>
+              <TextInputWithIcon
+                value={location}
+                onChangeText={setLocation}
+                placeholder="Ex: Arena Beach Sports"
+                onFocus={() => {
+                  setTimeout(() => {
+                    scrollViewRef.current?.scrollTo({ y: 200, animated: true });
+                  }, 100);
+                }}
+              />
+            </FormSection>
+
+            <FormSection label="Valor da Arena" optional>
+              <TextInputField
+                value={arenaValue}
+                onChangeText={handleArenaValueChange}
+                placeholder="R$ 0,00"
+                keyboardType="numeric"
+                onFocus={() => {
+                  setTimeout(() => {
+                    scrollViewRef.current?.scrollTo({ y: 250, animated: true });
+                  }, 100);
+                }}
+              />
+            </FormSection>
+
+            <FormSection label="Valor por Participante" optional>
+              <TextInputField
+                value={participantValue}
+                onChangeText={handleParticipantValueChange}
+                placeholder="R$ 0,00"
+                keyboardType="numeric"
+                onFocus={() => {
+                  setTimeout(() => {
+                    scrollViewRef.current?.scrollTo({ y: 300, animated: true });
+                  }, 100);
+                }}
+              />
+            </FormSection>
+
+            <FormSection label="Observações" optional>
+              <TextAreaField
+                value={notes}
+                onChangeText={setNotes}
+                placeholder="Notas ou instruções para o evento..."
+                rows={3}
+                onFocus={() => {
+                  setTimeout(() => {
+                    scrollViewRef.current?.scrollTo({ y: 350, animated: true });
+                  }, 100);
+                }}
+              />
+            </FormSection>
+
+            <RecurrenceCard
+              isEnabled={isRecurring}
+              onToggle={setIsRecurring}
+              frequency={frequency}
+              onFrequencyChange={setFrequency}
+              selectedDays={selectedDays}
+              onToggleDay={toggleDay}
+              endDate={endDate || formatDate(endDateSelected)}
+              onEndDatePress={handleEndDatePress}
+              showEndDatePicker={showEndDatePicker}
+              endDatePickerValue={endDateSelected}
+              onEndDatePickerChange={handleEndDatePickerChange}
             />
-          </FormSection>
 
-          <FormSection label="Valor da Arena" optional>
-            <TextInputField
-              value={arenaValue}
-              onChangeText={handleArenaValueChange}
-              placeholder="R$ 0,00"
-              keyboardType="numeric"
+            <InfoCard
+              title="Notificações Ativas"
+              description="Enviaremos lembretes para os participantes 2 horas antes do início."
             />
-          </FormSection>
-
-          <FormSection label="Valor por Participante" optional>
-            <TextInputField
-              value={participantValue}
-              onChangeText={handleParticipantValueChange}
-              placeholder="R$ 0,00"
-              keyboardType="numeric"
-            />
-          </FormSection>
-
-          <FormSection label="Observações" optional>
-            <TextAreaField
-              value={notes}
-              onChangeText={setNotes}
-              placeholder="Notas ou instruções para o evento..."
-              rows={3}
-            />
-          </FormSection>
-
-          <RecurrenceCard
-            isEnabled={isRecurring}
-            onToggle={setIsRecurring}
-            frequency={frequency}
-            onFrequencyChange={setFrequency}
-            selectedDays={selectedDays}
-            onToggleDay={toggleDay}
-            endDate={endDate || formatDate(endDateSelected)}
-            onEndDatePress={handleEndDatePress}
-            showEndDatePicker={showEndDatePicker}
-            endDatePickerValue={endDateSelected}
-            onEndDatePickerChange={handleEndDatePickerChange}
-          />
-
-          <InfoCard
-            title="Notificações Ativas"
-            description="Enviaremos lembretes para os participantes 2 horas antes do início."
-          />
-        </View>
-      </ScrollView>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
 
       <View className="absolute bottom-0 left-0 right-0 px-4 pb-8 bg-surface/80">
         <PrimaryButton

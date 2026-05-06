@@ -1,6 +1,10 @@
 import { Calendar } from 'lucide-react-native';
 import { TextInput, View } from 'react-native';
 
+
+
+
+
 type DateInputProps = {
   value: string;
   onChangeText: (text: string) => void;
@@ -16,7 +20,7 @@ export function DateInput({ value, onChangeText, onPress }: DateInputProps) {
         onPressIn={onPress}
         placeholder="DD/MM/AAAA"
         placeholderTextColor="#abadae"
-        className="w-full h-12 px-4 pr-12 rounded-xl bg-surface-container-low text-on-surface font-body"
+        className="w-full h-12 p-4 pr-12 rounded-xl bg-surface-container-low text-on-surface font-body"
       />
       <Calendar
         size={20}

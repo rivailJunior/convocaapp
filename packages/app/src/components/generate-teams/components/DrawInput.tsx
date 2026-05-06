@@ -19,7 +19,12 @@ const PLACEHOLDER: Record<string, string> = {
   manual: 'Ex: 3',
 };
 
-export function DrawInput({ mode, value, preview, onChangeValue }: DrawInputProps): React.JSX.Element | null {
+export function DrawInput({
+  mode,
+  value,
+  preview,
+  onChangeValue,
+}: DrawInputProps): React.JSX.Element | null {
   return (
     <View className="bg-surface-container-lowest p-6 rounded-xl mb-6 shadow-sm">
       <Text className="text-center font-headline font-bold text-on-surface-variant mb-4">
@@ -27,7 +32,7 @@ export function DrawInput({ mode, value, preview, onChangeValue }: DrawInputProp
       </Text>
       <View className="items-center gap-2">
         <TextInput
-          className="w-48 h-16 text-center text-3xl font-headline font-extrabold bg-surface-container-low rounded-xl"
+          className="w-48 p-4 text-center text-3xl font-headline font-extrabold bg-surface-container-low rounded-xl"
           placeholder={PLACEHOLDER[mode]}
           placeholderTextColor="#757778"
           keyboardType="number-pad"
@@ -35,9 +40,7 @@ export function DrawInput({ mode, value, preview, onChangeValue }: DrawInputProp
           onChangeText={onChangeValue}
         />
         {preview && (
-          <Text className="text-on-surface-variant text-xs font-medium mt-2">
-            {preview}
-          </Text>
+          <Text className="text-on-surface-variant text-xs font-medium mt-2">{preview}</Text>
         )}
       </View>
     </View>

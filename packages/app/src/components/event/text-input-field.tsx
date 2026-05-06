@@ -7,6 +7,7 @@ type TextInputFieldProps = {
   onChangeText: (text: string) => void;
   placeholder: string;
   keyboardType?: KeyboardTypeOptions;
+  onFocus?: () => void;
 };
 
 export function TextInputField({
@@ -14,6 +15,7 @@ export function TextInputField({
   onChangeText,
   placeholder,
   keyboardType,
+  onFocus,
 }: TextInputFieldProps) {
   return (
     <View className="relative">
@@ -24,7 +26,8 @@ export function TextInputField({
         placeholderTextColor="#abadae"
         accessibilityLabel={placeholder}
         keyboardType={keyboardType}
-        className="w-full h-14 px-4 rounded-xl bg-surface-container-high text-on-surface font-body"
+        onFocus={onFocus}
+        className="w-full h-14 p-4 rounded-xl bg-surface-container-high text-on-surface font-body"
       />
     </View>
   );

@@ -1,7 +1,18 @@
 import { ClipboardPaste, X } from 'lucide-react-native';
-import { Alert, Keyboard, Modal, Pressable, Text, TextInput, View } from 'react-native';
+import {
+  Alert,
+  Keyboard,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import * as Clipboard from 'expo-clipboard';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { parseWhatsappList } from '@sportspay/shared';
 
@@ -17,6 +28,7 @@ export function ImportListModal({
   onImport,
 }: ImportListModalProps): React.JSX.Element {
   const [text, setText] = useState('');
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const handlePaste = useCallback(async () => {
     const clipboardContent = await Clipboard.getStringAsync();
@@ -56,65 +68,79 @@ export function ImportListModal({
           handleClose();
         }}
       >
-        <Pressable className="bg-surface rounded-t-3xl p-6 max-h-[85%]" onPress={Keyboard.dismiss}>
-          <View className="flex-row items-center justify-between mb-4">
-            <Text className="font-bold text-lg text-on-surface">Importar lista</Text>
-            <Pressable
-              className="p-2 rounded-full active:bg-surface-container-high"
-              onPress={handleClose}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+        >
+          <Pressable className="bg-surface rounded-t-3xl p-6 " onPress={Keyboard.dismiss}>
+            <ScrollView
+              ref={scrollViewRef}
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
             >
-              <X size={20} color="#2c2f30" />
-            </Pressable>
-          </View>
+              <View className="flex-row items-center justify-between mb-2">
+                <Text className="font-bold text-lg text-on-surface">Importar lista</Text>
+                <Pressable
+                  className="p-2 rounded-full active:bg-surface-container-high"
+                  onPress={handleClose}
+                >
+                  <X size={20} color="#2c2f30" />
+                </Pressable>
+              </View>
 
-          <Text className="text-sm text-on-surface-variant mb-3">
-            Cole a lista copiada do WhatsApp abaixo:
-          </Text>
-
-          <View className="bg-surface-container-high rounded-xl p-3 mb-3 min-h-[160px] max-h-[240px]">
-            <TextInput
-              className="flex-1 text-on-surface text-sm"
-              multiline
-              textAlignVertical="top"
-              placeholder={'Ex:\n1 - João ✅\n2 - Maria ✅\n3 - Pedro'}
-              placeholderTextColor="#757778"
-              value={text}
-              onChangeText={setText}
-            />
-          </View>
-
-          <Pressable
-            className="flex-row items-center justify-center gap-2 py-2 mb-4 active:scale-[0.98]"
-            onPress={handlePaste}
-          >
-            <ClipboardPaste size={16} color="#3f5700" />
-            <Text className="text-secondary-dim font-bold text-sm">
-              Colar da área de transferência
-            </Text>
-          </Pressable>
-
-          {previewNames.length > 0 && (
-            <View className="mb-4">
-              <Text className="text-xs font-semibold text-on-surface-variant mb-2">
-                {previewNames.length} participante(s) encontrado(s):
+              <Text className="text-sm text-on-surface-variant mb-3">
+                Cole a lista copiada do WhatsApp abaixo:
               </Text>
-              <Text className="text-xs text-on-surface-variant" numberOfLines={4}>
-                {previewNames.join(', ')}
-              </Text>
-            </View>
-          )}
 
-          <Pressable
-            className="bg-primary py-4 rounded-xl items-center active:scale-[0.98]"
-            onPress={handleImport}
-            disabled={!text.trim()}
-            style={!text.trim() ? { opacity: 0.5 } : undefined}
-          >
-            <Text className="text-on-primary font-bold text-base">
-              Importar {previewNames.length > 0 ? `(${previewNames.length})` : ''}
-            </Text>
+              <View className="bg-surface-container-high rounded-xl p-3 mb-3 min-h-[100px] max-h-[200px]">
+                <TextInput
+                  className="flex-1 text-on-surface"
+                  multiline
+                  textAlignVertical="top"
+                  placeholder={'Ex:\n1 - João ✅\n2 - Maria ✅\n3 - Pedro'}
+                  placeholderTextColor="#757778"
+                  value={text}
+                  onChangeText={setText}
+                  onFocus={() => {
+                    setTimeout(() => {
+                      scrollViewRef.current?.scrollTo({ y: 100, animated: true });
+                    }, 100);
+                  }}
+                />
+              </View>
+
+              <Pressable
+                className="flex-row items-center justify-center gap-2 mb-4 active:scale-[0.98] bg-blue-400 rounded-lg py-4"
+                onPress={handlePaste}
+              >
+                <ClipboardPaste size={16} color="white" />
+                <Text className="text-white font-bold text-sm">Colar da área de transferência</Text>
+              </Pressable>
+
+              {previewNames.length > 0 && (
+                <View className="mb-4">
+                  <Text className="text-xs font-semibold text-on-surface-variant mb-2">
+                    {previewNames.length} participante(s) encontrado(s):
+                  </Text>
+                  <Text className="text-xs text-on-surface-variant" numberOfLines={4}>
+                    {previewNames.join(', ')}
+                  </Text>
+                </View>
+              )}
+
+              <Pressable
+                className="bg-primary py-4 rounded-xl items-center active:scale-[0.98] mb-4"
+                onPress={handleImport}
+                disabled={!text.trim()}
+                style={!text.trim() ? { opacity: 0.5 } : undefined}
+              >
+                <Text className="text-on-primary font-bold text-base">
+                  Importar {previewNames.length > 0 ? `(${previewNames.length})` : ''}
+                </Text>
+              </Pressable>
+            </ScrollView>
           </Pressable>
-        </Pressable>
+        </KeyboardAvoidingView>
       </Pressable>
     </Modal>
   );
