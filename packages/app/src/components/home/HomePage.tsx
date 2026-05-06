@@ -1,8 +1,7 @@
 import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from 'expo-router';
-import { useLocalGroups } from '@/hooks/use-local-groups';
-import { useLocalUpcomingEvents } from '@/hooks/use-local-upcoming-events';
+import { useAllGroupsUpcomingEvents } from '@/hooks/use-all-groups-upcoming-events';
 import { ROUTES } from '@/navigation';
 import { useCallback } from 'react';
 
@@ -15,14 +14,12 @@ import { MyGroupsList } from './components/MyGroupsList';
 import { UpcomingMatchesCarousel } from './components/UpcomingMatchesCarousel';
 
 export function HomePage(): React.JSX.Element {
-  const { groups, refetch } = useLocalGroups();
-  const { events, refetch: refetchEvents } = useLocalUpcomingEvents();
+  const { groups, events, refetch } = useAllGroupsUpcomingEvents();
 
   useFocusEffect(
     useCallback(() => {
       refetch();
-      refetchEvents();
-    }, [refetch, refetchEvents]),
+    }, [refetch]),
   );
   const { summaries } = useTreasurySummary();
 

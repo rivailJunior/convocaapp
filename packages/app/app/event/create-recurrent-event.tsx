@@ -79,7 +79,17 @@ export default function CreateRecurrentEventScreen() {
     setParticipantValue(digits ? formatCurrencyBRL(digits) : '');
   };
 
-  const formatDateTime = (date: Date) => {
+  const formatDateTimeForStorage = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  };
+
+  const formatDateTimeForDisplay = (date: Date) => {
     return new Intl.DateTimeFormat('pt-BR', {
       day: '2-digit',
       month: '2-digit',
@@ -111,10 +121,10 @@ export default function CreateRecurrentEventScreen() {
       } else {
         setShowPicker(false);
         setPickerMode('date');
-        setDateTime(formatDateTime(chosen));
+        setDateTime(formatDateTimeForDisplay(chosen));
       }
     } else {
-      setDateTime(formatDateTime(chosen));
+      setDateTime(formatDateTimeForDisplay(chosen));
     }
   };
 
@@ -147,10 +157,12 @@ export default function CreateRecurrentEventScreen() {
 
   const handleCreateEvent = async () => {
     try {
+      const eventDateTime = dateTime || formatDateTimeForStorage(selectedDate);
+
       await createRecurrentEvent({
         groupId: groupId ? Number(groupId) : 0,
         name: eventName,
-        dateTime: dateTime || formatDateTime(selectedDate),
+        dateTime: eventDateTime,
         location,
         notes,
         isRecurring,
@@ -165,8 +177,8 @@ export default function CreateRecurrentEventScreen() {
           : undefined,
       });
 
-      router.back();
       Alert.alert('Novo Evento Criado');
+      router.back();
     } catch (error) {
       console.error('[CreateEvent] Failed to create event:', error);
     }
@@ -188,7 +200,7 @@ export default function CreateRecurrentEventScreen() {
 
           <FormSection label="Data e hora">
             <DateTimeButton
-              value={dateTime || formatDateTime(selectedDate)}
+              value={dateTime || formatDateTimeForDisplay(selectedDate)}
               onPress={handleDateTimePress}
             />
             {showPicker && (
