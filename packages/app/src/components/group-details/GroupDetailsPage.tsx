@@ -85,53 +85,28 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
       >
         <GroupHeroCard group={group} onManageParticipants={handleAddParticipant} />
 
-        {showParticipantManagement ? (
-          <ParticipantManagement
-            participants={participants}
-            onChangeName={updateParticipantName}
-            onSaveName={saveParticipantName}
-            onRemove={removeParticipant}
-            onAdd={handleAddNewParticipant}
-            onImport={importParticipants}
-            isLoading={participantsLoading}
-            showAddButton={true}
-            compact={false}
-            maxParticipants={showAllParticipants ? undefined : MAX_COMPACT_PARTICIPANTS}
-            onSeeAll={
-              !showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
-                ? handleSeeAllParticipants
-                : undefined
-            }
-            onSeeLess={
-              showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
-                ? handleSeeLessParticipants
-                : undefined
-            }
-          />
-        ) : (
-          <ParticipantManagement
-            participants={participants}
-            onChangeName={updateParticipantName}
-            onSaveName={saveParticipantName}
-            onRemove={removeParticipant}
-            onAdd={handleAddNewParticipant}
-            onImport={importParticipants}
-            isLoading={participantsLoading}
-            showAddButton={false}
-            compact={true}
-            maxParticipants={showAllParticipants ? undefined : MAX_COMPACT_PARTICIPANTS}
-            onSeeAll={
-              !showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
-                ? handleSeeAllParticipants
-                : undefined
-            }
-            onSeeLess={
-              showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
-                ? handleSeeLessParticipants
-                : undefined
-            }
-          />
-        )}
+        <ParticipantManagement
+          participants={participants}
+          onChangeName={updateParticipantName}
+          onSaveName={saveParticipantName}
+          onRemove={removeParticipant}
+          onAdd={handleAddNewParticipant}
+          onImport={importParticipants}
+          isLoading={participantsLoading}
+          showAddButton={showParticipantManagement}
+          compact={!showParticipantManagement}
+          maxParticipants={showAllParticipants ? undefined : MAX_COMPACT_PARTICIPANTS}
+          onSeeAll={
+            !showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
+              ? handleSeeAllParticipants
+              : undefined
+          }
+          onSeeLess={
+            showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
+              ? handleSeeLessParticipants
+              : undefined
+          }
+        />
 
         <GroupEventList upcoming={upcoming} past={past} sport={group.sport} />
       </ScrollView>
