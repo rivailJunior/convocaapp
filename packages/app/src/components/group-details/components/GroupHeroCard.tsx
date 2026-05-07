@@ -1,4 +1,4 @@
-import { Copy } from 'lucide-react-native';
+import { Copy, Users } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 import * as ExpoClipboard from 'expo-clipboard';
 
@@ -12,9 +12,13 @@ const MAX_VISIBLE_AVATARS = 10;
 
 interface GroupHeroCardProps {
   group: GroupWithParticipants;
+  onManageParticipants?: () => void;
 }
 
-export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element {
+export function GroupHeroCard({
+  group,
+  onManageParticipants,
+}: GroupHeroCardProps): React.JSX.Element {
   const memberCount = group.participants.length;
 
   const handleCopyPix = async () => {
@@ -27,12 +31,31 @@ export function GroupHeroCard({ group }: GroupHeroCardProps): React.JSX.Element 
   return (
     <View className="bg-surface-container-lowest rounded-xl p-6 mb-8">
       <View className="gap-2">
-        <Text className="text-sm font-medium text-on-surface-variant">
-          {memberCount > 0 ? `${memberCount} Participantes` : 'Sem participantes'}
-        </Text>
+        <View className="flex-row items-center justify-between">
+          <Text className="text-sm font-medium text-on-surface-variant">
+            {memberCount > 0 ? `${memberCount} Participantes` : 'Sem participantes'}
+          </Text>
+          {memberCount === 0 && onManageParticipants && (
+            <Pressable
+              onPress={onManageParticipants}
+              className="flex-row items-center gap-1 bg-primary px-3 py-2 rounded-lg active:scale-[0.98]"
+            >
+              <Users size={16} color="#ffffff" />
+              <Text className="text-on-primary font-bold text-xs">Adicionar</Text>
+            </Pressable>
+          )}
+        </View>
         <View accessible accessibilityLabel={`${memberCount} participantes`}>
           <AvatarStack count={memberCount} maxVisible={MAX_VISIBLE_AVATARS} />
         </View>
+
+        {memberCount === 0 && (
+          <View className="bg-surface-container-low rounded-xl p-3 mt-2">
+            <Text className="text-center text-on-surface-variant text-xs">
+              Adicione participantes para começar a organizar eventos
+            </Text>
+          </View>
+        )}
 
         {group.pixKey && (
           <View className="mt-4 gap-4 ">

@@ -6,8 +6,10 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { useLocalGroupEvents } from '../../hooks/use-local-group-events';
 import { useLocalGroups } from '../../hooks/use-local-groups';
+import { useManageGroupParticipants } from '../../hooks/use-manage-group-participants';
 import { FloatingAddButton } from '../floating-add-button';
 import { PageContainer } from '../page-container';
+import { ParticipantManagement } from '../participant-management';
 import { GroupEventList } from './components/GroupEventList';
 import { GroupHeroCard } from './components/GroupHeroCard';
 
@@ -21,19 +23,38 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
   const { getSingleGroup } = useLocalGroups();
 
   const [group, setGroup] = useState<GroupWithParticipants | null>(null);
+  const [showParticipantManagement, setShowParticipantManagement] = useState(false);
 
   useEffect(() => {
     getSingleGroup(groupId).then(setGroup);
   }, [groupId, getSingleGroup]);
 
   const { upcoming, past, refetch } = useLocalGroupEvents(groupId);
+  const {
+    participants,
+    isLoading: participantsLoading,
+    addParticipant,
+    removeParticipant,
+    updateParticipantName,
+    importParticipants,
+    refetch: refetchParticipants,
+  } = useManageGroupParticipants(groupId);
 
   useFocusEffect(
     useCallback(() => {
       refetch();
-    }, [refetch]),
+      refetchParticipants();
+    }, [refetch, refetchParticipants]),
   );
+
   const handleBack = useCallback(() => router.back(), []);
+  const handleAddParticipant = useCallback(() => {
+    setShowParticipantManagement(true);
+  }, []);
+
+  const handleAddNewParticipant = useCallback(async () => {
+    await addParticipant(''); // Add empty participant that user can edit
+  }, [addParticipant]);
 
   if (!group) {
     return (
@@ -50,7 +71,32 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
         contentContainerClassName="pb-32"
         showsVerticalScrollIndicator={false}
       >
-        <GroupHeroCard group={group} />
+        <GroupHeroCard group={group} onManageParticipants={handleAddParticipant} />
+
+        {showParticipantManagement ? (
+          <ParticipantManagement
+            participants={participants}
+            onChangeName={updateParticipantName}
+            onRemove={removeParticipant}
+            onAdd={handleAddNewParticipant}
+            onImport={importParticipants}
+            isLoading={participantsLoading}
+            showAddButton={true}
+            compact={false}
+          />
+        ) : (
+          <ParticipantManagement
+            participants={participants}
+            onChangeName={updateParticipantName}
+            onRemove={removeParticipant}
+            onAdd={handleAddNewParticipant}
+            onImport={importParticipants}
+            isLoading={participantsLoading}
+            showAddButton={false}
+            compact={true}
+          />
+        )}
+
         <GroupEventList upcoming={upcoming} past={past} sport={group.sport} />
       </ScrollView>
 
