@@ -1,13 +1,14 @@
 import { Plus, Upload, Users } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
-import { ParticipantList } from './ParticipantList';
+import { ParticipantList } from '../participant-list';
 
 import type { Participant } from '@sportspay/shared';
 
 interface ParticipantManagementProps {
   participants: Participant[];
   onChangeName: (id: string, name: string) => void;
+  onSaveName?: (id: string, name: string) => Promise<void>;
   onRemove: (id: string) => void;
   onAdd: () => void;
   onImport: (names: string[]) => void;
@@ -22,6 +23,7 @@ interface ParticipantManagementProps {
 export function ParticipantManagement({
   participants,
   onChangeName,
+  onSaveName,
   onRemove,
   onAdd,
   onImport,
@@ -52,9 +54,9 @@ export function ParticipantManagement({
   return (
     <View className="mb-8">
       <View className="flex-row items-center justify-between mb-4">
-        <Text className="font-bold text-lg text-on-surface">
+        {/* <Text className="font-bold text-lg text-on-surface">
           Participantes ({participants.length})
-        </Text>
+        </Text> */}
         {showAddButton && (
           <Pressable
             className="flex-row items-center gap-1 active:scale-[0.98]"
@@ -78,6 +80,7 @@ export function ParticipantManagement({
       <ParticipantList
         participants={participants}
         onChangeName={onChangeName}
+        onSaveName={onSaveName}
         onRemove={onRemove}
         onAdd={onAdd}
         onImport={onImport}

@@ -15,10 +15,13 @@ import { useCreateGroup } from '@sportspay/shared';
 
 import { createGroup } from '../../services/database/entities/group/group';
 import { PageContainer } from '../page-container';
+import { ParticipantList } from '../participant-list';
 import { BottomActionBar } from './components/BottomActionBar';
-
-import { ParticipantList } from './components/ParticipantList';
 import { SportSelectionGrid } from './components/SportSelectionGrid';
+
+
+
+
 
 export function CreateGroupPage(): React.JSX.Element {
   const {

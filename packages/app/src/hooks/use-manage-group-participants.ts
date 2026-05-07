@@ -15,7 +15,8 @@ interface UseManageGroupParticipantsReturn {
   isLoading: boolean;
   addParticipant: (name: string) => Promise<void>;
   removeParticipant: (id: string) => Promise<void>;
-  updateParticipantName: (id: string, name: string) => Promise<void>;
+  updateParticipantName: (id: string, name: string) => void;
+  saveParticipantName: (id: string, name: string) => Promise<void>;
   importParticipants: (names: string[]) => Promise<void>;
   refetch: () => Promise<void>;
 }
@@ -38,8 +39,6 @@ export function useManageGroupParticipants(groupId: number): UseManageGroupParti
 
   const addParticipant = useCallback(
     async (name: string) => {
-      if (!name.trim()) return;
-
       setIsLoading(true);
       try {
         const newId = await addParticipantToGroup(groupId, name.trim());
@@ -72,14 +71,17 @@ export function useManageGroupParticipants(groupId: number): UseManageGroupParti
     [groupId, refetch],
   );
 
-  const updateParticipantName = useCallback(
+  const updateParticipantName = useCallback((id: string, name: string) => {
+    setParticipants((prev) => prev.map((p) => (p.id === id ? { ...p, name } : p)));
+  }, []);
+
+  const saveParticipantName = useCallback(
     async (id: string, name: string) => {
       if (!name.trim()) return;
 
       setIsLoading(true);
       try {
         await updateParticipantNameInDB(groupId, id, name.trim());
-
         setParticipants((prev) => prev.map((p) => (p.id === id ? { ...p, name: name.trim() } : p)));
       } catch (error) {
         console.error('[useManageGroupParticipants] Failed to update participant name:', error);
@@ -126,6 +128,7 @@ export function useManageGroupParticipants(groupId: number): UseManageGroupParti
     addParticipant,
     removeParticipant,
     updateParticipantName,
+    saveParticipantName,
     importParticipants,
     refetch,
   };

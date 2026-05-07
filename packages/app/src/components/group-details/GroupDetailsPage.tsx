@@ -39,6 +39,7 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
     addParticipant,
     removeParticipant,
     updateParticipantName,
+    saveParticipantName,
     importParticipants,
     refetch: refetchParticipants,
   } = useManageGroupParticipants(groupId);
@@ -88,6 +89,7 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
           <ParticipantManagement
             participants={participants}
             onChangeName={updateParticipantName}
+            onSaveName={saveParticipantName}
             onRemove={removeParticipant}
             onAdd={handleAddNewParticipant}
             onImport={importParticipants}
@@ -110,6 +112,7 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
           <ParticipantManagement
             participants={participants}
             onChangeName={updateParticipantName}
+            onSaveName={saveParticipantName}
             onRemove={removeParticipant}
             onAdd={handleAddNewParticipant}
             onImport={importParticipants}

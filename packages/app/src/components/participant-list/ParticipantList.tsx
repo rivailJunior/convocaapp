@@ -2,18 +2,14 @@ import { Plus, Upload, X } from 'lucide-react-native';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { useState } from 'react';
 
-
-
 import { ImportListModal } from './ImportListModal';
 
-
-
 import type { Participant } from '@sportspay/shared';
-
 
 interface ParticipantListProps {
   participants: Participant[];
   onChangeName: (id: string, name: string) => void;
+  onSaveName?: (id: string, name: string) => Promise<void>;
   onRemove: (id: string) => void;
   onAdd: () => void;
   onImport: (names: string[]) => void;
@@ -21,11 +17,14 @@ interface ParticipantListProps {
   maxParticipants?: number;
   onSeeAll?: () => void;
   onSeeLess?: () => void;
+  showTitle?: boolean;
+  compact?: boolean;
 }
 
 export function ParticipantList({
   participants,
   onChangeName,
+  onSaveName,
   onRemove,
   onAdd,
   onImport,
@@ -33,6 +32,8 @@ export function ParticipantList({
   maxParticipants,
   onSeeAll,
   onSeeLess,
+  showTitle = true,
+  compact = false,
 }: ParticipantListProps): React.JSX.Element {
   const [isImportModalVisible, setIsImportModalVisible] = useState(false);
 
@@ -42,7 +43,15 @@ export function ParticipantList({
   const hasMoreParticipants = maxParticipants ? participants.length > maxParticipants : false;
 
   return (
-    <View className="gap-3">
+    <View className={compact ? 'mb-8' : 'gap-3'}>
+      {showTitle && (
+        <View className="flex-row items-center justify-between mb-4">
+          <Text className="font-bold text-lg text-on-surface">
+            Participantes ({participants.length})
+          </Text>
+        </View>
+      )}
+
       {displayedParticipants.map((participant) => (
         <View
           key={participant.id}
@@ -52,6 +61,7 @@ export function ParticipantList({
             className="flex-1 bg-transparent p-4 text-on-surface font-medium"
             value={participant.name}
             onChangeText={(text) => onChangeName(participant.id, text)}
+            onBlur={() => onSaveName?.(participant.id, participant.name)}
             placeholder="Nome do participante"
             placeholderTextColor="#757778"
             editable={!isLoading}
