@@ -15,6 +15,8 @@ import { GroupHeroCard } from './components/GroupHeroCard';
 
 import type { GroupWithParticipants } from '@sportspay/shared';
 
+const MAX_COMPACT_PARTICIPANTS = 5;
+
 interface GroupDetailsPageProps {
   groupId: number;
 }
@@ -24,6 +26,7 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
 
   const [group, setGroup] = useState<GroupWithParticipants | null>(null);
   const [showParticipantManagement, setShowParticipantManagement] = useState(false);
+  const [showAllParticipants, setShowAllParticipants] = useState(false);
 
   useEffect(() => {
     getSingleGroup(groupId).then(setGroup);
@@ -56,6 +59,14 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
     await addParticipant(''); // Add empty participant that user can edit
   }, [addParticipant]);
 
+  const handleSeeAllParticipants = useCallback(() => {
+    setShowAllParticipants(true);
+  }, []);
+
+  const handleSeeLessParticipants = useCallback(() => {
+    setShowAllParticipants(false);
+  }, []);
+
   if (!group) {
     return (
       <SafeAreaView className="flex-1 bg-surface items-center justify-center">
@@ -83,6 +94,17 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
             isLoading={participantsLoading}
             showAddButton={true}
             compact={false}
+            maxParticipants={showAllParticipants ? undefined : MAX_COMPACT_PARTICIPANTS}
+            onSeeAll={
+              !showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
+                ? handleSeeAllParticipants
+                : undefined
+            }
+            onSeeLess={
+              showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
+                ? handleSeeLessParticipants
+                : undefined
+            }
           />
         ) : (
           <ParticipantManagement
@@ -94,6 +116,17 @@ export function GroupDetailsPage({ groupId }: GroupDetailsPageProps): React.JSX.
             isLoading={participantsLoading}
             showAddButton={false}
             compact={true}
+            maxParticipants={showAllParticipants ? undefined : MAX_COMPACT_PARTICIPANTS}
+            onSeeAll={
+              !showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
+                ? handleSeeAllParticipants
+                : undefined
+            }
+            onSeeLess={
+              showAllParticipants && participants.length > MAX_COMPACT_PARTICIPANTS
+                ? handleSeeLessParticipants
+                : undefined
+            }
           />
         )}
 

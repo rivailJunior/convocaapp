@@ -13,6 +13,9 @@ interface ParticipantListProps {
   onAdd: () => void;
   onImport: (names: string[]) => void;
   isLoading?: boolean;
+  maxParticipants?: number;
+  onSeeAll?: () => void;
+  onSeeLess?: () => void;
 }
 
 export function ParticipantList({
@@ -22,12 +25,20 @@ export function ParticipantList({
   onAdd,
   onImport,
   isLoading = false,
+  maxParticipants,
+  onSeeAll,
+  onSeeLess,
 }: ParticipantListProps): React.JSX.Element {
   const [isImportModalVisible, setIsImportModalVisible] = useState(false);
 
+  const displayedParticipants = maxParticipants
+    ? participants.slice(0, maxParticipants)
+    : participants;
+  const hasMoreParticipants = maxParticipants ? participants.length > maxParticipants : false;
+
   return (
     <View className="gap-3">
-      {participants.map((participant) => (
+      {displayedParticipants.map((participant) => (
         <View
           key={participant.id}
           className="flex-row items-center bg-surface-container-lowest rounded-xl p-1 pr-4 shadow-sm"
@@ -49,6 +60,26 @@ export function ParticipantList({
           </Pressable>
         </View>
       ))}
+
+      {hasMoreParticipants && onSeeAll && (
+        <Pressable
+          className="flex-row items-center justify-center gap-2 py-2 active:scale-[0.98]"
+          onPress={onSeeAll}
+          disabled={isLoading}
+        >
+          <Text className="text-primary font-bold text-sm">Ver todos ({participants.length})</Text>
+        </Pressable>
+      )}
+
+      {!maxParticipants && onSeeLess && participants.length > 5 && (
+        <Pressable
+          className="flex-row items-center justify-center gap-2 py-2 active:scale-[0.98]"
+          onPress={onSeeLess}
+          disabled={isLoading}
+        >
+          <Text className="text-primary font-bold text-sm">Ver menos</Text>
+        </Pressable>
+      )}
 
       <View className="mt-4 gap-3">
         <Pressable

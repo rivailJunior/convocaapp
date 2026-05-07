@@ -14,6 +14,9 @@ interface ParticipantManagementProps {
   isLoading?: boolean;
   showAddButton?: boolean;
   compact?: boolean;
+  maxParticipants?: number;
+  onSeeAll?: () => void;
+  onSeeLess?: () => void;
 }
 
 export function ParticipantManagement({
@@ -25,6 +28,9 @@ export function ParticipantManagement({
   isLoading = false,
   showAddButton = true,
   compact = false,
+  maxParticipants,
+  onSeeAll,
+  onSeeLess,
 }: ParticipantManagementProps): React.JSX.Element {
   const hasParticipants = participants.length > 0;
 
@@ -76,6 +82,9 @@ export function ParticipantManagement({
         onAdd={onAdd}
         onImport={onImport}
         isLoading={isLoading}
+        maxParticipants={maxParticipants}
+        onSeeAll={onSeeAll}
+        onSeeLess={onSeeLess}
       />
     </View>
   );
