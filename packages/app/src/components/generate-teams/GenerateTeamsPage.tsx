@@ -3,7 +3,11 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { useCallback, useState } from 'react';
 
+
+
 import { useAttendanceList, useGenerateTeams } from '@sportspay/shared';
+
+
 
 import { useEventTeams } from '../../hooks/use-event-teams';
 import { useLocalEventPlayers } from '../../hooks/use-local-event-players';
@@ -15,7 +19,10 @@ import { DrawResultList } from './components/DrawResultList';
 import { GenerateTeamsActionBar } from './components/GenerateTeamsActionBar';
 import { ModeSelector } from './components/ModeSelector';
 
+
+
 import type { Sport } from '@sportspay/shared';
+
 
 type GenerateTeamsPageProps = {
   eventId: string;
@@ -94,9 +101,7 @@ export function GenerateTeamsPage({
       // Refetch teams to update the UI
       await refetchTeams();
       setIsResultSaved(true);
-
-      // Show success feedback (you could add a toast here)
-      console.log('Times salvos com sucesso!');
+      alert('Times salvos com sucesso!');
     } catch (error) {
       console.error('Erro ao salvar times:', error);
       // Show error feedback (you could add a toast here)
@@ -119,17 +124,6 @@ export function GenerateTeamsPage({
             {players.length} participantes disponíveis
           </Text>
         </View>
-
-        {/* Show existing teams indicator */}
-        {/* {hasTeams && (
-          <View className="bg-primary-container/10 p-4 rounded-xl mb-6">
-            <Text className="text-on-primary-container text-sm font-medium text-center">
-              Times já gerados e salvos anteriormente
-            </Text>
-          </View>
-        )} */}
-
-        {/* Show generation controls only if no existing teams */}
 
         <>
           <ModeSelector selected={mode} onSelect={setMode} />

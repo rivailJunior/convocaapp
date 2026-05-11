@@ -297,21 +297,6 @@ export async function getUpcomingEventItems(): Promise<UpcomingEventRow[]> {
   );
 }
 
-// ...
-export async function debugEvents(): Promise<any[]> {
-  await ensureEventInitialized();
-  const db = getAdapter();
-  return db.getAllAsync<any>(
-    `SELECT re.id, re.groupId, re.name, re.dateTime, re.frequency,
-            g.name AS groupName, datetime(re.dateTime) as formattedDateTime, datetime('now') as now
-     FROM RecurrentEvents re
-     LEFT JOIN Groups g ON g.id = re.groupId
-     ORDER BY re.dateTime DESC
-     LIMIT 5
-    `,
-  );
-}
-
 export async function upsertEventAttendance(
   eventId: number,
   participantId: number,
