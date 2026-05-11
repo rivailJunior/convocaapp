@@ -29,7 +29,7 @@ export function GenerateTeamsPage({
   const { counts } = useAttendanceList(players);
 
   const { mode, value, result, error, preview, canDraw, setMode, setValue, draw, redraw } =
-    useGenerateTeams(players);
+    useGenerateTeams(players.filter((item) => item.status === 'confirmed'));
 
   const hasUnconfirmedAttendances = counts.all > 0 && counts.confirmed < counts.all;
 
