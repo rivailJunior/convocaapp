@@ -1,9 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 
+
+
 import { getUpcomingEventItems } from '../services/database/entities/event/event';
 import { getGroupDisplayItems } from '../services/database/entities/group/group';
 
+
+
 import type { GroupDisplayItem, Sport, UpcomingEventItem } from '@sportspay/shared';
+
 
 interface UseAllGroupsUpcomingEventsReturn {
   events: UpcomingEventItem[];
@@ -26,6 +31,8 @@ export function useAllGroupsUpcomingEvents(): UseAllGroupsUpcomingEventsReturn {
         getUpcomingEventItems(),
         getGroupDisplayItems(),
       ]);
+
+      console.log('events', eventRows);
 
       const mappedGroups: GroupDisplayItem[] = groupRows.slice(0, 10).map((row) => ({
         id: String(row.id),

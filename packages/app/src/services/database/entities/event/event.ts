@@ -254,9 +254,39 @@ export async function getUpcomingEventItems(): Promise<UpcomingEventRow[]> {
      FROM RecurrentEvents re
      INNER JOIN Groups g ON g.id = re.groupId
      LEFT JOIN EventAttendances ea ON ea.eventId = re.id
-     WHERE re.dateTime >= datetime('now')
-     GROUP BY re.id
-     ORDER BY re.dateTime ASC`,
+     WHERE re.frequency = 'weekly'
+     GROUP BY re.id, re.groupId, re.name, re.dateTime, re.location,
+              re.frequency, re.createdAt, g.sport, g.name
+     ORDER BY
+       CASE
+         -- Calculate next occurrence for weekly events
+         WHEN substr(re.dateTime, 7, 4) || '-' || substr(re.dateTime, 4, 2) || '-' || substr(re.dateTime, 1, 2) || ' ' || substr(re.dateTime, 13, 5) < datetime('now')
+         THEN
+           CASE
+             -- Get day of week (0=Sunday, 1=Monday, etc.)
+             WHEN strftime('%w', substr(re.dateTime, 7, 4) || '-' || substr(re.dateTime, 4, 2) || '-' || substr(re.dateTime, 1, 2)) <= strftime('%w', 'now')
+             THEN strftime('%Y-%m-%d', 'now', '+' || (7 + strftime('%w', substr(re.dateTime, 7, 4) || '-' || substr(re.dateTime, 4, 2) || '-' || substr(re.dateTime, 1, 2)) - strftime('%w', 'now')) || ' days') || ' ' || substr(re.dateTime, 13, 5)
+             ELSE strftime('%Y-%m-%d', 'now', '+' || (strftime('%w', substr(re.dateTime, 7, 4) || '-' || substr(re.dateTime, 4, 2) || '-' || substr(re.dateTime, 1, 2)) - strftime('%w', 'now')) || ' days') || ' ' || substr(re.dateTime, 13, 5)
+           END
+         ELSE substr(re.dateTime, 7, 4) || '-' || substr(re.dateTime, 4, 2) || '-' || substr(re.dateTime, 1, 2) || ' ' || substr(re.dateTime, 13, 5)
+       END ASC
+     LIMIT 10
+    `,
+  );
+}
+
+// ...
+export async function debugEvents(): Promise<any[]> {
+  await ensureEventInitialized();
+  const db = getAdapter();
+  return db.getAllAsync<any>(
+    `SELECT re.id, re.groupId, re.name, re.dateTime, re.frequency,
+            g.name AS groupName, datetime(re.dateTime) as formattedDateTime, datetime('now') as now
+     FROM RecurrentEvents re
+     LEFT JOIN Groups g ON g.id = re.groupId
+     ORDER BY re.dateTime DESC
+     LIMIT 5
+    `,
   );
 }
 
