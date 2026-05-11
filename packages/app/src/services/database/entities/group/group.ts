@@ -130,6 +130,73 @@ export async function deleteGroup(id: number): Promise<void> {
   });
 }
 
+export async function addParticipantToGroup(
+  groupId: number,
+  participantName: string,
+): Promise<number> {
+  await ensureGroupInitialized();
+  const db = getAdapter();
+
+  const result = await db.runAsync('INSERT INTO GroupParticipants (groupId, name) VALUES (?, ?)', [
+    groupId,
+    participantName.trim(),
+  ]);
+
+  return result.lastInsertRowId;
+}
+
+export async function removeParticipantFromGroup(
+  groupId: number,
+  participantId: string,
+): Promise<void> {
+  await ensureGroupInitialized();
+  const db = getAdapter();
+
+  await db.runAsync('DELETE FROM GroupParticipants WHERE groupId = ? AND id = ?', [
+    groupId,
+    participantId,
+  ]);
+}
+
+export async function updateParticipantName(
+  groupId: number,
+  participantId: string,
+  newName: string,
+): Promise<void> {
+  await ensureGroupInitialized();
+  const db = getAdapter();
+
+  await db.runAsync('UPDATE GroupParticipants SET name = ? WHERE groupId = ? AND id = ?', [
+    newName.trim(),
+    groupId,
+    participantId,
+  ]);
+}
+
+export async function addMultipleParticipantsToGroup(
+  groupId: number,
+  participantNames: string[],
+): Promise<number[]> {
+  await ensureGroupInitialized();
+  const db = getAdapter();
+
+  const insertedIds: number[] = [];
+
+  await db.withTransactionAsync(async () => {
+    for (const name of participantNames) {
+      if (name.trim().length > 0) {
+        const result = await db.runAsync(
+          'INSERT INTO GroupParticipants (groupId, name) VALUES (?, ?)',
+          [groupId, name.trim()],
+        );
+        insertedIds.push(result.lastInsertRowId);
+      }
+    }
+  });
+
+  return insertedIds;
+}
+
 export function _resetGroupForTesting(): void {
   groupInitPromise = null;
 }
