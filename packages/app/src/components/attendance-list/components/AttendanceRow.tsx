@@ -1,5 +1,7 @@
 import { Image, Text, View } from 'react-native';
 
+
+
 import { AttendanceStatusButtons } from './AttendanceStatusButtons';
 
 import type { Attendance, AttendanceStatus } from '@sportspay/shared';
@@ -16,23 +18,15 @@ const STATUS_ROW_STYLES: Record<AttendanceStatus, string> = {
   declined: 'bg-error/5 border-error/10',
 };
 
-const formatRespondedAt = (respondedAt?: string): string => {
-  if (!respondedAt) return 'Aguardando resposta';
-  const date = new Date(respondedAt);
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  return `Confirmado às ${hours}:${minutes}`;
-};
-
 const getStatusLabel = (attendance: Attendance): string => {
   if (attendance.status === 'confirmed') {
-    return formatRespondedAt(attendance.respondedAt);
+    return 'Ta pra jogo';
   }
   if (attendance.status === 'declined') {
-    return attendance.note ? `Recusou: ${attendance.note}` : 'Recusou';
+    return 'Tá fora';
   }
   if (attendance.status === 'maybe') {
-    return 'Talvez';
+    return 'Em fase de confirmação';
   }
   return 'Aguardando resposta';
 };

@@ -32,8 +32,6 @@ export function useAllGroupsUpcomingEvents(): UseAllGroupsUpcomingEventsReturn {
         getGroupDisplayItems(),
       ]);
 
-      console.log('events', eventRows);
-
       const mappedGroups: GroupDisplayItem[] = groupRows.slice(0, 10).map((row) => ({
         id: String(row.id),
         name: row.name,
