@@ -1,4 +1,4 @@
-import { Plus, Upload, Users } from 'lucide-react-native';
+import { Plus, Users } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
 import { ParticipantList } from '../participant-list';
