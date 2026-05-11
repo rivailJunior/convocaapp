@@ -2,7 +2,7 @@ import { getAdapter } from '../../database-adapter';
 
 
 
-import type { AttendanceStatus, CreateRecurrentEventInput, EventPaymentStatus, RecurrentEventEntity } from '@sportspay/shared';
+import type { AttendanceStatus, CreateRecurrentEventInput, EventPaymentStatus, RecurrentEventEntity, TeamDrawResult } from '@sportspay/shared';
 
 
 export type { CreateRecurrentEventInput, RecurrentEventEntity } from '@sportspay/shared';
@@ -29,19 +29,31 @@ async function performEventInit(): Promise<void> {
     `);
 
     // Migration: add groupId column for existing tables created before this change
-    await db.execAsync(`
+    await db
+      .execAsync(
+        `
       ALTER TABLE RecurrentEvents ADD COLUMN groupId INTEGER NOT NULL DEFAULT 0;
-    `).catch(() => {
-      // Column already exists — ignore
-    });
+    `,
+      )
+      .catch(() => {
+        // Column already exists — ignore
+      });
 
     // Migration: add arenaValue and participantValue columns
-    await db.execAsync(`
+    await db
+      .execAsync(
+        `
       ALTER TABLE RecurrentEvents ADD COLUMN arenaValue REAL NOT NULL DEFAULT 0;
-    `).catch(() => {});
-    await db.execAsync(`
+    `,
+      )
+      .catch(() => {});
+    await db
+      .execAsync(
+        `
       ALTER TABLE RecurrentEvents ADD COLUMN participantValue REAL NOT NULL DEFAULT 0;
-    `).catch(() => {});
+    `,
+      )
+      .catch(() => {});
 
     await db.execAsync(`
       CREATE TABLE IF NOT EXISTS EventAttendances (
@@ -66,6 +78,16 @@ async function performEventInit(): Promise<void> {
         UNIQUE(eventId, participantId),
         FOREIGN KEY (eventId) REFERENCES RecurrentEvents(id) ON DELETE CASCADE,
         FOREIGN KEY (participantId) REFERENCES GroupParticipants(id) ON DELETE CASCADE
+      );
+    `);
+
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS EventTeams (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        eventId INTEGER NOT NULL UNIQUE,
+        result TEXT NOT NULL,
+        createdAt TEXT NOT NULL DEFAULT (datetime('now')),
+        FOREIGN KEY (eventId) REFERENCES RecurrentEvents(id) ON DELETE CASCADE
       );
     `);
   } catch (error) {
@@ -304,4 +326,32 @@ export async function upsertEventAttendance(
      DO UPDATE SET status = excluded.status, respondedAt = excluded.respondedAt`,
     [eventId, participantId, status],
   );
+}
+
+export async function saveEventTeams(
+  eventId: number,
+  result: TeamDrawResult,
+): Promise<void> {
+  await ensureEventInitialized();
+  const db = getAdapter();
+  await db.runAsync(
+    `INSERT INTO EventTeams (eventId, result)
+     VALUES (?, ?)
+     ON CONFLICT(eventId)
+     DO UPDATE SET result = excluded.result, createdAt = datetime('now')`,
+    [eventId, JSON.stringify(result)],
+  );
+}
+
+export async function getEventTeams(
+  eventId: number,
+): Promise<TeamDrawResult | null> {
+  await ensureEventInitialized();
+  const db = getAdapter();
+  const row = await db.getFirstAsync<{ result: string }>(
+    'SELECT result FROM EventTeams WHERE eventId = ?',
+    [eventId],
+  );
+  if (!row) return null;
+  return JSON.parse(row.result) as TeamDrawResult;
 }
