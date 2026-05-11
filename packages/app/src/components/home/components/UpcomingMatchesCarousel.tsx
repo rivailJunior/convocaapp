@@ -1,11 +1,18 @@
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { router } from 'expo-router';
 
+
+
 import { formatLocalEventDate, SPORTS } from '@sportspay/shared';
+
+
 
 import { AvatarStack } from '../../ui/AvatarStack';
 
+
+
 import type { Sport, UpcomingEventItem } from '@sportspay/shared';
+
 
 const SPORT_BADGE_STYLES: Record<Sport, string> = {
   futebol: 'bg-primary-container text-on-primary-container',
@@ -73,8 +80,14 @@ export function UpcomingMatchesCarousel({
                 </View>
 
                 <View className="flex-row items-center gap-2 mt-2">
-                  <AvatarStack count={event.confirmedCount} size="sm" />
-                  <Text className="text-xs text-on-surface-variant">Confirmados</Text>
+                  {event.confirmedCount > 0 ? (
+                    <>
+                      <AvatarStack count={event.confirmedCount} size="sm" />
+                      <Text className="text-xs text-on-surface-variant">Confirmados</Text>
+                    </>
+                  ) : (
+                    <Text className="text-xs text-on-surface-variant">Nenhuma confirmacao</Text>
+                  )}
                 </View>
               </Pressable>
             );

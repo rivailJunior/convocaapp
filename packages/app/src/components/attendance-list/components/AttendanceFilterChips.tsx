@@ -30,7 +30,7 @@ export function AttendanceFilterChips({
   const filters: FilterOption[] = [
     { key: 'all', label: 'Todos', count: counts.all },
     { key: 'confirmed', label: 'Confirmados', count: counts.confirmed },
-    { key: 'pending', label: 'Pendentes', count: counts.pending },
+    { key: 'pending', label: 'Pendentes', count: counts.maybe },
     { key: 'declined', label: 'Recusados', count: counts.declined },
   ];
 
