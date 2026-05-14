@@ -29,12 +29,12 @@ export function DrawInput({
 }: DrawInputProps): React.JSX.Element | null {
   return (
     <View className="bg-surface-container-lowest p-4 rounded-xl mb-6 shadow-sm">
-      <Text className="text-center font-headline font-bold text-on-surface-variant mb-2">
+      <Text className="text-left font-headline font-bold text-on-surface-variant text-lg mb-2">
         {LABEL[mode]}
       </Text>
       <View className="items-center gap-2 mb-4">
         <TextInput
-          className="w-full p-4 text-center text-3xl font-headline font-extrabold bg-surface-container-low rounded-xl"
+          className="w-full p-6 text-center text-3xl font-headline font-extrabold bg-surface-container-low rounded-xl"
           placeholder={PLACEHOLDER[mode]}
           placeholderTextColor="#757778"
           keyboardType="number-pad"

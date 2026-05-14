@@ -3,7 +3,11 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 
+
+
 import { useAttendanceList, useGenerateTeams } from '@sportspay/shared';
+
+
 
 import { useEventTeams } from '../../hooks/use-event-teams';
 import { useLocalEventPlayers } from '../../hooks/use-local-event-players';
@@ -16,7 +20,10 @@ import { DrawResultList } from './components/DrawResultList';
 import { GenerateTeamsActionBar } from './components/GenerateTeamsActionBar';
 import { ModeSelector } from './components/ModeSelector';
 
+
+
 import type { Sport } from '@sportspay/shared';
+
 
 type GenerateTeamsPageProps = {
   eventId: string;
@@ -131,7 +138,7 @@ export function GenerateTeamsPage({
         contentContainerStyle={{ paddingBottom: displayResult ? 120 : 32 }}
         showsVerticalScrollIndicator={false}
       >
-        <View className="mb-6 px-1 pt-4">
+        <View className="mb-4 px-1 pt-4">
           {hasUnconfirmedAttendances && (
             <Pressable
               onPress={handleNavigateToAttendance}
@@ -139,7 +146,7 @@ export function GenerateTeamsPage({
             >
               <ClipboardList size={20} color="#266829" />
               <Text className="font-headline font-bold text-sm text-white">
-                List de Confirmados ({counts.confirmed}/{counts.all})
+                Lista de Confirmados ({counts.confirmed} de {counts.all})
               </Text>
             </Pressable>
           )}
