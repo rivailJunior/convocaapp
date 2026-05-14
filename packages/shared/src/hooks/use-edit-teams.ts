@@ -1,30 +1,30 @@
 import { useCallback, useMemo, useState } from 'react';
 
+
+
 import type { User } from '../types';
 
-type TeamHeaderItem = {
+type BaseItem = {
+  id: string;
+  key: string;
+  name?: string;
+  playerCount?: number;
+};
+
+type TeamHeaderItem = BaseItem & {
   type: 'team-header';
-  id: string;
-  key: string;
-  name: string;
-  playerCount: number;
-  colorIndex: number;
 };
 
-type BenchHeaderItem = {
-  type: 'bench-header';
-  id: string;
-  key: string;
-};
-
-type PlayerItem = {
+type PlayerItem = BaseItem & {
   type: 'player';
-  id: string;
-  key: string;
   user: User;
 };
 
-export type DragListItem = TeamHeaderItem | BenchHeaderItem | PlayerItem;
+type BenchHeaderItem = BaseItem & {
+  type: 'bench-header';
+};
+
+export type DragListItem = TeamHeaderItem | PlayerItem | BenchHeaderItem;
 
 type EditTeamsState = {
   teams: Map<string, User[]>;

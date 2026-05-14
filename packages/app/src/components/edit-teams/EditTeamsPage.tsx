@@ -6,6 +6,7 @@ import { useMemo } from 'react';
 import { useEditTeams } from '@sportspay/shared';
 
 import { saveEventTeams } from '../../services/teams';
+import { toTeamDrawResult } from '../../utils/edit-teams';
 import { PageContainer } from '../page-container';
 import { EditTeamsActionBar } from './components/EditTeamsActionBar';
 import { InstructionBanner } from './components/InstructionBanner';
@@ -13,7 +14,7 @@ import { PlayerCard } from './components/PlayerCard';
 import { TeamSectionHeader } from './components/TeamSectionHeader';
 import { useDragList } from './hooks/useDragList';
 
-import type { TeamDrawResult, User } from '@sportspay/shared';
+import type { DragListItem, User } from '@sportspay/shared';
 
 const ITEM_HEIGHT = 64;
 
@@ -23,13 +24,13 @@ type EditTeamsPageProps = {
   bench?: User[];
 };
 
-const TeamHeader = ({
+const TeamHeaderRow = ({
   name,
   item,
   onRenameTeam,
 }: {
   name: string;
-  item: any;
+  item: DragListItem;
   onRenameTeam: (oldName: string, newName: string) => void;
 }) => {
   return (
@@ -40,36 +41,10 @@ const TeamHeader = ({
       }}
       className="mt-4 mb-2 flex h-16 flex-end justify-center rounded-md bg-gray-200"
     >
-      <TeamSectionHeader name={name} playerCount={item.playerCount} onRename={onRenameTeam} />
+      <TeamSectionHeader name={name} playerCount={item.playerCount || 0} onRename={onRenameTeam} />
     </View>
   );
 };
-
-function toTeamDrawResult(teams: Map<string, User[]>, bench: User[]): TeamDrawResult {
-  const teamsArr = Array.from(teams.entries()).map(([name, players], index) => ({
-    id: String(index + 1),
-    name,
-    players: players.map((u) => ({
-      userId: u.uid,
-      userName: u.name,
-      avatarUrl: undefined,
-      status: 'confirmed' as const,
-      paymentStatus: 'pending' as const,
-    })),
-  }));
-
-  return {
-    teams: teamsArr,
-    bench: bench.map((u) => ({
-      userId: u.uid,
-      userName: u.name,
-      avatarUrl: undefined,
-      status: 'confirmed' as const,
-      paymentStatus: 'pending' as const,
-    })),
-    totalPlayers: teamsArr.reduce((sum, t) => sum + t.players.length, 0) + bench.length,
-  };
-}
 
 export function EditTeamsPage({
   eventId,
@@ -124,20 +99,9 @@ export function EditTeamsPage({
 
           if (item.type === 'team-header' || item.type === 'bench-header') {
             return (
-              <TeamHeader name={item?.name ?? 'Banco'} item={item} onRenameTeam={onRenameTeam} />
+              <TeamHeaderRow name={item?.name ?? 'Banco'} item={item} onRenameTeam={onRenameTeam} />
             );
           }
-
-          // if (item.type === 'bench-header') {
-          //   return (
-          //     <TeamHeader
-          //       name="Banco"
-          //       item={{ playerCount: bench?.length || 0, name: 'Banco' }}
-          //       onRenameTeam={onRenameTeam}
-          //     />
-          //   );
-          // }
-
           return (
             <View
               key={item.id}
