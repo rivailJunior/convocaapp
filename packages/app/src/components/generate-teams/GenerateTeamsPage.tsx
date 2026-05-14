@@ -132,33 +132,29 @@ export function GenerateTeamsPage({
         showsVerticalScrollIndicator={false}
       >
         <View className="mb-6 px-1 pt-4">
-          <Text className="text-on-surface-variant font-medium text-sm">
-            {players.length} participantes disponíveis
-          </Text>
+          {hasUnconfirmedAttendances && (
+            <Pressable
+              onPress={handleNavigateToAttendance}
+              className="w-full py-4 rounded-xl items-center justify-center mb-4 bg-primary flex-row gap-2"
+            >
+              <ClipboardList size={20} color="#266829" />
+              <Text className="font-headline font-bold text-sm text-white">
+                List de Confirmados ({counts.confirmed}/{counts.all})
+              </Text>
+            </Pressable>
+          )}
         </View>
 
         <>
           <ModeSelector selected={mode} onSelect={setMode} />
 
-          <DrawInput mode={mode} value={value} preview={preview} onChangeValue={setValue} />
-
-          {hasUnconfirmedAttendances && (
-            <Pressable
-              onPress={handleNavigateToAttendance}
-              className="w-full py-4 rounded-xl items-center justify-center mb-4 bg-surface-container-low flex-row gap-2"
-            >
-              <ClipboardList size={20} color="#266829" />
-              <Text className="font-headline font-bold text-sm text-primary">
-                Lista de Presença ({counts.confirmed}/{counts.all})
-              </Text>
-            </Pressable>
-          )}
-
-          <DrawButton
-            disabled={shouldDisble}
-            onPress={handleDrawPress}
-            label={result ? 'Refazer Sorteio' : 'Sortear'}
-          />
+          <DrawInput mode={mode} value={value} preview={preview} onChangeValue={setValue}>
+            <DrawButton
+              disabled={shouldDisble}
+              onPress={handleDrawPress}
+              label={result ? 'Refazer Sorteio' : 'Sortear'}
+            />
+          </DrawInput>
         </>
 
         {error && (

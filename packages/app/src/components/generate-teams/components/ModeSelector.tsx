@@ -14,7 +14,7 @@ const MODES: { key: GenerateTeamsMode; label: string }[] = [
 
 export function ModeSelector({ selected, onSelect }: ModeSelectorProps): React.JSX.Element {
   return (
-    <View className="mb-8">
+    <View className="mb-4">
       <View className="flex-row p-1 bg-surface-container-low rounded-full gap-1">
         {MODES.map(({ key, label }) => {
           const isActive = selected === key;
@@ -36,10 +36,7 @@ export function ModeSelector({ selected, onSelect }: ModeSelectorProps): React.J
                   : {}
               }
             >
-              <Text
-                className="text-sm font-bold"
-                style={{ color: isActive ? '#d1ffc8' : '#595c5d' }}
-              >
+              <Text className="text-sm font-bold" style={{ color: isActive ? 'white' : '#595c5d' }}>
                 {label}
               </Text>
             </Pressable>
