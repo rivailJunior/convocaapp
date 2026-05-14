@@ -16,7 +16,7 @@ export function InstructionBanner({
     <View className="bg-tertiary-container/20 p-6 rounded-xl flex-row items-start gap-3 mx-4">
       <Info size={20} color="#005861" className="mt-0.5" />
       <Text className="flex-1 text-md font-label font-semibold text-tertiary-dim leading-tight">
-        Arraste os jogadores para reorganizar os times
+        Arraste os jogadores para reorganizar os times ou edite o nome do time.
       </Text>
       <Pressable onPress={onDismiss} className="p-0.5">
         <X size={16} color="#005861" />

@@ -1,26 +1,21 @@
+import { Edit } from 'lucide-react-native';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { useCallback, useRef, useState } from 'react';
-
-import { TEAM_COLORS } from '@sportspay/shared';
 
 type TeamSectionHeaderProps = {
   name: string;
   playerCount: number;
-  colorIndex: number;
   onRename: (oldName: string, newName: string) => void;
 };
 
 export function TeamSectionHeader({
   name,
   playerCount,
-  colorIndex,
   onRename,
 }: TeamSectionHeaderProps): React.JSX.Element {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(name);
   const inputRef = useRef<TextInput>(null);
-
-  const color = TEAM_COLORS[colorIndex % TEAM_COLORS.length];
 
   const handlePress = useCallback(() => {
     setEditValue(name);
@@ -39,9 +34,8 @@ export function TeamSectionHeader({
   }, [editValue, name, onRename]);
 
   return (
-    <View className="flex-row items-center justify-between">
+    <View className="flex-row items-center justify-between px-4 gap-2">
       <View className="flex-row items-center gap-2 flex-1">
-        <View className={`w-1.5 h-12 rounded-full ${color.indicator}`} />
         {isEditing ? (
           <TextInput
             ref={inputRef}
@@ -54,12 +48,13 @@ export function TeamSectionHeader({
             selectTextOnFocus
           />
         ) : (
-          <Pressable onPress={handlePress}>
+          <Pressable onPress={handlePress} className="flex-row items-center gap-2 justify-center">
             <Text className="font-headline font-bold text-lg text-on-background">{name}</Text>
+            <Edit size={16} color="#666" />
           </Pressable>
         )}
       </View>
-      <View className="bg-surface-container-high px-2 py-2 rounded-md mr-2">
+      <View className="bg-surface-container-high px-2 py-2 rounded-md">
         <Text className="text-[12px] font-bold text-on-surface-variant">{playerCount}</Text>
       </View>
     </View>
