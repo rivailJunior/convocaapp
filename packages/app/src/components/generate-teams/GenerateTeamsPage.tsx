@@ -159,15 +159,6 @@ export function GenerateTeamsPage({
             onPress={handleDrawPress}
             label={result ? 'Refazer Sorteio' : 'Sortear'}
           />
-
-          {mode === 'manual' && (
-            <View className="bg-surface-container-lowest p-6 rounded-xl mb-6 shadow-sm items-center">
-              <Text className="text-on-surface-variant text-sm font-medium text-center">
-                Os times serão gerados aleatoriamente. Depois, você poderá reorganizar os jogadores
-                entre os times.
-              </Text>
-            </View>
-          )}
         </>
 
         {error && (

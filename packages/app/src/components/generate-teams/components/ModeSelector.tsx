@@ -8,9 +8,8 @@ type ModeSelectorProps = {
 };
 
 const MODES: { key: GenerateTeamsMode; label: string }[] = [
-  { key: 'by_teams', label: 'Por times' },
-  { key: 'by_players', label: 'Por jogadores' },
-  { key: 'manual', label: 'Manual' },
+  { key: 'by_teams', label: 'Nº de Times' },
+  { key: 'by_players', label: 'Nº de Jogadores' },
 ];
 
 export function ModeSelector({ selected, onSelect }: ModeSelectorProps): React.JSX.Element {
@@ -24,9 +23,20 @@ export function ModeSelector({ selected, onSelect }: ModeSelectorProps): React.J
               key={key}
               onPress={() => onSelect(key)}
               className="flex-1 py-3 px-4 rounded-full items-center"
-              style={isActive ? { backgroundColor: '#266829', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.2, shadowRadius: 1.41, elevation: 2 } : {}}
+              style={
+                isActive
+                  ? {
+                      backgroundColor: '#266829',
+                      shadowColor: '#000',
+                      shadowOffset: { width: 0, height: 1 },
+                      shadowOpacity: 0.2,
+                      shadowRadius: 1.41,
+                      elevation: 2,
+                    }
+                  : {}
+              }
             >
-              <Text 
+              <Text
                 className="text-sm font-bold"
                 style={{ color: isActive ? '#d1ffc8' : '#595c5d' }}
               >
