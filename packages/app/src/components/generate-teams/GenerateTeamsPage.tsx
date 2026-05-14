@@ -3,11 +3,7 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { useCallback, useState } from 'react';
 
-
-
 import { useAttendanceList, useGenerateTeams } from '@sportspay/shared';
-
-
 
 import { useEventTeams } from '../../hooks/use-event-teams';
 import { useLocalEventPlayers } from '../../hooks/use-local-event-players';
@@ -19,10 +15,7 @@ import { DrawResultList } from './components/DrawResultList';
 import { GenerateTeamsActionBar } from './components/GenerateTeamsActionBar';
 import { ModeSelector } from './components/ModeSelector';
 
-
-
 import type { Sport } from '@sportspay/shared';
-
 
 type GenerateTeamsPageProps = {
   eventId: string;
@@ -51,8 +44,6 @@ export function GenerateTeamsPage({
   const displayResult = result || existingTeams;
   const hasTeams = !!existingTeams;
   const canSave = !!result && !isResultSaved && !isSaving;
-
-  const hasUnconfirmedAttendances = counts.all > 0 && counts.confirmed < counts.all;
 
   const handleBack = useCallback(() => {
     try {
@@ -130,17 +121,15 @@ export function GenerateTeamsPage({
 
           <DrawInput mode={mode} value={value} preview={preview} onChangeValue={setValue} />
 
-          {hasUnconfirmedAttendances && (
-            <Pressable
-              onPress={handleNavigateToAttendance}
-              className="w-full py-4 rounded-xl items-center justify-center mb-4 bg-surface-container-low flex-row gap-2"
-            >
-              <ClipboardList size={20} color="#266829" />
-              <Text className="font-headline font-bold text-sm text-primary">
-                Lista de Presença ({counts.confirmed}/{counts.all})
-              </Text>
-            </Pressable>
-          )}
+          <Pressable
+            onPress={handleNavigateToAttendance}
+            className="w-full py-4 rounded-xl items-center justify-center mb-4 bg-surface-container-low flex-row gap-2"
+          >
+            <ClipboardList size={20} color="#266829" />
+            <Text className="font-headline font-bold text-sm text-primary">
+              Lista de Presença ({counts.confirmed}/{counts.all})
+            </Text>
+          </Pressable>
 
           <DrawButton
             disabled={shouldDisble}
