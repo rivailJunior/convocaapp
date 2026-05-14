@@ -3,11 +3,7 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 
-
-
 import { useAttendanceList, useGenerateTeams } from '@sportspay/shared';
-
-
 
 import { useEventTeams } from '../../hooks/use-event-teams';
 import { useLocalEventPlayers } from '../../hooks/use-local-event-players';
@@ -20,10 +16,7 @@ import { DrawResultList } from './components/DrawResultList';
 import { GenerateTeamsActionBar } from './components/GenerateTeamsActionBar';
 import { ModeSelector } from './components/ModeSelector';
 
-
-
 import type { Sport } from '@sportspay/shared';
-
 
 type GenerateTeamsPageProps = {
   eventId: string;

@@ -1,6 +1,8 @@
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { Repeat } from 'lucide-react-native';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
+import { DateTimeButton } from './date-time-button';
 import { FrequencyPicker } from './frequency-picker';
 import { SectionLabel } from './section-label';
 import { ToggleSwitch } from './toggle-switch';
@@ -29,6 +31,11 @@ export function RecurrenceCard({
   onFrequencyChange,
   selectedDays,
   onToggleDay,
+  endDate,
+  onEndDatePress,
+  showEndDatePicker,
+  endDatePickerValue,
+  onEndDatePickerChange,
 }: RecurrenceCardProps) {
   return (
     <View className="bg-surface-container-lowest p-4 rounded-2xl border border-surface-container-high">
@@ -52,7 +59,7 @@ export function RecurrenceCard({
             <WeekdaySelector selectedDays={selectedDays} onToggleDay={onToggleDay} />
           </View>
 
-          {/* <View className="gap-2">
+          <View className="gap-2">
             <SectionLabel label="Até quando?" />
             <DateTimeButton value={endDate} onPress={onEndDatePress} />
             {showEndDatePicker && (
@@ -64,7 +71,7 @@ export function RecurrenceCard({
                 locale="pt-BR"
               />
             )}
-          </View> */}
+          </View>
         </View>
       )}
     </View>

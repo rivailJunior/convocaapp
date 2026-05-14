@@ -99,7 +99,12 @@ export function EditTeamsPage({
 
           if (item.type === 'team-header' || item.type === 'bench-header') {
             return (
-              <TeamHeaderRow name={item?.name ?? 'Banco'} item={item} onRenameTeam={onRenameTeam} />
+              <TeamHeaderRow
+                key={item.id}
+                name={item?.name ?? 'Banco'}
+                item={item}
+                onRenameTeam={onRenameTeam}
+              />
             );
           }
           return (
