@@ -71,14 +71,15 @@ export function GenerateTeamsPage({
   }, []);
 
   const handleNavigateToShare = () => {
-    if (!result) return;
+    const source = result || existingTeams;
+    if (!source) return;
 
     router.push({
       pathname: '/events/[id]/teams/share',
       params: {
         id: eventId,
         eventTitle,
-        result: JSON.stringify(result),
+        result: JSON.stringify(source),
       },
     });
   };
