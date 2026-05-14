@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+
+
 
 import { generateTeams } from '../utils/team-draw';
 
+
+
 import type { AttendancePlayer, TeamDrawMode, TeamDrawResult } from '../types';
+
 
 type GenerateTeamsMode = TeamDrawMode;
 
@@ -74,15 +79,15 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
     return false;
   })();
 
-  const setMode = (mode: GenerateTeamsMode) => {
+  const setMode = useCallback((mode: GenerateTeamsMode) => {
     setState((prev) => ({ ...prev, mode, value: '', result: null, error: null }));
-  };
+  }, []);
 
-  const setValue = (value: string) => {
+  const setValue = useCallback((value: string) => {
     setState((prev) => ({ ...prev, value, error: null }));
-  };
+  }, []);
 
-  const draw = () => {
+  const draw = useCallback(() => {
     if (!Number.isInteger(numericValue) || numericValue <= 0) {
       setState((prev) => ({
         ...prev,
@@ -112,15 +117,15 @@ export function useGenerateTeams(players: AttendancePlayer[]): UseGenerateTeamsR
       const message = err instanceof Error ? err.message : 'Erro ao gerar times';
       setState((prev) => ({ ...prev, result: null, error: message }));
     }
-  };
+  }, [canDraw, numericValue, players, state.mode]);
 
-  const redraw = () => {
+  const redraw = useCallback(() => {
     draw();
-  };
+  }, [draw]);
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setState({ mode: 'by_teams', value: '', result: null, error: null });
-  };
+  }, []);
 
   return {
     mode: state.mode,

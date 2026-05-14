@@ -1,6 +1,6 @@
 import { ClipboardList } from 'lucide-react-native';
 import { Pressable, ScrollView, Text, View } from 'react-native';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 
 import { useAttendanceList, useGenerateTeams } from '@sportspay/shared';
@@ -38,7 +38,7 @@ export function GenerateTeamsPage({
   const [isSaving, setIsSaving] = useState(false);
   const [isResultSaved, setIsResultSaved] = useState(false);
 
-  const { mode, value, result, error, preview, canDraw, setMode, setValue, draw, redraw } =
+  const { mode, value, result, error, preview, canDraw, setMode, setValue, draw, redraw, reset } =
     useGenerateTeams(players.filter((item) => item.status === 'confirmed'));
 
   // Prefer newly drawn result over existing teams from DB
@@ -47,6 +47,13 @@ export function GenerateTeamsPage({
   const canSave = !!result && !isResultSaved && !isSaving;
 
   const hasUnconfirmedAttendances = counts.all > 0 && counts.confirmed < counts.all;
+
+  useFocusEffect(
+    useCallback(() => {
+      refetchTeams();
+      reset();
+    }, [refetchTeams, reset]),
+  );
 
   const handleBack = useCallback(() => {
     try {

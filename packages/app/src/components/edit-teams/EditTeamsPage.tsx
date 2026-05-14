@@ -4,7 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { useMemo } from 'react';
 
+
+
 import { useEditTeams } from '@sportspay/shared';
+
+
 
 import { saveEventTeams } from '../../services/teams';
 import { BenchSectionHeader } from './components/BenchSectionHeader';
@@ -14,7 +18,10 @@ import { PlayerCard } from './components/PlayerCard';
 import { TeamSectionHeader } from './components/TeamSectionHeader';
 import { useDragList } from './hooks/useDragList';
 
+
+
 import type { DragListItem, TeamDrawResult, User } from '@sportspay/shared';
+
 
 const ITEM_HEIGHT = 64;
 
@@ -58,9 +65,13 @@ export function EditTeamsPage({
   const callbacks = useMemo(
     () => ({
       onSave: async (currentTeams: Map<string, User[]>, currentBench: User[]) => {
-        const result = toTeamDrawResult(currentTeams, currentBench);
-        await saveEventTeams(eventId, result);
-        router.back();
+        try {
+          const result = toTeamDrawResult(currentTeams, currentBench);
+          await saveEventTeams(eventId, result);
+          router.back();
+        } catch (e) {
+          console.error('[EditTeams] saveEventTeams failed:', e);
+        }
       },
       onCancel: () => {
         router.back();
@@ -169,7 +180,7 @@ export function EditTeamsPage({
         })}
       </ScrollView>
 
-      <EditTeamsActionBar onSave={onSave} onCancel={onCancel} />
+      <EditTeamsActionBar onSave={() => onSave()} onCancel={onCancel} />
     </SafeAreaView>
   );
 }
