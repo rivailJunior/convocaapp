@@ -41,7 +41,7 @@ export function TeamSectionHeader({
   return (
     <View className="flex-row items-center justify-between">
       <View className="flex-row items-center gap-2 flex-1">
-        <View className={`w-1.5 h-6 rounded-full ${color.indicator}`} />
+        <View className={`w-1.5 h-12 rounded-full ${color.indicator}`} />
         {isEditing ? (
           <TextInput
             ref={inputRef}
@@ -59,8 +59,8 @@ export function TeamSectionHeader({
           </Pressable>
         )}
       </View>
-      <View className="bg-surface-container-high px-2 py-1 rounded-md">
-        <Text className="text-[10px] font-bold text-on-surface-variant">{playerCount}</Text>
+      <View className="bg-surface-container-high px-2 py-2 rounded-md mr-2">
+        <Text className="text-[12px] font-bold text-on-surface-variant">{playerCount}</Text>
       </View>
     </View>
   );

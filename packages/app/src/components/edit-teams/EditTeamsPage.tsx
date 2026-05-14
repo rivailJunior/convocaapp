@@ -1,16 +1,12 @@
-import { ArrowLeft, GripVertical } from 'lucide-react-native';
+import { GripVertical } from 'lucide-react-native';
 import { ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { useMemo } from 'react';
 
-
-
 import { useEditTeams } from '@sportspay/shared';
 
-
-
 import { saveEventTeams } from '../../services/teams';
+import { PageContainer } from '../page-container';
 import { BenchSectionHeader } from './components/BenchSectionHeader';
 import { EditTeamsActionBar } from './components/EditTeamsActionBar';
 import { InstructionBanner } from './components/InstructionBanner';
@@ -18,10 +14,7 @@ import { PlayerCard } from './components/PlayerCard';
 import { TeamSectionHeader } from './components/TeamSectionHeader';
 import { useDragList } from './hooks/useDragList';
 
-
-
-import type { DragListItem, TeamDrawResult, User } from '@sportspay/shared';
-
+import type { TeamDrawResult, User } from '@sportspay/shared';
 
 const ITEM_HEIGHT = 64;
 
@@ -90,21 +83,14 @@ export function EditTeamsPage({
   });
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <View className="flex-row items-center px-4 h-14">
-        <View className="p-2 rounded-full" onTouchEnd={onCancel}>
-          <ArrowLeft size={24} color="#266829" />
-        </View>
-        <Text className="flex-1 text-center font-headline font-bold text-xl text-primary pr-10">
-          Editar Times
-        </Text>
+    <PageContainer title="Editar Times" onBack={onCancel}>
+      <View className="mt-4">
+        <InstructionBanner isVisible={isBannerVisible} onDismiss={dismissBanner} />
       </View>
-
-      <InstructionBanner isVisible={isBannerVisible} onDismiss={dismissBanner} />
 
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 16, paddingBottom: 140 }}
+        contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 4, paddingBottom: 140 }}
         scrollEnabled={dragIndex === null}
       >
         {flatItems.map((item, index) => {
@@ -120,11 +106,9 @@ export function EditTeamsPage({
               <View
                 key={item.id}
                 style={{
-                  height: ITEM_HEIGHT,
-                  justifyContent: 'flex-end',
-                  paddingBottom: 4,
                   opacity: isHovered ? 0.4 : 1,
                 }}
+                className="mb-2 flex h-12 flex-end justify-center rounded-md bg-gray-200"
               >
                 <TeamSectionHeader
                   name={item.name}
@@ -141,11 +125,9 @@ export function EditTeamsPage({
               <View
                 key={item.id}
                 style={{
-                  height: ITEM_HEIGHT,
-                  justifyContent: 'flex-end',
-                  paddingBottom: 4,
                   opacity: isHovered ? 0.4 : 1,
                 }}
+                className="mb-2 flex h-12 flex-end justify-center rounded-md bg-gray-200/50"
               >
                 <BenchSectionHeader />
               </View>
@@ -181,6 +163,6 @@ export function EditTeamsPage({
       </ScrollView>
 
       <EditTeamsActionBar onSave={() => onSave()} onCancel={onCancel} />
-    </SafeAreaView>
+    </PageContainer>
   );
 }
