@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import type { User } from '../types';
 
+
 type BaseItem = {
   id: string;
   key: string;
@@ -46,7 +47,6 @@ type UseEditTeamsReturn = {
 
 function buildFlatItems(teams: Map<string, User[]>, bench: User[]): DragListItem[] {
   const items: DragListItem[] = [];
-  let colorIndex = 0;
   let teamIndex = 0;
 
   for (const [name, players] of teams.entries()) {
@@ -57,13 +57,11 @@ function buildFlatItems(teams: Map<string, User[]>, bench: User[]): DragListItem
       key: headerId,
       name,
       playerCount: players.length,
-      colorIndex,
     });
     for (const user of players) {
       const playerId = `player-${user.uid}`;
       items.push({ type: 'player', id: playerId, key: playerId, user });
     }
-    colorIndex++;
     teamIndex++;
   }
 
@@ -83,18 +81,18 @@ export function rebuildFromFlatItems(items: DragListItem[]): {
 } {
   const teams = new Map<string, User[]>();
   const bench: User[] = [];
-  let currentTeamName: string | null = null;
+  let currentTeamName: string | undefined = undefined;
   let isBench = false;
 
   for (const item of items) {
     if (item.type === 'team-header') {
       currentTeamName = item.name;
       isBench = false;
-      if (!teams.has(currentTeamName)) {
+      if (!!currentTeamName && !teams.has(currentTeamName)) {
         teams.set(currentTeamName, []);
       }
     } else if (item.type === 'bench-header') {
-      currentTeamName = null;
+      currentTeamName = undefined;
       isBench = true;
     } else if (item.type === 'player') {
       if (isBench) {
