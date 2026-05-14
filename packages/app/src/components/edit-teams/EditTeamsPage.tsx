@@ -89,6 +89,12 @@ export function EditTeamsPage({
         contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 12, paddingBottom: 140 }}
         scrollEnabled={dragIndex === null}
       >
+        {isBannerVisible && (
+          <View
+            className="absolute inset-0 z-50 bg-gray-200/50 rounded-lg m-2"
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50 }}
+          />
+        )}
         {flatItems.map((item, index) => {
           const isDragging = dragIndex === index;
           const isHovered = hoverIndex === index && dragIndex !== index;
