@@ -3,15 +3,12 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { useCallback, useState } from 'react';
 
-
-
 import { useAttendanceList, useGenerateTeams } from '@sportspay/shared';
-
-
 
 import { useEventTeams } from '../../hooks/use-event-teams';
 import { useLocalEventPlayers } from '../../hooks/use-local-event-players';
 import { saveEventTeams } from '../../services/teams';
+import { setPendingTeams } from '../../stores/teams-transfer';
 import { PageContainer } from '../page-container';
 import { DrawButton } from './components/DrawButton';
 import { DrawInput } from './components/DrawInput';
@@ -19,10 +16,7 @@ import { DrawResultList } from './components/DrawResultList';
 import { GenerateTeamsActionBar } from './components/GenerateTeamsActionBar';
 import { ModeSelector } from './components/ModeSelector';
 
-
-
 import type { Sport } from '@sportspay/shared';
-
 
 type GenerateTeamsPageProps = {
   eventId: string;
@@ -72,6 +66,17 @@ export function GenerateTeamsPage({
         eventTitle,
         result: JSON.stringify(result),
       },
+    });
+  };
+
+  const handleNavigateToEdit = () => {
+    const source = result || existingTeams;
+    if (!source) return;
+
+    setPendingTeams(source);
+    router.push({
+      pathname: '/events/[id]/teams/edit',
+      params: { id: eventId },
     });
   };
 
@@ -180,6 +185,7 @@ export function GenerateTeamsPage({
         <GenerateTeamsActionBar
           onShare={handleNavigateToShare}
           onSave={handleSave}
+          onEdit={handleNavigateToEdit}
           saveDisabled={!canSave}
           saveLabel={
             isSaving ? 'Salvando...' : isResultSaved || (!result && hasTeams) ? 'Salvo' : 'Salvar'

@@ -1,19 +1,22 @@
-import { GripVertical } from 'lucide-react-native';
 import { Text, View } from 'react-native';
 
 import type { User } from '@sportspay/shared';
 
-interface PlayerCardProps {
+type PlayerCardProps = {
   player: User;
-}
+  handle?: React.ReactNode;
+};
 
-export function PlayerCard({ player }: PlayerCardProps): React.JSX.Element {
+export function PlayerCard({ player, handle }: PlayerCardProps): React.JSX.Element {
   return (
     <View className="bg-surface-container-lowest p-3 rounded-lg flex-row items-center justify-between">
-      <Text className="text-sm font-label font-medium text-on-surface" numberOfLines={1}>
+      <Text
+        className="text-sm font-label font-medium text-on-surface flex-1 mr-2"
+        numberOfLines={1}
+      >
         {player.name}
       </Text>
-      <GripVertical size={18} color="#abadae" />
+      {handle}
     </View>
   );
 }

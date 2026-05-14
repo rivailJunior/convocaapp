@@ -1,77 +1,172 @@
-import { ArrowLeft } from 'lucide-react-native';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { ArrowLeft, GripVertical } from 'lucide-react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
+import { useMemo } from 'react';
 
-import { TEAM_COLORS, useEditTeams } from '@sportspay/shared';
+import { useEditTeams } from '@sportspay/shared';
 
-
-import { BenchSection } from './components/BenchSection';
+import { saveEventTeams } from '../../services/teams';
+import { BenchSectionHeader } from './components/BenchSectionHeader';
 import { EditTeamsActionBar } from './components/EditTeamsActionBar';
 import { InstructionBanner } from './components/InstructionBanner';
-import { TeamSection } from './components/TeamSection';
+import { PlayerCard } from './components/PlayerCard';
+import { TeamSectionHeader } from './components/TeamSectionHeader';
+import { useDragList } from './hooks/useDragList';
 
-import type { User } from '@sportspay/shared';
+import type { DragListItem, TeamDrawResult, User } from '@sportspay/shared';
 
-interface EditTeamsPageProps {
+const ITEM_HEIGHT = 64;
+
+type EditTeamsPageProps = {
+  eventId: string;
   teams: Map<string, User[]>;
   bench?: User[];
+};
+
+function toTeamDrawResult(teams: Map<string, User[]>, bench: User[]): TeamDrawResult {
+  const teamsArr = Array.from(teams.entries()).map(([name, players], index) => ({
+    id: String(index + 1),
+    name,
+    players: players.map((u) => ({
+      userId: u.uid,
+      userName: u.name,
+      avatarUrl: undefined,
+      status: 'confirmed' as const,
+      paymentStatus: 'pending' as const,
+    })),
+  }));
+
+  return {
+    teams: teamsArr,
+    bench: bench.map((u) => ({
+      userId: u.uid,
+      userName: u.name,
+      avatarUrl: undefined,
+      status: 'confirmed' as const,
+      paymentStatus: 'pending' as const,
+    })),
+    totalPlayers: teamsArr.reduce((sum, t) => sum + t.players.length, 0) + bench.length,
+  };
 }
 
-export function EditTeamsPage({ teams, bench = [] }: EditTeamsPageProps): React.JSX.Element {
-  const {
-    teams: currentTeams,
-    bench: currentBench,
-    isBannerVisible,
-    dismissBanner,
-    onSave,
-    onCancel,
-  } = useEditTeams(teams, bench);
+export function EditTeamsPage({
+  eventId,
+  teams,
+  bench = [],
+}: EditTeamsPageProps): React.JSX.Element {
+  const callbacks = useMemo(
+    () => ({
+      onSave: async (currentTeams: Map<string, User[]>, currentBench: User[]) => {
+        const result = toTeamDrawResult(currentTeams, currentBench);
+        await saveEventTeams(eventId, result);
+        router.back();
+      },
+      onCancel: () => {
+        router.back();
+      },
+    }),
+    [eventId],
+  );
 
-  const teamEntries = Array.from(currentTeams.entries());
+  const { flatItems, isBannerVisible, dismissBanner, onRenameTeam, onReorder, onSave, onCancel } =
+    useEditTeams(teams, bench, callbacks);
+
+  const { dragIndex, hoverIndex, dragY, panResponders } = useDragList({
+    items: flatItems,
+    itemHeight: ITEM_HEIGHT,
+    onReorder,
+  });
 
   return (
     <SafeAreaView className="flex-1 bg-background">
       <View className="flex-row items-center px-4 h-14">
-        <Pressable onPress={onCancel} className="p-2 rounded-full">
+        <View className="p-2 rounded-full" onTouchEnd={onCancel}>
           <ArrowLeft size={24} color="#266829" />
-        </Pressable>
+        </View>
         <Text className="flex-1 text-center font-headline font-bold text-xl text-primary pr-10">
           Editar Times
         </Text>
       </View>
 
+      <InstructionBanner isVisible={isBannerVisible} onDismiss={dismissBanner} />
+
       <ScrollView
-        className="flex-1 px-4 pt-4"
-        contentContainerClassName="pb-32 gap-6"
-        showsVerticalScrollIndicator={false}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 16, paddingBottom: 140 }}
+        scrollEnabled={dragIndex === null}
       >
-        <InstructionBanner
-          isVisible={isBannerVisible}
-          onDismiss={dismissBanner}
-        />
+        {flatItems.map((item, index) => {
+          const isDragging = dragIndex === index;
+          const isHovered = hoverIndex === index && dragIndex !== index;
+          const translateY =
+            isDragging && dragY !== null && dragIndex !== null
+              ? dragY - dragIndex * ITEM_HEIGHT
+              : 0;
 
-        {teamEntries.length === 0 ? (
-          <View className="rounded-xl bg-surface-container-lowest p-6 items-center">
-            <Text className="text-sm text-on-surface-variant font-label">
-              Não há times
-            </Text>
-          </View>
-        ) : (
-          teamEntries.map(([name, players], index) => {
-            const colorIndex = index % TEAM_COLORS.length;
+          if (item.type === 'team-header') {
             return (
-              <TeamSection
-                key={name}
-                name={name}
-                players={players}
-                indicatorColor={TEAM_COLORS[colorIndex].indicator}
-                borderColor={TEAM_COLORS[colorIndex].border}
-              />
+              <View
+                key={item.id}
+                style={{
+                  height: ITEM_HEIGHT,
+                  justifyContent: 'flex-end',
+                  paddingBottom: 4,
+                  opacity: isHovered ? 0.4 : 1,
+                }}
+              >
+                <TeamSectionHeader
+                  name={item.name}
+                  playerCount={item.playerCount}
+                  colorIndex={item.colorIndex}
+                  onRename={onRenameTeam}
+                />
+              </View>
             );
-          })
-        )}
+          }
 
-        <BenchSection players={currentBench} />
+          if (item.type === 'bench-header') {
+            return (
+              <View
+                key={item.id}
+                style={{
+                  height: ITEM_HEIGHT,
+                  justifyContent: 'flex-end',
+                  paddingBottom: 4,
+                  opacity: isHovered ? 0.4 : 1,
+                }}
+              >
+                <BenchSectionHeader />
+              </View>
+            );
+          }
+
+          return (
+            <View
+              key={item.id}
+              style={{
+                height: ITEM_HEIGHT,
+                justifyContent: 'center',
+                paddingVertical: 4,
+                opacity: isHovered ? 0.4 : 1,
+                zIndex: isDragging ? 99 : 1,
+                transform: [{ translateY }],
+              }}
+            >
+              <PlayerCard
+                player={item.user}
+                handle={
+                  <View
+                    hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                    {...(panResponders[index]?.panHandlers ?? {})}
+                  >
+                    <GripVertical size={18} color="#abadae" />
+                  </View>
+                }
+              />
+            </View>
+          );
+        })}
       </ScrollView>
 
       <EditTeamsActionBar onSave={onSave} onCancel={onCancel} />

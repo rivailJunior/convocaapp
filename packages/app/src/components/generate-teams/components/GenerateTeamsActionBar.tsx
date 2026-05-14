@@ -1,9 +1,10 @@
-import { Save, Share2 } from 'lucide-react-native';
+import { Pencil, Save, Share2 } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
 type GenerateTeamsActionBarProps = {
   onShare: () => void;
   onSave: () => void;
+  onEdit: () => void;
   saveDisabled?: boolean;
   saveLabel?: string;
 };
@@ -11,11 +12,18 @@ type GenerateTeamsActionBarProps = {
 export function GenerateTeamsActionBar({
   onShare,
   onSave,
+  onEdit,
   saveDisabled = false,
   saveLabel = 'Salvar Times',
 }: GenerateTeamsActionBarProps): React.JSX.Element {
   return (
     <View className="absolute bottom-0 left-0 right-0 flex-row items-center gap-3 px-4 pb-8 pt-4 bg-surface/80 rounded-t-[24px] shadow-sm">
+      <Pressable
+        onPress={onEdit}
+        className="flex-row items-center justify-center gap-2 py-4 px-4 rounded-xl border border-outline/30 bg-surface-container-lowest"
+      >
+        <Pencil size={16} color="#266829" />
+      </Pressable>
       <Pressable
         onPress={onShare}
         className="flex-1 flex-row items-center justify-center gap-2 py-4 rounded-xl border-1  bg-blue-500 "
