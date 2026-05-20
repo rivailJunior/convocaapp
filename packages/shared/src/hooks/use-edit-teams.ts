@@ -152,7 +152,7 @@ export function useEditTeams(
       if (isSaving) return;
       setIsSaving(true);
       try {
-        let { teams: t, bench: b } = orderedItems
+        const { teams: t, bench: b } = orderedItems
           ? rebuildFromFlatItems(orderedItems)
           : { teams: state.teams, bench: state.bench };
         await callbacks?.onSave?.(t, b);
