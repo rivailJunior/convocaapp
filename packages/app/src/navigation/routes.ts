@@ -12,6 +12,7 @@ export const createRoutes = {
   GENERATE_TEAMS: (eventId: string): `/generate-teams/${string}` => `/generate-teams/${eventId}`,
   ATTENDANCE_LIST: (eventId: string): `/events/${string}/attendance` =>
     `/events/${eventId}/attendance`,
+  EDIT_TEAMS: (eventId: string): `/events/${string}/teams/edit` => `/events/${eventId}/teams/edit`,
 } as const;
 
 export type RouteParams = {
@@ -19,6 +20,7 @@ export type RouteParams = {
   SHARE_TEAMS: { eventId: string };
   GENERATE_TEAMS: { eventId: string };
   ATTENDANCE_LIST: { eventId: string };
+  EDIT_TEAMS: { eventId: string };
 };
 
 export type NavigationRoutes = keyof typeof ROUTES;

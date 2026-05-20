@@ -1,80 +1,146 @@
-import { ArrowLeft } from 'lucide-react-native';
-import { Pressable, ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { GripVertical } from 'lucide-react-native';
+import { ScrollView, View } from 'react-native';
+import { router } from 'expo-router';
+import { useMemo } from 'react';
 
-import { TEAM_COLORS, useEditTeams } from '@sportspay/shared';
+import { useEditTeams } from '@sportspay/shared';
 
-
-import { BenchSection } from './components/BenchSection';
+import { saveEventTeams } from '../../services/teams';
+import { toTeamDrawResult } from '../../utils/edit-teams';
+import { PageContainer } from '../page-container';
 import { EditTeamsActionBar } from './components/EditTeamsActionBar';
 import { InstructionBanner } from './components/InstructionBanner';
-import { TeamSection } from './components/TeamSection';
+import { PlayerCard } from './components/PlayerCard';
+import { TeamSectionHeader } from './components/TeamSectionHeader';
+import { useDragList } from './hooks/useDragList';
 
-import type { User } from '@sportspay/shared';
+import type { DragListItem, User } from '@sportspay/shared';
 
-interface EditTeamsPageProps {
+const ITEM_HEIGHT = 64;
+
+type EditTeamsPageProps = {
+  eventId: string;
   teams: Map<string, User[]>;
   bench?: User[];
-}
+};
 
-export function EditTeamsPage({ teams, bench = [] }: EditTeamsPageProps): React.JSX.Element {
-  const {
-    teams: currentTeams,
-    bench: currentBench,
-    isBannerVisible,
-    dismissBanner,
-    onSave,
-    onCancel,
-  } = useEditTeams(teams, bench);
+const TeamHeaderRow = ({
+  name,
+  item,
+  onRenameTeam,
+}: {
+  name: string;
+  item: DragListItem;
+  onRenameTeam: (oldName: string, newName: string) => void;
+}) => {
+  return (
+    <View
+      key={name}
+      style={{
+        opacity: 1,
+      }}
+      className="mt-4 mb-2 flex h-16 flex-end justify-center rounded-md bg-gray-200"
+    >
+      <TeamSectionHeader name={name} playerCount={item.playerCount || 0} onRename={onRenameTeam} />
+    </View>
+  );
+};
 
-  const teamEntries = Array.from(currentTeams.entries());
+export function EditTeamsPage({
+  eventId,
+  teams,
+  bench = [],
+}: EditTeamsPageProps): React.JSX.Element {
+  const callbacks = useMemo(
+    () => ({
+      onSave: async (currentTeams: Map<string, User[]>, currentBench: User[]) => {
+        try {
+          const result = toTeamDrawResult(currentTeams, currentBench);
+          await saveEventTeams(eventId, result);
+          router.back();
+        } catch (e) {
+          console.error('[EditTeams] saveEventTeams failed:', e);
+        }
+      },
+      onCancel: () => {
+        router.back();
+      },
+    }),
+    [eventId],
+  );
+
+  const { flatItems, isBannerVisible, dismissBanner, onRenameTeam, onReorder, onSave, onCancel } =
+    useEditTeams(teams, bench, callbacks);
+
+  const { dragIndex, hoverIndex, dragY, panResponders } = useDragList({
+    items: flatItems,
+    itemHeight: ITEM_HEIGHT,
+    onReorder,
+  });
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <View className="flex-row items-center px-4 h-14">
-        <Pressable onPress={onCancel} className="p-2 rounded-full">
-          <ArrowLeft size={24} color="#266829" />
-        </Pressable>
-        <Text className="flex-1 text-center font-headline font-bold text-xl text-primary pr-10">
-          Editar Times
-        </Text>
+    <PageContainer title="Editar Times" onBack={onCancel}>
+      <View className="mt-4">
+        <InstructionBanner isVisible={isBannerVisible} onDismiss={dismissBanner} />
       </View>
 
       <ScrollView
-        className="flex-1 px-4 pt-4"
-        contentContainerClassName="pb-32 gap-6"
-        showsVerticalScrollIndicator={false}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 12, paddingBottom: 140 }}
+        scrollEnabled={dragIndex === null}
       >
-        <InstructionBanner
-          isVisible={isBannerVisible}
-          onDismiss={dismissBanner}
-        />
+        {isBannerVisible && (
+          <View
+            className="absolute inset-0 z-50 bg-gray-200/50 rounded-lg m-2"
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50 }}
+          />
+        )}
+        {flatItems.map((item, index) => {
+          const isDragging = dragIndex === index;
+          const isHovered = hoverIndex === index && dragIndex !== index;
+          const translateY =
+            isDragging && dragY !== null && dragIndex !== null
+              ? dragY - dragIndex * ITEM_HEIGHT
+              : 0;
 
-        {teamEntries.length === 0 ? (
-          <View className="rounded-xl bg-surface-container-lowest p-6 items-center">
-            <Text className="text-sm text-on-surface-variant font-label">
-              Não há times
-            </Text>
-          </View>
-        ) : (
-          teamEntries.map(([name, players], index) => {
-            const colorIndex = index % TEAM_COLORS.length;
+          if (item.type === 'team-header' || item.type === 'bench-header') {
             return (
-              <TeamSection
-                key={name}
-                name={name}
-                players={players}
-                indicatorColor={TEAM_COLORS[colorIndex].indicator}
-                borderColor={TEAM_COLORS[colorIndex].border}
+              <TeamHeaderRow
+                key={item.id}
+                name={item?.name ?? 'Banco'}
+                item={item}
+                onRenameTeam={onRenameTeam}
               />
             );
-          })
-        )}
-
-        <BenchSection players={currentBench} />
+          }
+          return (
+            <View
+              key={item.id}
+              className="justify-center py-2 gap-2 flex-col"
+              style={{
+                height: ITEM_HEIGHT,
+                opacity: isHovered ? 0.4 : 1,
+                zIndex: isDragging ? 99 : 1,
+                transform: [{ translateY }],
+              }}
+            >
+              <PlayerCard
+                player={item.user}
+                handle={
+                  <View
+                    hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                    {...(panResponders[index]?.panHandlers ?? {})}
+                  >
+                    <GripVertical size={28} color="#abadae" />
+                  </View>
+                }
+              />
+            </View>
+          );
+        })}
       </ScrollView>
 
-      <EditTeamsActionBar onSave={onSave} onCancel={onCancel} />
-    </SafeAreaView>
+      <EditTeamsActionBar onSave={() => onSave()} onCancel={onCancel} />
+    </PageContainer>
   );
 }

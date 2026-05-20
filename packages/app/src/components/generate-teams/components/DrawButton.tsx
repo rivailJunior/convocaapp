@@ -17,7 +17,7 @@ export function DrawButton({
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      className={`w-full py-5 rounded-xl items-center justify-center mb-8 ${disabledStyle}`}
+      className={`w-full py-4 rounded-xl items-center justify-center ${disabledStyle}`}
     >
       <Text className="font-headline font-extrabold text-lg text-white">{label}</Text>
     </Pressable>

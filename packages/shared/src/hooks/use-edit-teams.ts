@@ -1,53 +1,181 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+
+
 
 import type { User } from '../types';
 
-interface EditTeamsState {
+
+type BaseItem = {
+  id: string;
+  key: string;
+  name?: string;
+  playerCount?: number;
+};
+
+type TeamHeaderItem = BaseItem & {
+  type: 'team-header';
+};
+
+type PlayerItem = BaseItem & {
+  type: 'player';
+  user: User;
+};
+
+type BenchHeaderItem = BaseItem & {
+  type: 'bench-header';
+};
+
+export type DragListItem = TeamHeaderItem | PlayerItem | BenchHeaderItem;
+
+type EditTeamsState = {
   teams: Map<string, User[]>;
   bench: User[];
   isBannerVisible: boolean;
-}
+};
 
-interface UseEditTeamsReturn {
+type UseEditTeamsReturn = {
   teams: Map<string, User[]>;
   bench: User[];
+  flatItems: DragListItem[];
   isBannerVisible: boolean;
   dismissBanner: () => void;
-  onSave: () => void;
+  onReorder: (items: DragListItem[]) => void;
+  onRenameTeam: (oldName: string, newName: string) => void;
+  onSave: (orderedItems?: DragListItem[]) => void;
   onCancel: () => void;
-  onMovePlayer: (userId: string, fromTeam: string, toTeam: string) => void;
+};
+
+function buildFlatItems(teams: Map<string, User[]>, bench: User[]): DragListItem[] {
+  const items: DragListItem[] = [];
+  let teamIndex = 0;
+
+  for (const [name, players] of teams.entries()) {
+    const headerId = `header-team-${teamIndex}`;
+    items.push({
+      type: 'team-header',
+      id: headerId,
+      key: headerId,
+      name,
+      playerCount: players.length,
+    });
+    for (const user of players) {
+      const playerId = `player-${user.uid}`;
+      items.push({ type: 'player', id: playerId, key: playerId, user });
+    }
+    teamIndex++;
+  }
+
+  const benchId = 'header-bench';
+  items.push({ type: 'bench-header', id: benchId, key: benchId });
+  for (const user of bench) {
+    const playerId = `player-${user.uid}`;
+    items.push({ type: 'player', id: playerId, key: playerId, user });
+  }
+
+  return items;
+}
+
+export function rebuildFromFlatItems(items: DragListItem[]): {
+  teams: Map<string, User[]>;
+  bench: User[];
+} {
+  const teams = new Map<string, User[]>();
+  const bench: User[] = [];
+  let currentTeamName: string | undefined = undefined;
+  let isBench = false;
+
+  for (const item of items) {
+    if (item.type === 'team-header') {
+      currentTeamName = item.name;
+      isBench = false;
+      if (!!currentTeamName && !teams.has(currentTeamName)) {
+        teams.set(currentTeamName, []);
+      }
+    } else if (item.type === 'bench-header') {
+      currentTeamName = undefined;
+      isBench = true;
+    } else if (item.type === 'player') {
+      if (isBench) {
+        bench.push(item.user);
+      } else if (currentTeamName) {
+        teams.get(currentTeamName)!.push(item.user);
+      }
+    }
+  }
+
+  return { teams, bench };
 }
 
 export function useEditTeams(
   initialTeams: Map<string, User[]>,
   initialBench: User[] = [],
+  callbacks?: {
+    onSave?: (teams: Map<string, User[]>, bench: User[]) => Promise<void>;
+    onCancel?: () => void;
+  },
 ): UseEditTeamsReturn {
   const [state, setState] = useState<EditTeamsState>({
     teams: initialTeams,
     bench: initialBench,
     isBannerVisible: true,
   });
+  const [isSaving, setIsSaving] = useState(false);
 
-  const dismissBanner = () => {
+  const flatItems = useMemo(
+    () => buildFlatItems(state.teams, state.bench),
+    [state.teams, state.bench],
+  );
+
+  const dismissBanner = useCallback(() => {
     setState((prev) => ({ ...prev, isBannerVisible: false }));
-  };
+  }, []);
 
-  // TODO(@developer): implement save logic — persist edited teams
-  const onSave = () => {};
+  const onReorder = useCallback((items: DragListItem[]) => {
+    const { teams, bench } = rebuildFromFlatItems(items);
+    setState((prev) => ({ ...prev, teams, bench }));
+  }, []);
 
-  // TODO(@developer): implement cancel logic — navigate back without saving
-  const onCancel = () => {};
+  const onRenameTeam = useCallback((oldName: string, newName: string) => {
+    if (!newName.trim() || oldName === newName) return;
 
-  // TODO(@developer): implement drag-and-drop move logic
-  const onMovePlayer = (_userId: string, _fromTeam: string, _toTeam: string) => {};
+    setState((prev) => {
+      const newTeams = new Map<string, User[]>();
+      for (const [name, players] of prev.teams.entries()) {
+        newTeams.set(name === oldName ? newName.trim() : name, players);
+      }
+      return { ...prev, teams: newTeams };
+    });
+  }, []);
+
+  const onSave = useCallback(
+    async (orderedItems?: DragListItem[]) => {
+      if (isSaving) return;
+      setIsSaving(true);
+      try {
+        const { teams: t, bench: b } = orderedItems
+          ? rebuildFromFlatItems(orderedItems)
+          : { teams: state.teams, bench: state.bench };
+        await callbacks?.onSave?.(t, b);
+      } finally {
+        setIsSaving(false);
+      }
+    },
+    [isSaving, state.teams, state.bench, callbacks],
+  );
+
+  const onCancel = useCallback(() => {
+    callbacks?.onCancel?.();
+  }, [callbacks]);
 
   return {
     teams: state.teams,
     bench: state.bench,
+    flatItems,
     isBannerVisible: state.isBannerVisible,
     dismissBanner,
+    onReorder,
+    onRenameTeam,
     onSave,
     onCancel,
-    onMovePlayer,
   };
 }

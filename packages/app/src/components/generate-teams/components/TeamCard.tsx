@@ -1,6 +1,9 @@
 import { Text, View } from 'react-native';
 
+
+
 import type { AttendancePlayer } from '@sportspay/shared';
+
 
 type TeamCardProps = {
   name: string;
@@ -26,11 +29,9 @@ function getInitials(name: string): string {
 
 export function TeamCard({ name, players, bgTint, textColor }: TeamCardProps): React.JSX.Element {
   return (
-    <View className="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/15">
+    <View className={`rounded-xl overflow-hidden border border-outline/20 ${bgTint}`}>
       <View className={`p-4 flex-row justify-between items-center ${bgTint}`}>
-        <Text className={`font-headline font-bold ${textColor}`}>
-          {name}
-        </Text>
+        <Text className={`font-headline font-bold ${textColor}`}>{name}</Text>
         <View className={`px-2 py-1 rounded-full ${bgTint}`}>
           <Text className={`text-[10px] font-bold uppercase ${textColor}`}>
             {players.length} {players.length === 1 ? 'Jogador' : 'Jogadores'}
@@ -45,9 +46,7 @@ export function TeamCard({ name, players, bgTint, textColor }: TeamCardProps): R
                 {getInitials(player.userName)}
               </Text>
             </View>
-            <Text className="text-sm font-medium text-on-surface">
-              {player.userName}
-            </Text>
+            <Text className={`text-md font-medium text-on-surface/80`}>{player.userName}</Text>
           </View>
         ))}
       </View>

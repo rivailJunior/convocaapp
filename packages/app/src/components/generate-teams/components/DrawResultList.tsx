@@ -10,17 +10,17 @@ type DrawResultListProps = {
 };
 
 const TEAM_STYLES = [
-  { bgTint: 'bg-primary/5', textColor: 'text-primary' },
-  { bgTint: 'bg-tertiary/5', textColor: 'text-tertiary' },
-  { bgTint: 'bg-error-container/5', textColor: 'text-error-container' },
-  { bgTint: 'bg-secondary/5', textColor: 'text-secondary' },
-  { bgTint: 'bg-blue-500/5', textColor: 'text-blue-500' },
-  { bgTint: 'bg-purple-500/5', textColor: 'text-purple-500' },
+  { bgTint: 'bg-primary/20', textColor: 'text-white' },
+  { bgTint: 'bg-tertiary/20', textColor: 'text-white' },
+  { bgTint: 'bg-error-container/20', textColor: 'text-white' },
+  { bgTint: 'bg-secondary/20', textColor: 'text-white' },
+  { bgTint: 'bg-blue-500/20', textColor: 'text-white' },
+  { bgTint: 'bg-purple-500/20', textColor: 'text-white' },
 ];
 
 export function DrawResultList({ result }: DrawResultListProps): React.JSX.Element {
   return (
-    <View className="gap-6">
+    <View className="gap-2">
       <Text className="font-headline font-bold text-xl px-1">Times Gerados</Text>
       {result.teams.map((team, index) => {
         const style = TEAM_STYLES[index % TEAM_STYLES.length]!;
