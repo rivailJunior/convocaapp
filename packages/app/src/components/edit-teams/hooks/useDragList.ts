@@ -1,7 +1,8 @@
-import { PanResponder, PanResponderInstance } from 'react-native';
+import { PanResponder } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 
 import type { DragListItem } from '@sportspay/shared';
+import type { PanResponderInstance } from 'react-native';
 
 type UseDragListProps = {
   items: DragListItem[];
