@@ -1,5 +1,7 @@
 export const ROUTES = {
   HOME: '/home',
+  GROUPS: '/groups',
+  EVENTS: '/events',
   SETTINGS: '/settings',
   EVENT_CREATE_RECURRENT: '/event/create-recurrent-event',
   GROUP: '/group',

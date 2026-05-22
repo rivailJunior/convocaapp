@@ -1,9 +1,7 @@
-import Constants from 'expo-constants';
-import { router } from 'expo-router';
-import { ArrowLeft } from 'lucide-react-native';
-import { useCallback } from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Constants from 'expo-constants';
+import { useCallback } from 'react';
 
 import { useLocalSettings } from '../../hooks/use-local-settings';
 import { AboutSection } from './AboutSection';
@@ -26,20 +24,11 @@ export function SettingsPage(): React.JSX.Element {
   const handlePrivacyPress = useCallback(() => {}, []);
   const handleTermsPress = useCallback(() => {}, []);
   const handleFeedbackPress = useCallback(() => {}, []);
-  const handleReturn = useCallback(() => {
-    router.back();
-  }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
-      <View className="flex-row items-center px-4 h-14">
-        <Pressable
-          onPress={handleReturn}
-          className="w-10 h-10 rounded-full items-center justify-center active:opacity-70"
-        >
-          <ArrowLeft size={24} color="#266829" />
-        </Pressable>
-        <Text className="ml-4 text-xl font-bold text-on-surface font-headline tracking-tight">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top', 'left', 'right']}>
+      <View className="px-4 pt-4 pb-2">
+        <Text className="text-2xl font-bold text-on-surface font-headline tracking-tight">
           Configurações
         </Text>
       </View>
