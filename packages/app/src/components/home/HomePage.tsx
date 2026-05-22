@@ -24,7 +24,7 @@ export function HomePage(): React.JSX.Element {
   const { summaries } = useTreasurySummary();
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top', 'left', 'right']}>
       <HomeHeader />
 
       <ScrollView

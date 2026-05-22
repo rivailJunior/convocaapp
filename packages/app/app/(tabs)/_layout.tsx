@@ -7,8 +7,8 @@ import type { Href } from 'expo-router';
 export default function TabsLayout() {
   return (
     <BottomNavbarProvider>
-      <Tabs>
-        <TabSlot />
+      <Tabs style={{ flex: 1 }}>
+        <TabSlot style={{ flex: 1 }} />
         <BottomNavbar />
         <TabList style={{ display: 'none' }}>
           <TabTrigger name="home" href={'/home' as Href}>

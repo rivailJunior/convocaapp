@@ -26,7 +26,7 @@ export function SettingsPage(): React.JSX.Element {
   const handleFeedbackPress = useCallback(() => {}, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top', 'left', 'right']}>
       <View className="px-4 pt-4 pb-2">
         <Text className="text-2xl font-bold text-on-surface font-headline tracking-tight">
           Configurações
