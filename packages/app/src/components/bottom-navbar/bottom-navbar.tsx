@@ -9,6 +9,8 @@ import { TabTrigger } from 'expo-router/ui';
 import { BottomNavbarActions } from './bottom-navbar-actions';
 import { useBottomNavbar } from './bottom-navbar-context';
 
+
+
 import type { ComponentType } from 'react';
 
 interface TabItem {
@@ -35,8 +37,8 @@ const BottomNavbar = () => {
   }
 
   return (
-    <View className="justify-center pb-6 bg-black">
-      <View className="flex flex-row items-center bg-blue-400">
+    <View className="justify-center p-4 bg-white">
+      <View className="flex flex-row  w-full justify-around">
         {TAB_ITEMS.map((tab) => {
           const isFocused = pathname === tab.href || pathname.startsWith(`${tab.href}/`);
           const Icon = tab.icon;
@@ -45,17 +47,19 @@ const BottomNavbar = () => {
             <TabTrigger
               key={tab.name}
               name={tab.name}
-              className="flex-1 bg-red-500"
+              className="justify-center items-center"
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={tab.label}
             >
-              <View className={`flex-col items-center align-middle justify-center  rounded-md`}>
-                <View className={`items-center justify-center rounded-full px-5 py-1`}>
+              <View
+                className={`flex-col items-center align-middle justify-center rounded-md gap-2`}
+              >
+                <View className={`items-center justify-center rounded-full `}>
                   <Icon
-                    size={22}
-                    color={isFocused ? 'black' : '#757778'}
-                    strokeWidth={isFocused ? 2 : 1.5}
+                    size={30}
+                    color={isFocused ? '#324600' : '#757778'}
+                    strokeWidth={isFocused ? 1.5 : 1}
                   />
                 </View>
                 <Text

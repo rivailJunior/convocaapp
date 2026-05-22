@@ -20,7 +20,6 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerShown: false,
-          contentStyle: { padding: 0, margin: 0 },
         }}
       />
     </QueryClientProvider>
