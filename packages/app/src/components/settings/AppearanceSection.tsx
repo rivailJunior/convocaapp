@@ -1,28 +1,26 @@
 import { Pressable, Text, View } from 'react-native';
 
-import { APP_LANGUAGES, THEME_LABELS } from '@sportspay/shared';
+import { THEME_LABELS } from '@sportspay/shared';
 
-import type { AppLanguage, ThemeMode } from '@sportspay/shared';
+import type { ThemeMode } from '@sportspay/shared';
 
 interface AppearanceSectionProps {
   theme: ThemeMode;
-  language: AppLanguage;
   onThemeChange: (theme: ThemeMode) => void;
-  onLanguagePress: () => void;
 }
 
 export function AppearanceSection({
   theme,
-  language,
   onThemeChange,
-  onLanguagePress,
 }: AppearanceSectionProps): React.JSX.Element {
   return (
     <View>
-      <Text className="text-on-surface-variant font-headline font-bold text-xs mb-3 ml-1 uppercase tracking-widest">
+      {/* Both theme and language options are disabled, so no need to show the section */}
+      {/* <Text className="text-on-surface-variant font-headline font-bold text-xs mb-3 ml-1 uppercase tracking-widest">
         Aparência
       </Text>
       <View className="bg-surface-container-lowest rounded-xl overflow-hidden">
+        Theme temporarily disabled - no dark theme yet
         <View className="flex-row items-center justify-between p-4">
           <Text className="font-medium text-on-surface">Tema</Text>
           <View className="flex-row bg-surface-container-high p-1 rounded-full gap-1">
@@ -64,18 +62,17 @@ export function AppearanceSection({
             </Pressable>
           </View>
         </View>
+        Language temporarily disabled
         <Pressable
           onPress={onLanguagePress}
           className="flex-row items-center justify-between p-4 active:opacity-70"
         >
           <Text className="font-medium text-on-surface">Idioma</Text>
           <View className="flex-row items-center gap-2">
-            <Text className="text-on-surface-variant text-sm">
-              {APP_LANGUAGES[language]}
-            </Text>
+            <Text className="text-on-surface-variant text-sm">{APP_LANGUAGES[language]}</Text>
           </View>
         </Pressable>
-      </View>
+      </View> */}
     </View>
   );
 }
