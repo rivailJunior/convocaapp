@@ -19,6 +19,7 @@ export function SettingsPage(): React.JSX.Element {
   const [showTermsModal, setShowTermsModal] = useState(false);
 
   const handleExportPress = useCallback(async () => {
+    console.log('handle Export');
     try {
       await exportDatabase();
       Alert.alert('Dados exportados', 'Os dados foram copiados para a área de transferência', [

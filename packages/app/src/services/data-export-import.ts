@@ -1,4 +1,6 @@
 import * as Clipboard from 'expo-clipboard';
+import { File, Paths } from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
 
 import { getAdapter } from './database/database-adapter';
 import { getRecurrentEvents } from './database/entities/event/event';
@@ -35,7 +37,7 @@ export async function exportDatabase(): Promise<void> {
     const eventTeams = await db.getAllAsync('SELECT * FROM EventTeams ORDER BY eventId');
 
     // Export settings
-    const settings = await db.getAllAsync('SELECT * FROM Settings');
+    const settings = await db.getAllAsync('SELECT * FROM UserSettings');
 
     const exportData: DatabaseExport = {
       version: '1.0.0',
@@ -50,11 +52,28 @@ export async function exportDatabase(): Promise<void> {
       eventTeams: eventTeams || [],
     };
 
-    // Copy JSON to clipboard
+    // Create JSON file
     const jsonString = JSON.stringify(exportData, null, 2);
-    await Clipboard.setStringAsync(jsonString);
+    const fileName = `convoca-backup-${new Date().toISOString().split('T')[0]}.json`;
+    const file = new File(Paths.document, fileName);
 
-    console.log('Database exported to clipboard');
+    // Write file to device
+    await file.write(jsonString);
+
+    // Check if sharing is available
+    const isAvailable = await Sharing.isAvailableAsync();
+    if (isAvailable) {
+      await Sharing.shareAsync(file.uri, {
+        mimeType: 'application/json',
+        dialogTitle: 'Exportar Dados do Convoca',
+      });
+    } else {
+      // Fallback: copy file path to clipboard if sharing not available
+      await Clipboard.setStringAsync(file.uri);
+      throw new Error('Compartilhamento não disponível. Arquivo salvo em: ' + file.uri);
+    }
+
+    console.log('Database exported to file:', file.uri);
   } catch (error) {
     console.error('Error exporting database:', error);
     throw new Error('Falha ao exportar dados. Tente novamente.');
@@ -88,7 +107,7 @@ export async function importDatabase(): Promise<void> {
       await db.execAsync('DELETE FROM RecurrentEvents');
       await db.execAsync('DELETE FROM GroupParticipants');
       await db.execAsync('DELETE FROM Groups');
-      await db.execAsync('DELETE FROM Settings');
+      await db.execAsync('DELETE FROM UserSettings');
 
       // Import groups
       for (const group of importData.groups) {
@@ -170,10 +189,10 @@ export async function importDatabase(): Promise<void> {
       // Import settings if available
       if (importData.settings) {
         for (const setting of importData.settings) {
-          await db.runAsync('INSERT INTO Settings (key, value) VALUES (?, ?)', [
-            setting.key,
-            setting.value,
-          ]);
+          await db.runAsync(
+            'INSERT INTO UserSettings (id, theme, language, onboarded) VALUES (?, ?, ?, ?)',
+            [setting.id, setting.theme, setting.language, setting.onboarded],
+          );
         }
       }
     });

@@ -24,6 +24,7 @@
     "expo": "~54.0.34",
     "expo-clipboard": "~8.0.8",
     "expo-constants": "~18.0.13",
+    "expo-file-system": "^17.0.1",
     "expo-image-picker": "~17.0.11",
     "expo-linear-gradient": "^15.0.8",
     "expo-linking": "~8.0.12",
