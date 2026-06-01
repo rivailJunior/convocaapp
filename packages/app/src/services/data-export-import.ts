@@ -1,10 +1,16 @@
 import * as Clipboard from 'expo-clipboard';
-import { File, Paths } from 'expo-file-system';
+import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
+
+
 
 import { getAdapter } from './database/database-adapter';
 import { getRecurrentEvents } from './database/entities/event/event';
 import { getGroupDisplayItems, getGroups } from './database/entities/group/group';
+
+
+
+
 
 export interface DatabaseExport {
   version: string;
@@ -55,41 +61,49 @@ export async function exportDatabase(): Promise<void> {
     // Create JSON file
     const jsonString = JSON.stringify(exportData, null, 2);
     const fileName = `convoca-backup-${new Date().toISOString().split('T')[0]}.json`;
-    const file = new File(Paths.document, fileName);
+    const fileUri = `${FileSystem.cacheDirectory}${fileName}`;
 
     // Write file to device
-    await file.write(jsonString);
+    await FileSystem.writeAsStringAsync(fileUri, jsonString);
 
     // Check if sharing is available
     const isAvailable = await Sharing.isAvailableAsync();
     if (isAvailable) {
-      await Sharing.shareAsync(file.uri, {
+      await Sharing.shareAsync(fileUri, {
         mimeType: 'application/json',
         dialogTitle: 'Exportar Dados do Convoca',
       });
     } else {
       // Fallback: copy file path to clipboard if sharing not available
-      await Clipboard.setStringAsync(file.uri);
-      throw new Error('Compartilhamento não disponível. Arquivo salvo em: ' + file.uri);
+      await Clipboard.setStringAsync(fileUri);
+      throw new Error('Compartilhamento não disponível. Arquivo salvo em: ' + fileUri);
     }
 
-    console.log('Database exported to file:', file.uri);
+    console.log('Database exported to file:', fileUri);
   } catch (error) {
     console.error('Error exporting database:', error);
     throw new Error('Falha ao exportar dados. Tente novamente.');
   }
 }
 
-export async function importDatabase(): Promise<void> {
+export async function importDatabase(fileUri?: string): Promise<void> {
   try {
-    // Get JSON from clipboard
-    const clipboardContent = await Clipboard.getStringAsync();
+    let importData: DatabaseExport;
 
-    if (!clipboardContent) {
-      throw new Error('Nenhum dados encontrado na área de transferência.');
+    if (fileUri) {
+      // Read from file
+      const fileContent = await FileSystem.readAsStringAsync(fileUri);
+      importData = JSON.parse(fileContent);
+    } else {
+      // Fallback: Get JSON from clipboard (for backward compatibility)
+      const clipboardContent = await Clipboard.getStringAsync();
+
+      if (!clipboardContent) {
+        throw new Error('Nenhum dados encontrados. Por favor, selecione um arquivo ou copie os dados JSON para a área de transferência.');
+      }
+
+      importData = JSON.parse(clipboardContent);
     }
-
-    const importData: DatabaseExport = JSON.parse(clipboardContent);
 
     // Validate import data
     if (!importData.version || !importData.groups || !importData.events) {
@@ -201,5 +215,32 @@ export async function importDatabase(): Promise<void> {
   } catch (error) {
     console.error('Error importing database:', error);
     throw new Error('Falha ao importar dados. Verifique o arquivo e tente novamente.');
+  }
+}
+
+export async function clearDatabase(): Promise<void> {
+  try {
+    const db = getAdapter();
+
+    // Clear all data in a transaction
+    await db.withTransactionAsync(async () => {
+      // Clear data in reverse order of dependencies
+      await db.execAsync('DELETE FROM EventTeams');
+      await db.execAsync('DELETE FROM EventPayments');
+      await db.execAsync('DELETE FROM EventAttendances');
+      await db.execAsync('DELETE FROM RecurrentEvents');
+      await db.execAsync('DELETE FROM GroupParticipants');
+      await db.execAsync('DELETE FROM Groups');
+      await db.execAsync('DELETE FROM UserSettings');
+    });
+
+    // Re-initialize settings with defaults
+    const { initSettingsDatabase } = await import('./database/entities/settings/settings');
+    await initSettingsDatabase();
+
+    console.log('Database cleared successfully');
+  } catch (error) {
+    console.error('Error clearing database:', error);
+    throw new Error('Falha ao limpar dados. Tente novamente.');
   }
 }

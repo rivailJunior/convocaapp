@@ -1,10 +1,11 @@
 import { Alert, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
+import * as DocumentPicker from 'expo-document-picker';
 import { useCallback, useState } from 'react';
 
 import { useLocalSettings } from '../../hooks/use-local-settings';
-import { exportDatabase, importDatabase } from '../../services/data-export-import';
+import { clearDatabase, exportDatabase, importDatabase } from '../../services/data-export-import';
 import { AboutSection } from './AboutSection';
 import { AppearanceSection } from './AppearanceSection';
 import { DataSection } from './DataSection';
@@ -22,7 +23,7 @@ export function SettingsPage(): React.JSX.Element {
     console.log('handle Export');
     try {
       await exportDatabase();
-      Alert.alert('Dados exportados', 'Os dados foram copiados para a área de transferência', [
+      Alert.alert('Dados exportados', 'Os dados foram salvos em um arquivo para compartilhamento', [
         { text: 'OK', style: 'default' },
       ]);
     } catch (error) {
@@ -34,7 +35,19 @@ export function SettingsPage(): React.JSX.Element {
 
   const handleImportPress = useCallback(async () => {
     try {
-      await importDatabase();
+      // Pick a file from the device
+      const result = await DocumentPicker.getDocumentAsync({
+        type: ['application/json'],
+        copyToCacheDirectory: true,
+      });
+
+      if (result.canceled || !result.assets || result.assets.length === 0) {
+        return; // User cancelled the picker
+      }
+
+      const file = result.assets[0];
+      await importDatabase(file.uri);
+
       Alert.alert('Dados importados', 'Os dados foram restaurados com sucesso', [
         { text: 'OK', style: 'default' },
       ]);
@@ -50,6 +63,34 @@ export function SettingsPage(): React.JSX.Element {
 
   const handleTermsPress = useCallback(() => {
     setShowTermsModal(true);
+  }, []);
+
+  const handleClearDataPress = useCallback(() => {
+    Alert.alert(
+      'Limpar Dados',
+      'Tem certeza que deseja apagar todos os dados? Esta ação não pode ser desfeita.',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Apagar Tudo',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await clearDatabase();
+              Alert.alert('Dados Limpos', 'Todos os dados foram apagados com sucesso', [
+                { text: 'OK', style: 'default' },
+              ]);
+            } catch (error) {
+              Alert.alert(
+                'Erro ao Limpar',
+                error instanceof Error ? error.message : 'Tente novamente',
+                [{ text: 'OK', style: 'default' }],
+              );
+            }
+          },
+        },
+      ],
+    );
   }, []);
 
   const handleFeedbackPress = useCallback(() => {
@@ -73,7 +114,11 @@ export function SettingsPage(): React.JSX.Element {
       >
         <AppearanceSection theme={settings.theme} onThemeChange={setTheme} />
 
-        <DataSection onExportPress={handleExportPress} onImportPress={handleImportPress} />
+        <DataSection
+          onExportPress={handleExportPress}
+          onImportPress={handleImportPress}
+          onClearDataPress={handleClearDataPress}
+        />
 
         <AboutSection
           version={settings.version}
