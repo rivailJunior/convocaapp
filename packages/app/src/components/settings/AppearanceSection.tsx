@@ -1,18 +1,19 @@
-import { Pressable, Text, View } from 'react-native';
+import { View } from 'react-native';
 
-import { THEME_LABELS } from '@sportspay/shared';
 
-import type { ThemeMode } from '@sportspay/shared';
 
-interface AppearanceSectionProps {
-  theme: ThemeMode;
-  onThemeChange: (theme: ThemeMode) => void;
-}
 
-export function AppearanceSection({
-  theme,
-  onThemeChange,
-}: AppearanceSectionProps): React.JSX.Element {
+
+// import { THEME_LABELS } from '@sportspay/shared';
+
+// import type { ThemeMode } from '@sportspay/shared';
+
+// interface AppearanceSectionProps {
+//   theme: ThemeMode;
+//   onThemeChange: (theme: ThemeMode) => void;
+// }
+
+export function AppearanceSection(): React.JSX.Element {
   return (
     <View>
       {/* Both theme and language options are disabled, so no need to show the section */}

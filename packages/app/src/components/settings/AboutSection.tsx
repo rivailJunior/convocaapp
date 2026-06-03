@@ -1,4 +1,3 @@
-import { Mail } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
 
@@ -16,7 +15,6 @@ export function AboutSection({
   version,
   onPrivacyPress,
   onTermsPress,
-  onFeedbackPress,
 }: AboutSectionProps): React.JSX.Element {
   return (
     <View>
