@@ -1,9 +1,14 @@
+import * as FileSystem from 'expo-file-system';
 import { File, Paths } from 'expo-file-system/next';
 import * as Sharing from 'expo-sharing';
 
 
 
 import { getAdapter } from './database/database-adapter';
+
+
+
+
 
 export interface DatabaseExport {
   version: string;
@@ -81,9 +86,8 @@ export async function exportDatabase(): Promise<void> {
 
 export async function importDatabase(fileUri: string): Promise<void> {
   try {
-    // Read file content
-    const file = new File(fileUri);
-    const fileContent = file.text();
+    // Read file content using legacy API (works with DocumentPicker URIs)
+    const fileContent = await FileSystem.readAsStringAsync(fileUri);
     const importData: DatabaseExport = JSON.parse(fileContent);
 
     // Validate import data
