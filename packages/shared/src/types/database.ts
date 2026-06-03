@@ -60,6 +60,23 @@ export interface GroupWithMemberCount {
   memberCount: number;
 }
 
+// Event attendance & payment entities
+export interface EventAttendanceEntity {
+  id: number;
+  eventId: number;
+  participantId: number;
+  status: string;
+  respondedAt: string | null;
+}
+
+export interface EventPaymentEntity {
+  id: number;
+  eventId: number;
+  participantId: number;
+  status: string;
+  paidAt: string | null;
+}
+
 // Recurrent event entities
 export interface RecurrentEventEntity {
   id: number;

@@ -1,29 +1,99 @@
-import { ScrollView, Text, View } from 'react-native';
+import { Alert, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
-import { useCallback } from 'react';
+import * as DocumentPicker from 'expo-document-picker';
+import { useCallback, useState } from 'react';
 
 import { useLocalSettings } from '../../hooks/use-local-settings';
+import { clearDatabase, exportDatabase, importDatabase } from '../../services/data-export-import';
 import { AboutSection } from './AboutSection';
 import { AppearanceSection } from './AppearanceSection';
 import { DataSection } from './DataSection';
 import { FutureSection } from './FutureSection';
+import { PrivacyModal } from './PrivacyModal';
+import { TermsModal } from './TermsModal';
 
 export function SettingsPage(): React.JSX.Element {
   const appVersion = Constants.expoConfig?.version ?? '1.0.0';
-  const { settings, setTheme, setLanguage } = useLocalSettings(appVersion);
+  const { settings } = useLocalSettings(appVersion);
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
 
-  const handleLanguagePress = useCallback(() => {
-    const nextLanguage =
-      settings.language === 'pt-BR' ? 'en-US' : settings.language === 'en-US' ? 'es-ES' : 'pt-BR';
-    setLanguage(nextLanguage);
-  }, [settings.language, setLanguage]);
+  const handleExportPress = useCallback(async () => {
+    console.log('handle Export');
+    try {
+      await exportDatabase();
+      Alert.alert('Dados exportados', 'O arquivo de backup foi salvo com sucesso.', [
+        { text: 'OK', style: 'default' },
+      ]);
+    } catch (error) {
+      Alert.alert('Erro ao exportar', error instanceof Error ? error.message : 'Tente novamente', [
+        { text: 'OK', style: 'default' },
+      ]);
+    }
+  }, []);
 
-  const handleExportPress = useCallback(() => {}, []);
-  const handleImportPress = useCallback(() => {}, []);
-  const handlePrivacyPress = useCallback(() => {}, []);
-  const handleTermsPress = useCallback(() => {}, []);
-  const handleFeedbackPress = useCallback(() => {}, []);
+  const handleImportPress = useCallback(async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        type: ['application/json'],
+        copyToCacheDirectory: true,
+      });
+
+      if (result.canceled || !result.assets || result.assets.length === 0) {
+        return;
+      }
+
+      await importDatabase(result.assets[0].uri);
+
+      Alert.alert('Dados importados', 'Os dados foram restaurados com sucesso', [
+        { text: 'OK', style: 'default' },
+      ]);
+    } catch (error) {
+      Alert.alert('Erro ao importar', error instanceof Error ? error.message : 'Tente novamente', [
+        { text: 'OK', style: 'default' },
+      ]);
+    }
+  }, []);
+  const handlePrivacyPress = useCallback(() => {
+    setShowPrivacyModal(true);
+  }, []);
+
+  const handleTermsPress = useCallback(() => {
+    setShowTermsModal(true);
+  }, []);
+
+  const handleClearDataPress = useCallback(() => {
+    Alert.alert(
+      'Limpar Dados',
+      'Tem certeza que deseja apagar todos os dados? Esta ação não pode ser desfeita.',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Apagar Tudo',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await clearDatabase();
+              Alert.alert('Dados Limpos', 'Todos os dados foram apagados com sucesso', [
+                { text: 'OK', style: 'default' },
+              ]);
+            } catch (error) {
+              Alert.alert(
+                'Erro ao Limpar',
+                error instanceof Error ? error.message : 'Tente novamente',
+                [{ text: 'OK', style: 'default' }],
+              );
+            }
+          },
+        },
+      ],
+    );
+  }, []);
+
+  const handleFeedbackPress = useCallback(() => {
+    // Feedback disabled
+  }, []);
 
   return (
     <SafeAreaView className="flex-1 bg-surface" edges={['top', 'left', 'right']}>
@@ -40,14 +110,13 @@ export function SettingsPage(): React.JSX.Element {
         contentContainerClassName="pb-32 gap-4"
         showsVerticalScrollIndicator={false}
       >
-        <AppearanceSection
-          theme={settings.theme}
-          language={settings.language}
-          onThemeChange={setTheme}
-          onLanguagePress={handleLanguagePress}
-        />
+        <AppearanceSection />
 
-        <DataSection onExportPress={handleExportPress} onImportPress={handleImportPress} />
+        <DataSection
+          onExportPress={handleExportPress}
+          onImportPress={handleImportPress}
+          onClearDataPress={handleClearDataPress}
+        />
 
         <AboutSection
           version={settings.version}
@@ -62,6 +131,9 @@ export function SettingsPage(): React.JSX.Element {
           <View className="w-12 h-1 bg-surface-container-high rounded-full opacity-50" />
         </View>
       </ScrollView>
+
+      <PrivacyModal visible={showPrivacyModal} onClose={() => setShowPrivacyModal(false)} />
+      <TermsModal visible={showTermsModal} onClose={() => setShowTermsModal(false)} />
     </SafeAreaView>
   );
 }
