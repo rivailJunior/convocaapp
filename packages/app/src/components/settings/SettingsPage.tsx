@@ -15,7 +15,7 @@ import { TermsModal } from './TermsModal';
 
 export function SettingsPage(): React.JSX.Element {
   const appVersion = Constants.expoConfig?.version ?? '1.0.0';
-  const { settings, setTheme } = useLocalSettings(appVersion);
+  const { settings } = useLocalSettings(appVersion);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
 
