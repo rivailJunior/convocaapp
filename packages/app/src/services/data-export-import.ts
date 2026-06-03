@@ -1,13 +1,9 @@
-import { Platform } from 'react-native';
-import * as Clipboard from 'expo-clipboard';
-import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
-import { StorageAccessFramework } from 'expo-file-system';
+import { File, Paths } from 'expo-file-system/next';
 import * as Sharing from 'expo-sharing';
 
+
+
 import { getAdapter } from './database/database-adapter';
-import { getRecurrentEvents } from './database/entities/event/event';
-import { getGroupDisplayItems, getGroups } from './database/entities/group/group';
 
 export interface DatabaseExport {
   version: string;
@@ -57,109 +53,38 @@ export async function exportDatabase(): Promise<void> {
 
     // Create JSON content
     const jsonString = JSON.stringify(exportData, null, 2);
-    const fileName = `convoca-backup-${new Date().toISOString().split('T')[0]}.json`;
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const fileName = `convoca-backup-${timestamp}.json`;
 
-    console.log('Platform:', Platform.OS);
-    console.log('documentDirectory:', FileSystem.documentDirectory);
-    console.log('cacheDirectory:', FileSystem.cacheDirectory);
+    // Write file to cache directory using new File API
+    const file = new File(Paths.cache, fileName);
+    file.write(jsonString);
 
-    // Android: Use StorageAccessFramework (native "Save As" dialog)
-    if (Platform.OS === 'android') {
-      try {
-        const permissions = await StorageAccessFramework.requestDirectoryPermissionsAsync();
-        if (!permissions.granted) {
-          throw new Error('Permissão para salvar arquivo negada.');
-        }
-
-        const fileUri = await StorageAccessFramework.createFileAsync(
-          permissions.directoryUri,
-          fileName,
-          'application/json',
-        );
-
-        await FileSystem.writeAsStringAsync(fileUri, jsonString, {
-          encoding: FileSystem.EncodingType.UTF8,
-        });
-
-        console.log('Database exported successfully via SAF');
-        return;
-      } catch (safError) {
-        console.log('SAF failed, trying sharing fallback:', safError);
-      }
+    // Open share sheet ("Save to Files" on iOS, share options on Android)
+    const isAvailable = await Sharing.isAvailableAsync();
+    if (!isAvailable) {
+      throw new Error('Compartilhamento não disponível neste dispositivo.');
     }
 
-    // iOS / Fallback: Write file and share (shows "Save to Files" on iOS)
-    const baseDir = FileSystem.documentDirectory ?? FileSystem.cacheDirectory;
-    if (baseDir) {
-      const fileUri = `${baseDir}${fileName}`;
-      await FileSystem.writeAsStringAsync(fileUri, jsonString, {
-        encoding: FileSystem.EncodingType.UTF8,
-      });
+    await Sharing.shareAsync(file.uri, {
+      mimeType: 'application/json',
+      dialogTitle: 'Exportar Dados do Convoca',
+      UTI: 'public.json',
+    });
 
-      const isAvailable = await Sharing.isAvailableAsync();
-      if (isAvailable) {
-        await Sharing.shareAsync(fileUri, {
-          mimeType: 'application/json',
-          dialogTitle: 'Exportar Dados do Convoca',
-          UTI: 'public.json',
-        });
-        console.log('Database exported successfully via sharing');
-        return;
-      }
-    }
-
-    // Last resort fallback: copy JSON to clipboard
-    await Clipboard.setStringAsync(jsonString);
-    console.log('Database exported to clipboard (fallback)');
+    console.log('Database exported successfully:', fileName);
   } catch (error) {
     console.error('Error exporting database:', error);
     throw error;
   }
 }
 
-export async function importDatabase(): Promise<void> {
+export async function importDatabase(fileUri: string): Promise<void> {
   try {
-    let importData: DatabaseExport;
-    let fileContent: string | null = null;
-
-    // Try to pick a file using DocumentPicker
-    try {
-      const result = await DocumentPicker.getDocumentAsync({
-        type: ['application/json'],
-        copyToCacheDirectory: false,
-      });
-
-      if (result.canceled || !result.assets || result.assets.length === 0) {
-        return; // User cancelled the picker
-      }
-
-      const pickedFileUri = result.assets[0].uri;
-
-      // Android: Use SAF to read content:// URIs
-      if (Platform.OS === 'android') {
-        fileContent = await StorageAccessFramework.readAsStringAsync(pickedFileUri);
-      } else {
-        // iOS: Read directly
-        fileContent = await FileSystem.readAsStringAsync(pickedFileUri);
-      }
-    } catch (pickerError) {
-      console.log('File picker failed, trying clipboard:', pickerError);
-    }
-
-    // Fallback: Get JSON from clipboard
-    if (!fileContent) {
-      const clipboardContent = await Clipboard.getStringAsync();
-
-      if (!clipboardContent) {
-        throw new Error(
-          'Nenhum dado encontrado. Por favor, selecione um arquivo ou copie os dados JSON para a área de transferência.',
-        );
-      }
-
-      fileContent = clipboardContent;
-    }
-
-    importData = JSON.parse(fileContent);
+    // Read file content
+    const file = new File(fileUri);
+    const fileContent = file.text();
+    const importData: DatabaseExport = JSON.parse(fileContent);
 
     // Validate import data
     if (!importData.version || !importData.groups || !importData.events) {

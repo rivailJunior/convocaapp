@@ -1,6 +1,7 @@
 import { Alert, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
+import * as DocumentPicker from 'expo-document-picker';
 import { useCallback, useState } from 'react';
 
 import { useLocalSettings } from '../../hooks/use-local-settings';
@@ -34,7 +35,16 @@ export function SettingsPage(): React.JSX.Element {
 
   const handleImportPress = useCallback(async () => {
     try {
-      await importDatabase();
+      const result = await DocumentPicker.getDocumentAsync({
+        type: ['application/json'],
+        copyToCacheDirectory: true,
+      });
+
+      if (result.canceled || !result.assets || result.assets.length === 0) {
+        return;
+      }
+
+      await importDatabase(result.assets[0].uri);
 
       Alert.alert('Dados importados', 'Os dados foram restaurados com sucesso', [
         { text: 'OK', style: 'default' },
