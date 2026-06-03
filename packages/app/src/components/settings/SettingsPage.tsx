@@ -110,7 +110,7 @@ export function SettingsPage(): React.JSX.Element {
         contentContainerClassName="pb-32 gap-4"
         showsVerticalScrollIndicator={false}
       >
-        <AppearanceSection theme={settings.theme} onThemeChange={setTheme} />
+        <AppearanceSection />
 
         <DataSection
           onExportPress={handleExportPress}
